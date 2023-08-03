@@ -8,9 +8,11 @@ public class NewCharacterInputController : MonoBehaviour
     [SerializeField] private Camera _camera;
 
     private IControllable _iControllable;
+    private ICanAttack _canAttack;
     private Input _gameInput;
     private Vector2 _mousePosition;
     private Rigidbody2D _rigidbody;
+    
 
     private void Awake()
     {
@@ -30,17 +32,20 @@ public class NewCharacterInputController : MonoBehaviour
     {
         _gameInput.Gameplay.Dash.performed += OnDashOnPerformed;
         _gameInput.Gameplay.MousePosition.performed += OnMousePositionPerformed;
+        _gameInput.Gameplay.Attack.performed += OnAttackPerformed;
     }
 
-    private void OnMousePositionPerformed(CallbackContext obj)
-    {
-        _mousePosition = _camera.ScreenToWorldPoint(obj.ReadValue<Vector2>());
-    }
 
     private void OnDisable()
     {
         _gameInput.Gameplay.MousePosition.performed -= OnMousePositionPerformed;
         _gameInput.Gameplay.Dash.performed -= OnDashOnPerformed;
+        _gameInput.Gameplay.Attack.performed -= OnAttackPerformed;
+    }
+
+    private void OnMousePositionPerformed(CallbackContext obj)
+    {
+        _mousePosition = _camera.ScreenToWorldPoint(obj.ReadValue<Vector2>());
     }
 
     private void Update()
@@ -52,6 +57,11 @@ public class NewCharacterInputController : MonoBehaviour
     private void OnDashOnPerformed(InputAction.CallbackContext callbackContext)
     {
         _iControllable.Dash();
+    }
+
+    private void OnAttackPerformed(CallbackContext obj)
+    {
+        _canAttack.Attack();
     }
 
     private void ReadMovement()
