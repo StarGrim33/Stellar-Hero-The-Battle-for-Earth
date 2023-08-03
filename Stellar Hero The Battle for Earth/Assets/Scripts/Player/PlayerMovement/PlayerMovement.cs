@@ -1,22 +1,20 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour, IControllable
 {
     [SerializeField] private float _speed;
-    [SerializeField] private float _rotationSpeed;
-    [SerializeField] private Transform _spriteImage;
 
-    private CharacterController _controller;
+    private Rigidbody2D _rigidbody;
 
     private void Awake()
     {
-        _controller = GetComponent<CharacterController>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    public void Move(Vector3 direction)
+    public void Move(Vector2 direction)
     {
-        _controller.Move(direction * _speed * Time.deltaTime);
+        _rigidbody.MovePosition(_rigidbody.position + direction * _speed * Time.fixedDeltaTime);
     }
 
     public void Dash()
