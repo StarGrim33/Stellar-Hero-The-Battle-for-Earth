@@ -20,4 +20,9 @@ public class UnitConfig : ScriptableObject
     public float Speed => _speed;
 
     public float Armor => _armor;
+
+    public void ApplyHealthUpgrade()
+    {
+        _health += 10; // just for example
+    }
 }

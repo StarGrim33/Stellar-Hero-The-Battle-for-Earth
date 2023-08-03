@@ -3,8 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerUnit))]
 public class PlayerMovement : MonoBehaviour, IControllable
 {
-    [SerializeField] private float _speed;
-
+    private float _speed;
     private Rigidbody2D _rigidbody;
     private PlayerUnit _playerUnit;
 

@@ -7,15 +7,15 @@ public class NewCharacterInputController : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
 
+    private PlayerShooting _playerShooting;
     private IControllable _iControllable;
-    private ICanAttack _canAttack;
     private Input _gameInput;
     private Vector2 _mousePosition;
     private Rigidbody2D _rigidbody;
     
-
     private void Awake()
     {
+        _playerShooting = GetComponent<PlayerShooting>();
         _iControllable = GetComponent<IControllable>();
         _rigidbody = GetComponent<Rigidbody2D>();
 
@@ -43,9 +43,9 @@ public class NewCharacterInputController : MonoBehaviour
         _gameInput.Gameplay.Attack.performed -= OnAttackPerformed;
     }
 
-    private void OnMousePositionPerformed(CallbackContext obj)
+    private void OnMousePositionPerformed(InputAction.CallbackContext callbackContext)
     {
-        _mousePosition = _camera.ScreenToWorldPoint(obj.ReadValue<Vector2>());
+        _mousePosition = _camera.ScreenToWorldPoint(callbackContext.ReadValue<Vector2>());
     }
 
     private void Update()
@@ -59,9 +59,9 @@ public class NewCharacterInputController : MonoBehaviour
         _iControllable.Dash();
     }
 
-    private void OnAttackPerformed(CallbackContext obj)
+    private void OnAttackPerformed(InputAction.CallbackContext callbackContext)
     {
-        _canAttack.Attack();
+        _playerShooting.PerformAttack();
     }
 
     private void ReadMovement()

@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class PlayerUnit : Unit, ICanAttack
+public class PlayerUnit : Unit
 {
-    public void Attack()
-    {
-        
-    }
+    private IWeapon _weapon;
+
 }
