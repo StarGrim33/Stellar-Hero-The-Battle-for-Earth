@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 public class NewCharacterInputController : MonoBehaviour
 {
@@ -23,27 +24,26 @@ public class NewCharacterInputController : MonoBehaviour
     private void OnEnable()
     {
         _gameInput.Gameplay.Dash.performed += OnDashOnPerformed;
+        _gameInput.Gameplay.Movement.performed += OnGetDirection;
+        _gameInput.Gameplay.Movement.canceled += OnGetDirection;
     }
 
     private void OnDisable()
     {
         _gameInput.Gameplay.Dash.performed -= OnDashOnPerformed;
+        _gameInput.Gameplay.Movement.performed -= OnGetDirection;
+        _gameInput.Gameplay.Movement.canceled -= OnGetDirection;
     }
 
-    private void Update()
-    {
-        ReadMovement();
-    }
 
     private void OnDashOnPerformed(InputAction.CallbackContext obj)
     {
-        _iControllable.Dash();
+        _iControllable.TryDash();
     }
 
-    private void ReadMovement()
+    private void OnGetDirection(InputAction.CallbackContext context)
     {
-        var inputDirection = _gameInput.Gameplay.Movement.ReadValue<Vector2>();
-        var direction = new Vector2(inputDirection.x, inputDirection.y);
-        _iControllable.Move(direction);
+        var direction = context.ReadValue<Vector2>();
+        _iControllable.SetDirection(direction);
     }
 }
