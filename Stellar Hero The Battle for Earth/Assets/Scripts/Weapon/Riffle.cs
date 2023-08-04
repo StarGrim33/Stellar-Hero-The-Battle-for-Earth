@@ -1,9 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class Riffle : MonoBehaviour, IWeapon
 {
     [SerializeField] private Bullet _bulletPrefab;
-    private float _shootForce = 20f;
+    private float _shootForce = 200f;
 
     public void PerformShot(Transform shootPoint)
     {

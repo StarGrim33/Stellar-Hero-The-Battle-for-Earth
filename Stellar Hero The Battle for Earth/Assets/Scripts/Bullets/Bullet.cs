@@ -9,15 +9,10 @@ public class Bullet : MonoBehaviour
     {
         if (collision.TryGetComponent<IDamageable>(out IDamageable component))
         {
+            GameObject effect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
+            Destroy(effect, 0.5f);
             component.TakeDamage(_damage);
-            Destroy(gameObject, 2f);
+            Destroy(gameObject);
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        GameObject effect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-        Destroy(effect, 0.5f);
     }
 }
