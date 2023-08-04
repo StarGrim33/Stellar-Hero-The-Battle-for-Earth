@@ -63,8 +63,9 @@ public class NewCharacterInputController : MonoBehaviour
 
     private void ReadRotation()
     {
+        float rightAngle = 90f;
         Vector2 facingRotation = _mousePosition - _rigidbody.position;
-        float angle = Mathf.Atan2(facingRotation.y, facingRotation.x) * Mathf.Rad2Deg + 90f;
+        float angle = Mathf.Atan2(facingRotation.y, facingRotation.x) * Mathf.Rad2Deg + rightAngle;
         _rigidbody.MoveRotation(angle);
     }
 }
