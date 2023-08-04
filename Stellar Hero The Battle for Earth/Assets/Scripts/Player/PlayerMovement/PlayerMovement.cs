@@ -2,7 +2,7 @@ using Assets.Scripts.Components.Checkers;
 using Assets.Scripts.Utils;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerUnit))]
 public class PlayerMovement : MonoBehaviour, IControllable
 {
     [SerializeField] private float _speed;
@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     private Rigidbody2D _rigidBody;
     private Vector2 _direction;
-
+    private PlayerUnit _playerUnit;
     private Vector2 _startDashPostioin;
     private Vector2 _endDashPostioin;
     private float _dashTimer;
@@ -24,7 +24,9 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     private void Awake()
     {
+        _playerUnit = GetComponent<PlayerUnit>();
         _rigidBody = GetComponent<Rigidbody2D>();
+        _speed = _playerUnit.Config.Speed;
     }
 
     private void FixedUpdate()
@@ -35,17 +37,17 @@ public class PlayerMovement : MonoBehaviour, IControllable
             Move();
     }
 
-    private void Move()
+    public void Move()
     {
         _rigidBody.velocity = _direction * _speed;
-
+    }
 
     public void Dash()
     {
         _dashTimer += Time.fixedDeltaTime;
-        float t = _dashTimer / _duration;
-        transform.position = Vector2.Lerp(_startDashPostioin, _endDashPostioin, t);
-        _isDash = t >= 1 ? false : true;
+        float time = _dashTimer / _duration;
+        transform.position = Vector2.Lerp(_startDashPostioin, _endDashPostioin, time);
+        _isDash = time >= 1 ? false : true;
         if (_obstacleChecker.CheckCount() > 0)
             _isDash = false;
     }
@@ -61,11 +63,6 @@ public class PlayerMovement : MonoBehaviour, IControllable
             _dashTimer = 0;
             _isDash = true;
         }
-    }
-
-    void IControllable.Move()
-    {
-        throw new System.NotImplementedException();
     }
 
     public void SetDirection(Vector2 direction)
