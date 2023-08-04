@@ -12,4 +12,11 @@ public class Bullet : MonoBehaviour
             component.TakeDamage(_damage);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject effect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
+        Destroy(effect);
+        Destroy(gameObject);
+    }
 }
