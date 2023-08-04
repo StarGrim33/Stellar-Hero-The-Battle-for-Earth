@@ -2,6 +2,7 @@ using UnityEngine;
 
 public interface IControllable
 {
+
     public void Move();
 
     public void TryDash();

@@ -6,8 +6,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour, IControllable
 {
     [SerializeField] private float _speed;
-    [SerializeField] private float _rotationSpeed;
-    [SerializeField] private Transform _spriteImage;
 
     [Space]
     [Header("Dash")]
@@ -40,7 +38,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
     private void Move()
     {
         _rigidBody.velocity = _direction * _speed;
-    }
+
 
     public void Dash()
     {

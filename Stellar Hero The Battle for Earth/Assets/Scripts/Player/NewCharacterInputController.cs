@@ -1,16 +1,21 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
+using static UnityEngine.InputSystem.InputAction;
 
 public class NewCharacterInputController : MonoBehaviour
 {
+    [SerializeField] private Camera _camera;
+
     private IControllable _iControllable;
     private Input _gameInput;
+    private Vector2 _mousePosition;
+    private Rigidbody2D _rigidbody;
 
     private void Awake()
     {
         _iControllable = GetComponent<IControllable>();
+        _rigidbody = GetComponent<Rigidbody2D>();
 
         if (_iControllable == null)
         {
@@ -24,19 +29,28 @@ public class NewCharacterInputController : MonoBehaviour
     private void OnEnable()
     {
         _gameInput.Gameplay.Dash.performed += OnDashOnPerformed;
+
         _gameInput.Gameplay.Movement.performed += OnGetDirection;
         _gameInput.Gameplay.Movement.canceled += OnGetDirection;
+
+        _gameInput.Gameplay.MousePosition.performed += OnMousePositionPerformed;
+    }
+
+    private void OnMousePositionPerformed(CallbackContext obj)
+    {
+        _mousePosition = _camera.ScreenToWorldPoint(obj.ReadValue<Vector2>());
+
     }
 
     private void OnDisable()
     {
+        _gameInput.Gameplay.MousePosition.performed -= OnMousePositionPerformed;
         _gameInput.Gameplay.Dash.performed -= OnDashOnPerformed;
         _gameInput.Gameplay.Movement.performed -= OnGetDirection;
         _gameInput.Gameplay.Movement.canceled -= OnGetDirection;
     }
 
-
-    private void OnDashOnPerformed(InputAction.CallbackContext obj)
+    private void OnDashOnPerformed(InputAction.CallbackContext callbackContext)
     {
         _iControllable.TryDash();
     }
@@ -45,5 +59,12 @@ public class NewCharacterInputController : MonoBehaviour
     {
         var direction = context.ReadValue<Vector2>();
         _iControllable.SetDirection(direction);
+    }
+
+    private void ReadRotation()
+    {
+        Vector2 facingRotation = _mousePosition - _rigidbody.position;
+        float angle = Mathf.Atan2(facingRotation.y, facingRotation.x) * Mathf.Rad2Deg + 90f;
+        _rigidbody.MoveRotation(angle);
     }
 }
