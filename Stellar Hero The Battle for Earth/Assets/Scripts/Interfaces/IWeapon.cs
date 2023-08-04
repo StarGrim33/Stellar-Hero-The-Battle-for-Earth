@@ -1,5 +1,7 @@
 
+using UnityEngine;
+
 public interface IWeapon
 {
-    public void PerformAttack();
+    public void PerformShot(Transform shootPoint);
 }

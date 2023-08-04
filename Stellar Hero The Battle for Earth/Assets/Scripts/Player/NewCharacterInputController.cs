@@ -61,7 +61,7 @@ public class NewCharacterInputController : MonoBehaviour
 
     private void OnAttackPerformed(InputAction.CallbackContext callbackContext)
     {
-        _playerShooting.PerformAttack();
+        _playerShooting.PerformShot();
     }
 
     private void ReadMovement()
