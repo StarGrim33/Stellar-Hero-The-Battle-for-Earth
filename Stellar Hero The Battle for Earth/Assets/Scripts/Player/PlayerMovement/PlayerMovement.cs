@@ -16,10 +16,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     private Rigidbody2D _rigidBody;
     private Vector2 _direction;
-<<<<<<< Updated upstream
     private PlayerUnit _playerUnit;
-=======
->>>>>>> Stashed changes
     private Vector2 _startDashPostioin;
     private Vector2 _endDashPostioin;
     private float _dashTimer;
@@ -45,20 +42,13 @@ public class PlayerMovement : MonoBehaviour, IControllable
         _rigidBody.velocity = _direction * _speed;
     }
 
-<<<<<<< Updated upstream
-    public void Dash()
-=======
     private void Dash()
->>>>>>> Stashed changes
     {
         _dashTimer += Time.fixedDeltaTime;
         float time = _dashTimer / _duration;
         transform.position = Vector2.Lerp(_startDashPostioin, _endDashPostioin, time);
         _isDash = time >= 1 ? false : true;
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
         if (_obstacleChecker.CheckCount() > 0)
             _isDash = false;
     }
