@@ -29,36 +29,36 @@ public class NewCharacterInputController : MonoBehaviour
     private void OnEnable()
     {
         _gameInput.Gameplay.Dash.performed += OnDashOnPerformed;
+
+        _gameInput.Gameplay.Movement.performed += OnGetDirection;
+        _gameInput.Gameplay.Movement.canceled += OnGetDirection;
+
         _gameInput.Gameplay.MousePosition.performed += OnMousePositionPerformed;
     }
 
     private void OnMousePositionPerformed(CallbackContext obj)
     {
         _mousePosition = _camera.ScreenToWorldPoint(obj.ReadValue<Vector2>());
+
     }
 
     private void OnDisable()
     {
         _gameInput.Gameplay.MousePosition.performed -= OnMousePositionPerformed;
         _gameInput.Gameplay.Dash.performed -= OnDashOnPerformed;
-    }
-
-    private void Update()
-    {
-        ReadMovement();
-        ReadRotation();
+        _gameInput.Gameplay.Movement.performed -= OnGetDirection;
+        _gameInput.Gameplay.Movement.canceled -= OnGetDirection;
     }
 
     private void OnDashOnPerformed(InputAction.CallbackContext callbackContext)
     {
-        _iControllable.Dash();
+        _iControllable.TryDash();
     }
 
-    private void ReadMovement()
+    private void OnGetDirection(InputAction.CallbackContext context)
     {
-        var inputDirection = _gameInput.Gameplay.Movement.ReadValue<Vector2>();
-        var direction = new Vector2(inputDirection.x, inputDirection.y);
-        _iControllable.Move(direction);
+        var direction = context.ReadValue<Vector2>();
+        _iControllable.SetDirection(direction);
     }
 
     private void ReadRotation()
