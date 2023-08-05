@@ -1,4 +1,4 @@
-using System.Collections;
+using Assets.Scripts.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private Riffle _riffle;
     [SerializeField] private Transform _shootPoint;
+    [SerializeField] private Cooldown _shootCooldown;
 
     private float _distance = 5f;
     private Transform _target;
@@ -38,10 +39,7 @@ public class PlayerShooting : MonoBehaviour
         {
             var target = colliders[0].transform.position;
 
-            if (_canShoot)
-            {
-                StartCoroutine(ShootWithDelay());
-            }
+            TryShoot();
 
             Vector3 directionToTarget = target - transform.position;
             float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 90f;
@@ -49,16 +47,12 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    private IEnumerator ShootWithDelay()
+    private void TryShoot()
     {
-        // Выстрел
-        _riffle.PerformShot(_shootPoint);
-
-        // Запрещаем стрельбу на заданное время
-        _canShoot = false;
-        yield return new WaitForSeconds(1f / _fireRate); // Задержка между выстрелами
-
-        // Разрешаем стрельбу снова
-        _canShoot = true;
+        if (_shootCooldown.IsReady())
+        {
+            _shootCooldown.Reset();
+            _riffle.PerformShot(_shootPoint);
+        }
     }
 }
