@@ -15,7 +15,9 @@ public class PlayerShooting : MonoBehaviour
     private float _fireRate = 1f;
     private bool _canShoot = true; // Может ли игрок сейчас стрелять
 
-    private void Awake()
+    private float _circleLength = 360f;
+
+    private void Start()
     {
         _enemyLayer = LayerMask.GetMask("Enemy");
     }
