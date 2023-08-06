@@ -8,13 +8,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] private Cooldown _shotCooldown;
     [SerializeField] private CheckCircleOverlap _enemyChecker;
-    [SerializeField] private Transform _shootPoint;
 
     [Space, Header("Bullet")]
-    [SerializeField] private Bullet _bulletPrefab;
-    [SerializeField] private float _shootForce = 200f;
+    [SerializeField] private PoolObjectSpawnComponent _spawnComponent;
+    [SerializeField] private float _force = 10;
 
     private List<GameObject> _enemies;
+    private Vector2 _directionToTarget;
 
     public void TryShoot()
     {
@@ -30,22 +30,25 @@ public class Weapon : MonoBehaviour
             }
 
             _shotCooldown.Reset();
-            PerformShot(_shootPoint);
+
+            SpawnBullet();
         }
     }
 
-    private void PerformShot(Transform shootPoint)
+    private void SpawnBullet()
     {
-        var bullet = Instantiate(_bulletPrefab, transform);
-        bullet.transform.position = shootPoint.position;
-        var rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(-shootPoint.up * _shootForce, ForceMode2D.Impulse);
+        var go = _spawnComponent.Spawn();
+
+        if(go.TryGetComponent(out Bullet bullet))
+        {
+            bullet.AddForce(_directionToTarget, _force);
+        }
     }
 
     private void RotateToTarget(Vector3 target)
     {
-        Vector3 directionToTarget = target - transform.position;
-        float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 90f;
+        _directionToTarget = target - transform.position;
+        float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg + 90f;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 }
