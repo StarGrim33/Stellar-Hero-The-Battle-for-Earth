@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 2304124671426842212, guid: 562a7412c8c0b4a46ae1b93fdea34ca2, type: 3}
+  _shootForce: 10
