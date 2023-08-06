@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2415,6 +2415,7 @@ GameObject:
   - component: {fileID: 634599306}
   - component: {fileID: 634599305}
   - component: {fileID: 634599304}
+  - component: {fileID: 634599308}
   m_Layer: 7
   m_Name: Enemy (1)
   m_TagString: Untagged
@@ -2537,6 +2538,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &634599308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634599303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11efad2c9032b04eb9d01a8c9ce3d28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 634599305}
 --- !u!1 &798207580
 GameObject:
   m_ObjectHideFlags: 0
@@ -2767,6 +2781,10 @@ PrefabInstance:
       propertyPath: _container
       value: 
       objectReference: {fileID: 1751978531}
+    - target: {fileID: 8030029205758572689, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 623886440}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
