@@ -6,7 +6,7 @@ public class EnemyPool : MonoBehaviour
 {
     public static EnemyPool EnemyPoolInstance;
 
-    [SerializeField] private int _simpleEnemy;
+    [SerializeField] private int _amount;
     [SerializeField] private GameObject _simpleEnemyPrefab;
     [SerializeField] private List<GameObject> _simpleEnemyList;
     [SerializeField] private GameObject _container;
@@ -14,7 +14,7 @@ public class EnemyPool : MonoBehaviour
     private void Awake()
     {
         EnemyPoolInstance = this;
-        CreateObjects(_simpleEnemyPrefab, _container.transform, _simpleEnemy, _simpleEnemyList);
+        CreateObjects(_simpleEnemyPrefab, _container.transform, _amount, _simpleEnemyList);
     }
 
     private void CreateObjects(GameObject prefab, Transform parent, int count, List<GameObject> list)

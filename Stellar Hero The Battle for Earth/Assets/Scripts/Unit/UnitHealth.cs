@@ -12,6 +12,7 @@ public abstract class UnitHealth : MonoBehaviour
     protected void Awake()
     {
         _maxHealth = _unit.Config.Health;
+        _currenHealth = _maxHealth;
         Debug.Log(_maxHealth);
     }
 

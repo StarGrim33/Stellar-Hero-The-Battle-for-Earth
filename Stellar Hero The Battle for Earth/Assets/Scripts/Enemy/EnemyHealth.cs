@@ -1,9 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(EnemyHealth))]
 public class EnemyHealth : UnitHealth, IDamageable
 {
+    public event UnityAction<EnemyHealth> Dying;
+
     public float MaxHealth { get; private set; }
 
     public float CurrentHealth
@@ -31,6 +34,7 @@ public class EnemyHealth : UnitHealth, IDamageable
 
     protected override void Die()
     {
-        Destroy(gameObject);
+        Dying?.Invoke(this);
+        gameObject.SetActive(false);
     }
 }

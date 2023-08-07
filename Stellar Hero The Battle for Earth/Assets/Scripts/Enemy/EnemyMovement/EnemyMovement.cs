@@ -35,4 +35,10 @@ public class EnemyMovement : MonoBehaviour
         if (_target)
             _rigidbody.velocity = new Vector2(_moveDirection.x, _moveDirection.y) * _speed;
     }
+
+    public void SetTarget(Transform target)
+    {
+        if(target != null)
+            _target = target;
+    }
 }
