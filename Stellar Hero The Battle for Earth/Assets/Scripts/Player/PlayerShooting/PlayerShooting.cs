@@ -10,7 +10,6 @@ public class PlayerShooting : MonoBehaviour
 
     private float _circleLength = 360f;
 
-
     private void Start()
     {
         SetWeaponPosition();

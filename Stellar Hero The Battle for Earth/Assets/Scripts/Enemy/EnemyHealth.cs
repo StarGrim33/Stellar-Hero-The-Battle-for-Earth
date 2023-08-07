@@ -2,12 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(PlayerUnit))]
-public class PlayerHealth : UnitHealth, IDamageable
+[RequireComponent(typeof(EnemyHealth))]
+public class EnemyHealth : UnitHealth, IDamageable
 {
-    public event UnityAction<int> OnHealthChanged;
-
-    public event UnityAction PlayerDead;
+    public event UnityAction<EnemyHealth> Dying;
 
     public float MaxHealth { get; private set; }
 
@@ -26,16 +24,17 @@ public class PlayerHealth : UnitHealth, IDamageable
         }
     }
 
-    protected override void Die()
-    {
-        PlayerDead?.Invoke();
-    }
-
     public void TakeDamage(int damage)
     {
         if (damage <= 0)
             throw new ArgumentException("Value cannot be negative", nameof(damage));
 
         CurrentHealth -= damage;
+    }
+
+    protected override void Die()
+    {
+        Dying?.Invoke(this);
+        gameObject.SetActive(false);
     }
 }
