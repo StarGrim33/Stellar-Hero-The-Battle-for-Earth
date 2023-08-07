@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.Events;
 
 public class Spawner : MonoBehaviour
@@ -13,12 +12,11 @@ public class Spawner : MonoBehaviour
     [SerializeField] private EnemyPool _enemyPool;
     [SerializeField] private List<WaveEnemies> _waves;
     [SerializeField] private PlayerUnit _playerUnit;
+    [SerializeField] private List<int> _unusedSpawnPoints;
 
     public int CurrentWaveIndex => _currentWaveIndex;
 
     public event UnityAction AllEnemySpawned;
-
-    private List<int> _unusedSpawnPoints;
 
     private int _currentWaveIndex = 0;
     private WaveEnemies _currentWave;
@@ -65,14 +63,14 @@ public class Spawner : MonoBehaviour
             if (_currentSpawnPointIndex < _spawnPoints.Length - 1)
             {
                 _currentSpawnPointIndex++;
-                SpawnEnemy(_currentSpawnPointIndex);
+                SpawnEnemy();
                 _spawned++;
                 _timeAfterLastSpawn = 0;
             }
             else
             {
                 _currentSpawnPointIndex = 0;
-                SpawnEnemy(_currentSpawnPointIndex);
+                SpawnEnemy();
                 _spawned++;
                 _timeAfterLastSpawn = 0;
             }
@@ -83,7 +81,6 @@ public class Spawner : MonoBehaviour
             if (_waves.Count > _currentWaveIndex + 1)
             {
                 AllEnemySpawned?.Invoke();
-                //_currentWaveIndex++;
                 StartCoroutine(NextWave());
             }
 
@@ -115,12 +112,20 @@ public class Spawner : MonoBehaviour
         _isSpawnFrozen = false;
     }
 
-    private void SpawnEnemy(int spawnPoint)
+    private void SpawnEnemy()
     {
         int randomIndex = UnityEngine.Random.Range(0, _unusedSpawnPoints.Count);
-        int spawnPointIndex = _unusedSpawnPoints[randomIndex];
 
-        _unusedSpawnPoints.RemoveAt(randomIndex);
+        int spawnPointIndex;
+
+        if (TryGetSpawnPoint(randomIndex, out spawnPointIndex))
+            _unusedSpawnPoints.RemoveAt(randomIndex);
+        else
+        {
+            ResetSpawnPoints();
+            randomIndex = UnityEngine.Random.Range(0, _unusedSpawnPoints.Count);
+            TryGetSpawnPoint(randomIndex, out spawnPointIndex);
+        }
 
         GameObject enemy = _enemyPool.GetObject(_currentWave.EnemyPrefab);
 
@@ -140,5 +145,26 @@ public class Spawner : MonoBehaviour
     private void SetWave(int index)
     {
         _currentWave = _waves[index];
+    }
+
+    private bool TryGetSpawnPoint(int randomIndex, out int spawnPointIndex)
+    {
+        spawnPointIndex = -1;
+        if (_unusedSpawnPoints.Contains(randomIndex))
+        {
+            spawnPointIndex = _unusedSpawnPoints[randomIndex];
+            return true;
+        }
+        return false;
+    }
+
+    private void ResetSpawnPoints()
+    {
+        _unusedSpawnPoints.Clear();
+
+        for (int i = 0; i < _spawnPoints.Length; i++)
+        {
+            _unusedSpawnPoints.Add(i);
+        }
     }
 }

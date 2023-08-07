@@ -2348,7 +2348,9 @@ MonoBehaviour:
   _enemyPool: {fileID: 1785633410}
   _waves:
   - {fileID: 8482029898213735348, guid: 77bcd1affa8a6784cb4e88ca48118014, type: 3}
+  - {fileID: 8482029898213735348, guid: 77bcd1affa8a6784cb4e88ca48118014, type: 3}
   _playerUnit: {fileID: 921011741}
+  _unusedSpawnPoints: 
 --- !u!4 &600178209
 Transform:
   m_ObjectHideFlags: 0
@@ -3594,7 +3596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695953164fec361428c646930d961c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _amount: 5
+  _amount: 15
   _simpleEnemyPrefab: {fileID: 1279897517143324483, guid: 5aa37efffc1eb7d49b1abd19a86e4851, type: 3}
   _simpleEnemyList: []
   _container: {fileID: 1785633409}
