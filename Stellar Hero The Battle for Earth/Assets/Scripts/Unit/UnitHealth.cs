@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public abstract class UnitHealth : MonoBehaviour
 {
     [SerializeField] Unit _unit;
+
     protected float _maxHealth;
     protected float _currenHealth;
 
