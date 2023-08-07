@@ -150,11 +150,13 @@ public class Spawner : MonoBehaviour
     private bool TryGetSpawnPoint(int randomIndex, out int spawnPointIndex)
     {
         spawnPointIndex = -1;
+
         if (_unusedSpawnPoints.Contains(randomIndex))
         {
             spawnPointIndex = _unusedSpawnPoints[randomIndex];
             return true;
         }
+
         return false;
     }
 

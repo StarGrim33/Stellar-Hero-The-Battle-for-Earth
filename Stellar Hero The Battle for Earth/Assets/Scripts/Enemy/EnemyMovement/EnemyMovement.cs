@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyUnit), typeof(Rigidbody2D))]
 public class EnemyMovement : MonoBehaviour
 {
+    private Transform _target;
     private float _speed;
     private EnemyUnit _enemyUnit;
     private Rigidbody2D _rigidbody;
-    [SerializeField] private Transform _target;
     private Vector2 _moveDirection;
 
     private void Awake()
