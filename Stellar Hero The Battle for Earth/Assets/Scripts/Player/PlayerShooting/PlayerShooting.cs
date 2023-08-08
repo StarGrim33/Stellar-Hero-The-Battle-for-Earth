@@ -14,39 +14,19 @@ public class PlayerShooting : MonoBehaviour
     private void Start()
     {
         transform.rotation = Quaternion.identity;
-
-        //SetWeaponPosition();
     }
 
     private void Update()
     {
         foreach (var weapon in _weapons)
         {
-            //if (weapon.Target != null)
-            //    LookAtTarget(weapon);
-            //else
-            //    transform.rotation = Quaternion.identity;
-            RotateWeapon(weapon);
-            weapon.PerformShot();
+            if(weapon.Target != null)
+            {
+                RotateWeapon(weapon);
+                weapon.PerformShot();
+            }
         }
     }
-
-    //private void SetWeaponPosition()
-    //{
-    //    if (_weapons.Count == 0) return;
-
-    //    float angleStep = _circleLength / _weapons.Count;
-
-    //    for (int i = 0; i < _weapons.Count; i++)
-    //    {
-    //        float angle = i * angleStep;
-
-    //        float x = _radius * Mathf.Cos(angle * Mathf.Deg2Rad);
-    //        float y = _radius * Mathf.Sin(angle * Mathf.Deg2Rad);
-
-    //        _weapons[i].transform.parent = transform;
-    //    }
-    //}
 
     private void RotateWeapon(Weapon currentTarget)
     {
