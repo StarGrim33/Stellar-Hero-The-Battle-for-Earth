@@ -15,7 +15,7 @@ public class PlayerShooting : MonoBehaviour
     {
         transform.rotation = Quaternion.identity;
 
-        SetWeaponPosition();
+        //SetWeaponPosition();
     }
 
     private void Update()
@@ -31,22 +31,22 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    private void SetWeaponPosition()
-    {
-        if (_weapons.Count == 0) return;
+    //private void SetWeaponPosition()
+    //{
+    //    if (_weapons.Count == 0) return;
 
-        float angleStep = _circleLength / _weapons.Count;
+    //    float angleStep = _circleLength / _weapons.Count;
 
-        for (int i = 0; i < _weapons.Count; i++)
-        {
-            float angle = i * angleStep;
+    //    for (int i = 0; i < _weapons.Count; i++)
+    //    {
+    //        float angle = i * angleStep;
 
-            float x = _radius * Mathf.Cos(angle * Mathf.Deg2Rad);
-            float y = _radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+    //        float x = _radius * Mathf.Cos(angle * Mathf.Deg2Rad);
+    //        float y = _radius * Mathf.Sin(angle * Mathf.Deg2Rad);
 
-            _weapons[i].transform.parent = transform;
-        }
-    }
+    //        _weapons[i].transform.parent = transform;
+    //    }
+    //}
 
     private void RotateWeapon(Weapon currentTarget)
     {
@@ -54,15 +54,13 @@ public class PlayerShooting : MonoBehaviour
         float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg;
         currentTarget.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        if (angle < 90 && angle > -90) // Проверка на угол между -90 и 90 градусами
+        if (angle < 90 && angle > -90) 
         {
-            // Оружие смотрит вправо (не отражено)
-            currentTarget.transform.localScale = new Vector3(1f, 1f, 1f);
+            currentTarget.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         }
         else
         {
-            // Оружие смотрит влево (отражено)
-            currentTarget.transform.localScale = new Vector3(1f, -1f, -1f);
+            currentTarget.transform.localScale = new Vector3(0.8f, -0.8f, -0.8f);
         }
     }
 }

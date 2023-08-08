@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
     [SerializeField] private float _distance;
     [SerializeField] private Cooldown _dashCooldown;
     [SerializeField] private CheckCircleOverlap _obstacleChecker;
+    [SerializeField] private SpriteRenderer _sprite;
 
     public float CurrentSpeed { get; private set; }
 
@@ -71,6 +72,11 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     public void SetDirection(Vector2 direction)
     {
+        if (direction.x < 0)
+            _sprite.flipX = true;
+        else
+            _sprite.flipX = false;                
+
         _direction = direction;
     }
 }
