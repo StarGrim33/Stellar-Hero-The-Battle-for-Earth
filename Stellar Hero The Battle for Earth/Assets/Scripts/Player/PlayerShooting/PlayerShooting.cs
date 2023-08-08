@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private List<Weapon> _weapons;
-
+    [SerializeField] private Transform _transform;
+    [SerializeField] private Sprite _image;
     [Space, Header("WeaponPosition")]
     [SerializeField] private float _radius;
 
@@ -12,33 +13,34 @@ public class PlayerShooting : MonoBehaviour
 
     private void Start()
     {
-        SetWeaponPosition();
+        transform.rotation = Quaternion.identity;
     }
 
     private void Update()
     {
         foreach (var weapon in _weapons)
         {
-            weapon.TryShoot();
+            if(weapon.Target != null)
+            {
+                RotateWeapon(weapon);
+                weapon.PerformShot();
+            }
         }
     }
 
-    private void SetWeaponPosition()
+    private void RotateWeapon(Weapon currentTarget)
     {
-        if( _weapons.Count == 0 ) return;
+        var _directionToTarget = currentTarget.Target - transform.position;
+        float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg;
+        currentTarget.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        float angleStep = _circleLength / _weapons.Count;
-
-        for(int i=0; i< _weapons.Count; i++)
+        if (angle < 90 && angle > -90) 
         {
-            float angle = i*angleStep;
-
-            float x = _radius * Mathf.Cos(angle * Mathf.Deg2Rad);
-            float y = _radius * Mathf.Sin(angle * Mathf.Deg2Rad);
-
-            _weapons[i].transform.position = new Vector3(x, y, 0);
-
-            _weapons[i].transform.parent = transform;
+            currentTarget.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        }
+        else
+        {
+            currentTarget.transform.localScale = new Vector3(1.2f, -1.2f, -1.2f);
         }
     }
 }

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
   _unitName: Hero
   _health: 100
-  _speed: 5
+  _speed: 2
   _armor: 0

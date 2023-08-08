@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Riffle : MonoBehaviour, IWeapon
+public class Riffle : MonoBehaviour
 {
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private float _shootForce = 200f;

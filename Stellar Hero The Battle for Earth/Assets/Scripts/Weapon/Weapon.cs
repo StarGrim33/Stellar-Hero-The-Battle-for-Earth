@@ -3,7 +3,7 @@ using Assets.Scripts.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IWeapon
 {
     [SerializeField] private int _damage;
     [SerializeField] private Cooldown _shotCooldown;
@@ -13,20 +13,22 @@ public class Weapon : MonoBehaviour
     [SerializeField] private PoolObjectSpawnComponent _spawnComponent;
     [SerializeField] private float _force = 10;
 
+    public Vector3 Target { get; private set; }
+
     private List<GameObject> _enemies;
     private Vector2 _directionToTarget;
 
-    public void TryShoot()
+    public void PerformShot()
     {
-        if (_shotCooldown.IsReady())
-        {
-            _enemies = _enemyChecker.Check();
+        _enemies = _enemyChecker.Check();
 
+        if (_enemies != null && _enemies.Count > 0 && _shotCooldown.IsReady())
+        {
             if (_enemies.Count > 0)
             {
-                var target = _enemies[0].transform.position;
+                Target = _enemies[0].transform.position;
 
-                RotateToTarget(target);
+                RotateToTarget(Target);
             }
 
             _shotCooldown.Reset();
@@ -37,10 +39,11 @@ public class Weapon : MonoBehaviour
 
     private void SpawnBullet()
     {
-        var go = _spawnComponent.Spawn();
+        GameObject gameObject = _spawnComponent.Spawn();
 
-        if(go.TryGetComponent(out Bullet bullet))
+        if(gameObject.TryGetComponent(out Bullet bullet))
         {
+            bullet.gameObject.SetActive(true);
             bullet.AddForce(_directionToTarget, _force);
         }
     }
