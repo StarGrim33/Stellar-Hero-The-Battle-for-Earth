@@ -36,11 +36,11 @@ public class PlayerShooting : MonoBehaviour
 
         if (angle < 90 && angle > -90) 
         {
-            currentTarget.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            currentTarget.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         }
         else
         {
-            currentTarget.transform.localScale = new Vector3(0.8f, -0.8f, -0.8f);
+            currentTarget.transform.localScale = new Vector3(1.2f, -1.2f, -1.2f);
         }
     }
 }
