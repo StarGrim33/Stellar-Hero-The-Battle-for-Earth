@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private List<Weapon> _weapons;
-
+    [SerializeField] private Transform _transform;
+    [SerializeField] private Sprite _image;
     [Space, Header("WeaponPosition")]
     [SerializeField] private float _radius;
 
@@ -12,6 +13,8 @@ public class PlayerShooting : MonoBehaviour
 
     private void Start()
     {
+        transform.rotation = Quaternion.identity;
+
         SetWeaponPosition();
     }
 
@@ -19,26 +22,47 @@ public class PlayerShooting : MonoBehaviour
     {
         foreach (var weapon in _weapons)
         {
-            weapon.TryShoot();
+            //if (weapon.Target != null)
+            //    LookAtTarget(weapon);
+            //else
+            //    transform.rotation = Quaternion.identity;
+            RotateWeapon(weapon);
+            weapon.PerformShot();
         }
     }
 
     private void SetWeaponPosition()
     {
-        if( _weapons.Count == 0 ) return;
+        if (_weapons.Count == 0) return;
 
         float angleStep = _circleLength / _weapons.Count;
 
-        for(int i=0; i< _weapons.Count; i++)
+        for (int i = 0; i < _weapons.Count; i++)
         {
-            float angle = i*angleStep;
+            float angle = i * angleStep;
 
             float x = _radius * Mathf.Cos(angle * Mathf.Deg2Rad);
             float y = _radius * Mathf.Sin(angle * Mathf.Deg2Rad);
 
-            _weapons[i].transform.position = new Vector3(x, y, 0);
-
             _weapons[i].transform.parent = transform;
+        }
+    }
+
+    private void RotateWeapon(Weapon currentTarget)
+    {
+        var _directionToTarget = currentTarget.Target - transform.position;
+        float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg;
+        currentTarget.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+        if (angle < 90 && angle > -90) // Проверка на угол между -90 и 90 градусами
+        {
+            // Оружие смотрит вправо (не отражено)
+            currentTarget.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else
+        {
+            // Оружие смотрит влево (отражено)
+            currentTarget.transform.localScale = new Vector3(1f, -1f, -1f);
         }
     }
 }

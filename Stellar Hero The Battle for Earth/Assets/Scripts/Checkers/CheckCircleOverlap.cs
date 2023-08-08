@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Components.Checkers
@@ -23,7 +22,10 @@ namespace Assets.Scripts.Components.Checkers
 
             for (int i = 0; i < size; i++)
             {
-                result.Add(_collidedResult[i].gameObject);
+                if (_collidedResult[i].gameObject.TryGetComponent<EnemyUnit>(out EnemyUnit unit)) 
+                {
+                    result.Add(_collidedResult[i].gameObject);
+                }
             }
 
             return result;

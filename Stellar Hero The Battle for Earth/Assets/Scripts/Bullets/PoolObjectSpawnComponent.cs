@@ -13,15 +13,16 @@ public class PoolObjectSpawnComponent : ObjectPool
 
     public GameObject Spawn()
     {
-        if(TryGetObject(out GameObject tamplate))
+        if(TryGetObject(out GameObject template))
         {
-            tamplate.transform.position = _spawnPoint.position;
-            if(_isTransformToLossyScale )
-                tamplate.transform.localScale = _spawnPoint.lossyScale;
+            template.transform.position = _spawnPoint.position;
 
-            tamplate.SetActive(true);
+            if(_isTransformToLossyScale)
+                template.transform.localScale = _spawnPoint.lossyScale;
+
+            template.SetActive(false);
         }
 
-        return tamplate;
+        return template;
     }
 }
