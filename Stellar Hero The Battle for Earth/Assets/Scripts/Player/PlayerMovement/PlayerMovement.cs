@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour, IControllable
     [SerializeField] private Cooldown _dashCooldown;
     [SerializeField] private CheckCircleOverlap _obstacleChecker;
 
+    public float CurrentSpeed { get; private set; }
+
     private Rigidbody2D _rigidBody;
     private Vector2 _direction;
     private PlayerUnit _playerUnit;
@@ -40,6 +42,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
     public void Move()
     {
         _rigidBody.velocity = _direction * _speed;
+        CurrentSpeed = _rigidBody.velocity.magnitude;
     }
 
     private void Dash()

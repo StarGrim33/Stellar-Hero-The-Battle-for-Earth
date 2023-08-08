@@ -49,6 +49,6 @@ public class Weapon : MonoBehaviour
     {
         _directionToTarget = target - transform.position;
         float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg + 90f;
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        transform.rotation = Quaternion.Euler(angle, angle, angle);
     }
 }
