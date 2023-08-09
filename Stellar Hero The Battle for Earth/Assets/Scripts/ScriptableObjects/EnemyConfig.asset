@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EnemyConfig
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
   _unitName: Enemy
-  _health: 2000
+  _health: 300
   _speed: 2
   _armor: 2
