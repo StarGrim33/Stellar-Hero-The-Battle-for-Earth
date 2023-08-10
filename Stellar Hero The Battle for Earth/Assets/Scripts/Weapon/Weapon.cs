@@ -22,22 +22,24 @@ public class Weapon : MonoBehaviour, IWeapon
 
     private void Update()
     {
-        // Обновляем список врагов
         _enemies = _enemyChecker.Check();
 
-        // Если нет текущей цели или она мертва, ищем ближайшего живого врага
+        if(_currentTarget == null)
+            DisableCrossHair();
+
         if (_currentTarget == null || _currentTarget.GetComponent<EnemyHealth>().CurrentHealth <= 0)
         {
             _currentTarget = FindClosestLivingEnemy();
         }
 
-        // Обновляем позицию прицела по текущей цели
         if (_currentTarget != null)
         {
+            if(!_crosshair.gameObject.activeSelf)
+                _crosshair.gameObject.SetActive(true);
+
             UpdateCrossHairPosition(_currentTarget.transform.position);
         }
 
-        // Если есть живая цель и прошла задержка, стреляем
         if (_currentTarget != null && _shotCooldown.IsReady())
         {
             RotateToTarget(_currentTarget.transform.position);
@@ -56,6 +58,7 @@ public class Weapon : MonoBehaviour, IWeapon
             if (enemy.GetComponent<EnemyHealth>().CurrentHealth > 0)
             {
                 float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+
                 if (distanceToEnemy < closestDistance)
                 {
                     closestDistance = distanceToEnemy;
@@ -69,7 +72,6 @@ public class Weapon : MonoBehaviour, IWeapon
 
     public void PerformShot()
     {
-
         if (_enemies != null && _enemies.Count > 0 && _shotCooldown.IsReady())
         {
 
@@ -106,5 +108,15 @@ public class Weapon : MonoBehaviour, IWeapon
     {
         _crosshair.transform.position = new Vector2(vector.x, vector.y);
         Debug.Log($"Crosshair position: {_crosshair.transform.position}, Target position: {vector}");
+    }
+
+    private void DisableCrossHair()
+    {
+        _crosshair.gameObject.SetActive(false);
+    }
+
+    private void EnableCrossHair()
+    {
+        _crosshair.gameObject.SetActive(true);
     }
 }
