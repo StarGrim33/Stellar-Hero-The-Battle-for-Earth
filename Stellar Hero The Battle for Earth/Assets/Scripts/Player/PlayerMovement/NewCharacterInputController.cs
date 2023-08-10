@@ -12,7 +12,7 @@ public class NewCharacterInputController : MonoBehaviour
     private Vector2 _mousePosition;
     private Rigidbody2D _rigidbody;
 
-    private void Awake()
+    private void Start()
     {
         _iControllable = GetComponent<IControllable>();
         _rigidbody = GetComponent<Rigidbody2D>();
