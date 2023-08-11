@@ -11,7 +11,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void Start()
     {
-        ResetState(_firstState);
+        ResetState();
     }
 
     private void Update()
@@ -29,11 +29,13 @@ public class EnemyStateMachine : MonoBehaviour
     {
         if (target != null)
             Target = target;
+
+        Debug.Log(Target.position);
     }
 
-    private void ResetState(State startState)
+    public void ResetState()
     {
-        CurrentState = startState;
+        CurrentState = _firstState;
 
         if (CurrentState != null)
             CurrentState.Enter(Target);

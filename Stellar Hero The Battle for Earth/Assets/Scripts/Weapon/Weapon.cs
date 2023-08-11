@@ -75,7 +75,7 @@ public class Weapon : MonoBehaviour, IWeapon
         if (_enemies != null && _enemies.Count > 0 && _shotCooldown.IsReady())
         {
 
-            if (_enemies.Count > 0)
+            if (_currentTarget != null && _enemies.Count > 0)
             {
                 RotateToTarget(_currentTarget.transform.position);
             }
