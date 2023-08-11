@@ -2332,8 +2332,6 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3257822748604171154, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
   m_PrefabInstance: {fileID: 1041975600}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-=======
   m_GameObject: {fileID: 184126674}
   m_CullTransparentMesh: 1
 --- !u!114 &184126678
@@ -2549,7 +2547,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499981607}
   m_CullTransparentMesh: 1
->>>>>>> Stashed changes
 --- !u!1 &600178207
 GameObject:
   m_ObjectHideFlags: 0
@@ -3034,14 +3031,11 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6618343706205989739, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
       insertIndex: -1
-<<<<<<< Updated upstream
       addedObject: {fileID: 2135931708}
-=======
       addedObject: {fileID: 1567611299}
     - targetCorrespondingSourceObject: {fileID: 6618343706205989739, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1567611300}
->>>>>>> Stashed changes
   m_SourcePrefab: {fileID: 100100000, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
 --- !u!1 &1045175478
 GameObject:
@@ -3051,18 +3045,15 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
   - component: {fileID: 1045175479}
   m_Layer: 0
   m_Name: Gun
-=======
   - component: {fileID: 1364044153}
   - component: {fileID: 1364044152}
   - component: {fileID: 1364044151}
   - component: {fileID: 1364044150}
   m_Layer: 5
   m_Name: Canvas
->>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3205,8 +3196,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6618343706205989739, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
   m_PrefabInstance: {fileID: 1041975600}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!114 &1567611299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3241,7 +3230,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
->>>>>>> Stashed changes
 --- !u!1 &1714784813
 GameObject:
   m_ObjectHideFlags: 0
