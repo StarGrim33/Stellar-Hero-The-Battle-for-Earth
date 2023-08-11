@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.InputSystem.InputAction;
 
 public class NewCharacterInputController : MonoBehaviour
 {
@@ -36,10 +35,9 @@ public class NewCharacterInputController : MonoBehaviour
         _gameInput.Gameplay.MousePosition.performed += OnMousePositionPerformed;
     }
 
-    private void OnMousePositionPerformed(CallbackContext obj)
+    private void OnMousePositionPerformed(InputAction.CallbackContext callbackContext)
     {
-        _mousePosition = _camera.ScreenToWorldPoint(obj.ReadValue<Vector2>());
-
+        _mousePosition = _camera.ScreenToWorldPoint(callbackContext.ReadValue<Vector2>());
     }
 
     private void OnDisable()
@@ -52,7 +50,8 @@ public class NewCharacterInputController : MonoBehaviour
 
     private void OnDashOnPerformed(InputAction.CallbackContext callbackContext)
     {
-        _iControllable.TryDash();
+        if (StateManager.Instance.CurrentGameState == GameStates.Gameplay)
+            _iControllable.TryDash();
     }
 
     private void OnGetDirection(InputAction.CallbackContext context)

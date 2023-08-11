@@ -38,6 +38,9 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     private void FixedUpdate()
     {
+        if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+            return;
+
         if (_isDash)
             Dash();
         else
