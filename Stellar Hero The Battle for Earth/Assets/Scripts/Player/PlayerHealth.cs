@@ -37,5 +37,6 @@ public class PlayerHealth : UnitHealth, IDamageable
             throw new ArgumentException("Value cannot be negative", nameof(damage));
 
         CurrentHealth -= damage;
+        Debug.Log($"Health is {CurrentHealth}");
     }
 }
