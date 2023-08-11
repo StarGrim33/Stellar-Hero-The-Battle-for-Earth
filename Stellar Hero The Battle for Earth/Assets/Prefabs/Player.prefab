@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 8567515817849420360}
   - component: {fileID: 1535661462909078285}
   - component: {fileID: 8030029205758572689}
+  - component: {fileID: 3269315514667543425}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -91,6 +92,7 @@ MonoBehaviour:
     _value: 0.5
   _obstacleChecker: {fileID: 7848346284930106692}
   _sprite: {fileID: 3257822748604171154}
+  _dushFiller: {fileID: 0}
 --- !u!58 &599111435902902873
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -123,9 +125,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5322059}
+  m_Offset: {x: 0, y: -0.08662825}
   serializedVersion: 2
-  m_Radius: 0.37586325
+  m_Radius: 0.5090299
 --- !u!50 &778677616308860282
 Rigidbody2D:
   serializedVersion: 4
@@ -179,7 +181,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapons:
-  - {fileID: 0}
   - {fileID: 7294861832889080704}
   _transform: {fileID: 8398813695619437156}
   _image: {fileID: 0}
@@ -197,6 +198,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 0}
+--- !u!114 &3269315514667543425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6618343706205989739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f18c37148b90f334c96956c6a416e0d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _joystick: {fileID: 0}
+  _abilityButton: {fileID: 0}
 --- !u!1 &6879082655019942976
 GameObject:
   m_ObjectHideFlags: 0
