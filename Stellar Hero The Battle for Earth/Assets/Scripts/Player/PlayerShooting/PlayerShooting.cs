@@ -9,8 +9,6 @@ public class PlayerShooting : MonoBehaviour
     [Space, Header("WeaponPosition")]
     [SerializeField] private float _radius;
 
-    private float _circleLength = 360f;
-
     private void Start()
     {
         transform.rotation = Quaternion.identity;
@@ -18,6 +16,9 @@ public class PlayerShooting : MonoBehaviour
 
     private void Update()
     {
+        if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+            return;
+
         foreach (var weapon in _weapons)
         {
             if(weapon.Target != null)

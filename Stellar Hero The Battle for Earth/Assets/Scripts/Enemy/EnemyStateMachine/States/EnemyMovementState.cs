@@ -16,6 +16,9 @@ public class EnemyMovementState : State
 
     private void Update()
     {
+        if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+            return;
+
         if (Target)
         {
             Vector3 direction = (Target.position - transform.position).normalized;
