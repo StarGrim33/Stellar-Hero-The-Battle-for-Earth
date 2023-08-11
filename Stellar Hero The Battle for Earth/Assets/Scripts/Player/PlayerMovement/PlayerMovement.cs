@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
     [SerializeField] private Cooldown _dashCooldown;
     [SerializeField] private CheckCircleOverlap _obstacleChecker;
     [SerializeField] private SpriteRenderer _sprite;
+    [SerializeField] private ButtonFiller _dushFiller;
 
     public float CurrentSpeed { get; private set; }
 
@@ -52,6 +53,8 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     private void Dash()
     {
+        _dushFiller.StartFilled(_dashCooldown.Value);
+
         _dashTimer += Time.fixedDeltaTime;
         float time = _dashTimer / _duration;
         transform.position = Vector2.Lerp(_startDashPostioin, _endDashPostioin, time);
