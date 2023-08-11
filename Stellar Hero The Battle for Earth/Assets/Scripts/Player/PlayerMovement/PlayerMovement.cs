@@ -29,6 +29,10 @@ public class PlayerMovement : MonoBehaviour, IControllable
     {
         _playerUnit = GetComponent<PlayerUnit>();
         _rigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
         _speed = _playerUnit.Config.Speed;
     }
 

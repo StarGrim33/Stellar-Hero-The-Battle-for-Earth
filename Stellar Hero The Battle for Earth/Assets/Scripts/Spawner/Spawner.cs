@@ -132,7 +132,7 @@ public class Spawner : MonoBehaviour
         enemy.transform.position = _spawnPoints[spawnPointIndex].position;
         enemy.transform.rotation = _spawnPoints[spawnPointIndex].rotation;
         enemy.gameObject.SetActive(true);
-        enemy.GetComponent<EnemyMovement>().SetTarget(_playerUnit.transform);
+        enemy.GetComponent<EnemyStateMachine>().SetTarget(_playerUnit.transform);
         enemy.GetComponent<EnemyHealth>().Dying += OnEnemyDying;
     }
 

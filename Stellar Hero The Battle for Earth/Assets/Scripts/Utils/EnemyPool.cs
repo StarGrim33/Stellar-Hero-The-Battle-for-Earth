@@ -14,6 +14,10 @@ public class EnemyPool : MonoBehaviour
     private void Awake()
     {
         EnemyPoolInstance = this;
+    }
+
+    private void Start()
+    {
         CreateObjects(_simpleEnemyPrefab, _container.transform, _amount, _simpleEnemyList);
     }
 
