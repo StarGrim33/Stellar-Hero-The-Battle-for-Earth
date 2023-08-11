@@ -50,7 +50,7 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        if (_isSpawnFrozen /*|| StateManager.Instance.CurrentGameState == GameState.Paused*/)
+        if (_isSpawnFrozen || StateManager.Instance.CurrentGameState == GameStates.Paused)
             return;
 
         if (_currentWave == null)

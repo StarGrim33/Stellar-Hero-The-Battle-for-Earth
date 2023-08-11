@@ -22,6 +22,9 @@ public class Weapon : MonoBehaviour, IWeapon
 
     private void Update()
     {
+        if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+            return;
+
         _enemies = _enemyChecker.Check();
 
         if(_currentTarget == null)
@@ -92,6 +95,7 @@ public class Weapon : MonoBehaviour, IWeapon
 
         if (gameObject.TryGetComponent(out Bullet bullet))
         {
+            bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, -_directionToTarget); 
             bullet.gameObject.SetActive(true);
             bullet.AddForce(_directionToTarget, _force);
         }
