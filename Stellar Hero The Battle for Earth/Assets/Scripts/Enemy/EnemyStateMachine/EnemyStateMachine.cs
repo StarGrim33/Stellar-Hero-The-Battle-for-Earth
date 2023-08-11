@@ -16,7 +16,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void Update()
     {
-        if (CurrentState == null)
+        if (CurrentState == null || StateManager.Instance.CurrentGameState == GameStates.Paused)
             return;
 
         var nextState = CurrentState.GetNextState();

@@ -8,6 +8,8 @@ namespace Assets.Scripts.Utils
     {
         [SerializeField] private float _value;
 
+        public float Value => _value;
+
         private float _timesUp;
 
         public void Reset()
@@ -17,5 +19,7 @@ namespace Assets.Scripts.Utils
 
         public bool IsReady() =>
             _timesUp < Time.time;
+
+        
     }
 }
