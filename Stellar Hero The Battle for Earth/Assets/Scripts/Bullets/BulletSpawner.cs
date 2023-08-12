@@ -1,5 +1,4 @@
 using Assets.Scripts.Components.Checkers;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +15,9 @@ public class BulletSpawner : MonoBehaviour
     private GameObject _currentTarget;
 
     private BulletParams _params;
-    private bool _isShooting => _enemies.Count>0;
+    private Vector3 _shotTarget;
+
+    private bool _isShooting => _currentTarget != null;
 
     private void Awake()
     {
@@ -28,21 +29,27 @@ public class BulletSpawner : MonoBehaviour
         StartCoroutine(Spawn());
     }
 
+    private void Update()
+    {
+        _enemies = _enemyChecker.Check();
+        UpdateCrossHair();
+    }
+
     private IEnumerator Spawn()
     {
         while (StateManager.Instance.CurrentGameState == GameStates.Gameplay)
         {
-            _enemies = _enemyChecker.Check();
-
-            UpdateCrossHair();
-
             if (_isShooting)
             {
                 //RotateToTarget(_currentTarget.transform.position);
+                for (int i = 0; i < _params.Count; i++)
+                {
+                    var bullet = Instantiate(_tamplate);
 
-                var bullet = Instantiate(_tamplate);
+                    CalculateShotTarget(i - 1);
 
-                bullet.Shot(gameObject.transform.position, _currentTarget.transform.position, _params.BulletSpeed, _params.Damage);
+                    bullet.Shot(gameObject.transform.position, _shotTarget, _params.BulletSpeed, _params.Damage);
+                }
 
                 yield return new WaitForSeconds(_params.AttackCooldown);
             }
@@ -50,6 +57,14 @@ public class BulletSpawner : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    private void CalculateShotTarget(int number)
+    {
+        int sideModifier = number % 2 == 0 ? -1 : 1;
+        var dispertion = _params.StepDispertion * number * sideModifier;
+        Quaternion deviation = Quaternion.Euler(dispertion, dispertion, 0f);
+        _shotTarget = deviation * _currentTarget.transform.position;
     }
 
     private void RotateToTarget(Vector3 target)
@@ -65,7 +80,8 @@ public class BulletSpawner : MonoBehaviour
         {
             DisableCrossHair();
             _currentTarget = FindClosestLivingEnemy();
-        } else
+        }
+        else
         {
             if (_currentTarget.GetComponent<EnemyHealth>().CurrentHealth <= 0)
                 _currentTarget = FindClosestLivingEnemy();

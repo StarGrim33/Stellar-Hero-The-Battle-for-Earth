@@ -39,6 +39,7 @@ public class Bullet : MonoBehaviour
             yield return null;
         }        
     }
+
     private void CalculateDirection(Vector3 startPoint, Vector3 endPoint)
     {
         var heading = endPoint - startPoint;
