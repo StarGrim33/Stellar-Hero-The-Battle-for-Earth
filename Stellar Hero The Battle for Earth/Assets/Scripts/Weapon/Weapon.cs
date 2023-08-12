@@ -104,9 +104,10 @@ public class Weapon : MonoBehaviour, IWeapon
 
     private void RotateToTarget(Vector3 target)
     {
-        _directionToTarget = target - transform.position;
+        _directionToTarget = (target - transform.position).normalized;
         float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        //angle = (angle + 360) % 360;
+        transform.eulerAngles = new Vector3(0, 0, -angle);
     }
 
     private void UpdateCrossHairPosition(Vector3 vector)
