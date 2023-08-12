@@ -40,6 +40,7 @@ public class Weapon : MonoBehaviour, IWeapon
             if(!_crosshair.gameObject.activeSelf)
                 _crosshair.gameObject.SetActive(true);
 
+            RotateToTarget(_currentTarget.transform.position);
             UpdateCrossHairPosition(_currentTarget.transform.position);
         }
 
@@ -104,7 +105,7 @@ public class Weapon : MonoBehaviour, IWeapon
     private void RotateToTarget(Vector3 target)
     {
         _directionToTarget = target - transform.position;
-        float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg + 90f;
+        float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 

@@ -2436,7 +2436,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.14858705, y: 0.23500001}
-  m_AnchoredPosition: {x: 32, y: 39}
+  m_AnchoredPosition: {x: 32, y: 0}
   m_SizeDelta: {x: -74, y: -55}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &184126676
@@ -2730,6 +2730,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 567920677612093574, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.914834
+      objectReference: {fileID: 0}
+    - target: {fileID: 567920677612093574, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.914834
+      objectReference: {fileID: 0}
+    - target: {fileID: 567920677612093574, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9148344
+      objectReference: {fileID: 0}
+    - target: {fileID: 567920677612093574, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.54693
+      objectReference: {fileID: 0}
+    - target: {fileID: 567920677612093574, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.58834
+      objectReference: {fileID: 0}
     - target: {fileID: 3269315514667543425, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
       propertyPath: _joystick
       value: 
@@ -2903,7 +2923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 31
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3167,6 +3187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unit: {fileID: 921011741}
+  _animator: {fileID: 2139919878}
 --- !u!95 &1676097798
 Animator:
   serializedVersion: 5
@@ -4499,3 +4520,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2139919878 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2199239826057215998, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+  m_PrefabInstance: {fileID: 1041975600}
+  m_PrefabAsset: {fileID: 0}
