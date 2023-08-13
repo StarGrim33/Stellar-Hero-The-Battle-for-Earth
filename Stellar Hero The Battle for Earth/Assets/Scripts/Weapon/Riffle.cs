@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Riffle : MonoBehaviour
 {
-    [SerializeField] private Bullet _bulletPrefab;
+    [SerializeField] private BulletSpawner _bulletPrefab;
     [SerializeField] private float _shootForce = 200f;
 
     public void PerformShot(Transform shootPoint)

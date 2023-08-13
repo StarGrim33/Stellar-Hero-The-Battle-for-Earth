@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1059083512422173799}
   - component: {fileID: 6592497713495090935}
   - component: {fileID: 7805510915912713314}
-  - component: {fileID: 7031428636839666058}
   - component: {fileID: 4949959846210203222}
   m_Layer: 8
   m_Name: CircleBullet
@@ -99,36 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1931ffa5f9f887045a8eef5d9535a437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitEffect: {fileID: 180838, guid: bfbeddd8307f4e441aa8ae4537bf45ad, type: 3}
-  _shootForce: 10
-  _lifetime: 2
---- !u!50 &7031428636839666058
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7154380817474453084}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!58 &4949959846210203222
 CircleCollider2D:
   m_ObjectHideFlags: 0

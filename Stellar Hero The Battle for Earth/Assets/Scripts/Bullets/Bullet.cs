@@ -1,33 +1,49 @@
+using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private GameObject _hitEffect;
+    private Vector3 _direction;
+    private int _damage = 1;
 
-    private int _damage = 40;
-    private Rigidbody2D _rigidbody;
-
-    private void Awake()
+    public void Shot(Vector3 startPoint, Vector3 endPoint, float speed, int damage)
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
-    }
+        CalculateDirection(startPoint, endPoint);
+        transform.position = startPoint;
+        StartCoroutine(ShotCoroutine(speed));
 
-    public void AddForce(Vector2 direction, float force)
-    {
-        _rigidbody.AddForce(direction * force, ForceMode2D.Impulse);
+        _damage = damage;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject effect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
-        Destroy(effect, 0.5f);
-
-        gameObject.SetActive(false);
-
-        if (collision.TryGetComponent<IDamageable>(out IDamageable component))
+        if(collision.TryGetComponent<EnemyHealth>(out EnemyHealth enemyHealth))
         {
-            component.TakeDamage(_damage);
+            enemyHealth.TakeDamage(_damage);
         }
+        OnTriggerAction();
+        
+    }
+
+    private void OnTriggerAction()
+    {
+        Destroy(gameObject);
+    }
+
+    private IEnumerator ShotCoroutine(float speed)
+    {
+        while (true)
+        {
+            transform.position += _direction * speed * Time.deltaTime;
+
+            yield return null;
+        }        
+    }
+
+    private void CalculateDirection(Vector3 startPoint, Vector3 endPoint)
+    {
+        var heading = endPoint - startPoint;
+        var distance = heading.magnitude;
+        _direction = heading / distance;
     }
 }

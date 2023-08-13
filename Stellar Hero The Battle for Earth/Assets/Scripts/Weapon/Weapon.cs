@@ -20,6 +20,10 @@ public abstract class Weapon : MonoBehaviour, IWeapon
     [SerializeField] protected float _reloadTime = 2f;
     [SerializeField] protected int _currentAmmo;
     protected bool _isReloading = false;
+    [Space, Header("BulletSpawner")]
+    [SerializeField] private PoolObjectSpawnComponent _spawnComponent;
+    [SerializeField] private float _force = 10;
+    [SerializeField] private GameObject _crosshair;
 
     public Vector3 Target { get; private set; }
 
@@ -117,11 +121,11 @@ public abstract class Weapon : MonoBehaviour, IWeapon
     {
         GameObject gameObject = _spawnComponent.Spawn();
 
-        if (gameObject.TryGetComponent(out Bullet bullet))
+        if (gameObject.TryGetComponent(out BulletSpawner bullet))
         {
             bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, -_directionToTarget); 
             bullet.gameObject.SetActive(true);
-            bullet.AddForce(_directionToTarget, _force);
+            //bullet.AddForce(_directionToTarget, _force);
         }
     }
 
