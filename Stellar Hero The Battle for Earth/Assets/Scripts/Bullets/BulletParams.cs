@@ -3,6 +3,8 @@ using UnityEngine;
 public class BulletParams : MonoBehaviour
 {
     [SerializeField] private int _count = 1;
+    [SerializeField] private int _circleCount = 1;
+
     [SerializeField] private float _dispertion = 10;
 
     [SerializeField] private float _damageModify = 0;
@@ -19,5 +21,6 @@ public class BulletParams : MonoBehaviour
     public float AttackCooldown => _baseCooldownAttack/(_baseAttackSpeed*(1f+ _attackSpeedModify));
     public float BulletSpeed =>  _baseBulletSpeed * (1f + _bulletSpeedModify);
     public int Count => _count;
+    public int CircleCount => _circleCount;
     public float StepDispertion => _dispertion/2;
 }

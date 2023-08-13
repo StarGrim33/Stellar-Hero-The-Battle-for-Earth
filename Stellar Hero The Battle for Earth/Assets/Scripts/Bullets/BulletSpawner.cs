@@ -16,6 +16,7 @@ public class BulletSpawner : MonoBehaviour
 
     private BulletParams _params;
     private Vector3 _shotTarget;
+    private float fullAngle = 360f;
 
     private bool _isShooting => _currentTarget != null;
 
@@ -42,14 +43,9 @@ public class BulletSpawner : MonoBehaviour
             if (_isShooting)
             {
                 //RotateToTarget(_currentTarget.transform.position);
-                for (int i = 0; i < _params.Count; i++)
-                {
-                    var bullet = Instantiate(_tamplate);
+                SimpleShot();
 
-                    CalculateShotTarget(i - 1);
-
-                    bullet.Shot(gameObject.transform.position, _shotTarget, _params.BulletSpeed, _params.Damage);
-                }
+                CircleShot();
 
                 yield return new WaitForSeconds(_params.AttackCooldown);
             }
@@ -59,7 +55,44 @@ public class BulletSpawner : MonoBehaviour
 
     }
 
-    private void CalculateShotTarget(int number)
+    private void CircleShot()
+    {
+        int circleCount = _params.CircleCount;
+        float angleStep = fullAngle / circleCount;
+        float firstShotAngle = Random.Range(0, fullAngle);
+
+        for (int i = 0; i < circleCount; i++)
+        {
+            var bullet = Instantiate(_tamplate);
+            CalculateCircleShotTarget(i - 1, firstShotAngle, angleStep);
+
+            bullet.Shot(gameObject.transform.position, _shotTarget, _params.BulletSpeed, _params.Damage);
+        }
+    }
+
+    private void SimpleShot()
+    {
+        for (int i = 0; i < _params.Count; i++)
+        {
+            var bullet = Instantiate(_tamplate);
+
+            CalculateSimpleShotTarget(i-1);
+
+            bullet.Shot(gameObject.transform.position, _shotTarget, _params.BulletSpeed, _params.Damage);
+        }
+    }
+
+    private void CalculateCircleShotTarget(int number, float firstShotAngle, float angleStep)
+    {
+        float angle = firstShotAngle + number * angleStep;
+
+        float x = Mathf.Cos(angle * Mathf.Deg2Rad);
+        float y = Mathf.Sin(angle * Mathf.Deg2Rad);
+
+        _shotTarget = transform.position + new Vector3(x, y, 0f);
+    }
+
+    private void CalculateSimpleShotTarget(int number)
     {
         int sideModifier = number % 2 == 0 ? -1 : 1;
         var dispertion = _params.StepDispertion * number * sideModifier;
