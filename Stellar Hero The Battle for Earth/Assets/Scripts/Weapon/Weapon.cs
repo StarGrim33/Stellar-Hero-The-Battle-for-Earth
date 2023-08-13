@@ -106,14 +106,12 @@ public class Weapon : MonoBehaviour, IWeapon
     {
         _directionToTarget = (target - transform.position).normalized;
         float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg;
-        //angle = (angle + 360) % 360;
         transform.eulerAngles = new Vector3(0, 0, -angle);
     }
 
     private void UpdateCrossHairPosition(Vector3 vector)
     {
         _crosshair.transform.position = new Vector2(vector.x, vector.y);
-        Debug.Log($"Crosshair position: {_crosshair.transform.position}, Target position: {vector}");
     }
 
     private void DisableCrossHair()
