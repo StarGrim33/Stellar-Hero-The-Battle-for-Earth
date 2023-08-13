@@ -5,18 +5,14 @@ using UnityEngine.Events;
 [RequireComponent(typeof(PlayerUnit), typeof(Animator))]
 public class PlayerHealth : UnitHealth, IDamageable
 {
-    private Animator _animator;
+    [SerializeField] private Animator _animator;
+    private PlayerUnit _playerUnit;
 
-    public event UnityAction<int> OnHealthChanged;
+    public event UnityAction<float, float> OnHealthChanged;
 
     public event UnityAction PlayerDead;
 
-    public float MaxHealth { get; private set; }
-
-    private void Start()
-    {
-        _animator = GetComponent<Animator>();
-    }
+    public float MaxHealth => _maxHealth;
 
     public float CurrentHealth
     {
@@ -33,10 +29,15 @@ public class PlayerHealth : UnitHealth, IDamageable
         }
     }
 
+    private void Start()
+    {
+        _playerUnit = GetComponent<PlayerUnit>();
+    }
+
     protected override void Die()
     {
+        _animator.SetTrigger(Constants.DeadState);
         StateManager.Instance.SetState(GameStates.Paused);
-        _animator.Play(Constants.DeadState);
         PlayerDead?.Invoke();
     }
 
@@ -46,6 +47,7 @@ public class PlayerHealth : UnitHealth, IDamageable
             throw new ArgumentException("Value cannot be negative", nameof(damage));
 
         CurrentHealth -= damage;
+        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
         Debug.Log($"Health is {CurrentHealth}");
     }
 }
