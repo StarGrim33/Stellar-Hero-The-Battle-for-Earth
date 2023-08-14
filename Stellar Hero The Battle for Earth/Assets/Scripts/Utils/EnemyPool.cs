@@ -11,6 +11,10 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] private List<GameObject> _simpleEnemyList;
     [SerializeField] private GameObject _container;
 
+    [SerializeField] private int _bomberEnemyAmount;
+    [SerializeField] private GameObject _bomberEnemy;
+    [SerializeField] private List<GameObject> _bomberEnemyList;
+
     private void Awake()
     {
         EnemyPoolInstance = this;
@@ -19,6 +23,7 @@ public class EnemyPool : MonoBehaviour
     private void Start()
     {
         CreateObjects(_simpleEnemyPrefab, _container.transform, _amount, _simpleEnemyList);
+        CreateObjects(_bomberEnemy, _container.transform, _bomberEnemyAmount, _bomberEnemyList);
     }
 
     private void CreateObjects(GameObject prefab, Transform parent, int count, List<GameObject> list)
@@ -37,6 +42,8 @@ public class EnemyPool : MonoBehaviour
 
         if (prefab == _simpleEnemyPrefab)
             list = _simpleEnemyList;
+        else if(prefab == _bomberEnemy)
+            list = _bomberEnemyList;
         else
             return null;
 

@@ -35,7 +35,7 @@ public class PlayerShooting : MonoBehaviour
         float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg;
         currentTarget.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        if (angle < 90 && angle > -90) 
+        if (angle <= 90 && angle >= -90) 
         {
             currentTarget.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         }

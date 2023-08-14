@@ -8,22 +8,19 @@ public abstract class Weapon : MonoBehaviour, IWeapon
 {
     [SerializeField] protected int _damage;
     [SerializeField] protected Cooldown _shotCooldown;
-    [SerializeField] protected CheckCircleOverlap _enemyChecker;
+    [SerializeField] private CheckCircleOverlap _enemyChecker;
 
     [Space, Header("Bullet")]
     [SerializeField] protected PoolObjectSpawnComponent _spawnComponent;
     [SerializeField] protected float _force = 10;
-    [SerializeField] protected GameObject _crosshair;
+    [SerializeField] private GameObject _crosshair;
 
     [Space, Header("Reload and Ammo")]
     [SerializeField] protected int _maxAmmo = 6;
     [SerializeField] protected float _reloadTime = 2f;
     [SerializeField] protected int _currentAmmo;
+
     protected bool _isReloading = false;
-    [Space, Header("BulletSpawner")]
-    [SerializeField] private PoolObjectSpawnComponent _spawnComponent;
-    [SerializeField] private float _force = 10;
-    [SerializeField] private GameObject _crosshair;
 
     public Vector3 Target { get; private set; }
 
@@ -36,7 +33,7 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         _currentAmmo = _maxAmmo;
     }
 
-    protected void Update()
+    private void Update()
     {
         if (StateManager.Instance.CurrentGameState == GameStates.Paused)
             return;
@@ -76,7 +73,7 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         }
     }
 
-    protected GameObject FindClosestLivingEnemy()
+    private GameObject FindClosestLivingEnemy()
     {
         GameObject closestEnemy = null;
         float closestDistance = float.MaxValue;
@@ -117,7 +114,7 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         }
     }
 
-    protected void SpawnBullet()
+    private void SpawnBullet()
     {
         GameObject gameObject = _spawnComponent.Spawn();
 
@@ -129,19 +126,19 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         }
     }
 
-    protected void RotateToTarget(Vector3 target)
+    private void RotateToTarget(Vector3 target)
     {
         _directionToTarget = (target - transform.position).normalized;
         float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0, 0, -angle);
     }
 
-    protected void UpdateCrossHairPosition(Vector3 vector)
+    private void UpdateCrossHairPosition(Vector3 vector)
     {
         _crosshair.transform.position = new Vector2(vector.x, vector.y);
     }
 
-    protected void DisableCrossHair()
+    private void DisableCrossHair()
     {
         _crosshair.gameObject.SetActive(false);
     }
