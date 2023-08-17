@@ -13,7 +13,6 @@ public abstract class UnitHealth : MonoBehaviour
     {
         _maxHealth = _unit.Config.Health;
         _currenHealth = _maxHealth;
-        Debug.Log(_maxHealth);
     }
 
     protected virtual void Die() { }

@@ -16,6 +16,7 @@ public class BulletSpawner : MonoBehaviour
 
     private BulletParams _params;
     private Vector3 _shotTarget;
+    private Coroutine _coroutine;
 
     private bool _isShooting => _currentTarget != null;
 
@@ -26,7 +27,7 @@ public class BulletSpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Spawn());
+        _coroutine = StartCoroutine(Spawn());
     }
 
     private void Update()
@@ -37,17 +38,14 @@ public class BulletSpawner : MonoBehaviour
 
     private IEnumerator Spawn()
     {
-        while (StateManager.Instance.CurrentGameState == GameStates.Gameplay)
+        while (true)
         {
-            if (_isShooting)
+            if (StateManager.Instance.CurrentGameState == GameStates.Gameplay && _isShooting)
             {
-                //RotateToTarget(_currentTarget.transform.position);
                 for (int i = 0; i < _params.Count; i++)
                 {
                     var bullet = Instantiate(_tamplate);
-
                     CalculateShotTarget(i - 1);
-
                     bullet.Shot(gameObject.transform.position, _shotTarget, _params.BulletSpeed, _params.Damage);
                 }
 
@@ -56,7 +54,6 @@ public class BulletSpawner : MonoBehaviour
 
             yield return null;
         }
-
     }
 
     private void CalculateShotTarget(int number)
@@ -126,6 +123,5 @@ public class BulletSpawner : MonoBehaviour
     {
         _crosshair.transform.parent = target.transform;
         _crosshair.transform.localPosition = Vector3.zero;
-        //Debug.Log($"Crosshair position: {_crosshair.transform.position}, Target position: {vector}");
     }
 }

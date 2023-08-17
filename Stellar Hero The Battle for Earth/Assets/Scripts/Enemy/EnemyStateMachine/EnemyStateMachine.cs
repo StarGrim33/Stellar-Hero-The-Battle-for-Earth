@@ -29,7 +29,6 @@ public class EnemyStateMachine : MonoBehaviour
     {
         if (target != null)
             Target = target;
-        //Debug.Log(Target.position);
     }
 
     public void ResetState()

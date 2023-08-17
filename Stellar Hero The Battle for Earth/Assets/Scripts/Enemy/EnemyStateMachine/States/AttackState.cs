@@ -1,17 +1,17 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class AttakState : State
+public class AttackState : State
 {
-    [SerializeField] private int _damage;
-    [SerializeField] private float _delay;
-    
-    private EnemyStateMachine _enemyStateMachine;
-    private Animator _animator;
-    private float _lastAttackTime;
-    private IDamageable _target;
+    [SerializeField] protected int _damage;
+    [SerializeField] protected float _delay;
 
-    private void Start()
+    protected EnemyStateMachine _enemyStateMachine;
+    protected Animator _animator;
+    protected float _lastAttackTime;
+    protected IDamageable _target;
+
+    protected void Start()
     {
         _enemyStateMachine = GetComponent<EnemyStateMachine>();
         _target = Target.GetComponent<IDamageable>();
@@ -29,11 +29,11 @@ public class AttakState : State
         _lastAttackTime -= Time.deltaTime;
     }
 
-    private void Attack()
+    public virtual void Attack()
     {
         if(_target != null) 
         {
-            if(Vector2.Distance(Target.transform.position, transform.position) < 0.7)
+            if(Vector2.Distance(Target.transform.position, transform.position) < 1)
             {
                 _animator.Play(Constants.AttackState);
                 _target.TakeDamage(_damage);
