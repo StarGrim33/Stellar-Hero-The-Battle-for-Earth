@@ -5,9 +5,9 @@ public abstract class State : MonoBehaviour
 {
     [SerializeField] private List<Transition> _transitions;
 
-    protected Transform Target { get; set; }
+    protected IDamageable Target { get; set; }
 
-    public void Enter(Transform target)
+    public void Enter(IDamageable target)
     {
         if(!enabled)
         {

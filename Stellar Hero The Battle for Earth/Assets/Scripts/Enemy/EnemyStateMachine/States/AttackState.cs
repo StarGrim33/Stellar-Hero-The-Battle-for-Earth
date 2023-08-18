@@ -9,12 +9,10 @@ public class AttackState : State
     protected EnemyStateMachine _enemyStateMachine;
     protected Animator _animator;
     protected float _lastAttackTime;
-    protected IDamageable _target;
 
     protected void Start()
     {
         _enemyStateMachine = GetComponent<EnemyStateMachine>();
-        _target = Target.GetComponent<IDamageable>();
         _animator = GetComponent<Animator>();
     }
 
@@ -31,17 +29,12 @@ public class AttackState : State
 
     public virtual void Attack()
     {
-        if(_target != null) 
+        if(Target.IsAlive) 
         {
-            if(Vector2.Distance(Target.transform.position, transform.position) < 1)
+            if(Vector2.Distance(Target.TargetTransform.position, transform.position) < 1)
             {
                 _animator.Play(Constants.AttackState);
-                _target.TakeDamage(_damage);
-            }
-            else
-            {
-                _enemyStateMachine.ResetState();
-                enabled = false;
+                Target.TakeDamage(_damage);
             }
         }
     }

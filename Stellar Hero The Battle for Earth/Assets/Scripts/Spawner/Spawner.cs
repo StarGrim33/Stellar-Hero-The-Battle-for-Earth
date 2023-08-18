@@ -14,6 +14,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private PlayerUnit _playerUnit;
     [SerializeField] private List<int> _unusedSpawnPoints;
 
+    private IDamageable _target;
     public int CurrentWaveIndex => _currentWaveIndex;
 
     public event UnityAction AllEnemySpawned;
@@ -46,6 +47,7 @@ public class Spawner : MonoBehaviour
             _unusedSpawnPoints.Add(i);
 
         SetWave(_currentWaveIndex);
+        _target = _playerUnit.GetComponent<IDamageable>();
     }
 
     private void Update()
@@ -132,7 +134,7 @@ public class Spawner : MonoBehaviour
         enemy.transform.position = _spawnPoints[spawnPointIndex].position;
         enemy.transform.rotation = _spawnPoints[spawnPointIndex].rotation;
         enemy.gameObject.SetActive(true);
-        enemy.GetComponent<EnemyStateMachine>().SetTarget(_playerUnit.transform);
+        enemy.GetComponent<EnemyStateMachine>().SetTarget(_target);
         enemy.GetComponent<EnemyHealth>().Dying += OnEnemyDying;
     }
 

@@ -5,7 +5,7 @@ public class EnemyStateMachine : MonoBehaviour
 {
     [SerializeField] private State _firstState;
 
-    public Transform Target { get; private set; }
+    public IDamageable Target { get; private set; }
 
     public State CurrentState { get; private set; }
 
@@ -25,7 +25,7 @@ public class EnemyStateMachine : MonoBehaviour
             Transit(nextState);
     }
 
-    public void SetTarget(Transform target)
+    public void SetTarget(IDamageable target)
     {
         if (target != null)
             Target = target;

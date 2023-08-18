@@ -12,7 +12,10 @@ public class DistanceTransition : Transition
 
     private void Update()
     {
-        if(Vector2.Distance(transform.position, Target.position) < _transitionRangeForNextState)
-            NeedTransit = true;
+        if (Target.IsAlive)
+        {
+            if (Vector2.Distance(transform.position, Target.TargetTransform.position) < _transitionRangeForNextState)
+                NeedTransit = true;
+        }
     }
 }

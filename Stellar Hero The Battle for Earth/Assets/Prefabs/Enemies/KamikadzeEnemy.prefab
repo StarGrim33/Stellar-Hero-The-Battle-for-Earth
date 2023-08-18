@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 8526898780158588204}
   - component: {fileID: 7584878476643794156}
   - component: {fileID: 1276942936284483731}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: KamikadzeEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,6 +301,14 @@ PrefabInstance:
     - target: {fileID: 157776, guid: 82bf03917e16d3d4cad30518cca28308, type: 3}
       propertyPath: m_Name
       value: StarBurst2D
+      objectReference: {fileID: 0}
+    - target: {fileID: 157776, guid: 82bf03917e16d3d4cad30518cca28308, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 175694, guid: 82bf03917e16d3d4cad30518cca28308, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 453802, guid: 82bf03917e16d3d4cad30518cca28308, type: 3}
       propertyPath: m_RootOrder

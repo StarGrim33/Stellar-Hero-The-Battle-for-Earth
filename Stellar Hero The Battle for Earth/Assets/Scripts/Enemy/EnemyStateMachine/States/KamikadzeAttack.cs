@@ -8,9 +8,9 @@ public class KamikadzeAttack : AttackState
 
     public override void Attack()
     {
-        if (_target != null)
+        if (Target != null)
         {
-            if (Vector2.Distance(Target.transform.position, transform.position) < 1)
+            if (Vector2.Distance(Target.TargetTransform.position, transform.position) < 1)
             {
                 _animator.Play(Constants.ExplosionEnemyAnimation);
                 _explodeEffect.Play();

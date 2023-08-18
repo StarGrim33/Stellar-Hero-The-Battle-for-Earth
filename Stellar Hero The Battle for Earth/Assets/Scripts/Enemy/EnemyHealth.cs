@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(EnemyHealth))]
+[RequireComponent(typeof(EnemyUnit))]
 public class EnemyHealth : UnitHealth, IDamageable
 {
     public event UnityAction<EnemyHealth> Dying;
@@ -23,6 +23,10 @@ public class EnemyHealth : UnitHealth, IDamageable
                 Die();
         }
     }
+
+    public Transform TargetTransform => transform;
+
+    public bool IsAlive => _currenHealth > 0;
 
     public void TakeDamage(int damage)
     {
