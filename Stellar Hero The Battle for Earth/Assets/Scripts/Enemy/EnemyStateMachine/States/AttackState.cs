@@ -36,6 +36,11 @@ public class AttackState : State
                 _animator.Play(Constants.AttackState);
                 Target.TakeDamage(_damage);
             }
+            else
+            {
+                enabled = false;
+                _enemyStateMachine.ResetState();
+            }
         }
     }
 }

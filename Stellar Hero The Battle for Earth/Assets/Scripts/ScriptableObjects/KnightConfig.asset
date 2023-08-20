@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4a336cb06e8fe548b987d2e2d91d8cd, type: 3}
-  m_Name: TankConfig
+  m_Name: KnightConfig
   m_EditorClassIdentifier: 
-  _unitName: Tank
-  _health: 1500
-  _speed: 0.5
-  _armor: 100
+  _unitName: 
+  _health: 2555555
+  _speed: 0.8
+  _armor: 300

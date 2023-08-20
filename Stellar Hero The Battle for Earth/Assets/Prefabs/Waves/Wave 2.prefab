@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1602329178703116030}
   - component: {fileID: 8482029898213735348}
   m_Layer: 0
-  m_Name: Wave 1
+  m_Name: Wave 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be09da705d58f341a0ef9b8d0a01f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 1356164921579192394, guid: 26c06d7f37cb24c47bddf55f9e485a61, type: 3}
+  _enemyPrefab: {fileID: 2697685215078831126, guid: b997919f4ead6fb42acceaa00d03c3e8, type: 3}
   _spawnDelay: 1
   _amount: 3
