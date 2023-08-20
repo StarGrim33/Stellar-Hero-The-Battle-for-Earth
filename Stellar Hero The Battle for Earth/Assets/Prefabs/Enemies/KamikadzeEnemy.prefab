@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 8526898780158588204}
   - component: {fileID: 7584878476643794156}
   - component: {fileID: 1276942936284483731}
+  - component: {fileID: -2415949594848079456}
   m_Layer: 7
   m_Name: KamikadzeEnemy
   m_TagString: Untagged
@@ -290,6 +291,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.50384617}
   m_Size: {x: 0.76153845, y: 1.0076923}
   m_Direction: 0
+--- !u!114 &-2415949594848079456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6448669922451256016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ced777abd780b48958d33e6ef76b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _experienceForEnemy: 15
 --- !u!1001 &4062168149178386995
 PrefabInstance:
   m_ObjectHideFlags: 0

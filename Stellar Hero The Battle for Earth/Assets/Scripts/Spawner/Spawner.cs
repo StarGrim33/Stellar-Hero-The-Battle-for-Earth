@@ -15,10 +15,12 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<int> _unusedSpawnPoints;
 
     private IDamageable _target;
+
     public int CurrentWaveIndex => _currentWaveIndex;
 
     public event UnityAction AllEnemySpawned;
 
+    private ExperienceHandler _experienceHandler;
     private int _currentWaveIndex = 0;
     private WaveEnemies _currentWave;
     private float _timeAfterLastSpawn;
@@ -41,6 +43,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
+        _experienceHandler = GetComponent<ExperienceHandler>();
         _unusedSpawnPoints = new List<int>();
 
         for (int i = 0; i < _spawnPoints.Length; i++)
@@ -140,6 +143,11 @@ public class Spawner : MonoBehaviour
 
     private void OnEnemyDying(EnemyHealth enemy)
     {
+        if(enemy == null) return;
+
+        if(enemy.TryGetComponent<ExperienceEnemy>(out ExperienceEnemy experience))
+            _experienceHandler.AddExperience(experience.ExperienceForEnemy);
+
         enemy.Dying -= OnEnemyDying;
         enemy.gameObject.SetActive(false);
     }
