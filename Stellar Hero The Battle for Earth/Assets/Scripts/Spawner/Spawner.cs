@@ -14,10 +14,13 @@ public class Spawner : MonoBehaviour
     [SerializeField] private PlayerUnit _playerUnit;
     [SerializeField] private List<int> _unusedSpawnPoints;
 
+    private IDamageable _target;
+
     public int CurrentWaveIndex => _currentWaveIndex;
 
     public event UnityAction AllEnemySpawned;
 
+    private ExperienceHandler _experienceHandler;
     private int _currentWaveIndex = 0;
     private WaveEnemies _currentWave;
     private float _timeAfterLastSpawn;
@@ -40,12 +43,14 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
+        _experienceHandler = GetComponent<ExperienceHandler>();
         _unusedSpawnPoints = new List<int>();
 
         for (int i = 0; i < _spawnPoints.Length; i++)
             _unusedSpawnPoints.Add(i);
 
         SetWave(_currentWaveIndex);
+        _target = _playerUnit.GetComponent<IDamageable>();
     }
 
     private void Update()
@@ -132,12 +137,17 @@ public class Spawner : MonoBehaviour
         enemy.transform.position = _spawnPoints[spawnPointIndex].position;
         enemy.transform.rotation = _spawnPoints[spawnPointIndex].rotation;
         enemy.gameObject.SetActive(true);
-        enemy.GetComponent<EnemyStateMachine>().SetTarget(_playerUnit.transform);
+        enemy.GetComponent<EnemyStateMachine>().SetTarget(_target);
         enemy.GetComponent<EnemyHealth>().Dying += OnEnemyDying;
     }
 
     private void OnEnemyDying(EnemyHealth enemy)
     {
+        if(enemy == null) return;
+
+        if(enemy.TryGetComponent<ExperienceEnemy>(out ExperienceEnemy experience))
+            _experienceHandler.AddExperience(experience.ExperienceForEnemy);
+
         enemy.Dying -= OnEnemyDying;
         enemy.gameObject.SetActive(false);
     }

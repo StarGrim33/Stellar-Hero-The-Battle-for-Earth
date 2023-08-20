@@ -9,6 +9,7 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] private Bullet _tamplate;
     [SerializeField] private CheckCircleOverlap _enemyChecker;
     [SerializeField] private CrossHair _crosshair;
+    [SerializeField] private AudioSource _audioSource;
 
     private List<GameObject> _enemies;
     private Vector2 _directionToTarget;
@@ -47,6 +48,7 @@ public class BulletSpawner : MonoBehaviour
                     var bullet = Instantiate(_tamplate);
                     CalculateShotTarget(i - 1);
                     bullet.Shot(gameObject.transform.position, _shotTarget, _params.BulletSpeed, _params.Damage);
+                    _audioSource.PlayOneShot(_audioSource.clip);
                 }
 
                 yield return new WaitForSeconds(_params.AttackCooldown);

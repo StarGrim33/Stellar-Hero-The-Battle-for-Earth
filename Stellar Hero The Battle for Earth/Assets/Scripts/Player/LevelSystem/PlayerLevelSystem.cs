@@ -6,13 +6,12 @@ public class PlayerLevelSystem
     private int _level;
     private int _experience;
     private readonly int[] _experienceLevel;
+
     public event UnityAction OnExperienceChanged;
 
     public event UnityAction OnLevelChanged;
 
     public int Level => _level;
-
-    public int Experience => _experience;
 
     public float ExperienceNormalized => (float)_experience / ExperienceToNextLevel;
 

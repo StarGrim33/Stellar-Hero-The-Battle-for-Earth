@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class PlayerHealth : UnitHealth, IDamageable
 {
     [SerializeField] private Animator _animator;
-    private PlayerUnit _playerUnit;
 
     public event UnityAction<float, float> OnHealthChanged;
 
@@ -29,10 +28,9 @@ public class PlayerHealth : UnitHealth, IDamageable
         }
     }
 
-    private void Start()
-    {
-        _playerUnit = GetComponent<PlayerUnit>();
-    }
+    public Transform TargetTransform => transform;
+
+    public bool IsAlive => _currenHealth > 0;
 
     protected override void Die()
     {

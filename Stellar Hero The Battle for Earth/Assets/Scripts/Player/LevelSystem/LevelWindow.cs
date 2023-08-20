@@ -1,13 +1,12 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class LevelWindow : MonoBehaviour
 {
     [SerializeField] private TMP_Text _leveText;
     [SerializeField] private Image _experienceBarImage;
-    [SerializeField] private Button _experienceTestButton;
+
     private PlayerLevelSystem _playerLevelSystem;
 
     private void SetExperienceBarSize(float experienceNormalized)
@@ -29,11 +28,6 @@ public class LevelWindow : MonoBehaviour
         SetExperienceBarSize(_playerLevelSystem.ExperienceNormalized);
         _playerLevelSystem.OnExperienceChanged += OnExperienceChanged;
         _playerLevelSystem.OnLevelChanged += OnLevelChanged;
-    }
-
-    public void AddExp()
-    {
-        _playerLevelSystem.AddExperience(50);
     }
 
     private void OnLevelChanged()

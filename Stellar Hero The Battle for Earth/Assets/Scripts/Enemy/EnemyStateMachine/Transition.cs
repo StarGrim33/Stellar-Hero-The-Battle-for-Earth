@@ -4,7 +4,7 @@ public abstract class Transition : MonoBehaviour
 {
     [SerializeField] private State _nextState;
 
-    protected Transform Target { get; private set; }
+    protected IDamageable Target { get; private set; }
 
     public State NextState => _nextState;
 
@@ -15,7 +15,7 @@ public abstract class Transition : MonoBehaviour
         NeedTransit = false;
     }
 
-    public void Init(Transform target)
+    public void Init(IDamageable target)
     {
         if (Target == null)
             Target = target;
