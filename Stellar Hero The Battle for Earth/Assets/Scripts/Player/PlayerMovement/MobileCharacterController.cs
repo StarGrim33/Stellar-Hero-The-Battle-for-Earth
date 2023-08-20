@@ -10,6 +10,7 @@ public class MobileCharacterController : MonoBehaviour
     private void Awake()
     {
         _iControllable = GetComponent<IControllable>();
+        _joystick.gameObject.SetActive(true);
     }
 
     private void OnEnable()

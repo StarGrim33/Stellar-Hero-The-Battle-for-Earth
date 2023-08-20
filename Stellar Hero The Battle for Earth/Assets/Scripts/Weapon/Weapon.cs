@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour, IWeapon
     [SerializeField] private Cooldown _shotCooldown;
     [SerializeField] private CheckCircleOverlap _enemyChecker;
 
-    [Space, Header("BulletSpawner")]
+    [Space, Header("SimpleBulletSpawner")]
     [SerializeField] private PoolObjectSpawnComponent _spawnComponent;
     [SerializeField] private float _force = 10;
     [SerializeField] private GameObject _crosshair;
@@ -93,7 +93,7 @@ public class Weapon : MonoBehaviour, IWeapon
     {
         GameObject gameObject = _spawnComponent.Spawn();
 
-        if (gameObject.TryGetComponent(out BulletSpawner bullet))
+        if (gameObject.TryGetComponent(out SimpleBulletSpawner bullet))
         {
             bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, -_directionToTarget); 
             bullet.gameObject.SetActive(true);
