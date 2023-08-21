@@ -5,6 +5,9 @@ using UnityEngine.Events;
 [RequireComponent(typeof(EnemyUnit))]
 public class EnemyHealth : UnitHealth, IDamageable
 {
+    private MaterialBlicker _blicker;
+    private DamagePopuper _damagePopuper;
+
     public event UnityAction<EnemyHealth> Dying;
 
     public float MaxHealth { get; private set; }
@@ -24,6 +27,12 @@ public class EnemyHealth : UnitHealth, IDamageable
         }
     }
 
+    private void Start()
+    {
+        _damagePopuper = GetComponent<DamagePopuper>();
+        _blicker = GetComponentInChildren<MaterialBlicker>();
+    }
+
     public Transform TargetTransform => transform;
 
     public bool IsAlive => _currenHealth > 0;
@@ -34,6 +43,8 @@ public class EnemyHealth : UnitHealth, IDamageable
             throw new ArgumentException("Value cannot be negative", nameof(damage));
 
         CurrentHealth -= damage;
+        _blicker.Flash();
+        _damagePopuper.ShowDamagePopup(damage);
     }
 
     protected override void Die()
