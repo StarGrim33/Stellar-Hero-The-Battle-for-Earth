@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -25,7 +26,9 @@ public class DamagePopuper : MonoBehaviour
 
         _prefabPopup.transform.position = transform.position + randomShift;
         _prefabPopup.SetActive(true);
-        Invoke("HidePopup", _displayDuration);
+        _prefabPopup.transform.DOScale(Vector3.one * 0.2f, 0.2f)
+                    .OnComplete(() => _prefabPopup.transform.DOScale(Vector3.one * 0.1f, 0.2f)
+                    .OnComplete(() => HidePopup()));
     }
 
     private void HidePopup()
