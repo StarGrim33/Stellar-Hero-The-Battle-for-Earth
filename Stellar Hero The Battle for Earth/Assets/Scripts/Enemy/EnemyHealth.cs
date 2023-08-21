@@ -7,6 +7,7 @@ public class EnemyHealth : UnitHealth, IDamageable
 {
     private MaterialBlicker _blicker;
     private DamagePopuper _damagePopuper;
+    private DeadEffectSpawner _deadEffectSpawner;
 
     public event UnityAction<EnemyHealth> Dying;
 
@@ -29,6 +30,7 @@ public class EnemyHealth : UnitHealth, IDamageable
 
     private void Start()
     {
+        _deadEffectSpawner = GetComponent<DeadEffectSpawner>();
         _damagePopuper = GetComponent<DamagePopuper>();
         _blicker = GetComponentInChildren<MaterialBlicker>();
     }
@@ -41,7 +43,8 @@ public class EnemyHealth : UnitHealth, IDamageable
     {
         if (damage <= 0)
             throw new ArgumentException("Value cannot be negative", nameof(damage));
-
+        if (_deadEffectSpawner != null)
+            _deadEffectSpawner.SpawnEffect();
         CurrentHealth -= damage;
         _blicker.Flash();
         _damagePopuper.ShowDamagePopup(damage);
@@ -49,6 +52,7 @@ public class EnemyHealth : UnitHealth, IDamageable
 
     protected override void Die()
     {
+
         Dying?.Invoke(this);
         gameObject.SetActive(false);
     }
