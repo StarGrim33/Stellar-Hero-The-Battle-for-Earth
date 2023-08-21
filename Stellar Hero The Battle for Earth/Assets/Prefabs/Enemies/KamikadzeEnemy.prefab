@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6395763675958745131}
   - component: {fileID: 5687412855477747811}
+  - component: {fileID: 4503037232828644248}
   m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
@@ -84,6 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4503037232828644248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213539047834721922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd55f8e6d1a5bb429a752ae07bfb27c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _materialFlash: {fileID: 2100000, guid: 30160f3ac716e624cbe06a589bec17a6, type: 2}
+  _flashDuration: 0
 --- !u!1 &1356164921579192394
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +142,7 @@ Transform:
   - {fileID: 6395763675958745131}
   - {fileID: 2767803625706521983}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4736472756257058779
 Animator:

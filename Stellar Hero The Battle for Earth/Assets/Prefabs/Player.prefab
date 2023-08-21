@@ -93,7 +93,7 @@ Transform:
   - {fileID: 983719929081150883}
   - {fileID: 2279482085195485885}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &4833200701993620068
 MonoBehaviour:
@@ -622,8 +622,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
+      propertyPath: ShapeModule.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
+      propertyPath: ShapeModule.angle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
+      propertyPath: LightsModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.72
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -639,7 +659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.7858338
+      value: 0.53611743
       objectReference: {fileID: 0}
     - target: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
@@ -648,6 +668,10 @@ PrefabInstance:
     - target: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
       value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 19.5
       objectReference: {fileID: 0}
     - target: {fileID: 19839796, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
       propertyPath: playOnAwake
