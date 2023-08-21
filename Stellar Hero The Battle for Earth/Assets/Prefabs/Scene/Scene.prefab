@@ -5237,7 +5237,7 @@ MonoBehaviour:
   _delayBetweenWaves: 2
   _enemyPool: {fileID: 4047725242305840427}
   _waves:
-  - {fileID: 8482029898213735348, guid: 42f2f4ccaacd3cf46bc3fcc2064e5891, type: 3}
+  - {fileID: 8482029898213735348, guid: 77bcd1affa8a6784cb4e88ca48118014, type: 3}
   - {fileID: 8482029898213735348, guid: 4547f24da0a76f84ca643c231bd59177, type: 3}
   _playerUnit: {fileID: 0}
   _unusedSpawnPoints: 
@@ -5405,8 +5405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695953164fec361428c646930d961c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _amount: 15
-  _simpleEnemyPrefab: {fileID: 2697685215078831126, guid: b997919f4ead6fb42acceaa00d03c3e8, type: 3}
+  _amount: 5
+  _simpleEnemyPrefab: {fileID: 3163140446368412027, guid: d5d9abad6e605bf4e809e8c5d2027836, type: 3}
   _simpleEnemyList: []
   _container: {fileID: 8213705886979903580}
   _bomberEnemyAmount: 5
