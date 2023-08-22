@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     public float CurrentSpeed { get; private set; }
 
+    private ParticleSystemPlayer _particleSystem;
     private Rigidbody2D _rigidBody;
     private Vector2 _direction;
     private PlayerUnit _playerUnit;
@@ -28,6 +29,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     private void Awake()
     {
+        _particleSystem = GetComponent<ParticleSystemPlayer>();
         _playerUnit = GetComponent<PlayerUnit>();
         _rigidBody = GetComponent<Rigidbody2D>();
     }
@@ -48,23 +50,21 @@ public class PlayerMovement : MonoBehaviour, IControllable
             Move();
     }
 
+    public void SetDirection(Vector2 direction)
+    {
+        if (direction.x < 0)
+            _sprite.flipX = true;
+        else
+            _sprite.flipX = false;
+
+        _direction = direction;
+    }
+
     public void Move()
     {
         _rigidBody.velocity = _direction * _speed;
+        _particleSystem.CreateDust();
         CurrentSpeed = _rigidBody.velocity.magnitude;
-    }
-
-    private void Dash()
-    {
-        _dushFiller.StartFilled(_dashCooldown.Value);
-
-        _dashTimer += Time.fixedDeltaTime;
-        float time = _dashTimer / _duration;
-        transform.position = Vector2.Lerp(_startDashPostioin, _endDashPostioin, time);
-        _isDash = time >= 1 ? false : true;
-
-        if (_obstacleChecker.CheckCount() > 0)
-            _isDash = false;
     }
 
     public void TryDash()
@@ -80,13 +80,18 @@ public class PlayerMovement : MonoBehaviour, IControllable
         }
     }
 
-    public void SetDirection(Vector2 direction)
+    private void Dash()
     {
-        if (direction.x < 0)
-            _sprite.flipX = true;
-        else
-            _sprite.flipX = false;                
+        _dushFiller.StartFilled(_dashCooldown.Value);
 
-        _direction = direction;
+        _dashTimer += Time.fixedDeltaTime;
+        float time = _dashTimer / _duration;
+        transform.position = Vector2.Lerp(_startDashPostioin, _endDashPostioin, time);
+        _particleSystem.CreateDust();
+        _isDash = time >= 1 ? false : true;
+
+        if (_obstacleChecker.CheckCount() > 0)
+            _isDash = false;
     }
+
 }
