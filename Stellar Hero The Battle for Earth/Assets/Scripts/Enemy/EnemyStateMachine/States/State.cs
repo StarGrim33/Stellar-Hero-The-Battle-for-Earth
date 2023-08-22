@@ -9,7 +9,7 @@ public abstract class State : MonoBehaviour
 
     public void Enter(IDamageable target)
     {
-        if(!enabled)
+        if(enabled == false)
         {
             Target = target;
             enabled = true;

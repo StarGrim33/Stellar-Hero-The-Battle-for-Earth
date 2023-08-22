@@ -17,7 +17,6 @@ public abstract class Transition : MonoBehaviour
 
     public void Init(IDamageable target)
     {
-        if (Target == null)
-            Target = target;
+        Target ??= target;
     }
 }
