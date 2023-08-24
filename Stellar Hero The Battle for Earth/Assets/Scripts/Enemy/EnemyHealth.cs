@@ -48,7 +48,11 @@ public class EnemyHealth : UnitHealth, IDamageable
             _deadEffectSpawner.SpawnEffect();
 
         CurrentHealth -= damage;
-        _blicker.Flash();
+
+        if (_blicker != null)
+            _blicker.Flash();
+
+        if(_damagePopuper  != null)
         _damagePopuper.ShowDamagePopup(damage);
     }
 

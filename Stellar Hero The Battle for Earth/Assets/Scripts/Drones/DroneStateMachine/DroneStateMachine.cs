@@ -11,13 +11,16 @@ public class DroneStateMachine : MonoBehaviour
     private IStateSwitcher _currentState;
     private CheckCircleOverlap _enemyChecker;
     private ParticleSystemPlayer _shotEffect;
+    private DroneSpriteRotator _spriteRotator;
 
     private void Start()
     {
+        _spriteRotator = GetComponent<DroneSpriteRotator>();
         _shotEffect = GetComponent<ParticleSystemPlayer>();
         _enemyChecker = GetComponent<CheckCircleOverlap>();
         Init();
         SetBehaviourByDefault();
+        SpriteRotatorInit();
     }
 
     private void Update()
@@ -42,7 +45,7 @@ public class DroneStateMachine : MonoBehaviour
         _states = new Dictionary<Type, IStateSwitcher>()
         {
             [typeof(DroneMovementState)] = new DroneMovementState(transform, _playerUnit, this, _enemyChecker),
-            [typeof(DroneAttackState)] = new DroneAttackState(this, _enemyChecker, _shotEffect, transform),
+            [typeof(DroneAttackState)] = new DroneAttackState(this, _enemyChecker, _shotEffect, transform, _playerUnit),
         };
     }
 
@@ -62,5 +65,16 @@ public class DroneStateMachine : MonoBehaviour
     private IStateSwitcher GetBehaviour<T>() where T: IStateSwitcher
     {
         return _states[typeof(T)];
+    }
+
+    private void SpriteRotatorInit()
+    {
+        if (_states.TryGetValue(typeof(DroneAttackState), out var attackState))
+        {
+            if (attackState is DroneAttackState droneAttackState)
+            {
+                _spriteRotator.Init(droneAttackState);
+            }
+        }
     }
 }

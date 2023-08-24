@@ -1,5 +1,4 @@
 using Assets.Scripts.Components.Checkers;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DroneMovementState : IStateSwitcher
@@ -10,7 +9,6 @@ public class DroneMovementState : IStateSwitcher
     private float _angle = 0.0f;
     private DroneStateMachine _stateMachine;
     private CheckCircleOverlap _enemyChecker;
-    private IDamageable _currentTarget;
 
     public DroneMovementState(Transform transform, Transform playerTransform, DroneStateMachine stateMachine, CheckCircleOverlap checker)
     {
@@ -32,24 +30,10 @@ public class DroneMovementState : IStateSwitcher
 
     public void Update()
     {
-        if (_enemyChecker.CheckCount() < 0)
-            return;
-
-        //if (_target.position.x > _droneSprite.position.x)
-        //{
-        //    _droneSprite.localScale = new Vector3(1f, 1f, 1f);
-        //}
-        //else
-        //{
-        //    _droneSprite.localScale = new Vector3(-1f, 1f, 1f);
-        //}
-
         MoveAroundPlayer();
 
         if (_enemyChecker.CheckCount() > 0)
-        {
             _stateMachine.SetWorkState();
-        }
     }
 
     private void MoveAroundPlayer()
@@ -59,10 +43,4 @@ public class DroneMovementState : IStateSwitcher
         float y = _heroTransform.position.y + _flyRadius * Mathf.Sin(_angle);
         _droneTransform.position = new Vector3(x, y, _droneTransform.position.z);
     }
-
-    private void RotateToTarget()
-    {
-
-    }
-
 }

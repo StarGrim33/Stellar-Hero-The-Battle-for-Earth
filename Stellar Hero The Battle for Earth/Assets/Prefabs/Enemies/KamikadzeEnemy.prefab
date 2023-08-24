@@ -649,6 +649,10 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 19897484, guid: 721ed883392764d42a3957861e7752c0, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 19940966, guid: 721ed883392764d42a3957861e7752c0, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
