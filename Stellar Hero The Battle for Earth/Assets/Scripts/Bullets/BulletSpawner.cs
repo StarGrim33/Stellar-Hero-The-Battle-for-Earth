@@ -12,9 +12,9 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private CameraShaker _cameraShaker;
 
-    private List<GameObject> _enemies;
+    private List<IDamageable> _enemies;
     private Vector2 _directionToTarget;
-    private GameObject _currentTarget;
+    private IDamageable _currentTarget;
 
     private BulletParams _params;
     private Vector3 _shotTarget;
@@ -34,7 +34,7 @@ public class BulletSpawner : MonoBehaviour
 
     private void Update()
     {
-        _enemies = _enemyChecker.Check();
+        _enemies = _enemyChecker.Check<IDamageable>();
         UpdateCrossHair();
     }
 
@@ -65,7 +65,7 @@ public class BulletSpawner : MonoBehaviour
         int sideModifier = number % 2 == 0 ? -1 : 1;
         var dispertion = _params.StepDispertion * number * sideModifier;
         Quaternion deviation = Quaternion.Euler(dispertion, dispertion, 0f);
-        _shotTarget = deviation * _currentTarget.transform.position;
+        _shotTarget = deviation * _currentTarget.TargetTransform.position;
     }
 
     private void RotateToTarget(Vector3 target)
@@ -84,7 +84,7 @@ public class BulletSpawner : MonoBehaviour
         }
         else
         {
-            if (_currentTarget.GetComponent<EnemyHealth>().CurrentHealth <= 0)
+            if (_currentTarget.IsAlive == false)
                 _currentTarget = FindClosestLivingEnemy();
 
             if (_currentTarget == null) return;
@@ -101,16 +101,16 @@ public class BulletSpawner : MonoBehaviour
         _crosshair.gameObject.SetActive(false);
     }
 
-    private GameObject FindClosestLivingEnemy()
+    private IDamageable FindClosestLivingEnemy()
     {
-        GameObject closestEnemy = null;
+        IDamageable closestEnemy = null;
         float closestDistance = float.MaxValue;
 
         foreach (var enemy in _enemies)
         {
-            if (enemy.GetComponent<EnemyHealth>().CurrentHealth > 0)
+            if (enemy.IsAlive)
             {
-                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                float distanceToEnemy = Vector3.Distance(transform.position, enemy.TargetTransform.position);
 
                 if (distanceToEnemy < closestDistance)
                 {
@@ -123,9 +123,9 @@ public class BulletSpawner : MonoBehaviour
         return closestEnemy;
     }
 
-    private void UpdateCrossHairPosition(GameObject target)
+    private void UpdateCrossHairPosition(IDamageable target)
     {
-        _crosshair.transform.parent = target.transform;
+        _crosshair.transform.parent = target.TargetTransform;
         _crosshair.transform.localPosition = Vector3.zero;
     }
 }

@@ -3,11 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyUnit))]
 public class EnemyMovementState : State
 {
+    protected Animator _animator;
     private float _speed;
     private EnemyUnit _enemyUnit;
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         _enemyUnit = GetComponent<EnemyUnit>();
         _speed = _enemyUnit.Config.Speed;
     }

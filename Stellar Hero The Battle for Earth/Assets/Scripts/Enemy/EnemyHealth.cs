@@ -43,8 +43,10 @@ public class EnemyHealth : UnitHealth, IDamageable
     {
         if (damage <= 0)
             throw new ArgumentException("Value cannot be negative", nameof(damage));
+
         if (_deadEffectSpawner != null)
             _deadEffectSpawner.SpawnEffect();
+
         CurrentHealth -= damage;
         _blicker.Flash();
         _damagePopuper.ShowDamagePopup(damage);
@@ -52,7 +54,6 @@ public class EnemyHealth : UnitHealth, IDamageable
 
     protected override void Die()
     {
-
         Dying?.Invoke(this);
         gameObject.SetActive(false);
     }

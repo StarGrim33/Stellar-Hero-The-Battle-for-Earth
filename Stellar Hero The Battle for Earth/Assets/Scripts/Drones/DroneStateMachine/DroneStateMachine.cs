@@ -1,17 +1,21 @@
+using Assets.Scripts.Components.Checkers;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CheckCircleOverlap))]
 public class DroneStateMachine : MonoBehaviour
 {
     [SerializeField] private Transform _playerUnit;
     private Dictionary<Type, IStateSwitcher> _states;
     private IStateSwitcher _currentState;
-    private Transform _droneTransform;
+    private CheckCircleOverlap _enemyChecker;
+    private ParticleSystemPlayer _shotEffect;
 
     private void Start()
     {
-        _droneTransform = transform;
+        _shotEffect = GetComponent<ParticleSystemPlayer>();
+        _enemyChecker = GetComponent<CheckCircleOverlap>();
         Init();
         SetBehaviourByDefault();
     }
@@ -19,12 +23,6 @@ public class DroneStateMachine : MonoBehaviour
     private void Update()
     {
         _currentState?.Update();
-    }
-
-    public void SetIdleState()
-    {
-        var state = GetBehaviour<DroneIdleState>();
-        SetBehaviour(state);
     }
 
     public void SetMovementState()
@@ -43,9 +41,8 @@ public class DroneStateMachine : MonoBehaviour
     {
         _states = new Dictionary<Type, IStateSwitcher>()
         {
-            [typeof(DroneIdleState)] = new DroneIdleState(),
-            [typeof(DroneMovementState)] = new DroneMovementState(transform, _playerUnit),
-            [typeof(DroneAttackState)] = new DroneAttackState(),
+            [typeof(DroneMovementState)] = new DroneMovementState(transform, _playerUnit, this, _enemyChecker),
+            [typeof(DroneAttackState)] = new DroneAttackState(this, _enemyChecker, _shotEffect, transform),
         };
     }
 
