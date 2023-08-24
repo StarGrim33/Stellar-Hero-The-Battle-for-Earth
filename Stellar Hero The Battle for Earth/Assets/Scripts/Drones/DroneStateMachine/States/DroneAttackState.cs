@@ -13,20 +13,19 @@ public class DroneAttackState : IStateSwitcher
     private Transform _transform;
     private IDamageable _currentTarget;
     private Transform _heroTransform;
+    private DroneParameters _parameters;
 
-    private int _damage = 15;
-    private float _delay = 2f;
     private float _lastAttackTime;
-    private float _flyRadius = 1.0f;
-    private float _angle = 0.0f;
+    private float _angle;
 
-    public DroneAttackState(DroneStateMachine machine, CheckCircleOverlap checker, ParticleSystemPlayer shotEffect, Transform transformDrone, Transform heroTransform)
+    public DroneAttackState(DroneStateMachine machine, CheckCircleOverlap checker, ParticleSystemPlayer shotEffect, Transform transformDrone, Transform heroTransform, DroneParameters droneParameters)
     {
         _enemyChecker = checker;
         _machine = machine;
         _shotEffect = shotEffect;
         _transform = transformDrone;
         _heroTransform = heroTransform;
+        _parameters = droneParameters;
     }
 
     public void Enter()
@@ -53,8 +52,8 @@ public class DroneAttackState : IStateSwitcher
 
         if (hit.collider != null && hit.collider.TryGetComponent<IDamageable>(out var damageable))
         {
-            if (damageable is not EnemyHealth)
-                damageable.TakeDamage(_damage);
+            if (damageable is not PlayerHealth)
+                damageable.TakeDamage(_parameters.Damage);
 
             _shotEffect.PlayEffect();
         }
@@ -85,8 +84,8 @@ public class DroneAttackState : IStateSwitcher
     private void Move()
     {
         _angle += Time.deltaTime;
-        float x = _heroTransform.position.x + _flyRadius * Mathf.Cos(_angle);
-        float y = _heroTransform.position.y + _flyRadius * Mathf.Sin(_angle);
+        float x = _heroTransform.position.x + _parameters.FlyRadius * Mathf.Cos(_angle);
+        float y = _heroTransform.position.y + _parameters.FlyRadius * Mathf.Sin(_angle);
         _transform.position = new Vector3(x, y, _transform.position.z);
 
     }
@@ -104,7 +103,7 @@ public class DroneAttackState : IStateSwitcher
         if (_lastAttackTime <= 0 && _currentTarget != null)
         {
             ShootAtEnemy(_currentTarget);
-            _lastAttackTime = _delay;
+            _lastAttackTime = _parameters.Delay;
         }
 
         _lastAttackTime -= Time.deltaTime;
