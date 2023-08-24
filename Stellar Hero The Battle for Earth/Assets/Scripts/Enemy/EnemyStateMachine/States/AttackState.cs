@@ -38,6 +38,7 @@ public class AttackState : State
             }
             else
             {
+                _animator.SetBool(Constants.AttackState, false);
                 enabled = false;
                 _enemyStateMachine.ResetState();
             }

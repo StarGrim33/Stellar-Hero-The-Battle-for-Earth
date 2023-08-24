@@ -3,8 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class KamikadzeAttack : AttackState
 {
-    [SerializeField] private ParticleSystem _explodeEffect;
-    private float _explosionRadius = 2f;
+    private float _explosionRadius = 1f;
 
     public override void Attack()
     {
@@ -12,10 +11,7 @@ public class KamikadzeAttack : AttackState
         {
             if (Vector2.Distance(Target.TargetTransform.position, transform.position) < 1)
             {
-                _animator.Play(Constants.ExplosionEnemyAnimation);
-                _explodeEffect.Play();
                 Explode();
-                gameObject.SetActive(false);
             }
             else
             {

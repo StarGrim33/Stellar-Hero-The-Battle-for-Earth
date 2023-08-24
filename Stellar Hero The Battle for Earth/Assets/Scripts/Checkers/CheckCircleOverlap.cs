@@ -10,22 +10,16 @@ namespace Assets.Scripts.Components.Checkers
 
         private readonly Collider2D[] _collidedResult = new Collider2D[5];
 
-        public List<GameObject> Check()
+        public List<T> Check<T>() where T : IDamageable
         {
-            var result = new List<GameObject>();
+            var result = new List<T>();
 
-            var size = Physics2D.OverlapCircleNonAlloc(
-                transform.position,
-                _radius,
-                _collidedResult,
-                _layer);
+            var size = Physics2D.OverlapCircleNonAlloc(transform.position, _radius, _collidedResult, _layer);
 
             for (int i = 0; i < size; i++)
             {
-                if (_collidedResult[i].gameObject.TryGetComponent<EnemyUnit>(out EnemyUnit unit)) 
-                {
-                    result.Add(_collidedResult[i].gameObject);
-                }
+                if (_collidedResult[i].gameObject.TryGetComponent<T>(out var damageable))
+                    result.Add(damageable);
             }
 
             return result;

@@ -24,9 +24,9 @@ public abstract class Weapon : MonoBehaviour, IWeapon
 
     public Vector3 Target { get; private set; }
 
-    protected List<GameObject> _enemies;
+    protected List<IDamageable> _enemies;
     protected Vector2 _directionToTarget;
-    protected GameObject _currentTarget;
+    protected IDamageable _currentTarget;
 
     private void Start()
     {
@@ -38,30 +38,30 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         if (StateManager.Instance.CurrentGameState == GameStates.Paused)
             return;
 
-        _enemies = _enemyChecker.Check();
+        _enemies = _enemyChecker.Check<IDamageable>();
 
         if (_currentTarget == null)
             DisableCrossHair();
 
-        if (_currentTarget == null || _currentTarget.GetComponent<EnemyHealth>().CurrentHealth <= 0)
+        if (_currentTarget == null || _currentTarget.IsAlive == false)
         {
             _currentTarget = FindClosestLivingEnemy();
         }
 
         if (_currentTarget != null)
         {
-            if (!_crosshair.gameObject.activeSelf)
+            if (_crosshair.gameObject.activeSelf == false)
                 _crosshair.gameObject.SetActive(true);
 
-            RotateToTarget(_currentTarget.transform.position);
-            UpdateCrossHairPosition(_currentTarget.transform.position);
+            RotateToTarget(_currentTarget.TargetTransform.position);
+            UpdateCrossHairPosition(_currentTarget.TargetTransform.position);
         }
 
         if (_currentTarget != null && _shotCooldown.IsReady() && !_isReloading)
         {
             if (_currentAmmo > 0)
             {
-                RotateToTarget(_currentTarget.transform.position);
+                RotateToTarget(_currentTarget.TargetTransform.position);
                 _shotCooldown.Reset();
                 _currentAmmo--;
                 SpawnBullet();
@@ -73,16 +73,16 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         }
     }
 
-    private GameObject FindClosestLivingEnemy()
+    private IDamageable FindClosestLivingEnemy()
     {
-        GameObject closestEnemy = null;
+        IDamageable closestEnemy = null;
         float closestDistance = float.MaxValue;
 
         foreach (var enemy in _enemies)
         {
-            if (enemy.GetComponent<EnemyHealth>().CurrentHealth > 0)
+            if (enemy.IsAlive)
             {
-                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                float distanceToEnemy = Vector3.Distance(transform.position, enemy.TargetTransform.position);
 
                 if (distanceToEnemy < closestDistance)
                 {
@@ -102,7 +102,7 @@ public abstract class Weapon : MonoBehaviour, IWeapon
 
             if (_currentAmmo > 0)
             {
-                RotateToTarget(_currentTarget.transform.position);
+                RotateToTarget(_currentTarget.TargetTransform.position);
                 _shotCooldown.Reset();
                 _currentAmmo--;
                 SpawnBullet();

@@ -14,7 +14,6 @@ public class BulletParams : MonoBehaviour
     private float _baseCooldownAttack = 1f;
     private float _baseBulletSpeed = 1f;
 
-
     public int Damage => (int)(_baseDamage * (1f + _damageModify));
 
     public float AttackCooldown => _baseCooldownAttack/(_baseAttackSpeed*(1f+ _attackSpeedModify));
