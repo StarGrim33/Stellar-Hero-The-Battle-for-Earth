@@ -14,11 +14,11 @@ public class DroneAttackState : IStateSwitcher
     private IDamageable _currentTarget;
     private Transform _heroTransform;
     private DroneParameters _parameters;
-
+    private TrailInstantiator _instantiator;
     private float _lastAttackTime;
     private float _angle;
 
-    public DroneAttackState(DroneStateMachine machine, CheckCircleOverlap checker, ParticleSystemPlayer shotEffect, Transform transformDrone, Transform heroTransform, DroneParameters droneParameters)
+    public DroneAttackState(DroneStateMachine machine, CheckCircleOverlap checker, ParticleSystemPlayer shotEffect, Transform transformDrone, Transform heroTransform, DroneParameters droneParameters, TrailInstantiator instantiator)
     {
         _enemyChecker = checker;
         _machine = machine;
@@ -26,6 +26,7 @@ public class DroneAttackState : IStateSwitcher
         _transform = transformDrone;
         _heroTransform = heroTransform;
         _parameters = droneParameters;
+        _instantiator = instantiator;
     }
 
     public void Enter()
@@ -55,6 +56,7 @@ public class DroneAttackState : IStateSwitcher
             if (damageable is not PlayerHealth)
                 damageable.TakeDamage(_parameters.Damage);
 
+            _instantiator.TrailInstantiate(hit.point);
             _shotEffect.PlayEffect();
         }
     }
@@ -87,7 +89,6 @@ public class DroneAttackState : IStateSwitcher
         float x = _heroTransform.position.x + _parameters.FlyRadius * Mathf.Cos(_angle);
         float y = _heroTransform.position.y + _parameters.FlyRadius * Mathf.Sin(_angle);
         _transform.position = new Vector3(x, y, _transform.position.z);
-
     }
 
     private void CheckEnemiesAndAttack()

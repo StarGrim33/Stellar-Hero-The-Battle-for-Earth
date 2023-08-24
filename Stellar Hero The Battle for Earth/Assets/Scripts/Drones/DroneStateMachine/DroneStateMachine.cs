@@ -13,7 +13,8 @@ public class DroneStateMachine : MonoBehaviour
     private ParticleSystemPlayer _shotEffect;
     private DroneSpriteRotator _spriteRotator;
     private DroneParameters _parameters;
-
+    private TrailInstantiator _instantiator;
+    
     private void Start()
     {
         Init();
@@ -40,6 +41,7 @@ public class DroneStateMachine : MonoBehaviour
 
     private void Init()
     {
+        _instantiator = GetComponent<TrailInstantiator>();
         _spriteRotator = GetComponent<DroneSpriteRotator>();
         _shotEffect = GetComponent<ParticleSystemPlayer>();
         _enemyChecker = GetComponent<CheckCircleOverlap>();
@@ -48,7 +50,7 @@ public class DroneStateMachine : MonoBehaviour
         _states = new Dictionary<Type, IStateSwitcher>()
         {
             [typeof(DroneMovementState)] = new DroneMovementState(transform, _playerUnit, this, _enemyChecker),
-            [typeof(DroneAttackState)] = new DroneAttackState(this, _enemyChecker, _shotEffect, transform, _playerUnit, _parameters),
+            [typeof(DroneAttackState)] = new DroneAttackState(this, _enemyChecker, _shotEffect, transform, _playerUnit, _parameters, _instantiator),
         };
     }
 
