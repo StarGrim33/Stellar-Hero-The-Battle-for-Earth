@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81b4f52ee99e8748abe0762d98772c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitConfig: {fileID: 11400000, guid: 8e87c1b20fc9d464492f040eaaa32b94, type: 2}
+  _unitConfig: {fileID: 11400000, guid: 8e87c1b20fc9d464492f040eaaa32b94, type: 2}
 --- !u!114 &7090686678005439530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,7 +708,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2384880284765460905, guid: bc04f9bd94a0bd94cade510dad34db0d, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2655610182938613516, guid: bc04f9bd94a0bd94cade510dad34db0d, type: 3}
       propertyPath: m_Pivot.x
