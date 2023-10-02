@@ -1,20 +1,11 @@
-using System.Collections;
 using UnityEngine;
 
-public class ParticleSystemPlayer : MonoBehaviour
+public abstract class ParticleSystemPlayer : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem _effect;
-    [SerializeField] private float _flashDuration = 0.1f; 
+    [SerializeField] protected ParticleSystem _effect;
 
-    public void PlayEffect()
+    public virtual void PlayEffect()
     {
         _effect.Play();
-        StartCoroutine(StopEffectAfterDelay());
-    }
-
-    private IEnumerator StopEffectAfterDelay()
-    {
-        yield return new WaitForSeconds(_flashDuration);
-        _effect.Stop();
     }
 }
