@@ -31,7 +31,7 @@ public class HealthBar : MonoBehaviour
             _backHealthBar.fillAmount = Mathf.Lerp(fillBack, hFraction, percentComplete);
             _lerpTimer = 0f;
         }
-        if(fillFront < hFraction)
+        else if(fillFront < hFraction)
         {
             _backHealthBar.color = Color.green;
             _backHealthBar.fillAmount = hFraction;
