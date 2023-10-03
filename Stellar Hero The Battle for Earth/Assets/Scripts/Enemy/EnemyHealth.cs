@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -44,8 +45,8 @@ public class EnemyHealth : UnitHealth, IDamageable
         if (damage <= 0)
             throw new ArgumentException("Value cannot be negative", nameof(damage));
 
-        if (_deadEffectSpawner != null)
-            _deadEffectSpawner.SpawnEffect();
+        //if (_deadEffectSpawner != null)
+        //    _deadEffectSpawner.SpawnEffect();
 
         CurrentHealth -= damage;
 
@@ -58,7 +59,17 @@ public class EnemyHealth : UnitHealth, IDamageable
 
     protected override void Die()
     {
+        if (_deadEffectSpawner != null)
+            _deadEffectSpawner.SpawnEffect();
+
         Dying?.Invoke(this);
+
+        StartCoroutine(SetDisabled());
+    }
+
+    private IEnumerator SetDisabled()
+    {
+        yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
     }
 }

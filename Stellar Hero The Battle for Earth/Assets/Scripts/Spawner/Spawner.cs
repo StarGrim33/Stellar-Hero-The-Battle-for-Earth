@@ -147,7 +147,6 @@ public class Spawner : MonoBehaviour
             _experienceHandler.AddExperience(experience.ExperienceForEnemy);
 
         enemy.Dying -= OnEnemyDying;
-        enemy.gameObject.SetActive(false);
     }
 
     private void SetWave(int index)

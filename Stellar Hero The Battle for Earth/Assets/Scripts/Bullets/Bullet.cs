@@ -17,24 +17,17 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent<EnemyHealth>(out EnemyHealth enemyHealth))
+        if(collision.TryGetComponent<IDamageable>(out IDamageable enemyHealth))
         {
             enemyHealth.TakeDamage(_damage);
         }
-        OnTriggerAction();
-        
-    }
-
-    private void OnTriggerAction()
-    {
-        Destroy(gameObject);
     }
 
     private IEnumerator ShotCoroutine(float speed)
     {
         while (true)
         {
-            transform.position += _direction * speed * Time.deltaTime;
+            transform.position += speed * Time.deltaTime * _direction;
 
             yield return null;
         }        

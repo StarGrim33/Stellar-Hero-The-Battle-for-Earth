@@ -100,7 +100,7 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         if (!_isReloading && _enemies != null && _enemies.Count > 0 && _shotCooldown.IsReady())
         {
 
-            if (_currentAmmo > 0)
+            if (_currentAmmo > 0 && _currentTarget != null)
             {
                 RotateToTarget(_currentTarget.TargetTransform.position);
                 _shotCooldown.Reset();

@@ -54,9 +54,4 @@ public class EnemyPool : MonoBehaviour
 
         return null;
     }
-
-    public void ReturnToPool()
-    {
-        gameObject.SetActive(false);
-    }
 }
