@@ -41,6 +41,9 @@ public class DroneAttackState : IStateSwitcher
 
     public void Update()
     {
+        if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+            return;
+
         Move();
         CheckEnemiesAndAttack();
     }

@@ -6,9 +6,9 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour, IWeapon
 {
-    [SerializeField] protected int _damage;
     [SerializeField] protected Cooldown _shotCooldown;
     [SerializeField] private CheckCircleOverlap _enemyChecker;
+    [SerializeField] private SpriteRenderer _sprite;
 
     [Space, Header("Bullet")]
     [SerializeField] protected PoolObjectSpawnComponent _spawnComponent;
@@ -31,6 +31,7 @@ public abstract class Weapon : MonoBehaviour, IWeapon
     private void Start()
     {
         _currentAmmo = _maxAmmo;
+        _sprite.flipY = true;
     }
 
     private void Update()
@@ -122,15 +123,26 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         {
             bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, -_directionToTarget); 
             bullet.gameObject.SetActive(true);
-            //bullet.AddForce(_directionToTarget, _force);
         }
     }
 
     private void RotateToTarget(Vector3 target)
     {
-        _directionToTarget = (target - transform.position).normalized;
-        float angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg;
-        transform.eulerAngles = new Vector3(0, 0, -angle);
+        Vector2 directionToTarget = (target - transform.position).normalized;
+        float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
+        _sprite.transform.eulerAngles = new Vector3(0, 0, angle);
+
+        if (directionToTarget.x < 0)
+        {
+            _sprite.flipX = false;
+            _sprite.flipY = true;
+        }
+        else
+        {
+            _sprite.flipX = false;
+            _sprite.flipY = false;
+        }
+
     }
 
     private void UpdateCrossHairPosition(Vector3 vector)
@@ -157,6 +169,5 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         yield return new WaitForSeconds(_reloadTime);
         _currentAmmo = _maxAmmo;
         _isReloading = false;
-        Debug.Log("ok");
     }
 }

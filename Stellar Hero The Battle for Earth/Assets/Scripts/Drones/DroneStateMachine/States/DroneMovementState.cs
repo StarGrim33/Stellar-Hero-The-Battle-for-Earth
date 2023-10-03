@@ -30,6 +30,9 @@ public class DroneMovementState : IStateSwitcher
 
     public void Update()
     {
+        if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+            return;
+
         MoveAroundPlayer();
 
         if (_enemyChecker.CheckCount() > 0)
