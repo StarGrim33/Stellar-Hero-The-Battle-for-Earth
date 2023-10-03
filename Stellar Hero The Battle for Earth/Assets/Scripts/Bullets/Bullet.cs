@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
         CalculateDirection(startPoint, endPoint);
         transform.position = startPoint;
         StartCoroutine(ShotCoroutine(speed));
+        StartCoroutine(DisablefterDelay(5f));
 
         _damage = damage;
     }
@@ -38,5 +39,11 @@ public class Bullet : MonoBehaviour
         var heading = endPoint - startPoint;
         var distance = heading.magnitude;
         _direction = heading / distance;
+    }
+
+    private IEnumerator DisablefterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        gameObject.SetActive(false);
     }
 }

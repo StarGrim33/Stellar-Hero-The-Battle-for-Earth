@@ -330,6 +330,14 @@ PrefabInstance:
       value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 4309324926663632617, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: _template
+      value: 
+      objectReference: {fileID: 7805510915912713314, guid: 0b8c9ae8daf8c3c418b328624e9339ce, type: 3}
+    - target: {fileID: 4309324926663632617, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309324926663632617, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
       propertyPath: _crosshair
       value: 
       objectReference: {fileID: 1804763329}
@@ -338,13 +346,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1106013947}
     - target: {fileID: 4407669622946249843, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: _params
+      value: 
+      objectReference: {fileID: 817889722}
+    - target: {fileID: 4407669622946249843, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
       propertyPath: _sprite
       value: 
       objectReference: {fileID: 2057475011}
     - target: {fileID: 4407669622946249843, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407669622946249843, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
       propertyPath: _crosshair
       value: 
       objectReference: {fileID: 157602348}
+    - target: {fileID: 4407669622946249843, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: _bulletSpawner
+      value: 
+      objectReference: {fileID: 817889721}
     - target: {fileID: 4833200701993620068, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
       propertyPath: _dushFiller
       value: 
@@ -360,6 +380,10 @@ PrefabInstance:
     - target: {fileID: 5442664937538200987, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.1115139
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449430023971712585, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: _count
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5611528770600181225, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
       propertyPath: m_FlipX
@@ -389,6 +413,14 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1106013946}
+    - target: {fileID: 8463582923262388110, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: _capacity
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8463582923262388110, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: _template
+      value: 
+      objectReference: {fileID: 7154380817474453084, guid: 0b8c9ae8daf8c3c418b328624e9339ce, type: 3}
     - target: {fileID: 8463582923262388110, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
       propertyPath: _container
       value: 
@@ -636,6 +668,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _effect: {fileID: 939177791}
   _levelUpEffect: {fileID: 972049156}
+--- !u!114 &817889721 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4309324926663632617, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+  m_PrefabInstance: {fileID: 493477905}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713239082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa39c4987e677b4dae3841292061c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &817889722 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5449430023971712585, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+  m_PrefabInstance: {fileID: 493477905}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713239082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70e09c4927d3f554c9ebd2fd0b89597d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &899349495 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7285109592819117242, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
