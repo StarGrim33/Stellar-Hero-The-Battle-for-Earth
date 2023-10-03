@@ -8,16 +8,11 @@ public class DeadEffectSpawner : MonoBehaviour
     public void SpawnEffect()
     {
         ParticleSystem particleSystem = TryGetDeadEffect();
-
-        if(particleSystem != null)
-        {
-            particleSystem.Play();
-        }
+        particleSystem?.Play();
     }
 
     private ParticleSystem TryGetDeadEffect()
     {
-        var randomEffect = Random.Range(0, _particles.Count);
-        return _particles[randomEffect];
+        return _particles.Count > 0 ? _particles[Random.Range(0, _particles.Count)] : null;
     }
 }

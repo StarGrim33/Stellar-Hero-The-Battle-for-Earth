@@ -7,7 +7,7 @@ public class DroneAttackState : IStateSwitcher
     public Transform CurrenTarget { get; private set; }
 
     private CheckCircleOverlap _enemyChecker;
-    private ParticleSystemPlayer _shotEffect;
+    private DroneParticleSystem _shotEffect;
     private DroneStateMachine _machine;
     private List<IDamageable> _enemyList;
     private Transform _transform;
@@ -18,7 +18,7 @@ public class DroneAttackState : IStateSwitcher
     private float _lastAttackTime;
     private float _angle;
 
-    public DroneAttackState(DroneStateMachine machine, CheckCircleOverlap checker, ParticleSystemPlayer shotEffect, Transform transformDrone, Transform heroTransform, DroneParameters droneParameters, TrailInstantiator instantiator)
+    public DroneAttackState(DroneStateMachine machine, CheckCircleOverlap checker, DroneParticleSystem shotEffect, Transform transformDrone, Transform heroTransform, DroneParameters droneParameters, TrailInstantiator instantiator)
     {
         _enemyChecker = checker;
         _machine = machine;

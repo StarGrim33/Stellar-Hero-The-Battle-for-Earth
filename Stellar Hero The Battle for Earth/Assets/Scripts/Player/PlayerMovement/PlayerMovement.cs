@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     public float CurrentSpeed { get; private set; }
 
-    private ParticleSystemPlayer _particleSystem;
+    private PlayerParticleSystem _particleSystem;
     private Rigidbody2D _rigidBody;
     private Vector2 _direction;
     private PlayerUnit _playerUnit;
@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     private void Awake()
     {
-        _particleSystem = GetComponent<ParticleSystemPlayer>();
+        _particleSystem = GetComponent<PlayerParticleSystem>();
         _playerUnit = GetComponent<PlayerUnit>();
         _rigidBody = GetComponent<Rigidbody2D>();
     }

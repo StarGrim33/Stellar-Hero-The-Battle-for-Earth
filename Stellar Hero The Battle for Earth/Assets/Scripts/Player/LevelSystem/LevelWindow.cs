@@ -8,6 +8,7 @@ public class LevelWindow : MonoBehaviour
     [SerializeField] private Image _experienceBarImage;
 
     private PlayerLevelSystem _playerLevelSystem;
+    private string _englishLevelText = "Level: ";
 
     private void SetExperienceBarSize(float experienceNormalized)
     {
@@ -17,7 +18,7 @@ public class LevelWindow : MonoBehaviour
     private void SetLevelNumber(int number)
     {
         number++;
-        _leveText.text = number.ToString();
+        _leveText.text = _englishLevelText + number.ToString();
     }
 
     public void SetLevelSystem(PlayerLevelSystem levelSystem)

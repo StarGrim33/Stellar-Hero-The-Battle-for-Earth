@@ -121,9 +121,7 @@ public class Spawner : MonoBehaviour
     {
         int randomIndex = UnityEngine.Random.Range(0, _unusedSpawnPoints.Count);
 
-        int spawnPointIndex;
-
-        if (TryGetSpawnPoint(randomIndex, out spawnPointIndex))
+        if (TryGetSpawnPoint(randomIndex, out int spawnPointIndex))
             _unusedSpawnPoints.RemoveAt(randomIndex);
         else
         {
@@ -149,7 +147,6 @@ public class Spawner : MonoBehaviour
             _experienceHandler.AddExperience(experience.ExperienceForEnemy);
 
         enemy.Dying -= OnEnemyDying;
-        enemy.gameObject.SetActive(false);
     }
 
     private void SetWave(int index)

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,10 +53,5 @@ public class EnemyPool : MonoBehaviour
         }
 
         return null;
-    }
-
-    public void ReturnToPool()
-    {
-        gameObject.SetActive(false);
     }
 }
