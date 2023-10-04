@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerUnit))]
 public class PlayerMovement : MonoBehaviour, IControllable
 {
-    [SerializeField] private float _speed;
-
     [Space]
     [Header("Dash")]
     [SerializeField] private float _duration;
@@ -18,6 +16,8 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     public float CurrentSpeed { get; private set; }
 
+    public Vector3 Direction => _direction;
+
     private PlayerParticleSystem _particleSystem;
     private Rigidbody2D _rigidBody;
     private Vector2 _direction;
@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
     private Vector2 _endDashPostioin;
     private float _dashTimer;
     private bool _isDash = false;
+    private float _speed;
 
     private void Awake()
     {
@@ -88,10 +89,9 @@ public class PlayerMovement : MonoBehaviour, IControllable
         float time = _dashTimer / _duration;
         transform.position = Vector2.Lerp(_startDashPostioin, _endDashPostioin, time);
         _particleSystem.PlayEffect();
-        _isDash = time >= 1 ? false : true;
+        _isDash = time < 1;
 
         if (_obstacleChecker.CheckCount() > 0)
             _isDash = false;
     }
-
 }

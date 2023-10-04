@@ -2,7 +2,6 @@ using Assets.Scripts.Components.Checkers;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BulletParams))]
 public class BulletSpawner : MonoBehaviour
 {
     [SerializeField] private Bullet _template;

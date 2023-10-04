@@ -1,21 +1,14 @@
 using Assets.Scripts.Components.Checkers;
 using Assets.Scripts.Utils;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class Weapon : MonoBehaviour, IWeapon
 {
     [SerializeField] protected Cooldown _shotCooldown;
+    [SerializeField] protected SpriteRenderer _weaponSprite;
+    [SerializeField] protected GameObject _crosshair;
     [SerializeField] private CheckCircleOverlap _enemyChecker;
-    [SerializeField] private SpriteRenderer _sprite;
-    [SerializeField] private BulletSpawner _bulletSpawner;
-    [SerializeField] private BulletParams _params;
-
-    [Space, Header("Bullet")]
-    [SerializeField] protected PoolObjectSpawnComponent _spawnComponent;
-    [SerializeField] private GameObject _crosshair;
 
     [Space, Header("Reload and Ammo")]
     [SerializeField] protected int _maxAmmo = 6;
@@ -24,18 +17,15 @@ public abstract class Weapon : MonoBehaviour, IWeapon
 
     protected bool _isReloading = false;
 
-    public Vector3 Target { get; private set; }
-
     protected List<IDamageable> _enemies;
-    protected Vector2 _directionToTarget;
     protected IDamageable _currentTarget;
 
-    public event UnityAction<bool> Reloading;
+    public Vector3 Target { get; private set; }
 
     private void Start()
     {
         _currentAmmo = _maxAmmo;
-        _sprite.flipY = true;
+        _weaponSprite.flipY = true;
     }
 
     private void Update()
@@ -43,6 +33,29 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         if (StateManager.Instance.CurrentGameState == GameStates.Paused)
             return;
 
+        HandleWeaponUpdate();
+    }
+
+    public void PerformShot()
+    {
+        if (_isReloading == false && _enemies != null && _enemies.Count > 0 && _shotCooldown.IsReady())
+        {
+            if (_currentAmmo > 0 && _currentTarget != null)
+            {
+                RotateWeaponToTarget(_currentTarget.TargetTransform.position);
+                _shotCooldown.Reset();
+                _currentAmmo--;
+                SpawnBullet();
+            }
+            else
+            {
+                StartReloading();
+            }
+        }
+    }
+
+    protected void HandleWeaponUpdate()
+    {
         _enemies = _enemyChecker.Check<IDamageable>();
 
         if (_currentTarget == null)
@@ -55,8 +68,8 @@ public abstract class Weapon : MonoBehaviour, IWeapon
 
         if (_currentTarget != null && _isReloading == false)
         {
-            if (_crosshair.gameObject.activeSelf == false)
-                _crosshair.gameObject.SetActive(true);
+            if (_crosshair.activeSelf == false)
+                _crosshair.SetActive(true);
 
             UpdateCrossHair();
             RotateWeaponToTarget(_currentTarget.TargetTransform.position);
@@ -112,91 +125,19 @@ public abstract class Weapon : MonoBehaviour, IWeapon
             if (_currentTarget.IsAlive == false)
                 _currentTarget = FindClosestLivingEnemy();
 
-            _crosshair.gameObject.SetActive(_currentTarget != null);
+            _crosshair.SetActive(_currentTarget != null);
 
             UpdateCrossHairPosition(_currentTarget);
         }
     }
 
-    public void PerformShot()
-    {
-        if (_isReloading == false && _enemies != null && _enemies.Count > 0 && _shotCooldown.IsReady())
-        {
-            if (_currentAmmo > 0 && _currentTarget != null)
-            {
-                RotateWeaponToTarget(_currentTarget.TargetTransform.position);
-                _shotCooldown.Reset();
-                _currentAmmo--;
-                SpawnBullet();
-            }
-            else
-            {
-                StartReloading();
-            }
-        }
-    }
+    protected abstract void RotateWeaponToTarget(Vector3 target);
 
-    private void SpawnBullet()
-    {
-        GameObject gameObject = _spawnComponent.Spawn();
+    protected abstract void DisableCrossHair();
 
-        if (gameObject.TryGetComponent(out Bullet bullet))
-        {
-            bullet.gameObject.SetActive(true);
-            bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, -_directionToTarget); 
-            bullet.Shot(transform.position, _currentTarget.TargetTransform.position, _params.BulletSpeed, _params.Damage);
-        }
-    }
+    protected abstract void StartReloading();
 
-    private void RotateWeaponToTarget(Vector3 target)
-    {
-        Vector2 directionToTarget = (target - transform.position).normalized;
-        float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
-        _sprite.transform.eulerAngles = new Vector3(0, 0, angle);
+    protected abstract void UpdateCrossHairPosition(IDamageable target);
 
-        if (directionToTarget.x < 0)
-        {
-            _sprite.flipX = false;
-            _sprite.flipY = true;
-        }
-        else
-        {
-            _sprite.flipX = false;
-            _sprite.flipY = false;
-        }
-
-    }
-
-    private void DisableCrossHair()
-    {
-        _crosshair.gameObject.SetActive(false);
-    }
-
-    private void StartReloading()
-    {
-        if (_isReloading == false && _currentAmmo < _maxAmmo)
-        {
-            _isReloading = true;
-            Reloading?.Invoke(_isReloading);
-            StartCoroutine(ReloadCoroutine());
-        }
-    }
-
-    private IEnumerator ReloadCoroutine()
-    {
-        var waitForSeconds = new WaitForSeconds(_reloadTime);
-        yield return waitForSeconds;
-        _currentAmmo = _maxAmmo;
-        _isReloading = false;
-        Reloading?.Invoke(_isReloading);
-    }
-
-    private void UpdateCrossHairPosition(IDamageable target)
-    {
-        if (target == null)
-            return;
-
-        _crosshair.transform.parent = target.TargetTransform;
-        _crosshair.transform.localPosition = Vector3.zero;
-    }
+    protected abstract void SpawnBullet();
 }

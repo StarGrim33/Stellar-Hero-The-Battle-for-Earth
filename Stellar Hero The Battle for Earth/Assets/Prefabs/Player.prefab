@@ -65,10 +65,8 @@ GameObject:
   - component: {fileID: 8030029205758572689}
   - component: {fileID: 3269315514667543425}
   - component: {fileID: 5449430023971712585}
-  - component: {fileID: 4309324926663632617}
   - component: {fileID: 8956449809013996824}
   - component: {fileID: 8142571683833930101}
-  - component: {fileID: 7627629466236222634}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -95,7 +93,7 @@ Transform:
   - {fileID: 2279482085195485885}
   - {fileID: 5442664937538200987}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &4833200701993620068
 MonoBehaviour:
@@ -191,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141589cf91d3a7c4f81b72057bc9d125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitConfig: {fileID: 11400000, guid: d19de01e87fa72c4497f93f717e59341, type: 2}
+  _unitConfig: {fileID: 0}
 --- !u!114 &1535661462909078285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,23 +249,6 @@ MonoBehaviour:
   _damageModify: 10
   _attackSpeedModify: 1
   _bulletSpeedModify: 10
---- !u!114 &4309324926663632617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6618343706205989739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfa39c4987e677b4dae3841292061c39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tamplate: {fileID: 7805510915912713314, guid: 0b8c9ae8daf8c3c418b328624e9339ce, type: 3}
-  _enemyChecker: {fileID: 7217269960245825307}
-  _crosshair: {fileID: 0}
-  _audioSource: {fileID: 8142571683833930101}
-  _cameraShaker: {fileID: 0}
 --- !u!114 &8956449809013996824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,20 +359,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7627629466236222634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6618343706205989739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0194b958db2682a499eda759fe3e4d3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _effect: {fileID: 8026228422972124712}
-  _flashDuration: 0.1
 --- !u!1 &6725394019799126679
 GameObject:
   m_ObjectHideFlags: 0
@@ -5389,7 +5356,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 2199239826057215998}
   _movement: {fileID: 4833200701993620068}
-  _levelUpEffect: {fileID: 2279482085177093661}
 --- !u!1 &8857276055142481429
 GameObject:
   m_ObjectHideFlags: 0
@@ -5619,11 +5585,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
---- !u!198 &2279482085177093661 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
-  m_PrefabInstance: {fileID: 2279482085195815543}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2279482085195485885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 461002, guid: 8368975de5593844bbfaf74e342fb326, type: 3}
@@ -5775,12 +5736,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51a4ef8016b1f44fb7f60cb26e5eefc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
   _shotCooldown:
     _value: 1
   _enemyChecker: {fileID: 7217269960245825307}
+  _sprite: {fileID: 0}
+  _bulletSpawner: {fileID: 0}
+  _params: {fileID: 0}
   _spawnComponent: {fileID: 8463582923262388110}
-  _force: 10
   _crosshair: {fileID: 0}
   _maxAmmo: 6
   _reloadTime: 2

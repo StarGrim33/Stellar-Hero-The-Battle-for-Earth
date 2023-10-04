@@ -17,9 +17,6 @@ namespace Assets.Scripts.Utils
             _timesUp = Time.time + _value;
         }
 
-        public bool IsReady() =>
-            _timesUp < Time.time;
-
-        
+        public bool IsReady() => _timesUp < Time.time;
     }
 }

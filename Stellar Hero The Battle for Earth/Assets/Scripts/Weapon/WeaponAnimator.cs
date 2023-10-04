@@ -6,14 +6,13 @@ public class WeaponAnimator : MonoBehaviour
     [SerializeField] private Transform weaponTransform;
     private Pistol _pistol;
 
-    private Quaternion startRotation; // Начальное вращение пистолета
+    private Quaternion _startRotation; 
 
     private void Awake()
     {
         _pistol = GetComponent<Pistol>();
 
-        // Получаем начальное вращение пистолета
-        startRotation = weaponTransform.localRotation;
+        _startRotation = weaponTransform.localRotation;
     }
 
     private void OnEnable()
@@ -38,7 +37,7 @@ public class WeaponAnimator : MonoBehaviour
         else
         {
             weaponTransform.DOKill();
-            weaponTransform.localRotation = startRotation;
+            weaponTransform.localRotation = _startRotation;
         }
     }
 }

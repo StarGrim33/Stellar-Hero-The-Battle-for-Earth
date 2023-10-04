@@ -5,20 +5,19 @@ public class Bullet : MonoBehaviour
 {
     private Vector3 _direction;
     private int _damage = 1;
+    public float maxDistance = 10f; 
 
     public void Shot(Vector3 startPoint, Vector3 endPoint, float speed, int damage)
     {
         CalculateDirection(startPoint, endPoint);
         transform.position = startPoint;
         StartCoroutine(ShotCoroutine(speed));
-        StartCoroutine(DisablefterDelay(5f));
-
         _damage = damage;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent<IDamageable>(out IDamageable enemyHealth))
+        if (collision.TryGetComponent<IDamageable>(out IDamageable enemyHealth))
         {
             enemyHealth.TakeDamage(_damage);
         }
@@ -26,12 +25,16 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator ShotCoroutine(float speed)
     {
-        while (true)
-        {
-            transform.position += speed * Time.deltaTime * _direction;
+        float distanceTravelled = 0f;
 
+        while (distanceTravelled < maxDistance)
+        {
+            transform.position += speed * _direction * Time.deltaTime;
+            distanceTravelled += speed * Time.deltaTime;
             yield return null;
-        }        
+        }
+
+        gameObject.SetActive(false);
     }
 
     private void CalculateDirection(Vector3 startPoint, Vector3 endPoint)
@@ -39,11 +42,5 @@ public class Bullet : MonoBehaviour
         var heading = endPoint - startPoint;
         var distance = heading.magnitude;
         _direction = heading / distance;
-    }
-
-    private IEnumerator DisablefterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        gameObject.SetActive(false);
     }
 }
