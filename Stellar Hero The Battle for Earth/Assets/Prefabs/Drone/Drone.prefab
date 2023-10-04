@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 8338611121950948412}
   - component: {fileID: 9111627816598930487}
   - component: {fileID: 2124784063863259279}
-  - component: {fileID: 3188604537857662733}
   - component: {fileID: 6775687246112065652}
   - component: {fileID: 2690354411804827812}
+  - component: {fileID: 1420868626038764766}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -148,24 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4437f334aeeee84bb3d7ca3f6920e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 8.2
+  _radius: 6
   _layer:
     serializedVersion: 2
     m_Bits: 128
---- !u!114 &3188604537857662733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8087542905730846273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0194b958db2682a499eda759fe3e4d3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _effect: {fileID: 7312830004881207610}
-  _flashDuration: 0.1
 --- !u!114 &6775687246112065652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +178,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _trailPrefab: {fileID: 6315044156940661184, guid: e7cae2b797ab6dd45bc489cb5719c10a, type: 3}
   _gunPoint: {fileID: 8723072557118417304}
+--- !u!114 &1420868626038764766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087542905730846273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4adf86234e398a49a9f38b52c477806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effect: {fileID: 7312830004881207610}
 --- !u!1001 &4250343793179677689
 PrefabInstance:
   m_ObjectHideFlags: 0
