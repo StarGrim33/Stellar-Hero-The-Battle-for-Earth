@@ -111,7 +111,7 @@ MonoBehaviour:
   _duration: 0.25
   _distance: 5
   _dashCooldown:
-    _value: 0.5
+    _value: 2
   _obstacleChecker: {fileID: 7848346284930106692}
   _sprite: {fileID: 3257822748604171154}
   _dushFiller: {fileID: 0}
@@ -5276,7 +5276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6971514313298133530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5633,12 +5633,10 @@ MonoBehaviour:
   _weaponSprite: {fileID: 5611528770600181225}
   _crosshair: {fileID: 0}
   _enemyChecker: {fileID: 7217269960245825307}
-  _maxAmmo: 6
   _reloadTime: 2
-  _currentAmmo: 0
+  _movement: {fileID: 4833200701993620068}
   _spawnComponent: {fileID: 8463582923262388110}
   _params: {fileID: 5449430023971712585}
-  _movement: {fileID: 4833200701993620068}
   _transform: {fileID: 3210794916264140344}
   _audioSource: {fileID: 0}
   _shotSound: {fileID: 8300000, guid: 9771fd5944c0a6b46924b1b34a575474, type: 3}

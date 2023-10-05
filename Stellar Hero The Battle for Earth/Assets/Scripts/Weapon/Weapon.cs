@@ -2,6 +2,7 @@ using Assets.Scripts.Components.Checkers;
 using Assets.Scripts.Utils;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Weapon : MonoBehaviour, IWeapon
 {
@@ -11,9 +12,10 @@ public abstract class Weapon : MonoBehaviour, IWeapon
     [SerializeField] private CheckCircleOverlap _enemyChecker;
 
     [Space, Header("Reload and Ammo")]
-    [SerializeField] protected int _maxAmmo = 6;
+    protected int _maxAmmo = 6;
     [SerializeField] protected float _reloadTime = 1f;
-    [SerializeField] protected int _currentAmmo;
+    protected int _currentAmmo = 6;
+    [SerializeField] private PlayerMovement _movement;
 
     protected bool _isReloading = false;
 
@@ -22,9 +24,14 @@ public abstract class Weapon : MonoBehaviour, IWeapon
 
     public Vector3 Target { get; private set; }
 
+    public int CurrentAmmo => _currentAmmo;
+
+    public int MaxAmmo => _maxAmmo;
+
+    public event UnityAction<int, int> AmmoChanged;
+
     private void Start()
     {
-        _currentAmmo = _maxAmmo;
         _weaponSprite.flipY = true;
     }
 
@@ -45,6 +52,7 @@ public abstract class Weapon : MonoBehaviour, IWeapon
                 RotateWeaponToTarget(_currentTarget.TargetTransform.position);
                 _shotCooldown.Reset();
                 _currentAmmo--;
+                AmmoChanged?.DynamicInvoke(_currentAmmo, _maxAmmo); 
                 SpawnBullet();
             }
             else
@@ -64,6 +72,18 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         if (_currentTarget == null || _currentTarget.IsAlive == false)
         {
             _currentTarget = FindClosestLivingEnemy();
+
+
+            Vector2 playerDirection = _movement.Direction;
+
+            if (playerDirection.x < 0)
+            {
+                _weaponSprite.flipX = true;
+            }
+            else
+            {
+                _weaponSprite.flipX = false;
+            }
         }
 
         if (_currentTarget != null && _isReloading == false)
@@ -73,21 +93,6 @@ public abstract class Weapon : MonoBehaviour, IWeapon
 
             UpdateCrossHair();
             RotateWeaponToTarget(_currentTarget.TargetTransform.position);
-        }
-
-        if (_currentTarget != null && _shotCooldown.IsReady() && !_isReloading)
-        {
-            if (_currentAmmo > 0)
-            {
-                RotateWeaponToTarget(_currentTarget.TargetTransform.position);
-                _shotCooldown.Reset();
-                _currentAmmo--;
-                SpawnBullet();
-            }
-            else
-            {
-                StartReloading();
-            }
         }
     }
 

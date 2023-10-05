@@ -7,7 +7,6 @@ public class Pistol : Weapon
 {
     [SerializeField] private PoolObjectSpawnComponent _spawnComponent;
     [SerializeField] private BulletParams _params;
-    [SerializeField] private PlayerMovement _movement;
     [SerializeField] private Transform _transform;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _shotSound;
@@ -18,35 +17,20 @@ public class Pistol : Weapon
 
     protected override void RotateWeaponToTarget(Vector3 target)
     {
-        if (_currentTarget != null)
-        {
-            Vector2 directionToTarget = (target - transform.position).normalized;
-            float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
-            _weaponSprite.transform.eulerAngles = new Vector3(0, 0, angle);
 
-            if (directionToTarget.x < 0)
-            {
-                _weaponSprite.flipX = false;
-                _weaponSprite.flipY = true;
-            }
-            else
-            {
-                _weaponSprite.flipX = false;
-                _weaponSprite.flipY = false;
-            }
+        Vector2 directionToTarget = (target - transform.position).normalized;
+        float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
+        _weaponSprite.transform.eulerAngles = new Vector3(0, 0, angle);
+
+        if (directionToTarget.x < 0)
+        {
+            _weaponSprite.flipX = false;
+            _weaponSprite.flipY = true;
         }
         else
         {
-            Vector2 playerDirection = _movement.Direction;
-
-            if (playerDirection.x < 0)
-            {
-                _weaponSprite.flipX = true;
-            }
-            else
-            {
-                _weaponSprite.flipX = false;
-            }
+            _weaponSprite.flipX = false;
+            _weaponSprite.flipY = false;
         }
     }
 
@@ -76,7 +60,7 @@ public class Pistol : Weapon
     }
 
     protected override void SpawnBullet()
-    {   
+    {
         Vector2 directionToTarget = (_currentTarget.TargetTransform.position - transform.position).normalized;
 
         GameObject gameObject = _spawnComponent.Spawn();

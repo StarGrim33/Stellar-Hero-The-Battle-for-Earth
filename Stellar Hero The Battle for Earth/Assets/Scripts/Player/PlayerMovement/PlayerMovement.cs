@@ -1,6 +1,7 @@
 using Assets.Scripts.Components.Checkers;
 using Assets.Scripts.Utils;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerUnit))]
 public class PlayerMovement : MonoBehaviour, IControllable
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour, IControllable
     public float CurrentSpeed { get; private set; }
 
     public Vector3 Direction => _direction;
+
+    public event UnityAction<bool> Dashing;
 
     private PlayerParticleSystem _particleSystem;
     private Rigidbody2D _rigidBody;
@@ -78,6 +81,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
             _endDashPostioin = _startDashPostioin + directionDash * _distance;
             _dashTimer = 0;
             _isDash = true;
+            Dashing?.Invoke(true);
         }
     }
 
@@ -90,6 +94,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
         transform.position = Vector2.Lerp(_startDashPostioin, _endDashPostioin, time);
         _particleSystem.PlayEffect();
         _isDash = time < 1;
+        Dashing?.Invoke(false);
 
         if (_obstacleChecker.CheckCount() > 0)
             _isDash = false;

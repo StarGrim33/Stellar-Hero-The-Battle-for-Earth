@@ -59,7 +59,8 @@ public class DroneAttackState : IStateSwitcher
             if (damageable is not PlayerHealth)
                 damageable.TakeDamage(_parameters.Damage);
 
-            _instantiator.TrailInstantiate(hit.point);
+             _instantiator.TrailInstantiate(hit.point);
+            
             _shotEffect.PlayEffect();
         }
     }
