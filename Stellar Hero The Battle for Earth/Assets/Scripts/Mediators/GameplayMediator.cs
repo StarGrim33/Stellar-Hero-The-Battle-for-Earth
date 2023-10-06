@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameplayMediator : MonoBehaviour
 {
     [SerializeField] private DefeatPanel _defeatPanel;
+
     private Level _level;
 
     private void OnDisable()

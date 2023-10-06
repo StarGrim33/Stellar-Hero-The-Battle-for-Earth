@@ -4,8 +4,16 @@ using UnityEngine;
 public abstract class State : MonoBehaviour
 {
     [SerializeField] private List<Transition> _transitions;
+    private EnemyHealth _health;
 
     protected IDamageable Target { get; set; }
+
+    protected EnemyHealth Health => _health;
+
+    private void Awake()
+    {
+        _health = GetComponent<EnemyHealth>();
+    }
 
     public void Enter(IDamageable target)
     {

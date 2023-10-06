@@ -12,7 +12,7 @@ public class BulletParams : MonoBehaviour
     private int _baseDamage = 10;
     private float _baseAttackSpeed = 1f;
     private float _baseCooldownAttack = 1f;
-    private float _baseBulletSpeed = 1f;
+    private float _baseBulletSpeed = 3f;
 
     public int Damage => (int)(_baseDamage * (1f + _damageModify));
 

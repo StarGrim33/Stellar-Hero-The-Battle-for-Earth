@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3720015636565088528}
   - component: {fileID: 8666510731254123212}
+  - component: {fileID: 8545895616717789681}
   m_Layer: 0
   m_Name: LevelTest
   m_TagString: Untagged
@@ -45,5 +46,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelWindow: {fileID: 0}
-  _playerAnimator: {fileID: 0}
+  _particleSystemPlayer: {fileID: 0}
   _experienceHandler: {fileID: 0}
+  _gameplayMediator: {fileID: 8545895616717789681}
+  _defeatPanel: {fileID: 0}
+  _playerHealth: {fileID: 0}
+--- !u!114 &8545895616717789681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3860503463954575435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81104adc27b80e4894622335d423a00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defeatPanel: {fileID: 0}

@@ -41,6 +41,9 @@ public class DroneAttackState : IStateSwitcher
 
     public void Update()
     {
+        if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+            return;
+
         Move();
         CheckEnemiesAndAttack();
     }
@@ -56,7 +59,8 @@ public class DroneAttackState : IStateSwitcher
             if (damageable is not PlayerHealth)
                 damageable.TakeDamage(_parameters.Damage);
 
-            _instantiator.TrailInstantiate(hit.point);
+             _instantiator.TrailInstantiate(hit.point);
+            
             _shotEffect.PlayEffect();
         }
     }

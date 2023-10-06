@@ -8,6 +8,8 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private GameplayMediator _gameplayMediator;
     [SerializeField] private DefeatPanel _defeatPanel;
     [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private Pistol _weapon;
+    [SerializeField] private AmmoView _ammoView;
 
     private void Awake()
     {
@@ -18,5 +20,6 @@ public class Bootstrap : MonoBehaviour
         _experienceHandler.Init(playerLevelSystem);
         _gameplayMediator.Initialize(level);
         _defeatPanel.Initialize(_gameplayMediator);
+        _ammoView.Init(_weapon);
     }
 }

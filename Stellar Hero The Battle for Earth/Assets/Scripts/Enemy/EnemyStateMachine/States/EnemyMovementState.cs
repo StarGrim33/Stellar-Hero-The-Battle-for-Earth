@@ -22,9 +22,15 @@ public class EnemyMovementState : State
     private void Update()
     {
         if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+        {
+            _agent.destination = _agent.transform.position;
             return;
+        }
 
         if (Target != null)
             _agent.SetDestination(Target.TargetTransform.position);
+
+        if(Health.CurrentHealth == 0)
+            _agent.destination = _agent.transform.position;
     }
 }

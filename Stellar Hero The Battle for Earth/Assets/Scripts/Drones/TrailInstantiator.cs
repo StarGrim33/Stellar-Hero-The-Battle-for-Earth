@@ -7,7 +7,7 @@ public class TrailInstantiator : MonoBehaviour
 
     public void TrailInstantiate(Vector3 targetPosition)
     {
-        var trail = Instantiate(_trailPrefab, _gunPoint);
+        var trail = Instantiate(_trailPrefab, _gunPoint.transform.position, Quaternion.identity);
         var trailScript = trail.GetComponent<BulletTrail>();
 
         trailScript.SetTargetPosition(targetPosition);
