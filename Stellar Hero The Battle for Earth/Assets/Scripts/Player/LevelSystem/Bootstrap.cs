@@ -8,7 +8,7 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private GameplayMediator _gameplayMediator;
     [SerializeField] private DefeatPanel _defeatPanel;
     [SerializeField] private PlayerHealth _playerHealth;
-    [SerializeField] private Weapon _weapon;
+    [SerializeField] private Pistol _weapon;
     [SerializeField] private AmmoView _ammoView;
 
     private void Awake()

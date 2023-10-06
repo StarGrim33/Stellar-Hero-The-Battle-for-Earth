@@ -52,7 +52,7 @@ public abstract class Weapon : MonoBehaviour, IWeapon
                 RotateWeaponToTarget(_currentTarget.TargetTransform.position);
                 _shotCooldown.Reset();
                 _currentAmmo--;
-                AmmoChanged?.DynamicInvoke(_currentAmmo, _maxAmmo); 
+                AmmoChanged?.Invoke(_currentAmmo, _maxAmmo);
                 SpawnBullet();
             }
             else

@@ -14,7 +14,7 @@ public class Pistol : Weapon
     [SerializeField] private CinemachineImpulseSource _cameraShaker;
 
     public event UnityAction<bool> Reloading;
-
+    
     protected override void RotateWeaponToTarget(Vector3 target)
     {
 
@@ -72,6 +72,7 @@ public class Pistol : Weapon
             bullet.Shot(_transform.position, _currentTarget.TargetTransform.position, _params.BulletSpeed, _params.Damage);
             _cameraShaker.GenerateImpulse();
             _audioSource.PlayOneShot(_shotSound);
+
         }
     }
 

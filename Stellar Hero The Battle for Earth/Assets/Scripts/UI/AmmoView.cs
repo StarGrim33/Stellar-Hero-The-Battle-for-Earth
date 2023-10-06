@@ -4,14 +4,17 @@ using UnityEngine;
 public class AmmoView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _ammoText;
-    private Weapon _weapon;
+    private Pistol _weapon;
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        _weapon.AmmoChanged -= AmmoChanged;
+        if (_weapon != null)
+        {
+            _weapon.AmmoChanged -= AmmoChanged;
+        }
     }
 
-    public void Init(Weapon weapon)
+    public void Init(Pistol weapon)
     {
         _weapon = weapon;
         _weapon.AmmoChanged += AmmoChanged;
