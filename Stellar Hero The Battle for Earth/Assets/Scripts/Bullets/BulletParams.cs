@@ -20,7 +20,7 @@ public class BulletParams : MonoBehaviour
     public void Upgrade(int damageModify, float attackSpeedModify =0, float bulletSpeedModify = 0)
     {
         _damageModify += damageModify;
-        _attackSpeedModify += attackSpeedModify; ;
-        _attackSpeedModify += attackSpeedModify; ;
+        _attackSpeedModify += attackSpeedModify;
+        _bulletSpeedModify += bulletSpeedModify; 
     }
 }
