@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class LevelWindow : MonoBehaviour
 {
+    [SerializeField] private UpdateCharacteristicWindow _updateCharacteristicWindow;
+    [Space]
     [SerializeField] private TMP_Text _leveText;
     [SerializeField] private Image _experienceBarImage;
 
@@ -34,6 +36,8 @@ public class LevelWindow : MonoBehaviour
     private void OnLevelChanged()
     {
         SetLevelNumber(_playerLevelSystem.Level);
+
+        _updateCharacteristicWindow.gameObject.SetActive(true);
     }
 
     private void OnExperienceChanged()
