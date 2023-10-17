@@ -307,9 +307,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6879082655019942976, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: m_Name
+      value: DashObstacleChecker
+      objectReference: {fileID: 0}
     - target: {fileID: 6989468182717642343, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
       propertyPath: _damage
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7848346284930106692, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
+      propertyPath: _layer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 7895032176600087756, guid: 2b6c0aff27bdeae448a339be63b8b04d, type: 3}
       propertyPath: _characteristicsText
@@ -747,30 +755,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 403706282806200382, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 4.8876953
-      objectReference: {fileID: 0}
-    - target: {fileID: 420136820115864231, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 450953159054771655, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
       propertyPath: _health
       value: 
       objectReference: {fileID: 817889706}
-    - target: {fileID: 525627771491230442, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 2.5687256
-      objectReference: {fileID: 0}
     - target: {fileID: 551495644287254234, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
       propertyPath: _playerUnit
       value: 
       objectReference: {fileID: 817889701}
-    - target: {fileID: 929143277711286383, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2820366854190637291, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
       propertyPath: _updateCharacteristicWindow
       value: 
@@ -826,30 +818,6 @@ PrefabInstance:
     - target: {fileID: 5982261457740729008, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236028606426552983, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
-      propertyPath: m_fontSize
-      value: 72
-      objectReference: {fileID: 0}
-    - target: {fileID: 6504540860995158099, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 4.188965
-      objectReference: {fileID: 0}
-    - target: {fileID: 7134699229722192214, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -2.699936
-      objectReference: {fileID: 0}
-    - target: {fileID: 7148964997796680408, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
-      propertyPath: m_fontSize
-      value: 72
-      objectReference: {fileID: 0}
-    - target: {fileID: 7634317544193777693, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 4.275879
-      objectReference: {fileID: 0}
-    - target: {fileID: 8941064997818454387, guid: ccfce8dec4ade144faaeeb77775c6404, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -115.7439
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
