@@ -6,7 +6,7 @@ public class PlayerCharacteristics : MonoBehaviour
 {
     public static PlayerCharacteristics I = null;
 
-    [SerializeField] private float _speed  = 1.0f;
+    [SerializeField] private float _speed = 1.0f;
     [SerializeField] private float _damage = 1.0f;
     [SerializeField] private float _attackSpeed = 1.0f;
     [SerializeField] private float _maxHealth = 100f;
@@ -59,41 +59,42 @@ public class PlayerCharacteristics : MonoBehaviour
     //    }
     //}
 
-    public void AddValue(Characteristics characteristic, float value)
-    {
-        if (characteristics.ContainsKey(characteristic))
-        {
-            characteristics[characteristic] += value;
-        }
-        else
-        {
-            Debug.LogWarning("Íĺâĺđíîĺ čě˙ ďŕđŕěĺňđŕ: " + characteristic);
-        switch (characteristic)
-        {
-            case Characteristics.Speed: return _speed;
-            case Characteristics.Damage: return _damage;
-            case Characteristics.AttackSpeed: return _attackSpeed;
-            case Characteristics.MaxHealth: return _maxHealth;
-            default:
-                Debug.LogWarning("Íĺâĺđíîĺ čě˙ ďŕđŕěĺňđŕ: " + characteristic);
-                return 0.0f;
-        }
-    }
+    //public void AddValue(Characteristics characteristic, float value)
+    //{
+    //    if (characteristics.ContainsKey(characteristic))
+    //    {
+    //        characteristics[characteristic] += value;
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("Íĺâĺđíîĺ čě˙ ďŕđŕěĺňđŕ: " + characteristic);
+    //        switch (characteristic)
+    //        {
+    //            case Characteristics.Speed: return _speed;
+    //            case Characteristics.Damage: return _damage;
+    //            case Characteristics.AttackSpeed: return _attackSpeed;
+    //            case Characteristics.MaxHealth: return _maxHealth;
+    //            default:
+    //                Debug.LogWarning("Íĺâĺđíîĺ čě˙ ďŕđŕěĺňđŕ: " + characteristic);
+    //                return 0.0f;
+    //        }
+    //    }
+    //}
 
     public void SetValue(Characteristics characteristic, float value)
     {
         switch (characteristic)
         {
-            case Characteristics.Speed: 
+            case Characteristics.Speed:
                 _speed = value;
                 break;
             case Characteristics.Damage:
                 _damage = value;
                 break;
-            case Characteristics.AttackSpeed: 
+            case Characteristics.AttackSpeed:
                 _attackSpeed = value;
                 break;
-            case Characteristics.MaxHealth: 
+            case Characteristics.MaxHealth:
                 _maxHealth = value;
                 break;
             default:
@@ -136,13 +137,12 @@ public class PlayerCharacteristics : MonoBehaviour
         _attackSpeed = 1f;
         _maxHealth = 100f;
     }
-
 }
 
 public enum Characteristics
 {
     Speed,
-    Damage, 
-    AttackSpeed, 
+    Damage,
+    AttackSpeed,
     MaxHealth
 }
