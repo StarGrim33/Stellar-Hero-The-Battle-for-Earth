@@ -93,10 +93,11 @@ public class PlayerMovement : MonoBehaviour, IControllable
         float time = _dashTimer / _duration;
         transform.position = Vector2.Lerp(_startDashPostioin, _endDashPostioin, time);
         _particleSystem.PlayEffect();
-        _isDash = time < 1;
-        Dashing?.Invoke(false);
 
-        if (_obstacleChecker.CheckCount() > 0)
+        if (_obstacleChecker.CheckCount() > 0 || time > 1)
+        {
             _isDash = false;
+            Dashing?.Invoke(false);
+        }
     }
 }
