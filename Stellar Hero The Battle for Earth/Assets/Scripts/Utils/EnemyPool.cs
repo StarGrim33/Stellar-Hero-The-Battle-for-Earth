@@ -4,15 +4,23 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour
 {
     public static EnemyPool EnemyPoolInstance;
+    [SerializeField] private GameObject _container;
 
     [SerializeField] private int _amount;
     [SerializeField] private GameObject _simpleEnemyPrefab;
     [SerializeField] private List<GameObject> _simpleEnemyList;
-    [SerializeField] private GameObject _container;
 
     [SerializeField] private int _bomberEnemyAmount;
     [SerializeField] private GameObject _bomberEnemy;
     [SerializeField] private List<GameObject> _bomberEnemyList;
+
+    [SerializeField] private int _tankEnemyAmount;
+    [SerializeField] private GameObject _tankPrefab;
+    [SerializeField] private List<GameObject> _tankList;
+
+    [SerializeField] private int _knightAmount;
+    [SerializeField] private GameObject _knightPrefab;
+    [SerializeField] private List<GameObject> _knightList;
 
     private void Awake()
     {
@@ -21,8 +29,10 @@ public class EnemyPool : MonoBehaviour
 
     private void Start()
     {
-        CreateObjects(_simpleEnemyPrefab, _container.transform, _amount, _simpleEnemyList);
-        CreateObjects(_bomberEnemy, _container.transform, _bomberEnemyAmount, _bomberEnemyList);
+        CreateObjects(prefab: _simpleEnemyPrefab, parent: _container.transform, count: _amount, list: _simpleEnemyList);
+        CreateObjects(prefab: _bomberEnemy, parent: _container.transform, count: _bomberEnemyAmount, list: _bomberEnemyList);
+        CreateObjects(prefab: _tankPrefab, parent: _container.transform, count: _tankEnemyAmount, list: _tankList);
+        CreateObjects(prefab: _knightPrefab, parent: _container.transform, count: _knightAmount, list: _knightList);
     }
 
     private void CreateObjects(GameObject prefab, Transform parent, int count, List<GameObject> list)
@@ -43,6 +53,10 @@ public class EnemyPool : MonoBehaviour
             list = _simpleEnemyList;
         else if(prefab == _bomberEnemy)
             list = _bomberEnemyList;
+        else if(prefab == _tankPrefab)
+            list = _tankList;
+        else if(prefab == _knightPrefab) 
+            list = _knightList;
         else
             return null;
 

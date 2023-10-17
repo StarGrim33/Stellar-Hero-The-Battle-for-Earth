@@ -60,7 +60,7 @@ public class EnemyHealth : UnitHealth, IDamageable
     protected override void Die()
     {
         if (_deadEffectSpawner != null)
-            _deadEffectSpawner.SpawnEffect();
+            _deadEffectSpawner.SpawnRandomEffect();
 
         Dying?.Invoke(this);
 

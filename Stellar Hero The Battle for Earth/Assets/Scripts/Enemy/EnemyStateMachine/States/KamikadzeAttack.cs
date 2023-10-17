@@ -1,9 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator), typeof(DeadEffectSpawner))]
 public class KamikadzeAttack : AttackState
 {
-    private float _explosionRadius = 1f;
+    [SerializeField] private ParticleSystem _explosionEffect;
+    private DeadEffectSpawner _effectSpawner;
+    private readonly float _explosionRadius = 1f;
+
+    private void Awake()
+    {
+        _effectSpawner = GetComponent<DeadEffectSpawner>();
+    }
 
     public override void Attack()
     {
@@ -30,5 +38,15 @@ public class KamikadzeAttack : AttackState
             var unit = collider.GetComponent<IDamageable>();
             unit?.TakeDamage(_damage);
         }
+
+        _effectSpawner.SpawnEffect(_explosionEffect);
+        StartCoroutine(DisableGameObject());
+    }
+
+    private IEnumerator DisableGameObject()
+    {
+        var waitForSeconds = new WaitForSeconds(1.8f);
+        yield return waitForSeconds;
+        gameObject.SetActive(false);
     }
 }

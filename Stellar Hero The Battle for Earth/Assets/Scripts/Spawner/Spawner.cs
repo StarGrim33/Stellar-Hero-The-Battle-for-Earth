@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -133,6 +134,10 @@ public class Spawner : MonoBehaviour
         GameObject enemy = _enemyPool.GetObject(_currentWave.EnemyPrefab);
 
         enemy.transform.position = _spawnPoints[spawnPointIndex].position;
+
+        if (enemy.transform.position == null)
+            throw new Exception("Check spawner and enemy pool for available space");
+
         enemy.transform.rotation = _spawnPoints[spawnPointIndex].rotation;
         enemy.gameObject.SetActive(true);
         enemy.GetComponent<EnemyStateMachine>().SetTarget(_target);

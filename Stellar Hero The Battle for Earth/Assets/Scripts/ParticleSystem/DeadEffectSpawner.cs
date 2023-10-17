@@ -4,11 +4,18 @@ using UnityEngine;
 public class DeadEffectSpawner : MonoBehaviour
 {
     [SerializeField] private List<ParticleSystem> _particles;
-
-    public void SpawnEffect()
+    
+    public void SpawnRandomEffect()
     {
         ParticleSystem particleSystem = TryGetDeadEffect();
         particleSystem?.Play();
+    }
+
+    public void SpawnEffect(ParticleSystem particleSystem)
+    {
+        if(particleSystem == null) return;
+
+        particleSystem.Play();
     }
 
     private ParticleSystem TryGetDeadEffect()

@@ -17,6 +17,7 @@ public class EnemyMovementState : State
         _animator = GetComponent<Animator>();
         _enemyUnit = GetComponent<EnemyUnit>();
         _speed = _enemyUnit.Config.Speed;
+        _agent.speed = _speed;
     }
 
     private void Update()
