@@ -12,7 +12,6 @@ public class PlayerCharacteristics : MonoBehaviour
     [SerializeField] private float _maxHealth = 100f;
 
     private Dictionary<Characteristics, float> characteristics = new Dictionary<Characteristics, float>();
-
     private void Awake()
     {
         if (I == null)
@@ -33,7 +32,7 @@ public class PlayerCharacteristics : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Неверное имя параметра: " + characteristic);
+            Debug.LogWarning("ГЌДєГўДєД‘Г­Г®Дє ДЌД›Л™ ДЏЕ•Д‘Е•Д›ДєЕ€Д‘Е•: " + characteristic);
             return 0.0f;
         }
     }
@@ -55,7 +54,7 @@ public class PlayerCharacteristics : MonoBehaviour
     //            _maxHealth = value;
     //            break;
     //        default:
-    //            Debug.LogWarning("Неверное имя параметра: " + characteristic);
+    //            Debug.LogWarning("ГЌДєГўДєД‘Г­Г®Дє ДЌД›Л™ ДЏЕ•Д‘Е•Д›ДєЕ€Д‘Е•: " + characteristic);
     //            break;
     //    }
     //}
@@ -68,17 +67,74 @@ public class PlayerCharacteristics : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Неверное имя параметра: " + characteristic);
+            Debug.LogWarning("ГЌДєГўДєД‘Г­Г®Дє ДЌД›Л™ ДЏЕ•Д‘Е•Д›ДєЕ€Д‘Е•: " + characteristic);
+        switch (characteristic)
+        {
+            case Characteristics.Speed: return _speed;
+            case Characteristics.Damage: return _damage;
+            case Characteristics.AttackSpeed: return _attackSpeed;
+            case Characteristics.MaxHealth: return _maxHealth;
+            default:
+                Debug.LogWarning("ГЌДєГўДєД‘Г­Г®Дє ДЌД›Л™ ДЏЕ•Д‘Е•Д›ДєЕ€Д‘Е•: " + characteristic);
+                return 0.0f;
+        }
+    }
+
+    public void SetValue(Characteristics characteristic, float value)
+    {
+        switch (characteristic)
+        {
+            case Characteristics.Speed: 
+                _speed = value;
+                break;
+            case Characteristics.Damage:
+                _damage = value;
+                break;
+            case Characteristics.AttackSpeed: 
+                _attackSpeed = value;
+                break;
+            case Characteristics.MaxHealth: 
+                _maxHealth = value;
+                break;
+            default:
+                Debug.LogWarning("ГЌДєГўДєД‘Г­Г®Дє ДЌД›Л™ ДЏЕ•Д‘Е•Д›ДєЕ€Д‘Е•: " + characteristic);
+                break;
+        }
+    }
+
+    public void AddValue(Characteristics characteristic, float value)
+    {
+        switch (characteristic)
+        {
+            case Characteristics.Speed:
+                _speed += value;
+                break;
+            case Characteristics.Damage:
+                _damage += value;
+                break;
+            case Characteristics.AttackSpeed:
+                _attackSpeed += value;
+                break;
+            case Characteristics.MaxHealth:
+                _maxHealth += value;
+                break;
+            default:
+                Debug.LogWarning("ГЌДєГўДєД‘Г­Г®Дє ДЌД›Л™ ДЏЕ•Д‘Е•Д›ДєЕ€Д‘Е•: " + characteristic);
+                break;
         }
     }
 
     private void Initialize()
     {
-        //Загрузка параметров
+        //Г‡Е•ДѓД‘ГіГ§Д™Е• ДЏЕ•Д‘Е•Д›ДєЕ€Д‘Г®Гў
         characteristics[Characteristics.Speed] = _speed;
         characteristics[Characteristics.Damage] = _damage;
         characteristics[Characteristics.AttackSpeed] = _attackSpeed;
         characteristics[Characteristics.MaxHealth] = _maxHealth;
+        _speed = 1f;
+        _damage = 1f;
+        _attackSpeed = 1f;
+        _maxHealth = 100f;
     }
 
 }
