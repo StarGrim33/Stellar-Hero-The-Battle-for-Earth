@@ -1,34 +1,38 @@
-using System;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacteristicChanger : MonoBehaviour
 {
-    [SerializeField] private List<Changes> _changes;
+    [SerializeField] private Image _icon;
+    [SerializeField] private TMP_Text _description;
 
-
-    private PlayerCharacteristics _characteristics;
+    private CharacteristicChangerConfig _config;
+    private UpdateCharacteristicWindow _window;
 
     private void Start()
     {
-        _characteristics = PlayerCharacteristics.I;
+        _window = GetComponentInParent<UpdateCharacteristicWindow>();
+    }
+
+    public void Init(CharacteristicChangerConfig config)
+    {
+        _config = config;
+
+        _icon.sprite = _config.Icon;
+        _description.text = _config.Description;
+    }
+
+    public void OnClick()
+    {
+        ChangeCharacteristic();
+
+        Time.timeScale = 1.0f;
+        _window.gameObject.SetActive(false);
     }
 
     public void ChangeCharacteristic()
     {
-        foreach(var changes  in _changes)
-        {
-            _characteristics.AddValue(changes.Characteristics, changes.Value);
-        }
+        _config.ChangeCharacteristic();
     }
-}
-
-[Serializable]
-public struct Changes
-{
-    [SerializeField] private Characteristics _characteristics;
-    [SerializeField] private float _value;
-
-    public Characteristics Characteristics => _characteristics;
-    public float Value => _value;
 }

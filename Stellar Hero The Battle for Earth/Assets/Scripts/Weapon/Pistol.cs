@@ -14,10 +14,16 @@ public class Pistol : Weapon
     [SerializeField] private CinemachineImpulseSource _cameraShaker;
 
     public event UnityAction<bool> Reloading;
-    
+
+    private PlayerCharacteristics _characteristics;
+
+    private void Start()
+    {
+        _characteristics = PlayerCharacteristics.I;
+    }
+
     protected override void RotateWeaponToTarget(Vector3 target)
     {
-
         Vector2 directionToTarget = (target - transform.position).normalized;
         float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
         _weaponSprite.transform.eulerAngles = new Vector3(0, 0, angle);
@@ -69,7 +75,8 @@ public class Pistol : Weapon
         {
             bullet.gameObject.SetActive(true);
             bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, -directionToTarget);
-            bullet.Shot(_transform.position, _currentTarget.TargetTransform.position, _params.BulletSpeed, _params.Damage);
+            bullet.Shot(_transform.position, _currentTarget.TargetTransform.position, _params.BulletSpeed, (int)_characteristics.GetValue(Characteristics.Damage));
+
             _cameraShaker.GenerateImpulse();
             _audioSource.PlayOneShot(_shotSound);
 
