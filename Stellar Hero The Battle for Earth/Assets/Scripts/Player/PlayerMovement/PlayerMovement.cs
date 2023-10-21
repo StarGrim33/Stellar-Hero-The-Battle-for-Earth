@@ -40,7 +40,8 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     private void Start()
     {
-        _speed = _playerUnit.Config.Speed;
+        //_speed = _playerUnit.Config.Speed;
+        _speed = PlayerCharacteristics.I.GetValue(Characteristics.Speed);
     }
 
     private void FixedUpdate()

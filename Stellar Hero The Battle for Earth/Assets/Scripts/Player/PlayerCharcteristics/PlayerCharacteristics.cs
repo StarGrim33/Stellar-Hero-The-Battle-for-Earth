@@ -6,7 +6,7 @@ public class PlayerCharacteristics : MonoBehaviour
 {
     public static PlayerCharacteristics I = null;
 
-    [SerializeField] private float _speed = 1.0f;
+    [SerializeField] private float _speed = 10f;
     [SerializeField] private float _damage = 1.0f;
     [SerializeField] private float _attackSpeed = 1.0f;
     [SerializeField] private float _maxHealth = 100f;
@@ -132,7 +132,7 @@ public class PlayerCharacteristics : MonoBehaviour
         characteristics[Characteristics.Damage] = _damage;
         characteristics[Characteristics.AttackSpeed] = _attackSpeed;
         characteristics[Characteristics.MaxHealth] = _maxHealth;
-        _speed = 1f;
+        _speed = 10f;
         _damage = 1f;
         _attackSpeed = 1f;
         _maxHealth = 100f;

@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 5630203695567411588}
   - component: {fileID: 505637077818265302}
   - component: {fileID: 2731955376103612912}
+  - component: {fileID: 1231800579172960003}
   m_Layer: 7
   m_Name: Tank
   m_TagString: Untagged
@@ -627,6 +628,28 @@ MonoBehaviour:
   - {fileID: 8991736178652807755}
   - {fileID: 2009665092416190969}
   - {fileID: 6052251270542141567}
+--- !u!195 &1231800579172960003
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7647710165649982372}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1.04
+  m_Speed: 1.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0.74
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &8454109183495653939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1057,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 424698, guid: 76ea784c73256a744b24cba813a687e3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19809006, guid: 76ea784c73256a744b24cba813a687e3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19825216, guid: 76ea784c73256a744b24cba813a687e3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19830108, guid: 76ea784c73256a744b24cba813a687e3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19868354, guid: 76ea784c73256a744b24cba813a687e3, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19915184, guid: 76ea784c73256a744b24cba813a687e3, type: 3}

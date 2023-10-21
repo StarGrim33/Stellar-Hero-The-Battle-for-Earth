@@ -17,6 +17,11 @@ public class PlayerHealth : UnitHealth, IDamageable
 
     public float MaxHealth => _maxHealth;
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        _maxHealth = PlayerCharacteristics.I.GetValue(Characteristics.MaxHealth);
+    }
 
     private void Start()
     {
