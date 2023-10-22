@@ -9,6 +9,8 @@ public class CharacteristicChangerConfig : ScriptableObject
 
     [SerializeField] private List<Changes> _changes;
 
+    [SerializeField] private CharacteristicChangerConfig _nextUpdate;
+
     public Sprite Icon=> _icon;
     public string Description => _description;
 
