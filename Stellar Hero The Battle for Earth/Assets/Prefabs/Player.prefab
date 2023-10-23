@@ -143,10 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b3a4c66383baa439fc99e6b3f42032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 6
-  _damage: 25
-  _attackSpeed: 1
-  _maxHealth: 100
 --- !u!1 &6618343706205989739
 GameObject:
   m_ObjectHideFlags: 0
@@ -5630,7 +5626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198536722342428144, guid: c105577ec49dfb3408a7a89c3b7730be, type: 3}
       propertyPath: lengthInSec
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 198536722342428144, guid: c105577ec49dfb3408a7a89c3b7730be, type: 3}
       propertyPath: playOnAwake
@@ -5638,7 +5634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198536722342428144, guid: c105577ec49dfb3408a7a89c3b7730be, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 199717617902896242, guid: c105577ec49dfb3408a7a89c3b7730be, type: 3}
       propertyPath: m_SortingOrder

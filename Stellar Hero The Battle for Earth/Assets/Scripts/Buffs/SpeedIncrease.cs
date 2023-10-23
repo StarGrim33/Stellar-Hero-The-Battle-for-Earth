@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class Immortality : Buff
+public class SpeedIncrease : Buff
 {
     [SerializeField] private SpriteRenderer _sprite;
-    [SerializeField] private float _duration;
+    [SerializeField]  private float _speedValue = 4;
+    [SerializeField] private float _duration = 5;
+    private float _startSpeed;
 
     private void OnEnable()
     {
@@ -13,16 +15,17 @@ public class Immortality : Buff
 
     public override void Take(PlayerHealth playerHealth)
     {
-        playerHealth.ActivateImmortal();
+        _startSpeed = (int)PlayerCharacteristics.I.GetValue(Characteristics.Speed);
+        PlayerCharacteristics.I.AddValue(Characteristics.Speed, _speedValue);
         _sprite.enabled = false;
-        StartCoroutine(DisableEffect());
+        StartCoroutine(ReturnToBase());
     }
 
-    private IEnumerator DisableEffect()
+    private IEnumerator ReturnToBase()
     {
         var waitForSeconds = new WaitForSeconds(_duration);
         yield return waitForSeconds;
-        Destroy(gameObject);
+        PlayerCharacteristics.I.SetValue(Characteristics.Speed, _startSpeed);
     }
 
     private IEnumerator LifeTime()

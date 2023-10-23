@@ -66,6 +66,15 @@ public class PlayerHealth : UnitHealth, IDamageable
         PlayerDead?.Invoke();
     }
 
+    public void HealUp(int value)
+    {
+        if (value <= 0)
+            throw new ArgumentException("Value cannot be negative", nameof(value));
+
+        CurrentHealth += value;
+        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+    }
+
     public void TakeDamage(int damage)
     {
         if (_isImmortal)
