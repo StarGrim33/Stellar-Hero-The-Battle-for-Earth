@@ -4,7 +4,7 @@ using UnityEngine;
 public class ShieldHandler : MonoBehaviour
 {
     [SerializeField] private PlayerHealth _health;
-    [SerializeField] private ParticleSystem _sprite;
+    [SerializeField] private ParticleSystem _particle;
 
     private void OnEnable()
     {
@@ -18,6 +18,12 @@ public class ShieldHandler : MonoBehaviour
 
     private void Immortality()
     {
-        _sprite.Play();
+        if(_particle.isPlaying)
+        {
+            _particle.Stop();
+            _particle.Play();
+        }
+
+        _particle.Play();
     }
 }

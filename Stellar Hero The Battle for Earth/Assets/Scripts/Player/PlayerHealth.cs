@@ -7,11 +7,13 @@ using UnityEngine.Events;
 public class PlayerHealth : UnitHealth, IDamageable
 {
     [SerializeField] private Animator _animator;
-
+     
     private PlayerMovement _playerMovement;
 
     private bool _isInvulnerable = false;
     private bool _isImmortal = false;
+    private int _immortalityTime = 5;
+    private float _remainingImmortalityTime;
 
     public event UnityAction<float, float> OnHealthChanged;
 
@@ -91,8 +93,14 @@ public class PlayerHealth : UnitHealth, IDamageable
 
     private IEnumerator ImmortalityTime()
     {
-        var waitForSeconds = new WaitForSeconds(5);
-        yield return waitForSeconds;
+        _remainingImmortalityTime = _immortalityTime;
+
+        while (_remainingImmortalityTime > 0)
+        {
+            _remainingImmortalityTime -= Time.deltaTime;
+            yield return null;
+        }
+
         _isImmortal = false;
     }
 }

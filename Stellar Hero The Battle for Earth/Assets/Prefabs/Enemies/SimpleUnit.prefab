@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buffs:
   - {fileID: 4185985708926755898, guid: 6d54eff55afa11545909cd028bfb56c2, type: 3}
-  _spawnProbability: 50.3
+  _spawnProbability: 100
 --- !u!1 &7559466446741230732
 GameObject:
   m_ObjectHideFlags: 0

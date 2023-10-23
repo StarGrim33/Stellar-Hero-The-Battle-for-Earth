@@ -7,10 +7,10 @@ public class Immortality : Buff
     {
         playerHealth.ActivateImmortal();
         Sprite.enabled = false;
-        StartCoroutine(DisableEffect(playerHealth));
+        StartCoroutine(DisableEffect());
     }
 
-    private IEnumerator DisableEffect(PlayerHealth playerHealth)
+    private IEnumerator DisableEffect()
     {
         var waitForSeconds = new WaitForSeconds(Duration);
         yield return waitForSeconds;

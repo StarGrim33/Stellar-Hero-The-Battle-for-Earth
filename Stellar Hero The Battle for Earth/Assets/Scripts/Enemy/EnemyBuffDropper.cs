@@ -14,7 +14,8 @@ public class EnemyBuffDropper : MonoBehaviour
 
             if (buff != null)
             {
-                Instantiate(buff);
+                var instance = Instantiate(buff);
+                instance.transform.position = this.transform.position;
                 buff.Timer = 0;
             }
         }
