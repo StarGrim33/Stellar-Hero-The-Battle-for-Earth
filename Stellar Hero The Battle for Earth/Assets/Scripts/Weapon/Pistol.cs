@@ -79,7 +79,6 @@ public class Pistol : Weapon
 
             _cameraShaker.GenerateImpulse();
             _audioSource.PlayOneShot(_shotSound);
-
         }
     }
 

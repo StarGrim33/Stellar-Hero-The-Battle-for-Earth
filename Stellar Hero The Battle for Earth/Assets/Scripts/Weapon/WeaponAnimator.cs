@@ -30,9 +30,9 @@ public class WeaponAnimator : MonoBehaviour
         if (reloading)
         {
             weaponTransform
-                .DOLocalRotate(new Vector3(0f, 0f, 360f), 0.3f, RotateMode.FastBeyond360)
-                .SetLoops(-1, LoopType.Restart) 
-                .SetEase(Ease.Linear); 
+                .DOLocalRotate(new Vector3(0f, 0f, 360f), 0.2f, RotateMode.FastBeyond360)
+                .SetLoops(-1, LoopType.Restart)
+                .SetEase(Ease.Linear).SetLink(weaponTransform.gameObject);
         }
         else
         {

@@ -73,7 +73,6 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         {
             _currentTarget = FindClosestLivingEnemy();
 
-
             Vector2 playerDirection = _movement.Direction;
 
             if (playerDirection.x < 0)

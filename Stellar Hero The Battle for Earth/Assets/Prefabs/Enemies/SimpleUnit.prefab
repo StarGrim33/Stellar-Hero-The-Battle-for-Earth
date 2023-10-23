@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 6142243885911002162}
   - component: {fileID: 2818753646109050717}
   - component: {fileID: 2659617041797010179}
+  - component: {fileID: 3323426914929504132}
   m_Layer: 7
   m_Name: SimpleUnit
   m_TagString: Untagged
@@ -256,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ced777abd780b48958d33e6ef76b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _experienceForEnemy: 10
+  _experienceForEnemy: 15
 --- !u!114 &6142243885911002162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +310,23 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3323426914929504132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3163140446368412027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9aaa8bb2f3163642baa38bf5f854f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buffs:
+  - {fileID: 4185985708926755898, guid: 6d54eff55afa11545909cd028bfb56c2, type: 3}
+  - {fileID: 7595974463889192974, guid: 8506dcdff12786e4f8f9cd20cf2e8255, type: 3}
+  - {fileID: 2795838498731621043, guid: e90208d3125f75343a68a8eb3914f0fb, type: 3}
+  _spawnProbability: 20.1
 --- !u!1 &7559466446741230732
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +519,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 199895920213307954, guid: c06367f1236168548afccf20bf15e312, type: 3}
+      propertyPath: m_SortingOrder
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 199895920213307954, guid: c06367f1236168548afccf20bf15e312, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -620,6 +642,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 199763862910119196, guid: 0e37cdfe4a79e73478288f3c171e917b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 199763862910119196, guid: 0e37cdfe4a79e73478288f3c171e917b, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -721,6 +747,10 @@ PrefabInstance:
     - target: {fileID: 199102935433322898, guid: 21e3fa923d4f261409d83b8d0f6e81c7, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199670023006196368, guid: 21e3fa923d4f261409d83b8d0f6e81c7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 199670023006196368, guid: 21e3fa923d4f261409d83b8d0f6e81c7, type: 3}
       propertyPath: m_Materials.Array.size
