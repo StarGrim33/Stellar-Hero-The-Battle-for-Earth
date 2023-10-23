@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,10 +11,13 @@ public class PlayerHealth : UnitHealth, IDamageable
     private PlayerMovement _playerMovement;
 
     private bool _isInvulnerable = false;
+    private bool _isImmortal = false;
 
     public event UnityAction<float, float> OnHealthChanged;
 
     public event UnityAction PlayerDead;
+
+    public event UnityAction Immortality;
 
     public float MaxHealth => _maxHealth;
 
@@ -38,20 +42,20 @@ public class PlayerHealth : UnitHealth, IDamageable
     {
         get
         {
-            return _currenHealth;
+            return ÑurrenHealth;
         }
         private set
         {
-            _currenHealth = Mathf.Clamp(value, 0, _maxHealth);
+            ÑurrenHealth = Mathf.Clamp(value, 0, _maxHealth);
 
-            if (_currenHealth <= 0)
+            if (ÑurrenHealth <= 0)
                 Die();
         }
     }
 
     public Transform TargetTransform => transform;
 
-    public bool IsAlive => _currenHealth > 0;
+    public bool IsAlive => ÑurrenHealth > 0;
 
     protected override void Die()
     {
@@ -62,6 +66,9 @@ public class PlayerHealth : UnitHealth, IDamageable
 
     public void TakeDamage(int damage)
     {
+        if (_isImmortal)
+            return;
+
         if (damage <= 0)
             throw new ArgumentException("Value cannot be negative", nameof(damage));
 
@@ -74,4 +81,18 @@ public class PlayerHealth : UnitHealth, IDamageable
     }
 
     public void InvulnerableActivated(bool isInvulnerable) => _isInvulnerable = isInvulnerable;
+
+    public void ActivateImmortal()
+    {
+        _isImmortal = true;
+        Immortality?.Invoke();
+        StartCoroutine(ImmortalityTime());
+    }
+
+    private IEnumerator ImmortalityTime()
+    {
+        var waitForSeconds = new WaitForSeconds(5);
+        yield return waitForSeconds;
+        _isImmortal = false;
+    }
 }

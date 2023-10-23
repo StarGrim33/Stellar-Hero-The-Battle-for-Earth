@@ -7,12 +7,12 @@ public abstract class UnitHealth : MonoBehaviour
     [SerializeField] private Unit _unit;
 
     protected float _maxHealth;
-    protected float _currenHealth;
+    protected float ÑurrenHealth;
 
     protected virtual void OnEnable()
     {
         _maxHealth = _unit.Config.Health;
-        _currenHealth = _maxHealth;
+        ÑurrenHealth = _maxHealth;
     }
 
     protected virtual void Die() { }

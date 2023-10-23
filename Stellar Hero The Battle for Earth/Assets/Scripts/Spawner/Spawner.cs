@@ -15,12 +15,14 @@ public class Spawner : MonoBehaviour
     [SerializeField] private PlayerUnit _playerUnit;
     [SerializeField] private List<int> _unusedSpawnPoints;
 
-    private IDamageable _target;
 
     public int CurrentWaveIndex => _currentWaveIndex;
 
     public event UnityAction AllEnemySpawned;
 
+    public event UnityAction<int> WaveChanged;
+
+    private IDamageable _target;
     private ExperienceHandler _experienceHandler;
     private int _currentWaveIndex = 0;
     private WaveEnemies _currentWave;
@@ -33,7 +35,9 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+        }
         else
         {
             Debug.LogWarning("Multiple instances of Spawner found. Only one instance should exist.");
@@ -52,6 +56,7 @@ public class Spawner : MonoBehaviour
 
         SetWave(_currentWaveIndex);
         _target = _playerUnit.GetComponent<IDamageable>();
+        WaveChanged?.Invoke(CurrentWaveIndex);
     }
 
     private void Update()
@@ -108,6 +113,7 @@ public class Spawner : MonoBehaviour
 
         SetWave(++_currentWaveIndex);
         _spawned = 0;
+        WaveChanged?.Invoke(CurrentWaveIndex);
     }
 
     private IEnumerator UnfreezeSpawnAfterDelay(float duration)

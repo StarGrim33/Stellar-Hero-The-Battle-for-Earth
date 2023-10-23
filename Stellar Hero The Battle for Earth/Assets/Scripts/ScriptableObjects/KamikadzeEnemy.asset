@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: KamikadzeEnemy
   m_EditorClassIdentifier: 
   _unitName: Kamikadze
-  _health: 500
+  _health: 50
   _speed: 3
   _armor: 15

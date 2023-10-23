@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SimpleUnit
   m_EditorClassIdentifier: 
   _unitName: SimpleUnit
-  _health: 200
-  _speed: 2
+  _health: 100
+  _speed: 3
   _armor: 10
