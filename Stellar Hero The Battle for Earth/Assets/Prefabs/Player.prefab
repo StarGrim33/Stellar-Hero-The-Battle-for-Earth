@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 8956449809013996824}
-  _sprite: {fileID: 1503273426254190807}
+  _particle: {fileID: 1503273426254190807}
 --- !u!1 &3058424111062518631
 GameObject:
   m_ObjectHideFlags: 0
