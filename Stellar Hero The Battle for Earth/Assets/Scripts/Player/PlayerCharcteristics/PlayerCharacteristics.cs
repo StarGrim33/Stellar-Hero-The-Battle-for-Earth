@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public class PlayerCharacteristics : MonoBehaviour
 {
@@ -11,7 +11,9 @@ public class PlayerCharacteristics : MonoBehaviour
     private float _attackSpeed = 1f;
     private float _maxHealth = 100f;
 
-    private Dictionary<Characteristics, float> _characteristics = new Dictionary<Characteristics, float>();
+    private Dictionary<Characteristics, float> characteristics = new Dictionary<Characteristics, float>();
+
+    public UnityAction CharacteristicChanged;
 
     private void Awake()
     {
@@ -33,65 +35,44 @@ public class PlayerCharacteristics : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Íĺâĺđíîĺ čě˙ ďŕđŕěĺňđŕ: " + characteristic);
+            Debug.LogWarning("Not found: " + characteristic);
             return 0.0f;
         }
     }
 
     public void SetValue(Characteristics characteristic, float value)
     {
-        switch (characteristic)
+        if (characteristics.ContainsKey(characteristic))
         {
-            case Characteristics.Speed:
-                _speed = value;
-                break;
-            case Characteristics.Damage:
-                _damage = value;
-                break;
-            case Characteristics.AttackSpeed:
-                _attackSpeed = value;
-                break;
-            case Characteristics.MaxHealth:
-                _maxHealth = value;
-                break;
-            default:
-                Debug.LogWarning("Íĺâĺđíîĺ čě˙ ďŕđŕěĺňđŕ: " + characteristic);
-                break;
+            characteristics[characteristic] = value;
+            CharacteristicChanged?.Invoke();
+        }
+        else
+        {
+            Debug.LogWarning("Not Found: " + characteristic);
         }
     }
 
     public void AddValue(Characteristics characteristic, float value)
     {
-        switch (characteristic)
+        if (characteristics.ContainsKey(characteristic))
         {
-            case Characteristics.Speed:
-                _speed += value;
-                break;
-            case Characteristics.Damage:
-                _damage += value;
-                break;
-            case Characteristics.AttackSpeed:
-                _attackSpeed += value;
-                break;
-            case Characteristics.MaxHealth:
-                _maxHealth += value;
-                break;
-            default:
-                Debug.LogWarning("Íĺâĺđíîĺ čě˙ ďŕđŕěĺňđŕ: " + characteristic);
-                break;
+            CharacteristicChanged?.Invoke();
+            characteristics[characteristic] += value;
+        }
+        else
+        {
+            Debug.LogWarning("Not Found: " + characteristic);
         }
     }
 
     private void Initialize()
     {
-        _characteristics[Characteristics.Speed] = _speed;
-        _characteristics[Characteristics.Damage] = _damage;
-        _characteristics[Characteristics.AttackSpeed] = _attackSpeed;
-        _characteristics[Characteristics.MaxHealth] = _maxHealth;
-        _speed = 10f;
-        _damage = 1;
-        _attackSpeed = 1f;
-        _maxHealth = 100f;
+        //Load start characteristics
+        characteristics[Characteristics.Speed] = _speed;
+        characteristics[Characteristics.Damage] = _damage;
+        characteristics[Characteristics.AttackSpeed] = _attackSpeed;
+        characteristics[Characteristics.MaxHealth] = _maxHealth;
     }
 }
 

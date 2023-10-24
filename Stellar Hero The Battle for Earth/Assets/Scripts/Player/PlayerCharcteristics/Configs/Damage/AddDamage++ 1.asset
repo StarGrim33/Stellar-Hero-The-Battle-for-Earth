@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32b2f6a2b81b3ce4c9928df382d08eed, type: 3}
-  m_Name: AddDamage 2
+  m_Name: AddDamage++ 1
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 79f43a0ab9c88df4f8122c5abfa656eb, type: 3}
-  _description: Add 3 damage
+  _icon: {fileID: 21300000, guid: 05b0e81600bd44641b4ad9a89433d1da, type: 3}
+  _description: Add 100 damage
   _changes:
   - _characteristics: 1
-    _value: 3
+    _value: 100
+  _nextChanger: {fileID: 0}

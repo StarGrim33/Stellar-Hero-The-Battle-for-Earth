@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour, IControllable
     private PlayerParticleSystem _particleSystem;
     private Rigidbody2D _rigidBody;
     private Vector2 _direction;
-    private PlayerUnit _playerUnit;
     private Vector2 _startDashPostioin;
     private Vector2 _endDashPostioin;
     private float _dashTimer;
@@ -34,14 +33,13 @@ public class PlayerMovement : MonoBehaviour, IControllable
     private void Awake()
     {
         _particleSystem = GetComponent<PlayerParticleSystem>();
-        _playerUnit = GetComponent<PlayerUnit>();
         _rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
-        //_speed = _playerUnit.Config.Speed;
-        _speed = PlayerCharacteristics.I.GetValue(Characteristics.Speed);
+        SetSpeed();
+        PlayerCharacteristics.I.CharacteristicChanged += SetSpeed;
     }
 
     private void FixedUpdate()
@@ -101,4 +99,6 @@ public class PlayerMovement : MonoBehaviour, IControllable
             Dashing?.Invoke(false);
         }
     }
+
+    private void SetSpeed() => _speed = PlayerCharacteristics.I.GetValue(Characteristics.Speed);
 }
