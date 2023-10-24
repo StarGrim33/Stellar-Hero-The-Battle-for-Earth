@@ -234,8 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characteristicChangers:
   - {fileID: 11400000, guid: 94239bd5e953e3b4bb2504c50163107f, type: 2}
-  - {fileID: 11400000, guid: 4bd44f336227d7c4cbe21cc541da6431, type: 2}
-  - {fileID: 11400000, guid: 9020cf8b61de5ba45ba39a654ce25120, type: 2}
-  - {fileID: 11400000, guid: bd20e7b458d0ab24fb2f117b9bbb9e3a, type: 2}
+  - {fileID: 11400000, guid: b92f2ac184bd2834d8bc840d2f1ae182, type: 2}
+  - {fileID: 11400000, guid: f9197a165ad1d174bb1b38ff7bae32f4, type: 2}
   _chengersCount: 3
   _characteristicChangerTemplate: {fileID: 3992737999110083921, guid: 5cb5d9c38066cb44bbc11940dd843832, type: 3}

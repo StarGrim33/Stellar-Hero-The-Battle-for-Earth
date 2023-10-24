@@ -34,5 +34,7 @@ public class CharacteristicChanger : MonoBehaviour
     public void ChangeCharacteristic()
     {
         _config.ChangeCharacteristic();
+
+        _window.CharacteristicChangerListUpdated(_config);
     }
 }

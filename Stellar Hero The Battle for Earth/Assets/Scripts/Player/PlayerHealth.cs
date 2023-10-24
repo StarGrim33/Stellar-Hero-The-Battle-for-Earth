@@ -20,13 +20,16 @@ public class PlayerHealth : UnitHealth, IDamageable
     protected override void OnEnable()
     {
         base.OnEnable();
-        _maxHealth = PlayerCharacteristics.I.GetValue(Characteristics.MaxHealth);
     }
 
     private void Start()
     {
         _playerMovement = GetComponent<PlayerMovement>();
         _playerMovement.Dashing += InvulnerableActivated;
+
+        SetMaxHealth();
+
+        PlayerCharacteristics.I.CharacteristicChanged += SetMaxHealth;
     }
 
     private void OnDisable()
@@ -74,4 +77,6 @@ public class PlayerHealth : UnitHealth, IDamageable
     }
 
     public void InvulnerableActivated(bool isInvulnerable) => _isInvulnerable = isInvulnerable;
+
+    private void SetMaxHealth()=> _maxHealth = PlayerCharacteristics.I.GetValue(Characteristics.MaxHealth);
 }

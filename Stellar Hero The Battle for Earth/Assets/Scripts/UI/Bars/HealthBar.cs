@@ -46,7 +46,7 @@ public class HealthBar : MonoBehaviour
             _lerpTimer = 0f;
         }
     }
-
+    
     private void SetHealthValue(float currentHealth, float maxHealth)
     {
         _healthValue.text = $"{currentHealth}/{maxHealth}";

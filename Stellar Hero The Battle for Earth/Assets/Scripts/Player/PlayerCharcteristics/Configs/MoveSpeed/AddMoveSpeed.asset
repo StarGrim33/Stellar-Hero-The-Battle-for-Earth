@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32b2f6a2b81b3ce4c9928df382d08eed, type: 3}
-  m_Name: AddDamage
+  m_Name: AddMoveSpeed
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: d23c93ce187376249a12833543d4b146, type: 3}
-  _description: Add 1 damage
+  _icon: {fileID: 21300000, guid: 90119fe6101614a47a3e5d5d0dc3f91a, type: 3}
+  _description: AddMoveSpeed
   _changes:
-  - _characteristics: 1
-    _value: 1
+  - _characteristics: 0
+    _value: 5
+  _nextChanger: {fileID: 11400000}

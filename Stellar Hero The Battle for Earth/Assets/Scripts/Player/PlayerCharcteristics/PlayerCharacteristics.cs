@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public class PlayerCharacteristics : MonoBehaviour
 {
@@ -12,6 +12,8 @@ public class PlayerCharacteristics : MonoBehaviour
     [SerializeField] private float _maxHealth = 100f;
 
     private Dictionary<Characteristics, float> characteristics = new Dictionary<Characteristics, float>();
+
+    public UnityAction CharacteristicChanged;
 
     private void Awake()
     {
@@ -43,6 +45,7 @@ public class PlayerCharacteristics : MonoBehaviour
         if (characteristics.ContainsKey(characteristic))
         {
             characteristics[characteristic] = value;
+            CharacteristicChanged?.Invoke();
         }
         else
         {
@@ -54,6 +57,7 @@ public class PlayerCharacteristics : MonoBehaviour
     {
         if (characteristics.ContainsKey(characteristic))
         {
+            CharacteristicChanged?.Invoke();
             characteristics[characteristic] += value;
         }
         else
