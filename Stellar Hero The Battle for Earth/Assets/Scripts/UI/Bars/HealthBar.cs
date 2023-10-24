@@ -49,6 +49,6 @@ public class HealthBar : MonoBehaviour
     
     private void SetHealthValue(float currentHealth, float maxHealth)
     {
-        _healthValue.text = $"{currentHealth}/{maxHealth}";
+        _healthValue.text = $"{currentHealth}/{maxHealth}".ToString();
     }
 }

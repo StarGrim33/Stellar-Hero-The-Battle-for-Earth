@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitName: 
   _health: 700
-  _speed: 0.8
+  _speed: 2
   _armor: 300

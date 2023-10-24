@@ -37,6 +37,8 @@ public class UpdateCharacteristicWindow : MonoBehaviour
 
         _currentChangers.Clear();
 
+        _chengersCount = Mathf.Min(_chengersCount, _characteristicChangers.Count);
+
         for (int i = 0; i < _chengersCount; i++)
         {
             var template = Instantiate(_characteristicChangerTemplate, gameObject.transform);

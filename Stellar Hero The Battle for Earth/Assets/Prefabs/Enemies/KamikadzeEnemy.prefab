@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 2784508466019007980}
   - component: {fileID: 2953810296913510394}
   - component: {fileID: 1848887915280409084}
+  - component: {fileID: -7181656947624919785}
   m_Layer: 7
   m_Name: KamikadzeEnemy
   m_TagString: Untagged
@@ -296,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ced777abd780b48958d33e6ef76b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _experienceForEnemy: 10
+  _experienceForEnemy: 5
 --- !u!70 &2881887336483107333
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -411,6 +412,23 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-7181656947624919785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356164921579192394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9aaa8bb2f3163642baa38bf5f854f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buffs:
+  - {fileID: 7595974463889192974, guid: 8506dcdff12786e4f8f9cd20cf2e8255, type: 3}
+  - {fileID: 4185985708926755898, guid: 6d54eff55afa11545909cd028bfb56c2, type: 3}
+  - {fileID: 2795838498731621043, guid: e90208d3125f75343a68a8eb3914f0fb, type: 3}
+  _spawnProbability: 10
 --- !u!1001 &569957161346805743
 PrefabInstance:
   m_ObjectHideFlags: 0

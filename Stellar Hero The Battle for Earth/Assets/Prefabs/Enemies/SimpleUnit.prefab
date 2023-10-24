@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextState: {fileID: 9112572840895834242}
-  _transitionRangeForNextState: 1
+  _transitionRangeForNextState: 0.7
   _spreadRange: 0.2
 --- !u!114 &9112572840895834242
 MonoBehaviour:
@@ -217,8 +217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitions:
   - {fileID: 3783664232870393863}
-  _damage: 25
-  _delay: 1
+  _damage: 15
+  _delay: 2
 --- !u!114 &3783664232870393863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ced777abd780b48958d33e6ef76b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _experienceForEnemy: 15
+  _experienceForEnemy: 5
 --- !u!114 &6142243885911002162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +326,7 @@ MonoBehaviour:
   - {fileID: 4185985708926755898, guid: 6d54eff55afa11545909cd028bfb56c2, type: 3}
   - {fileID: 7595974463889192974, guid: 8506dcdff12786e4f8f9cd20cf2e8255, type: 3}
   - {fileID: 2795838498731621043, guid: e90208d3125f75343a68a8eb3914f0fb, type: 3}
-  _spawnProbability: 20.1
+  _spawnProbability: 10
 --- !u!1 &7559466446741230732
 GameObject:
   m_ObjectHideFlags: 0

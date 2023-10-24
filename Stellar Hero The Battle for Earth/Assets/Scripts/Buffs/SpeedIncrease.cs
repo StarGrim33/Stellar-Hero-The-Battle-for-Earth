@@ -3,10 +3,15 @@ using UnityEngine;
 
 public class SpeedIncrease : Buff
 {
-    [SerializeField] private SpriteRenderer _sprite;
     [SerializeField]  private float _speedValue = 4;
     [SerializeField] private float _duration = 5;
+    private SpriteRenderer _sprite;
     private float _startSpeed;
+
+    private void Awake()
+    {
+        _sprite = GetComponent<SpriteRenderer>();
+    }
 
     private void OnEnable()
     {

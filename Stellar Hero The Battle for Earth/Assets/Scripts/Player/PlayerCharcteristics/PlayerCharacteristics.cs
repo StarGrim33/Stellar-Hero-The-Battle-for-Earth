@@ -6,7 +6,7 @@ public class PlayerCharacteristics : MonoBehaviour
 {
     public static PlayerCharacteristics I = null;
 
-    private float _speed = 10f;
+    private float _speed = 3f;
     private float _damage = 25f;
     private float _attackSpeed = 1f;
     private float _maxHealth = 100f;
@@ -29,7 +29,7 @@ public class PlayerCharacteristics : MonoBehaviour
 
     public float GetValue(Characteristics characteristic)
     {
-        if (_characteristics.TryGetValue(characteristic, out float value))
+        if (characteristics.TryGetValue(characteristic, out float value))
         {
             return value;
         }
@@ -46,6 +46,8 @@ public class PlayerCharacteristics : MonoBehaviour
         {
             characteristics[characteristic] = value;
             CharacteristicChanged?.Invoke();
+            Debug.Log($"Max Health is {_maxHealth}");
+
         }
         else
         {
@@ -57,8 +59,8 @@ public class PlayerCharacteristics : MonoBehaviour
     {
         if (characteristics.ContainsKey(characteristic))
         {
-            CharacteristicChanged?.Invoke();
             characteristics[characteristic] += value;
+            CharacteristicChanged?.Invoke();
         }
         else
         {

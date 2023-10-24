@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 6442270139742212766}
   - component: {fileID: 7309519501696945963}
   - component: {fileID: 5631633004792144100}
+  - component: {fileID: 520284369088608454}
   m_Layer: 7
   m_Name: Knight
   m_TagString: Untagged
@@ -224,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextState: {fileID: 7397189105830833452}
-  _transitionRangeForNextState: 0.5
+  _transitionRangeForNextState: 0.7
   _spreadRange: 1
 --- !u!114 &7397189105830833452
 MonoBehaviour:
@@ -395,6 +396,23 @@ NavMeshAgent:
   m_BaseOffset: 0.4
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &520284369088608454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2697685215078831126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9aaa8bb2f3163642baa38bf5f854f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buffs:
+  - {fileID: 7595974463889192974, guid: 8506dcdff12786e4f8f9cd20cf2e8255, type: 3}
+  - {fileID: 4185985708926755898, guid: 6d54eff55afa11545909cd028bfb56c2, type: 3}
+  - {fileID: 2795838498731621043, guid: e90208d3125f75343a68a8eb3914f0fb, type: 3}
+  _spawnProbability: 30
 --- !u!1 &3762875557255828100
 GameObject:
   m_ObjectHideFlags: 0
