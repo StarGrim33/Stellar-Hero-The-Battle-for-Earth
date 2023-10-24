@@ -10,6 +10,8 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private Pistol _weapon;
     [SerializeField] private AmmoView _ammoView;
+    [SerializeField] private Spawner _spawner;
+    [SerializeField] private CurrentWaveView _currentWaveView;
 
     private void Awake()
     {
@@ -21,5 +23,6 @@ public class Bootstrap : MonoBehaviour
         _gameplayMediator.Initialize(level);
         _defeatPanel.Initialize(_gameplayMediator);
         _ammoView.Init(_weapon);
+        _currentWaveView.Init(_spawner);
     }
 }

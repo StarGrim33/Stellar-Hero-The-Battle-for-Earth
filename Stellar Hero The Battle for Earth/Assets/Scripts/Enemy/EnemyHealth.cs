@@ -9,7 +9,7 @@ public class EnemyHealth : UnitHealth, IDamageable
     private MaterialBlicker _blicker;
     private DamagePopuper _damagePopuper;
     private DeadEffectSpawner _deadEffectSpawner;
-
+    private EnemyBuffDropper _enemyBuffDropper;
     public event UnityAction<EnemyHealth> Dying;
 
     public float MaxHealth { get; private set; }
@@ -18,19 +18,20 @@ public class EnemyHealth : UnitHealth, IDamageable
     {
         get
         {
-            return _currenHealth;
+            return ÑurrenHealth;
         }
         private set
         {
-            _currenHealth = Mathf.Clamp(value, 0, _maxHealth);
+            ÑurrenHealth = Mathf.Clamp(value, 0, _maxHealth);
 
-            if (_currenHealth <= 0)
+            if (ÑurrenHealth <= 0)
                 Die();
         }
     }
 
     private void Start()
     {
+        _enemyBuffDropper = GetComponent<EnemyBuffDropper>();
         _deadEffectSpawner = GetComponent<DeadEffectSpawner>();
         _damagePopuper = GetComponent<DamagePopuper>();
         _blicker = GetComponentInChildren<MaterialBlicker>();
@@ -38,7 +39,7 @@ public class EnemyHealth : UnitHealth, IDamageable
 
     public Transform TargetTransform => transform;
 
-    public bool IsAlive => _currenHealth > 0;
+    public bool IsAlive => ÑurrenHealth > 0;
 
     public void TakeDamage(int damage)
     {
@@ -53,14 +54,17 @@ public class EnemyHealth : UnitHealth, IDamageable
         if (_blicker != null)
             _blicker.Flash();
 
-        if(_damagePopuper  != null)
-        _damagePopuper.ShowDamagePopup(damage);
+        if (_damagePopuper != null)
+            _damagePopuper.ShowDamagePopup(damage);
     }
 
     protected override void Die()
     {
         if (_deadEffectSpawner != null)
             _deadEffectSpawner.SpawnRandomEffect();
+
+        if (_enemyBuffDropper != null)
+            _enemyBuffDropper.SpawnRandomBuff();
 
         Dying?.Invoke(this);
 

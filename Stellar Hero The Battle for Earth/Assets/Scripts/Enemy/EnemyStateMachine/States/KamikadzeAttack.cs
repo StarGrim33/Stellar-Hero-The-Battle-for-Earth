@@ -7,9 +7,11 @@ public class KamikadzeAttack : AttackState
     [SerializeField] private ParticleSystem _explosionEffect;
     private DeadEffectSpawner _effectSpawner;
     private readonly float _explosionRadius = 1f;
+    private EnemyHealth _enemyHealth;
 
     private void Awake()
     {
+        _enemyHealth = GetComponent<EnemyHealth>();
         _effectSpawner = GetComponent<DeadEffectSpawner>();
     }
 
@@ -45,8 +47,9 @@ public class KamikadzeAttack : AttackState
 
     private IEnumerator DisableGameObject()
     {
-        var waitForSeconds = new WaitForSeconds(1.8f);
+        float disableDealy = 1.8f;
+        var waitForSeconds = new WaitForSeconds(disableDealy);
         yield return waitForSeconds;
-        gameObject.SetActive(false);
+        _enemyHealth.TakeDamage(500);
     }
 }

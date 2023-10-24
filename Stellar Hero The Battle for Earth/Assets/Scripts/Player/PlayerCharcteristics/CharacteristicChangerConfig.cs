@@ -20,7 +20,7 @@ public class CharacteristicChangerConfig : ScriptableObject
     {
         foreach(var changes  in _changes)
         {
-            PlayerCharacteristics.I.AddValue(changes.Characteristics, changes.Value);
+            PlayerCharacteristics.I.AddValue(changes.Characteristics, (int)changes.Value);
         }
     }
 }

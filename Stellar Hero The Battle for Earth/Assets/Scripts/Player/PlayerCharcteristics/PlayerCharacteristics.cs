@@ -6,10 +6,10 @@ public class PlayerCharacteristics : MonoBehaviour
 {
     public static PlayerCharacteristics I = null;
 
-    [SerializeField] private float _speed = 2f;
-    [SerializeField] private float _damage = 1.0f;
-    [SerializeField] private float _attackSpeed = 1.0f;
-    [SerializeField] private float _maxHealth = 100f;
+    private float _speed = 10f;
+    private float _damage = 25f;
+    private float _attackSpeed = 1f;
+    private float _maxHealth = 100f;
 
     private Dictionary<Characteristics, float> characteristics = new Dictionary<Characteristics, float>();
 
@@ -29,7 +29,7 @@ public class PlayerCharacteristics : MonoBehaviour
 
     public float GetValue(Characteristics characteristic)
     {
-        if (characteristics.TryGetValue(characteristic, out float value))
+        if (_characteristics.TryGetValue(characteristic, out float value))
         {
             return value;
         }

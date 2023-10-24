@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TankConfig
   m_EditorClassIdentifier: 
   _unitName: Tank
-  _health: 1500
+  _health: 500
   _speed: 1
   _armor: 100
