@@ -3,10 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class LoadNextScene : MonoBehaviour
 {
+    [SerializeField] private int _levelIndex;
+    [SerializeField] private GameObject _panel;
+
     public void LoadScene()
     {
-        var currentScene = SceneManager.GetActiveScene();
-        int nextSceneNndex = currentScene.buildIndex + 1;
-        SceneManager.LoadScene(nextSceneNndex);
+        SceneManager.LoadScene(_levelIndex);
+        _panel.SetActive(false);
+        StateManager.Instance.SetState(GameStates.Gameplay);
     }
 }

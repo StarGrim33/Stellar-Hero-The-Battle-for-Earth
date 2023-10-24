@@ -355,11 +355,11 @@ GameObject:
   - component: {fileID: 252826694796612984}
   - component: {fileID: 3942859871848069838}
   - component: {fileID: 481730102401910519}
-  - component: {fileID: 4302625859328706934}
   - component: {fileID: 5630203695567411588}
   - component: {fileID: 505637077818265302}
   - component: {fileID: 2731955376103612912}
   - component: {fileID: 1231800579172960003}
+  - component: {fileID: -391932278124242597}
   m_Layer: 7
   m_Name: Tank
   m_TagString: Untagged
@@ -558,33 +558,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.02153182, y: 0.22663593}
   m_Size: {x: 1.0877559, y: 1.0877559}
   m_Direction: 0
---- !u!50 &4302625859328706934
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7647710165649982372}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &5630203695567411588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,6 +623,23 @@ NavMeshAgent:
   m_BaseOffset: 0.74
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-391932278124242597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7647710165649982372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9aaa8bb2f3163642baa38bf5f854f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buffs:
+  - {fileID: 7595974463889192974, guid: 8506dcdff12786e4f8f9cd20cf2e8255, type: 3}
+  - {fileID: 4185985708926755898, guid: 6d54eff55afa11545909cd028bfb56c2, type: 3}
+  - {fileID: 2795838498731621043, guid: e90208d3125f75343a68a8eb3914f0fb, type: 3}
+  _spawnProbability: 50.8
 --- !u!1 &8454109183495653939
 GameObject:
   m_ObjectHideFlags: 0
