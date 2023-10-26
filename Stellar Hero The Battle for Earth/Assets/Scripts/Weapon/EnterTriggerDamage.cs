@@ -3,8 +3,8 @@ using UnityEngine;
 [RequireComponent (typeof(Collider2D))]
 public class EnterTriggerDamage : MonoBehaviour
 {
-    [SerializeField] private int _damage = 1;
-    private bool _isTriggerDamage = false;
+    [SerializeField] private int _damage = 0;
+    [SerializeField] private bool _isTriggerDamage = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -20,4 +20,6 @@ public class EnterTriggerDamage : MonoBehaviour
     public void OnTriggerDamage()=> _isTriggerDamage = true;
 
     public void OffTriggerDamage()=> _isTriggerDamage = false;
+
+    public void SetDamage(int damage) => _damage = damage;  
 }

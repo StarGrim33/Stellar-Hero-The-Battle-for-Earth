@@ -109,5 +109,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
     {
         _speed = PlayerCharacteristics.I.GetValue(Characteristics.Speed);
         _dashCooldown.ChangeCooldownValue(PlayerCharacteristics.I.GetValue(Characteristics.DushCooldown));
+
+        _enterTriggerDamage.SetDamage((int)PlayerCharacteristics.I.GetValue(Characteristics.PlayerTriggerDamage));
     } 
 }

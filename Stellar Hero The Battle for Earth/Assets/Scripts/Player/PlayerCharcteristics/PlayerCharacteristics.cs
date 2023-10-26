@@ -13,6 +13,9 @@ public class PlayerCharacteristics : MonoBehaviour
     private float _maxAmmo = 6f;
     private float _reloadTimeAmmo = 1f;
     private float _dushCooldown = 2f;
+    private float _playerTriggerDamage = 0f;
+
+    private float _droneTriggerDamage = 0f;
 
     private Dictionary<Characteristics, float> characteristics = new Dictionary<Characteristics, float>();
 
@@ -81,6 +84,8 @@ public class PlayerCharacteristics : MonoBehaviour
         characteristics[Characteristics.MaxAmmo] = _maxAmmo;
         characteristics[Characteristics.ReloadTimeAmmo] = _reloadTimeAmmo;
         characteristics[Characteristics.DushCooldown] = _dushCooldown;
+        characteristics[Characteristics.PlayerTriggerDamage] = _playerTriggerDamage;
+        characteristics[Characteristics.DroneTriggerDamage] = _droneTriggerDamage;
     }
 }
 
@@ -92,5 +97,7 @@ public enum Characteristics
     MaxHealth,
     MaxAmmo,
     ReloadTimeAmmo,
-    DushCooldown
+    DushCooldown,
+    PlayerTriggerDamage,
+    DroneTriggerDamage
 }
