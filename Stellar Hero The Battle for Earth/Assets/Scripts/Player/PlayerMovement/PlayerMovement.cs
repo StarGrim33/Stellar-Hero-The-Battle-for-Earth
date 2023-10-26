@@ -38,8 +38,8 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     private void Start()
     {
-        SetSpeed();
-        PlayerCharacteristics.I.CharacteristicChanged += SetSpeed;
+        SetMovementCharacteristic();
+        PlayerCharacteristics.I.CharacteristicChanged += SetMovementCharacteristic;
     }
 
     private void FixedUpdate()
@@ -100,5 +100,9 @@ public class PlayerMovement : MonoBehaviour, IControllable
         }
     }
 
-    private void SetSpeed() => _speed = PlayerCharacteristics.I.GetValue(Characteristics.Speed);
+    private void SetMovementCharacteristic()
+    {
+        _speed = PlayerCharacteristics.I.GetValue(Characteristics.Speed);
+        _dashCooldown.ChangeCooldownValue(PlayerCharacteristics.I.GetValue(Characteristics.DushCooldown));
+    } 
 }

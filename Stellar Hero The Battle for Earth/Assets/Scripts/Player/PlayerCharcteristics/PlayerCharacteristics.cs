@@ -12,6 +12,7 @@ public class PlayerCharacteristics : MonoBehaviour
     private float _maxHealth = 100f;
     private float _maxAmmo = 6f;
     private float _reloadTimeAmmo = 1f;
+    private float _dushCooldown = 2f;
 
     private Dictionary<Characteristics, float> characteristics = new Dictionary<Characteristics, float>();
 
@@ -79,6 +80,7 @@ public class PlayerCharacteristics : MonoBehaviour
         characteristics[Characteristics.MaxHealth] = _maxHealth;
         characteristics[Characteristics.MaxAmmo] = _maxAmmo;
         characteristics[Characteristics.ReloadTimeAmmo] = _reloadTimeAmmo;
+        characteristics[Characteristics.DushCooldown] = _dushCooldown;
     }
 }
 
@@ -89,5 +91,6 @@ public enum Characteristics
     ShotCooldown,
     MaxHealth,
     MaxAmmo,
-    ReloadTimeAmmo
+    ReloadTimeAmmo,
+    DushCooldown
 }
