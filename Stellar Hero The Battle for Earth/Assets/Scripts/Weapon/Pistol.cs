@@ -21,9 +21,9 @@ public class Pistol : Weapon
     {
         _characteristics = PlayerCharacteristics.I;
 
-        _characteristics.CharacteristicChanged += SetAmmoParams;
+        _characteristics.CharacteristicChanged += SetWeaponParams;
 
-        SetAmmoParams();
+        SetWeaponParams();
 
         _currentAmmo = _maxAmmo;
     }
@@ -97,9 +97,10 @@ public class Pistol : Weapon
         Reloading?.Invoke(_isReloading);
     }
 
-    private void SetAmmoParams()
+    private void SetWeaponParams()
     {
         _reloadTime = _characteristics.GetValue(Characteristics.ReloadTimeAmmo);
         _maxAmmo = (int)_characteristics.GetValue(Characteristics.MaxAmmo);
+        _shotCooldown.ChangeCooldownValue(_characteristics.GetValue(Characteristics.ShotCooldown));
     }
 }

@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: ReduceREloadAmmo -0.3
   _changes:
   - _characteristics: 5
-    _value: -0.3
+    _value: -0.1
   _nextChanger: {fileID: 11400000, guid: fd4fd23ff7b5b404bb24644be0048061, type: 2}

@@ -8,7 +8,7 @@ public class PlayerCharacteristics : MonoBehaviour
 
     private float _speed = 3f;
     private float _damage = 25f;
-    private float _attackSpeed = 1f;
+    private float _shotCooldown = 1f;
     private float _maxHealth = 100f;
     private float _maxAmmo = 6f;
     private float _reloadTimeAmmo = 1f;
@@ -75,7 +75,7 @@ public class PlayerCharacteristics : MonoBehaviour
         //Load start characteristics
         characteristics[Characteristics.Speed] = _speed;
         characteristics[Characteristics.Damage] = _damage;
-        characteristics[Characteristics.AttackSpeed] = _attackSpeed;
+        characteristics[Characteristics.ShotCooldown] = _shotCooldown;
         characteristics[Characteristics.MaxHealth] = _maxHealth;
         characteristics[Characteristics.MaxAmmo] = _maxAmmo;
         characteristics[Characteristics.ReloadTimeAmmo] = _reloadTimeAmmo;
@@ -86,7 +86,7 @@ public enum Characteristics
 {
     Speed,
     Damage,
-    AttackSpeed,
+    ShotCooldown,
     MaxHealth,
     MaxAmmo,
     ReloadTimeAmmo
