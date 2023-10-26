@@ -135,6 +135,8 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         }
     }
 
+
+
     protected abstract void RotateWeaponToTarget(Vector3 target);
 
     protected abstract void DisableCrossHair();

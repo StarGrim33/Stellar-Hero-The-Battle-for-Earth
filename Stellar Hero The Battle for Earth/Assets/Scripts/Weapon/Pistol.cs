@@ -20,6 +20,12 @@ public class Pistol : Weapon
     private void Start()
     {
         _characteristics = PlayerCharacteristics.I;
+
+        _characteristics.CharacteristicChanged += SetAmmoParams;
+
+        SetAmmoParams();
+
+        _currentAmmo = _maxAmmo;
     }
 
     protected override void RotateWeaponToTarget(Vector3 target)
@@ -89,5 +95,11 @@ public class Pistol : Weapon
         _currentAmmo = _maxAmmo;
         _isReloading = false;
         Reloading?.Invoke(_isReloading);
+    }
+
+    private void SetAmmoParams()
+    {
+        _reloadTime = _characteristics.GetValue(Characteristics.ReloadTimeAmmo);
+        _maxAmmo = (int)_characteristics.GetValue(Characteristics.MaxAmmo);
     }
 }
