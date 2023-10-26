@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
     [SerializeField] private CheckCircleOverlap _obstacleChecker;
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private ButtonFiller _dushFiller;
+    [SerializeField] private EnterTriggerDamage _enterTriggerDamage;
 
     public float CurrentSpeed { get; private set; }
 
@@ -93,10 +94,14 @@ public class PlayerMovement : MonoBehaviour, IControllable
         transform.position = Vector2.Lerp(_startDashPostioin, _endDashPostioin, time);
         _particleSystem.PlayEffect();
 
+        _enterTriggerDamage.OnTriggerDamage();
+
         if (_obstacleChecker.CheckCount() > 0 || time > 1)
         {
             _isDash = false;
             Dashing?.Invoke(false);
+
+            _enterTriggerDamage.OffTriggerDamage();
         }
     }
 
