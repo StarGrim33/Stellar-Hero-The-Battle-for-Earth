@@ -67,25 +67,7 @@ public class Spawner : MonoBehaviour
         if (_currentWave == null)
             return;
 
-        _timeAfterLastSpawn += Time.deltaTime;
-
-        if (_timeAfterLastSpawn >= _currentWave.SpawnDelay)
-        {
-            if (_currentSpawnPointIndex < _spawnPoints.Length - 1)
-            {
-                _currentSpawnPointIndex++;
-                SpawnEnemy();
-                _spawned++;
-                _timeAfterLastSpawn = 0;
-            }
-            else
-            {
-                _currentSpawnPointIndex = 0;
-                SpawnEnemy();
-                _spawned++;
-                _timeAfterLastSpawn = 0;
-            }
-        }
+        SpawnWave();
 
         if (_currentWave.Amount <= _spawned)
         {
@@ -96,6 +78,16 @@ public class Spawner : MonoBehaviour
             }
 
             _currentWave = null;
+        }
+
+        if(_currentWaveIndex >= _waves.Count - 1)
+        {
+            Debug.Log("Loop");
+            _currentWaveIndex = 0;
+            SetWave(_currentWaveIndex);
+            _spawned = 0;
+            SpawnWave();
+            WaveChanged?.Invoke(_currentWaveIndex);
         }
     }
 
@@ -122,6 +114,29 @@ public class Spawner : MonoBehaviour
 
         yield return delay;
         _isSpawnFrozen = false;
+    }
+
+    private void SpawnWave()
+    {
+        _timeAfterLastSpawn += Time.deltaTime;
+
+        if (_timeAfterLastSpawn >= _currentWave.SpawnDelay)
+        {
+            if (_currentSpawnPointIndex < _spawnPoints.Length - 1)
+            {
+                _currentSpawnPointIndex++;
+                SpawnEnemy();
+                _spawned++;
+                _timeAfterLastSpawn = 0;
+            }
+            else
+            {
+                _currentSpawnPointIndex = 0;
+                SpawnEnemy();
+                _spawned++;
+                _timeAfterLastSpawn = 0;
+            }
+        }
     }
 
     private void SpawnEnemy()
