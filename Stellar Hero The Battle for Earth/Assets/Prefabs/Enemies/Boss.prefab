@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextState: {fileID: 5606134455811600912}
-  _transitionRangeForNextState: 0.8
+  _transitionRangeForNextState: 1
   _spreadRange: 0.5
 --- !u!114 &5606134455811600912
 MonoBehaviour:
