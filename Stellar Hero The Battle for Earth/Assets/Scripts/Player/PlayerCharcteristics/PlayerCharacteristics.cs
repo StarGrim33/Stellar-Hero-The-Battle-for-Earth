@@ -16,8 +16,6 @@ public class PlayerCharacteristics : MonoBehaviour
     private float _playerTriggerDamage = 0f;
 
     private float _droneTriggerDamage = 0f;
-    private float _droneDamage = 10f;
-    private float _droneShotDelay = 2f;
 
     private Dictionary<Characteristics, float> characteristics = new Dictionary<Characteristics, float>();
 
@@ -88,8 +86,6 @@ public class PlayerCharacteristics : MonoBehaviour
         characteristics[Characteristics.DushCooldown] = _dushCooldown;
         characteristics[Characteristics.PlayerTriggerDamage] = _playerTriggerDamage;
         characteristics[Characteristics.DroneTriggerDamage] = _droneTriggerDamage;
-        characteristics[Characteristics.DroneDamage] = _droneDamage;
-        characteristics[Characteristics.DroneShotDelay] = _droneShotDelay;
     }
 }
 
@@ -103,7 +99,5 @@ public enum Characteristics
     ReloadTimeAmmo,
     DushCooldown,
     PlayerTriggerDamage,
-    DroneTriggerDamage,
-    DroneDamage,
-    DroneShotDelay
+    DroneTriggerDamage
 }

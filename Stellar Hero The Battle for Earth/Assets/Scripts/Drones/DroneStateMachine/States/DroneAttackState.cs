@@ -15,11 +15,10 @@ public class DroneAttackState : IStateSwitcher
     private Transform _heroTransform;
     private DroneParameters _parameters;
     private TrailInstantiator _instantiator;
-    private PlayerCharacteristics _characteristics;
     private float _lastAttackTime;
     private float _angle;
 
-    public DroneAttackState(DroneStateMachine machine, CheckCircleOverlap checker, DroneParticleSystem shotEffect, Transform transformDrone, Transform heroTransform, DroneParameters droneParameters, TrailInstantiator instantiator, PlayerCharacteristics characteristics)
+    public DroneAttackState(DroneStateMachine machine, CheckCircleOverlap checker, DroneParticleSystem shotEffect, Transform transformDrone, Transform heroTransform, DroneParameters droneParameters, TrailInstantiator instantiator)
     {
         _enemyChecker = checker;
         _machine = machine;
@@ -28,7 +27,6 @@ public class DroneAttackState : IStateSwitcher
         _heroTransform = heroTransform;
         _parameters = droneParameters;
         _instantiator = instantiator;
-        _characteristics = characteristics;
     }
 
     public void Enter()
@@ -54,14 +52,14 @@ public class DroneAttackState : IStateSwitcher
     {
         CurrenTarget = enemy.TargetTransform;
         Vector2 direction = (enemy.TargetTransform.position - _enemyChecker.transform.position).normalized;
-        RaycastHit2D hit = Physics2D.Raycast(_enemyChecker.transform.position, direction, Mathf.Infinity, _enemyChecker.Layer);
+        RaycastHit2D hit = Physics2D.Raycast(_enemyChecker.transform.position, direction, Mathf.Infinity);
 
         if (hit.collider != null && hit.collider.TryGetComponent<IDamageable>(out var damageable))
         {
             if (damageable is not PlayerHealth)
-                damageable.TakeDamage((int)_characteristics.GetValue(Characteristics.DroneDamage));
+                damageable.TakeDamage(_parameters.Damage);
 
-            _instantiator.TrailInstantiate(hit.point);
+             _instantiator.TrailInstantiate(hit.point);
             
             _shotEffect.PlayEffect();
         }
@@ -110,7 +108,7 @@ public class DroneAttackState : IStateSwitcher
         if (_lastAttackTime <= 0 && _currentTarget != null)
         {
             ShootAtEnemy(_currentTarget);
-            _lastAttackTime = _characteristics.GetValue(Characteristics.DroneShotDelay);
+            _lastAttackTime = _parameters.Delay;
         }
 
         _lastAttackTime -= Time.deltaTime;
