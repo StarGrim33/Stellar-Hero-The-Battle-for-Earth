@@ -240,5 +240,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d76da4feb28ddb4d815e43f039a1dd3, type: 2}
   - {fileID: 11400000, guid: 32caa61daa18ef9428a8b273c209ad61, type: 2}
   - {fileID: 11400000, guid: 26c5f8bb9d79cee4f8f93dad82f9218a, type: 2}
+  - {fileID: 11400000, guid: 39388e3a56d45ce4d92c23421926d0c5, type: 2}
+  - {fileID: 11400000, guid: efc3ad6244ca7d74a88346def3f15b80, type: 2}
+  - {fileID: 11400000, guid: 52d9ccbff2d733442a33ab1b9da6ea9a, type: 2}
   _chengersCount: 3
   _characteristicChangerTemplate: {fileID: 3992737999110083921, guid: 5cb5d9c38066cb44bbc11940dd843832, type: 3}

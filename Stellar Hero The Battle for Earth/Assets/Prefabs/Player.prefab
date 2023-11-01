@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 8956449809013996824}
   - component: {fileID: 8142571683833930101}
   - component: {fileID: 8334076723747154508}
+  - component: {fileID: 2818099413636417051}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -213,6 +214,7 @@ MonoBehaviour:
   _obstacleChecker: {fileID: 7848346284930106692}
   _sprite: {fileID: 3257822748604171154}
   _dushFiller: {fileID: 0}
+  _enterTriggerDamage: {fileID: 2818099413636417051}
 --- !u!58 &599111435902902873
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -471,6 +473,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _effect: {fileID: 8026228422972124712}
   _levelUpEffect: {fileID: 6205146270534783653}
+--- !u!114 &2818099413636417051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6618343706205989739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcd263a632560d47a61a81d282f9d00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _isTriggerDamage: 0
 --- !u!1 &6725394019799126679
 GameObject:
   m_ObjectHideFlags: 0
