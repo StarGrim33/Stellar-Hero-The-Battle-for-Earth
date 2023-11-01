@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 1204065623448673416}
   - component: {fileID: 7023339199740405883}
   - component: {fileID: 4902321874920997200}
+  - component: {fileID: 448952344823678359}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -270,6 +271,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &448952344823678359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087542905730846273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d87994da036fd2240a1018d3377462b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4250343793179677689
 PrefabInstance:
   m_ObjectHideFlags: 0
