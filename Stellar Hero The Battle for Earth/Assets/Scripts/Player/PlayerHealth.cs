@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class PlayerHealth : UnitHealth, IDamageable
 {
     [SerializeField] private Animator _animator;
-     
+
     private PlayerMovement _playerMovement;
 
     private bool _isInvulnerable = false;
@@ -26,13 +26,17 @@ public class PlayerHealth : UnitHealth, IDamageable
     protected override void OnEnable()
     {
         base.OnEnable();
-        _maxHealth = PlayerCharacteristics.I.GetValue(Characteristics.MaxHealth);
     }
 
     private void Start()
     {
         _playerMovement = GetComponent<PlayerMovement>();
         _playerMovement.Dashing += InvulnerableActivated;
+
+        SetMaxHealth();
+
+        PlayerCharacteristics.I.CharacteristicChanged += SetMaxHealth;
+        Debug.Log($"Max Health is {MaxHealth}");
     }
 
     private void OnDisable()
@@ -111,5 +115,11 @@ public class PlayerHealth : UnitHealth, IDamageable
         }
 
         _isImmortal = false;
+    }
+
+    private void SetMaxHealth()
+    {
+        _maxHealth = PlayerCharacteristics.I.GetValue(Characteristics.MaxHealth);
+        CurrentHealth = MaxHealth;
     }
 }

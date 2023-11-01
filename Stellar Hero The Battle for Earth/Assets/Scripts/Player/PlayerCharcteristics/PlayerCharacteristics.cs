@@ -1,17 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public class PlayerCharacteristics : MonoBehaviour
 {
     public static PlayerCharacteristics I = null;
 
-    private float _speed = 10f;
+    private float _speed = 3f;
     private float _damage = 25f;
-    private float _attackSpeed = 1f;
+    private float _shotCooldown = 1f;
     private float _maxHealth = 100f;
+    private float _maxAmmo = 6f;
+    private float _reloadTimeAmmo = 1f;
+    private float _dushCooldown = 2f;
+    private float _playerTriggerDamage = 0f;
 
-    private Dictionary<Characteristics, float> _characteristics = new Dictionary<Characteristics, float>();
+    private float _droneTriggerDamage = 0f;
+    private float _droneDamage = 10f;
+    private float _droneShotDelay = 2f;
+
+    private Dictionary<Characteristics, float> characteristics = new Dictionary<Characteristics, float>();
+
+    public UnityAction CharacteristicChanged;
 
     private void Awake()
     {
@@ -27,71 +37,59 @@ public class PlayerCharacteristics : MonoBehaviour
 
     public float GetValue(Characteristics characteristic)
     {
-        if (_characteristics.TryGetValue(characteristic, out float value))
+        if (characteristics.TryGetValue(characteristic, out float value))
         {
             return value;
         }
         else
         {
-            Debug.LogWarning("Íĺâĺđíîĺ čě˙ ďŕđŕěĺňđŕ: " + characteristic);
+            Debug.LogWarning("Not found: " + characteristic);
             return 0.0f;
         }
     }
 
     public void SetValue(Characteristics characteristic, float value)
     {
-        switch (characteristic)
+        if (characteristics.ContainsKey(characteristic))
         {
-            case Characteristics.Speed:
-                _speed = value;
-                break;
-            case Characteristics.Damage:
-                _damage = value;
-                break;
-            case Characteristics.AttackSpeed:
-                _attackSpeed = value;
-                break;
-            case Characteristics.MaxHealth:
-                _maxHealth = value;
-                break;
-            default:
-                Debug.LogWarning("Íĺâĺđíîĺ čě˙ ďŕđŕěĺňđŕ: " + characteristic);
-                break;
+            characteristics[characteristic] = value;
+            CharacteristicChanged?.Invoke();
+            Debug.Log($"Max Health is {_maxHealth}");
+
+        }
+        else
+        {
+            Debug.LogWarning("Not Found: " + characteristic);
         }
     }
 
     public void AddValue(Characteristics characteristic, float value)
     {
-        switch (characteristic)
+        if (characteristics.ContainsKey(characteristic))
         {
-            case Characteristics.Speed:
-                _speed += value;
-                break;
-            case Characteristics.Damage:
-                _damage += value;
-                break;
-            case Characteristics.AttackSpeed:
-                _attackSpeed += value;
-                break;
-            case Characteristics.MaxHealth:
-                _maxHealth += value;
-                break;
-            default:
-                Debug.LogWarning("Íĺâĺđíîĺ čě˙ ďŕđŕěĺňđŕ: " + characteristic);
-                break;
+            characteristics[characteristic] += value;
+            CharacteristicChanged?.Invoke();
+        }
+        else
+        {
+            Debug.LogWarning("Not Found: " + characteristic);
         }
     }
 
     private void Initialize()
     {
-        _characteristics[Characteristics.Speed] = _speed;
-        _characteristics[Characteristics.Damage] = _damage;
-        _characteristics[Characteristics.AttackSpeed] = _attackSpeed;
-        _characteristics[Characteristics.MaxHealth] = _maxHealth;
-        _speed = 10f;
-        _damage = 1;
-        _attackSpeed = 1f;
-        _maxHealth = 100f;
+        //Load start characteristics
+        characteristics[Characteristics.Speed] = _speed;
+        characteristics[Characteristics.Damage] = _damage;
+        characteristics[Characteristics.ShotCooldown] = _shotCooldown;
+        characteristics[Characteristics.MaxHealth] = _maxHealth;
+        characteristics[Characteristics.MaxAmmo] = _maxAmmo;
+        characteristics[Characteristics.ReloadTimeAmmo] = _reloadTimeAmmo;
+        characteristics[Characteristics.DushCooldown] = _dushCooldown;
+        characteristics[Characteristics.PlayerTriggerDamage] = _playerTriggerDamage;
+        characteristics[Characteristics.DroneTriggerDamage] = _droneTriggerDamage;
+        characteristics[Characteristics.DroneDamage] = _droneDamage;
+        characteristics[Characteristics.DroneShotDelay] = _droneShotDelay;
     }
 }
 
@@ -99,6 +97,13 @@ public enum Characteristics
 {
     Speed,
     Damage,
-    AttackSpeed,
-    MaxHealth
+    ShotCooldown,
+    MaxHealth,
+    MaxAmmo,
+    ReloadTimeAmmo,
+    DushCooldown,
+    PlayerTriggerDamage,
+    DroneTriggerDamage,
+    DroneDamage,
+    DroneShotDelay
 }

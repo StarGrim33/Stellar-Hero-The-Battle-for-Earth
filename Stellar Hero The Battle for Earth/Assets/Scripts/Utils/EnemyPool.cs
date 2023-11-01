@@ -22,6 +22,14 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] private GameObject _knightPrefab;
     [SerializeField] private List<GameObject> _knightList;
 
+    [SerializeField] private int _firstBoss;
+    [SerializeField] private GameObject _firstBossPrefab;
+    [SerializeField] private List<GameObject> _firstBossList;
+
+    [SerializeField] private int _secondsBossAmount;
+    [SerializeField] private GameObject _secondsBossPrefab;
+    [SerializeField] private List<GameObject> _secondsBossList;
+
     private void Awake()
     {
         EnemyPoolInstance = this;
@@ -33,6 +41,9 @@ public class EnemyPool : MonoBehaviour
         CreateObjects(prefab: _bomberEnemy, parent: _container.transform, count: _bomberEnemyAmount, list: _bomberEnemyList);
         CreateObjects(prefab: _tankPrefab, parent: _container.transform, count: _tankEnemyAmount, list: _tankList);
         CreateObjects(prefab: _knightPrefab, parent: _container.transform, count: _knightAmount, list: _knightList);
+        CreateObjects(prefab: _firstBossPrefab, parent: _container.transform, count: _firstBoss, list: _firstBossList);
+        CreateObjects(prefab: _secondsBossPrefab, parent: _container.transform, count: _secondsBossAmount, list: _secondsBossList);
+
     }
 
     private void CreateObjects(GameObject prefab, Transform parent, int count, List<GameObject> list)
@@ -57,6 +68,10 @@ public class EnemyPool : MonoBehaviour
             list = _tankList;
         else if(prefab == _knightPrefab) 
             list = _knightList;
+        else if(prefab == _firstBossPrefab)
+            list = _firstBossList;
+        else if (prefab == _secondsBossPrefab) 
+            list = _secondsBossList;
         else
             return null;
 

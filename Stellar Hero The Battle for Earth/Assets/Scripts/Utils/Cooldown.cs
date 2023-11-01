@@ -18,5 +18,7 @@ namespace Assets.Scripts.Utils
         }
 
         public bool IsReady() => _timesUp < Time.time;
+
+        public void ChangeCooldownValue(float value) => _value = value;
     }
 }

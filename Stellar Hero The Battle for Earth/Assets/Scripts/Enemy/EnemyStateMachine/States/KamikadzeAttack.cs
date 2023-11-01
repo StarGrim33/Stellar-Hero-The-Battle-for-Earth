@@ -8,6 +8,9 @@ public class KamikadzeAttack : AttackState
     private DeadEffectSpawner _effectSpawner;
     private readonly float _explosionRadius = 1f;
     private EnemyHealth _enemyHealth;
+    private int _explosionDamage = 25;
+    private float _explosionDelay = 0.5f;
+    private float _attackDistance = 0.8f;
 
     private void Awake()
     {
@@ -17,11 +20,13 @@ public class KamikadzeAttack : AttackState
 
     public override void Attack()
     {
+        _damage = 0;
+
         if (Target != null)
         {
-            if (Vector2.Distance(Target.TargetTransform.position, transform.position) < 1)
+            if (Vector2.Distance(Target.TargetTransform.position, transform.position) < _attackDistance)
             {
-                Explode();
+                StartCoroutine(ExplodeWithDelay(_explosionDelay));
             }
             else
             {
@@ -31,6 +36,13 @@ public class KamikadzeAttack : AttackState
         }
     }
 
+    private IEnumerator ExplodeWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); 
+        Explode();
+
+    }
+
     private void Explode()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _explosionRadius);
@@ -38,7 +50,7 @@ public class KamikadzeAttack : AttackState
         foreach (Collider2D collider in colliders)
         {
             var unit = collider.GetComponent<IDamageable>();
-            unit?.TakeDamage(_damage);
+            unit?.TakeDamage(_explosionDamage);
         }
 
         _effectSpawner.SpawnEffect(_explosionEffect);
@@ -47,9 +59,10 @@ public class KamikadzeAttack : AttackState
 
     private IEnumerator DisableGameObject()
     {
-        float disableDealy = 1.8f;
-        var waitForSeconds = new WaitForSeconds(disableDealy);
+        int maxDamage = 500;
+        float disableDelay = 1.8f;
+        var waitForSeconds = new WaitForSeconds(disableDelay);
         yield return waitForSeconds;
-        _enemyHealth.TakeDamage(500);
+        _enemyHealth.TakeDamage(maxDamage);
     }
 }

@@ -16,7 +16,7 @@ public class PlayerCharacteristicsView : MonoBehaviour
     {
         _characteristicsText.text = $"Speed = {_characteristics.GetValue(Characteristics.Speed)} \n" +
             $"Damage ={_characteristics.GetValue(Characteristics.Damage)} \n" +
-            $"AttackSpeed= {_characteristics.GetValue(Characteristics.AttackSpeed)} \n" +
+            $"ShotCooldown= {_characteristics.GetValue(Characteristics.ShotCooldown)} \n" +
             $"MaxHealth = {_characteristics.GetValue(Characteristics.MaxHealth)} \n";
     }
 }

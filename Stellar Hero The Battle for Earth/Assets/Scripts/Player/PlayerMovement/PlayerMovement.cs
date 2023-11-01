@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
     [SerializeField] private CheckCircleOverlap _obstacleChecker;
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private ButtonFiller _dushFiller;
+    [SerializeField] private EnterTriggerDamage _enterTriggerDamage;
 
     public float CurrentSpeed { get; private set; }
 
@@ -24,7 +25,6 @@ public class PlayerMovement : MonoBehaviour, IControllable
     private PlayerParticleSystem _particleSystem;
     private Rigidbody2D _rigidBody;
     private Vector2 _direction;
-    private PlayerUnit _playerUnit;
     private Vector2 _startDashPostioin;
     private Vector2 _endDashPostioin;
     private float _dashTimer;
@@ -34,14 +34,13 @@ public class PlayerMovement : MonoBehaviour, IControllable
     private void Awake()
     {
         _particleSystem = GetComponent<PlayerParticleSystem>();
-        _playerUnit = GetComponent<PlayerUnit>();
         _rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
-        //_speed = _playerUnit.Config.Speed;
-        _speed = PlayerCharacteristics.I.GetValue(Characteristics.Speed);
+        SetMovementCharacteristic();
+        PlayerCharacteristics.I.CharacteristicChanged += SetMovementCharacteristic;
     }
 
     private void FixedUpdate()
@@ -95,10 +94,22 @@ public class PlayerMovement : MonoBehaviour, IControllable
         transform.position = Vector2.Lerp(_startDashPostioin, _endDashPostioin, time);
         _particleSystem.PlayEffect();
 
+        _enterTriggerDamage.OnTriggerDamage();
+
         if (_obstacleChecker.CheckCount() > 0 || time > 1)
         {
             _isDash = false;
             Dashing?.Invoke(false);
+
+            _enterTriggerDamage.OffTriggerDamage();
         }
     }
+
+    private void SetMovementCharacteristic()
+    {
+        _speed = PlayerCharacteristics.I.GetValue(Characteristics.Speed);
+        _dashCooldown.ChangeCooldownValue(PlayerCharacteristics.I.GetValue(Characteristics.DushCooldown));
+
+        _enterTriggerDamage.SetDamage((int)PlayerCharacteristics.I.GetValue(Characteristics.PlayerTriggerDamage));
+    } 
 }
