@@ -98,7 +98,7 @@ public abstract class Weapon : MonoBehaviour, IWeapon
     private IDamageable FindClosestLivingEnemy()
     {
         IDamageable closestEnemy = null;
-        float closestDistance = float.MaxValue;
+        float closestDistance = 6;
 
         foreach (var enemy in _enemies)
         {
