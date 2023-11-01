@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour
 {
-    [SerializeField] private UnitConfig unitConfig;
+    [SerializeField] private UnitConfig _unitConfig;
 
-    public UnitConfig Config => unitConfig;
+    public UnitConfig Config => _unitConfig;
 }

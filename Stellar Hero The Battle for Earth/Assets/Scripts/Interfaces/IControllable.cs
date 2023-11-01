@@ -2,7 +2,9 @@ using UnityEngine;
 
 public interface IControllable
 {
-    public void Move(Vector2 direction);
+    void Move();
 
-    public void Dash();
+    void TryDash();
+
+    void SetDirection(Vector2 direction);
 }
