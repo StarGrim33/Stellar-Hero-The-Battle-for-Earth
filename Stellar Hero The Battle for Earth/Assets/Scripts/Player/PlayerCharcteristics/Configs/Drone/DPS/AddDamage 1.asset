@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b2f6a2b81b3ce4c9928df382d08eed, type: 3}
+  m_Name: AddDamage 1
+  m_EditorClassIdentifier: 
+  _icon: {fileID: -1265058448, guid: 20289877ac03f334ebb5881a780b163a, type: 3}
+  _description: UpdateDrone
+  _changes:
+  - _characteristics: 10
+    _value: -0.5
+  _nextChanger: {fileID: 11400000, guid: fb9687c59be6bb7479ffde58e45eda6a, type: 2}

@@ -10,6 +10,8 @@ namespace Assets.Scripts.Components.Checkers
 
         private readonly Collider2D[] _collidedResult = new Collider2D[5];
 
+        public LayerMask Layer => _layer;
+
         public List<T> Check<T>() where T : IDamageable
         {
             var result = new List<T>();
