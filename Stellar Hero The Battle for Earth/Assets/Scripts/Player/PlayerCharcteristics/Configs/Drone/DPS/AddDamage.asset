@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: UpdateDrone
   _changes:
   - _characteristics: 9
-    _value: 1000
+    _value: 10
   _nextChanger: {fileID: 11400000, guid: 0170c2a60bdb1964ea74ff32a8f3539d, type: 2}

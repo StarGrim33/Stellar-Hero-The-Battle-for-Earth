@@ -48,8 +48,11 @@ GameObject:
   - component: {fileID: 1420868626038764766}
   - component: {fileID: 1204065623448673416}
   - component: {fileID: 7023339199740405883}
-  - component: {fileID: 4902321874920997200}
   - component: {fileID: 448952344823678359}
+  - component: {fileID: 2620493443993107165}
+  - component: {fileID: 2818723450444122109}
+  - component: {fileID: 8482914757887391359}
+  - component: {fileID: 8390868333979979223}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -244,7 +247,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 10
   _isTriggerDamage: 1
---- !u!50 &4902321874920997200
+--- !u!114 &448952344823678359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087542905730846273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d87994da036fd2240a1018d3377462b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &2620493443993107165
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087542905730846273}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.86499995
+--- !u!114 &2818723450444122109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087542905730846273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcd263a632560d47a61a81d282f9d00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 0
+  _isTriggerDamage: 0
+--- !u!50 &8482914757887391359
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -271,7 +335,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &448952344823678359
+--- !u!114 &8390868333979979223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
