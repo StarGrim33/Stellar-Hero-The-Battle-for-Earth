@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.agava.webutility": {
+      "version": "https://github.com/forcepusher/com.agava.webutility.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "0244aa7e3bdd56b2a45d1d64a1ee4ce169e699a1"
+    },
+    "com.agava.yandexgames": {
+      "version": "https://github.com/forcepusher/com.agava.yandexgames.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "b544fb0b88bfee362610c8ece71e41c1e4634bb1"
+    },
     "com.unity.2d.pixel-perfect": {
       "version": "5.0.3",
       "depth": 0,

@@ -12,6 +12,9 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private AmmoView _ammoView;
     [SerializeField] private Spawner _spawner;
     [SerializeField] private CurrentWaveView _currentWaveView;
+    [SerializeField] private NewCharacterInputController _desktopController;
+    [SerializeField] private MobileCharacterController _mobileController;
+    [SerializeField] private GameSettings _gameSettings;
 
     private void Awake()
     {
@@ -24,5 +27,23 @@ public class Bootstrap : MonoBehaviour
         _defeatPanel.Initialize(_gameplayMediator);
         _ammoView.Init(_weapon);
         _currentWaveView.Init(_spawner);
+        ControllerInitialize();
+    }
+
+    private void ControllerInitialize()
+    {
+        if(_gameSettings != null && _mobileController != null && _desktopController != null)
+        {
+            if(_gameSettings.IsMobile)
+            {
+                _mobileController.enabled = true;
+                _mobileController.enabled = false;
+            }
+            else
+            {
+                _mobileController.enabled = false;
+                _mobileController.enabled = true;
+            }
+        }
     }
 }
