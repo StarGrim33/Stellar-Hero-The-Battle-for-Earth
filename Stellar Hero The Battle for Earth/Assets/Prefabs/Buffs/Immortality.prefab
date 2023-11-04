@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca57e94a6b655b4abd5b72095bb9693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 5842700700125039383}
-  Duration: 5
+  _duration: 5
+  _sprite: {fileID: 5842700700125039383}
 --- !u!61 &3935262017147142629
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -4,13 +4,21 @@ using UnityEngine;
 public class PlayerParticleSystem : ParticleSystemPlayer
 {
     [SerializeField] private ParticleSystem _levelUpEffect;
+    [SerializeField] private ParticleSystem _shieldEffect;
     private float _dustDuration = 0.1f;
     private float _levelUpEffectDuration = 3f;
     private PlayerLevelSystem _playerLevelSystem;
+    private float _shieldDuration = 5;
 
-    public override void PlayEffect()
+    public override void PlayEffect(ParticleEffects effects)
     {
-        base.PlayEffect();
+        switch (effects)
+        {
+            case ParticleEffects.Dust:
+                _effect.Play();
+                break;
+        }
+
         StartCoroutine(StopDustAfterDelay());
     }
 
@@ -18,6 +26,13 @@ public class PlayerParticleSystem : ParticleSystemPlayer
     {
         yield return new WaitForSeconds(_dustDuration);
         _effect.Stop();
+    }
+    
+    private IEnumerator EnableShield()
+    {
+        var waitForSeconds = new WaitForSeconds(_shieldDuration);
+        yield return waitForSeconds;
+        _shieldEffect.Play();
     }
 
     public void SetLevelSystem(PlayerLevelSystem playerLevelSystem)
@@ -37,4 +52,11 @@ public class PlayerParticleSystem : ParticleSystemPlayer
         yield return new WaitForSeconds(_levelUpEffectDuration);
         _levelUpEffect.Stop();
     }
+}
+
+public enum ParticleEffects
+{
+    LevelUp,
+    Shield,
+    Dust,
 }
