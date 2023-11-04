@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: AddTriggerDamage
   m_EditorClassIdentifier: 
   _icon: {fileID: 744710160, guid: 20289877ac03f334ebb5881a780b163a, type: 3}
-  _description: AddTriggerDamage
+  _enDescription: Add trigger Damage
+  _ruDescription: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0443\u0440\u043E\u043D
+    \u0441\u0442\u043E\u043B\u043A\u043D\u043E\u0432\u0435\u043D\u0438\u044F"
+  _trDescription: Lj,fdbnm ehjy cnjkryjdtybz
   _changes:
   - _characteristics: 8
     _value: 10
