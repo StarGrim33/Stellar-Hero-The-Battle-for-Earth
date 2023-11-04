@@ -16,5 +16,5 @@ MonoBehaviour:
   _description: AddMoveSpeed
   _changes:
   - _characteristics: 0
-    _value: 5
+    _value: 1
   _nextChanger: {fileID: 11400000}

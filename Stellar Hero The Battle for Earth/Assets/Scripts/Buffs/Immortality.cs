@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Immortality : Buff
 {
-    [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private float _duration;
+    [SerializeField] private SpriteRenderer _sprite;
 
     private void OnEnable()
     {
@@ -14,12 +14,12 @@ public class Immortality : Buff
     public override void Take(PlayerHealth playerHealth)
     {
         playerHealth.ActivateImmortal();
-        _sprite.enabled = false;
         StartCoroutine(DisableEffect());
     }
 
     private IEnumerator DisableEffect()
     {
+        _sprite.enabled = false;
         var waitForSeconds = new WaitForSeconds(_duration);
         yield return waitForSeconds;
         Destroy(gameObject);

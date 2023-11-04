@@ -63,7 +63,7 @@ public class DroneAttackState : IStateSwitcher
 
             _instantiator.TrailInstantiate(hit.point);
             
-            _shotEffect.PlayEffect();
+            _shotEffect.PlayEffect(ParticleEffects.Shield);
         }
     }
 
