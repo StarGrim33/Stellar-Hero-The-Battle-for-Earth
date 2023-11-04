@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: AddMaxHealth
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: da9b166f02f3cdf489b8b14bd73bc55a, type: 3}
-  _description: Add 25 health
+  _enDescription: Add 25 Health
+  _ruDescription: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C 25 \u0416\u0438\u0437\u043D\u0435\u0439"
+  _trDescription: Lj,fdbnm 25 :bpytq
   _changes:
   - _characteristics: 3
     _value: 25

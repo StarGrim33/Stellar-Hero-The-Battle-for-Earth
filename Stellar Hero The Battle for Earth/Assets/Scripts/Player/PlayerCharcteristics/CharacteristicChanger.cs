@@ -20,7 +20,7 @@ public class CharacteristicChanger : MonoBehaviour
         _config = config;
 
         _icon.sprite = _config.Icon;
-        _description.text = _config.Description;
+        _description.text = _config.GetDescription();
     }
 
     public void OnClick()

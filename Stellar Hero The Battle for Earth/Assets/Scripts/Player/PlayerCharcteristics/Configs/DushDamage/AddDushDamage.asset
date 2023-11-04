@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: AddDushDamage
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 2c693ec360a6b29468fef0a723ebf3bf, type: 3}
-  _description: AddDushDamage +10
+  _enDescription: Add Dush Damage
+  _ruDescription: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0442\u044C \u0443\u0440\u043E\u043D
+    \u0440\u044B\u0432\u043A\u0430"
+  _trDescription: Ljf,dbnm ehjy r hsdre
   _changes:
   - _characteristics: 7
     _value: 10

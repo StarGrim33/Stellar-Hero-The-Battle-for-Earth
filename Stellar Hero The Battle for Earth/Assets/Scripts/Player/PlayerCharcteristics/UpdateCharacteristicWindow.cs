@@ -53,7 +53,6 @@ public class UpdateCharacteristicWindow : MonoBehaviour
         foreach(var changer in _currentChangers)
         {
             Destroy(changer.gameObject);
-            Debug.Log("Destroy");
         }
     }
 }

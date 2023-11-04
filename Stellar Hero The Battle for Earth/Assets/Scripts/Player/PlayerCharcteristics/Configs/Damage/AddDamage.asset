@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: AddDamage
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: d23c93ce187376249a12833543d4b146, type: 3}
-  _description: Add 25 damage
+  _enDescription: Add 25 Damage
+  _ruDescription: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C 25 \u0443\u0440\u043E\u043D\u0430"
+  _trDescription: Lj,fdbnm 26 ehjyf
   _changes:
   - _characteristics: 1
     _value: 25
