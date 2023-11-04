@@ -7,10 +7,14 @@ public class WebUtilityFixer : MonoBehaviour
 
     private void Awake()
     {
-        if(Device.IsMobile)
+        if (Device.IsMobile)
         {
-            _environment.IsMobile = true;
-            Debug.Log("Mobile is initialized");
+            if (_environment != null)
+            {
+                _environment.IsMobile = true;
+                Debug.Log("Mobile is initialized");
+
+            }
         }
     }
 

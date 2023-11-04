@@ -250,6 +250,10 @@ PrefabInstance:
       value: 2.65
       objectReference: {fileID: 0}
     - target: {fileID: 4684303936325318655, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
+      propertyPath: _gameSettings
+      value: 
+      objectReference: {fileID: 1132080231}
+    - target: {fileID: 4684303936325318655, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
       propertyPath: _mobileController
       value: 
       objectReference: {fileID: 7380027135499351927}
