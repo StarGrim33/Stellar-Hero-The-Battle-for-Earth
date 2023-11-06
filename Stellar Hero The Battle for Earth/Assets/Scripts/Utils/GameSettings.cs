@@ -4,10 +4,10 @@ public class GameSettings : MonoBehaviour
 {
     [SerializeField] private Bootstrap _bootstrap;
 
-    public bool IsMobile { get; set; } = true;
+    public bool IsMobile { get; set; } =  false;
 
     private void Start()
     {
-        Debug.Log($"Ismobile - {IsMobile}");
+        Debug.Log($"Is Mobile = {IsMobile}");
     }
 }

@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class InternationalText : MonoBehaviour
 {
-    [SerializeField] private string _en;
-    [SerializeField] private string _ru;
-    [SerializeField] private string _tr;
+    [SerializeField] protected string _en;
+    [SerializeField] protected string _ru;
+    [SerializeField] protected string _tr;
 
-    private const string _enLanguage = "en";
-    private const string _ruLanguage = "ru";
-    private const string _trLanguage = "tr";
+    protected const string _enLanguage = "en";
+    protected const string _ruLanguage = "ru";
+    protected const string _trLanguage = "tr";
 
     private TMP_Text _text;
 
@@ -18,7 +18,7 @@ public class InternationalText : MonoBehaviour
         _text = GetComponent<TMP_Text>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         string lang = Language.Instance.CurrentLanguage;
 
@@ -39,7 +39,7 @@ public class InternationalText : MonoBehaviour
         }
     }
 
-    private void SetText(string text)
+    protected void SetText(string text)
     {
         _text.text = text;
     }
