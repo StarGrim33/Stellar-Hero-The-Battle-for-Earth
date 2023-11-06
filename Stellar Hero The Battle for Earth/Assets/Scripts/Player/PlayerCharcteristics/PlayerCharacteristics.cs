@@ -76,6 +76,11 @@ public class PlayerCharacteristics : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        Initialize();
+    }
+
     private void Initialize()
     {
         //Load start characteristics

@@ -20,6 +20,7 @@ public class ButtonFiller : MonoBehaviour
 
     public void StartFilled(float delay)
     {
+        if( _image.gameObject.activeInHierarchy)
         StartCoroutine(Filled(delay));
     }
 

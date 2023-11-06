@@ -9,7 +9,7 @@ public class PlayerHealth : UnitHealth, IDamageable
     [SerializeField] private Animator _animator;
 
     private PlayerMovement _playerMovement;
-
+    private ParticleSystemPlayer _effects;
     private bool _isInvulnerable = false;
     private bool _isImmortal = false;
     private int _immortalityTime = 5;
@@ -26,6 +26,11 @@ public class PlayerHealth : UnitHealth, IDamageable
     protected override void OnEnable()
     {
         base.OnEnable();
+    }
+
+    private void Awake()
+    {
+        _effects = GetComponent<ParticleSystemPlayer>();
     }
 
     private void Start()
@@ -99,6 +104,7 @@ public class PlayerHealth : UnitHealth, IDamageable
 
     public void ActivateImmortal()
     {
+        _effects.PlayEffect(ParticleEffects.Shield);
         _isImmortal = true;
         Immortality?.Invoke();
         StartCoroutine(ImmortalityTime());

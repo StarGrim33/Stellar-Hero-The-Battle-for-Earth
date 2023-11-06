@@ -10,7 +10,7 @@ public class SDKInitializer : MonoBehaviour
         YandexGamesSdk.CallbackLogging = true;
     }
 
-    //#if UNITY_WEBGL && !UNITY_EDITOR
+#if UNITY_WEBGL && !UNITY_EDITOR
 
     private IEnumerator Start()
     {
@@ -32,5 +32,5 @@ public class SDKInitializer : MonoBehaviour
         yield return waitForSeconds;
         SceneManager.LoadScene(1);
     }
-    //#endif
+#endif
 }

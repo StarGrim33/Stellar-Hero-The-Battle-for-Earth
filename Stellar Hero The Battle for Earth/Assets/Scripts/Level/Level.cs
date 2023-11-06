@@ -32,6 +32,7 @@ public class Level
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.buildIndex);
+        StateManager.Instance.SetState(GameStates.Gameplay);
     }
 
     public void OnDefeat()
