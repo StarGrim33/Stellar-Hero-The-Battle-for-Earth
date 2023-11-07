@@ -8,6 +8,6 @@ public class GameSettings : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log($"Ismobile - {IsMobile}");
+        Debug.Log($"Is Mobile = {IsMobile}");
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &676297561
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3056102757938330838, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
+      propertyPath: m_Name
+      value: Language
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870953954068142672, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870953954068142672, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870953954068142672, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870953954068142672, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870953954068142672, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870953954068142672, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870953954068142672, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870953954068142672, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870953954068142672, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870953954068142672, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870953954068142672, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d16bd13b6924e94da1076a79ab37195, type: 3}
 --- !u!114 &151687254 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4465321586215278684, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
@@ -292,29 +353,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 1
       objectReference: {fileID: 0}
-    - target: {fileID: 720953869826203894, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: 1838c0bbb072d8046b505097813c6b53, type: 2}
-    - target: {fileID: 720953869826203894, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
-      propertyPath: m_OverrideVoxelSize
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 978824881245288203, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 978824881245288203, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390787515978774856, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390787515978774856, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -39.94
+    - target: {fileID: 4465321588074355796, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
+      propertyPath: snapX
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3451835479942976583, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
       propertyPath: _waves.Array.size
@@ -634,6 +675,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
+
 --- !u!114 &7380027135499351926 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4684303936325318655, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
@@ -643,27 +685,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 621ad64dc06037d4ea695f1721dd9111, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7380027135499351927 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5853840847247332860, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
-  m_PrefabInstance: {fileID: 7380027135499351923}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f18c37148b90f334c96956c6a416e0d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7380027135499351928 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1374601857786676972, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
-  m_PrefabInstance: {fileID: 7380027135499351923}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b047f93c3657e40a1f003fceebf8c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
