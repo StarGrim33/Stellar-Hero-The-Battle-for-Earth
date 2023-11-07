@@ -4,7 +4,7 @@ public class GameSettings : MonoBehaviour
 {
     [SerializeField] private Bootstrap _bootstrap;
 
-    public bool IsMobile { get; set; } = true;
+    public bool IsMobile { get; set; }
 
     private void Start()
     {
