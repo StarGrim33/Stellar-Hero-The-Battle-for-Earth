@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour, IControllable
     public void Move()
     {
         _rigidBody.velocity = _direction * _speed;
-        _particleSystem.PlayEffect();
+        _particleSystem.PlayEffect(ParticleEffects.Dust);
         CurrentSpeed = _rigidBody.velocity.magnitude;
     }
 
@@ -87,12 +87,12 @@ public class PlayerMovement : MonoBehaviour, IControllable
 
     private void Dash()
     {
+        if(_dushFiller != null)
         _dushFiller.StartFilled(_dashCooldown.Value);
 
         _dashTimer += Time.fixedDeltaTime;
         float time = _dashTimer / _duration;
         transform.position = Vector2.Lerp(_startDashPostioin, _endDashPostioin, time);
-        _particleSystem.PlayEffect();
 
         _enterTriggerDamage.OnTriggerDamage();
 
