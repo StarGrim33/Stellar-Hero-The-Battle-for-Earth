@@ -14,7 +14,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<WaveEnemies> _waves;
     [SerializeField] private PlayerUnit _playerUnit;
     [SerializeField] private List<int> _unusedSpawnPoints;
-
+    [SerializeField] private BestWaveView _bestWaveView;
+    private LeaderboradSaver _saver;
 
     public int CurrentWaveIndex => _currentWaveIndex;
 
@@ -31,9 +32,11 @@ public class Spawner : MonoBehaviour
     private int _lastWaveNumber = 1;
     private int _currentSpawnPointIndex = 1;
     private bool _isSpawnFrozen = false;
+    private int _bestWave;
 
     private void Awake()
     {
+
         if (Instance == null)
         {
             Instance = this;
@@ -44,6 +47,12 @@ public class Spawner : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+        _bestWave = Saves.Load("BestWave", 0);
+#endif
+
+        _saver = GetComponent<LeaderboradSaver>();
     }
 
     private void Start()
@@ -80,7 +89,7 @@ public class Spawner : MonoBehaviour
             _currentWave = null;
         }
 
-        if(_currentWaveIndex >= _waves.Count - 1)
+        if (_currentWaveIndex >= _waves.Count - 1)
         {
             Debug.Log("Loop");
             _currentWaveIndex = 0;
@@ -167,9 +176,9 @@ public class Spawner : MonoBehaviour
 
     private void OnEnemyDying(EnemyHealth enemy)
     {
-        if(enemy == null) return;
+        if (enemy == null) return;
 
-        if(enemy.TryGetComponent<ExperienceEnemy>(out ExperienceEnemy experience))
+        if (enemy.TryGetComponent<ExperienceEnemy>(out ExperienceEnemy experience))
             _experienceHandler.AddExperience(experience.ExperienceForEnemy);
 
         enemy.Dying -= OnEnemyDying;
@@ -178,6 +187,14 @@ public class Spawner : MonoBehaviour
     private void SetWave(int index)
     {
         _currentWave = _waves[index];
+
+        if (_currentWaveIndex > _bestWave)
+        {
+            _bestWave = _currentWaveIndex;
+            Saves.Save(Constants.BestWaveKey, _bestWave);
+            _saver.GetLeaderboardPlayerEntryButtonClick(_bestWave);
+            Debug.Log($"Best wave is {_bestWave}");
+        }
     }
 
     private bool TryGetSpawnPoint(int randomIndex, out int spawnPointIndex)

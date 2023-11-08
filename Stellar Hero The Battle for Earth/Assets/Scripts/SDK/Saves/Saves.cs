@@ -99,7 +99,6 @@ public static class Saves
     public static void LoadData()
     {
         PlayerAccount.GetCloudSaveData(OnSuccessLoad, OnErrorLoad);
-
     }
 
     private static void OnSuccessLoad(string json)

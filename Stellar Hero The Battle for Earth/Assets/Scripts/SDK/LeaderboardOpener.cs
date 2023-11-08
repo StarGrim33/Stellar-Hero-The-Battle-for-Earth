@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class LeaderboardOpener : MonoBehaviour
 {
-    private const string AnonymousName = "Anonymous";
-    private const string LeaderboardName = "1";
+
 
     [SerializeField] private GameObject _leaderboardPanel;
     [SerializeField] private GameObject _notAuthorizedPanel;
@@ -33,7 +32,7 @@ public class LeaderboardOpener : MonoBehaviour
 
     public void OnGetLeaderboardEntriesButtonClick()
     {
-        Agava.YandexGames.Leaderboard.GetEntries(LeaderboardName, (result) =>
+        Agava.YandexGames.Leaderboard.GetEntries(Constants.LeaderboardName, (result) =>
         {
             Debug.Log($"My rank = {result.userRank}");
             ClearLeaderboardPanel();
@@ -46,13 +45,13 @@ public class LeaderboardOpener : MonoBehaviour
 
                 if (string.IsNullOrEmpty(name))
                 {
-                    //if (LeanLocalization.GetFirstCurrentLanguage() == Constants.RussianCode)
-                    //    name = "Аноним";
-                    //else if (LeanLocalization.GetFirstCurrentLanguage() == Constants.EnglishCode)
-                    //    name = AnonymousName;
-                    //else if (LeanLocalization.GetFirstCurrentLanguage() == Constants.TurkishCode)
-                    //    name = "Anonim";
-                    //else
+                    if (Language.Instance.CurrentLanguage == Constants.RussianCode)
+                        name = "Аноним";
+                    else if (Language.Instance.CurrentLanguage == Constants.EnglishCode)
+                        name = Constants.AnonymousName;
+                    else if (Language.Instance.CurrentLanguage == Constants.TurkishCode)
+                        name = "Anonim";
+                    else
                         name = "Аноним";
                 }
 
