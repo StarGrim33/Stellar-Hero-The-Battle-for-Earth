@@ -7,4 +7,12 @@ public static class Constants
     public static string DeadState = "Dead";
     public static string ExplosionEnemyAnimation = "Explosion";
     public static string Speed = "Speed";
+
+    public const string EnglishCode = "en";
+    public const string RussianCode = "ru";
+    public const string TurkishCode = "tr";
+
+    public const string BestWaveKey = "BestWave";
+    public const string AnonymousName = "Anonymous";
+    public const string LeaderboardName = "Leaderboard";
 }

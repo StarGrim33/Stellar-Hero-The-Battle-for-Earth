@@ -1,3 +1,5 @@
+using Agava.WebUtility;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,8 +18,6 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private GameSettings _gameSettings;
     [SerializeField] private NewCharacterInputController _desktopController;
     [SerializeField] private MobileCharacterController _mobileController;
-    //[SerializeField] private AbilityButton _abilityButton;
-    //[SerializeField] private FixedJoystick _fixedJoystick;
     [SerializeField] private Image _ability;
     [SerializeField] private Image _ability2;
     [SerializeField] private Image _stick;
@@ -39,28 +39,23 @@ public class Bootstrap : MonoBehaviour
 
     private void ControllerInitialize()
     {
-        if(_gameSettings != null && _mobileController != null && _desktopController != null)
+        if (Device.IsMobile)
         {
-            if(_gameSettings.IsMobile)
-            {
-                //_fixedJoystick.gameObject.SetActive(true);
-                //_abilityButton.gameObject.SetActive(true);
-                _ability.enabled = true;
-                _ability2.enabled = true;
-                _stick.enabled = true;
-                _stick2.enabled = true;
-                _mobileController.enabled = true;
-            }
-            else
-            {
-                //_abilityButton.gameObject.SetActive(false);
-                //_fixedJoystick.gameObject.SetActive(false);
-                _ability.enabled = false;
-                _ability2.enabled = false;
-                _stick.enabled = false;
-                _stick2.enabled = false;
-                _desktopController.enabled = true;
-            }
+        //if (_gameSettings.IsMobile)
+        //{
+            _ability.enabled = true;
+            _ability2.enabled = true;
+            _stick.enabled = true;
+            _stick2.enabled = true;
+            _mobileController.enabled = true;
+        }
+        else
+        {
+            _ability.enabled = false;
+            _ability2.enabled = false;
+            _stick.enabled = false;
+            _stick2.enabled = false;
+            _desktopController.enabled = true;
         }
     }
 }
