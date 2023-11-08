@@ -41,8 +41,6 @@ public class Bootstrap : MonoBehaviour
     {
         if (Device.IsMobile)
         {
-        //if (_gameSettings.IsMobile)
-        //{
             _ability.enabled = true;
             _ability2.enabled = true;
             _stick.enabled = true;
