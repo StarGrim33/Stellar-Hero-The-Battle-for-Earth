@@ -3,8 +3,8 @@ using UnityEngine;
 [RequireComponent (typeof(Collider2D))]
 public class EnterTriggerDamage : MonoBehaviour
 {
-    [SerializeField] private int _damage = 0;
     [SerializeField] private bool _isTriggerDamage = false;
+    private int _damage = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

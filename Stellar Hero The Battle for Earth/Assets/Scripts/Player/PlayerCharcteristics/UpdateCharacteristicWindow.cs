@@ -19,6 +19,7 @@ public class UpdateCharacteristicWindow : MonoBehaviour
     {
         Time.timeScale = 0.0f;
     }
+
     public void CharacteristicChangerListUpdated(CharacteristicChangerConfig changer)
     {
         if (changer.NextChanger != null)

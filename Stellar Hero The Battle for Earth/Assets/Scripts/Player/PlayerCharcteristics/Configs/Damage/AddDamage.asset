@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AddDamage
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: d23c93ce187376249a12833543d4b146, type: 3}
-  _enDescription: Add 25 Damage
-  _ruDescription: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C 25 \u0443\u0440\u043E\u043D\u0430"
-  _trDescription: Lj,fdbnm 26 ehjyf
+  _enDescription: Add 10 Damage
+  _ruDescription: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C 10 \u0443\u0440\u043E\u043D\u0430"
+  _trDescription: 10 hasar ekle
   _changes:
   - _characteristics: 1
-    _value: 25
+    _value: 10
   _nextChanger: {fileID: 11400000, guid: 47c189f461520d94e9b5754d6173f474, type: 2}

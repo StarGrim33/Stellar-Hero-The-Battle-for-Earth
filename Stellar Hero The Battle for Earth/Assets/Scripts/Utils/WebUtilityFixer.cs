@@ -8,6 +8,9 @@ public class WebUtilityFixer : MonoBehaviour
 {
     [SerializeField] private GameSettings _environment;
     [SerializeField] private StateManager _stateManager;
+    [SerializeField] private AudioSource[] _gunSounds;
+
+#if UNITY_WEBGL && !UNITY_EDITOR
 
     private void Awake()
     {
@@ -15,7 +18,7 @@ public class WebUtilityFixer : MonoBehaviour
         {
             if (_environment != null)
             {
-                _environment.IsMobile = true;
+                //_environment.IsMobile = true;
                 Debug.Log("Mobile is initialized");
             }
         }
@@ -44,12 +47,17 @@ public class WebUtilityFixer : MonoBehaviour
 
     private void OnInBackgroundChange(bool inBackground)
     {
-        AudioListener.pause = inBackground;
-        AudioListener.volume = inBackground ? 0f : 1f;
-
+        foreach (var sound in _gunSounds)
+        {
+            sound.enabled = inBackground;
+            sound.volume = inBackground ? 0f : 1f;
+        }
+ 
         if (inBackground)
             _stateManager.SetState(GameStates.Paused);
         else
             _stateManager.SetState(GameStates.Gameplay);
     }
+#endif
 }
+

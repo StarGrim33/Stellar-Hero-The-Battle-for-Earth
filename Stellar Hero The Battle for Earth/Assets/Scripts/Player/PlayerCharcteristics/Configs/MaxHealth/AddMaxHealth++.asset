@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: AddMaxHealth++
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: a7d00f4193999e34caa7daa21382fef5, type: 3}
-  _description: Add 100 health
+  _enDescription: Add 40 Health
+  _ruDescription: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C 40 \u0416\u0438\u0437\u043D\u0435\u0439"
+  _trDescription: 40 Hayat Ekle
   _changes:
   - _characteristics: 3
-    _value: 100
+    _value: 40
   _nextChanger: {fileID: 0}

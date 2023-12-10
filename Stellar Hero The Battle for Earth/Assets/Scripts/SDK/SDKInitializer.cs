@@ -18,8 +18,6 @@ public class SDKInitializer : MonoBehaviour
 
         if (YandexGamesSdk.IsInitialized)
         {
-            InterstitialAd.Show();
-
             Debug.Log("SDK is initialized");
 
             StartCoroutine(OnInitialized());
