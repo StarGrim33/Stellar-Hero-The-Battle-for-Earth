@@ -255,7 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitions:
   - {fileID: 4613776902460177516}
-  _damage: 25
+  _damage: 35
   _delay: 1
   _explosionEffect: {fileID: 3891973167138149193}
 --- !u!114 &4613776902460177516

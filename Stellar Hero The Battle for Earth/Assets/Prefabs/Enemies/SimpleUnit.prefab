@@ -46,7 +46,7 @@ Transform:
   - {fileID: 5421959735931060140}
   - {fileID: 5424924219005459083}
   - {fileID: 882897466517681096}
-  - {fileID: 882780794207508642}
+  - {fileID: 6188301464327810391}
   - {fileID: 5651974914431213892}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ced777abd780b48958d33e6ef76b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _experienceForEnemy: 55
+  _experienceForEnemy: 3
 --- !u!114 &6142243885911002162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _particles:
   - {fileID: 1049003937776544020}
-  - {fileID: 1048337700703389234}
+  - {fileID: 6281807364729091015}
   - {fileID: 5530060586584125748}
 --- !u!195 &2659617041797010179
 NavMeshAgent:
@@ -746,12 +746,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c06367f1236168548afccf20bf15e312, type: 3}
---- !u!4 &882780794207508642 stripped
+--- !u!4 &6188301464327810391 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4029256752903648, guid: c06367f1236168548afccf20bf15e312, type: 3}
   m_PrefabInstance: {fileID: 6192189948687210679}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &1048337700703389234 stripped
+--- !u!198 &6281807364729091015 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198832897130687344, guid: c06367f1236168548afccf20bf15e312, type: 3}
   m_PrefabInstance: {fileID: 6192189948687210679}

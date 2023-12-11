@@ -1,17 +1,15 @@
 using Agava.WebUtility;
 using System;
-using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class WebUtilityFixer : MonoBehaviour
 {
     [SerializeField] private GameSettings _environment;
     [SerializeField] private StateManager _stateManager;
-    [SerializeField] private AudioSource[] _gunSounds;
+    [SerializeField] private MusicPlayer _backgroundSource;
+    [SerializeField] private AudioSource _gunSource;
 
-#if UNITY_WEBGL && !UNITY_EDITOR
-
+    //#if UNITY_WEBGL && !UNITY_EDITOR
     private void Awake()
     {
         if (Device.IsMobile || IsMobile())
@@ -26,7 +24,7 @@ public class WebUtilityFixer : MonoBehaviour
 
     private bool IsMobile()
     {
-        int mobileScreenWidthThreshold = 800; 
+        int mobileScreenWidthThreshold = 800;
 
         int screenWidth = Screen.width;
 
@@ -35,29 +33,65 @@ public class WebUtilityFixer : MonoBehaviour
 
     private void OnEnable()
     {
-        Application.focusChanged += OnInBackgroundChange;
-        WebApplication.InBackgroundChangeEvent += OnInBackgroundChange;
+        WebApplication.InBackgroundChangeEvent += OnInBackgroundChangeWeb;
     }
 
     private void OnDisable()
     {
-        Application.focusChanged -= OnInBackgroundChange;
-        WebApplication.InBackgroundChangeEvent -= OnInBackgroundChange;
+        WebApplication.InBackgroundChangeEvent -= OnInBackgroundChangeWeb;
     }
 
-    private void OnInBackgroundChange(bool inBackground)
+    private void OnInBackgroundChangeWeb(bool inBackground)
     {
-        foreach (var sound in _gunSounds)
-        {
-            sound.enabled = inBackground;
-            sound.volume = inBackground ? 0f : 1f;
-        }
- 
-        if (inBackground)
-            _stateManager.SetState(GameStates.Paused);
-        else
-            _stateManager.SetState(GameStates.Gameplay);
+        MuteAudio(inBackground);
+        PauseGame(inBackground);
     }
-#endif
+
+    private void PauseGame(bool inBackground)
+    {
+        if (inBackground)
+        {
+            _stateManager.SetState(GameStates.Paused);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            _stateManager.SetState(GameStates.Gameplay);
+            Time.timeScale = 1;
+        }
+    }
+
+    private void MuteAudio(bool inBackground)
+    {
+        if (inBackground)
+        {
+            _backgroundSource.Pause();
+            _gunSource.Pause();
+            Debug.Log("Paused");
+        }
+        else
+        {
+            Debug.Log("UnPaused");
+            _backgroundSource.UnPause();
+            _gunSource.UnPause();
+        }
+    }
+
+    public void UnPause()
+    {
+        Debug.Log("UnPaused");
+        _backgroundSource.UnPause();
+        _gunSource.UnPause();
+        _stateManager.SetState(GameStates.Gameplay);
+    }
+
+    public void Pause()
+    {
+        Debug.Log("Paused");
+        _backgroundSource.Pause();
+        _gunSource.Pause();
+        _stateManager.SetState(GameStates.Paused);
+    }
+    //#endif
 }
 
