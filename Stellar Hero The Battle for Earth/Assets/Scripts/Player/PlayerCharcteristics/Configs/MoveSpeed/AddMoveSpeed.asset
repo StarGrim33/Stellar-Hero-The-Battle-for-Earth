@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AddMoveSpeed
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 90119fe6101614a47a3e5d5d0dc3f91a, type: 3}
-  _enDescription: Add 5 movespeed
-  _ruDescription: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C 5 \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u0438"
-  _trDescription: 'Lj,fdbnm 5 crjhjcnb '
+  _enDescription: Add 2 movespeed
+  _ruDescription: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C 2 \u043A \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u0438"
+  _trDescription: "H\u0131za 2 ekle"
   _changes:
   - _characteristics: 0
-    _value: 1
+    _value: 2
   _nextChanger: {fileID: 11400000}

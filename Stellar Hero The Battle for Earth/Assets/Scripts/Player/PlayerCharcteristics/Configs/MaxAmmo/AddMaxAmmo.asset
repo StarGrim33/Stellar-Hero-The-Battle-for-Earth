@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b2f6a2b81b3ce4c9928df382d08eed, type: 3}
   m_Name: AddMaxAmmo
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: bbbbba1b9b4620140b1b0efb4da8bcd3, type: 3}
+  _icon: {fileID: 21300000, guid: c5f926efa26e8f145acd57c4a438c3a9, type: 3}
   _enDescription: Add 2 Ammo
-  _ruDescription: "\u0414\u041E\u0431\u0430\u0432\u0438\u0442\u044C 2 \u043A \u043E\u0431\u043E\u0439\u043C\u0435"
-  _trDescription: Lj,fdbnm 2 r j,jqvt
+  _ruDescription: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C 2 \u043A \u043E\u0431\u043E\u0439\u043C\u0435"
+  _trDescription: "\u015Earj cihaz\u0131na 2 ekle"
   _changes:
   - _characteristics: 4
     _value: 2

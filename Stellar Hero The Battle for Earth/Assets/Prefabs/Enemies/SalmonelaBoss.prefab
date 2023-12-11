@@ -424,7 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitions:
   - {fileID: 7369378606468511784}
-  _damage: 50
+  _damage: 75
   _delay: 1
 --- !u!114 &7369378606468511784
 MonoBehaviour:

@@ -495,7 +495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitions:
   - {fileID: 252826694796612984}
-  _damage: 25
+  _damage: 30
   _delay: 1
 --- !u!114 &252826694796612984
 MonoBehaviour:
@@ -611,7 +611,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.04
-  m_Speed: 1.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: AddDamage++ 1
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 05b0e81600bd44641b4ad9a89433d1da, type: 3}
-  _description: Add 100 damage
+  _enDescription: Add 40 Damage
+  _ruDescription: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C 40 \u0443\u0440\u043E\u043D\u0430"
+  _trDescription: 40 hasar ekle
   _changes:
   - _characteristics: 1
-    _value: 100
+    _value: 40
   _nextChanger: {fileID: 0}

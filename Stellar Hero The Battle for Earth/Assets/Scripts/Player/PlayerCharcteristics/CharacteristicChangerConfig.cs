@@ -27,17 +27,13 @@ public class CharacteristicChangerConfig : ScriptableObject
     {
         string lang = Language.Instance.CurrentLanguage;
 
-        switch (lang)
+        return lang switch
         {
-            case _enLanguage:
-                return _enDescription;
-            case _ruLanguage:
-                return _ruDescription;
-            case _trLanguage:
-                return _trDescription;
-            default:
-                return _enDescription;
-        }
+            _enLanguage => _enDescription,
+            _ruLanguage => _ruDescription,
+            _trLanguage => _trDescription,
+            _ => _enDescription,
+        };
     }
 
     public void ChangeCharacteristic()

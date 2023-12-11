@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: KnightConfig
   m_EditorClassIdentifier: 
   _unitName: 
-  _health: 700
+  _health: 50
   _speed: 2
   _armor: 300

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b2f6a2b81b3ce4c9928df382d08eed, type: 3}
   m_Name: AddDamage 3
   m_EditorClassIdentifier: 
-  _icon: {fileID: -1265058448, guid: 20289877ac03f334ebb5881a780b163a, type: 3}
-  _description: UpdateDrone
+  _icon: {fileID: -1103826506024865825, guid: 9cfbb362323bfad4eb88e48d04d8a2a7, type: 3}
+  _enDescription: Add shot rate of fire
+  _ruDescription: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u0440\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C"
+  _trDescription: "Ate\u015F oran\u0131n\u0131 ekle"
   _changes:
   - _characteristics: 10
     _value: -0.5
