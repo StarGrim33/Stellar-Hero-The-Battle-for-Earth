@@ -128,6 +128,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3571126303089113426, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
   m_PrefabInstance: {fileID: 7380027135499351923}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &505401103 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8854619334842824787, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
+  m_PrefabInstance: {fileID: 7380027135499351923}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406087623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &592725381 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 964841046957924104, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
@@ -649,6 +660,18 @@ PrefabInstance:
       propertyPath: _countDown
       value: 
       objectReference: {fileID: 1151440544}
+    - target: {fileID: 9011164319041732012, guid: dc82881eb54d6934093f5b072a7a8a98, type: 3}
+      propertyPath: _audioSources.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011164319041732012, guid: dc82881eb54d6934093f5b072a7a8a98, type: 3}
+      propertyPath: _audioSources.Array.data[0]
+      value: 
+      objectReference: {fileID: 592725381}
+    - target: {fileID: 9011164319041732012, guid: dc82881eb54d6934093f5b072a7a8a98, type: 3}
+      propertyPath: _audioSources.Array.data[1]
+      value: 
+      objectReference: {fileID: 656175251}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -694,6 +717,10 @@ PrefabInstance:
       propertyPath: _rangeEnemyPrefab
       value: 
       objectReference: {fileID: 6772627042174938138, guid: 31a7f5d94443e094c9de2dd57e82ea41, type: 3}
+    - target: {fileID: 3128366943106279313, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
+      propertyPath: _menuButton
+      value: 
+      objectReference: {fileID: 505401103}
     - target: {fileID: 3451835479942976583, guid: 234d2ee5fe2849b4d9cd3ddcf430396b, type: 3}
       propertyPath: _waves.Array.size
       value: 31

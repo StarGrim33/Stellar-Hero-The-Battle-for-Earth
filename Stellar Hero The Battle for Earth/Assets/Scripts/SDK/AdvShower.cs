@@ -7,6 +7,7 @@ public class AdvShower : MonoBehaviour
 {
     [SerializeField] private TMP_Text _countDown;
     [SerializeField] private WebUtilityFixer _fixer;
+    [SerializeField] private AudioSource[] _audioSources;
     private readonly string _ruText = "Показ рекламы через ";
     private readonly string _enText = "Adv in ";
     private readonly string _trText = "Reklam yoluyla ";
@@ -48,13 +49,30 @@ public class AdvShower : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        InterstitialAd.Show(onOpenCallback: _fixer.Pause, onCloseCallback: IsAdvEnded);
+        InterstitialAd.Show(onOpenCallback: Pause, onCloseCallback: IsAdvEnded);
         _countDown.text = string.Empty;
     }
 
     private void IsAdvEnded(bool isAdvEnded)
     {
         if (isAdvEnded)
-            _fixer.UnPause();
+        {
+            _fixer.UnPause(true);
+
+            foreach(var source in _audioSources)
+            {
+                source.UnPause();
+            }
+        }
+    }
+
+    private void Pause()
+    {
+        foreach (var source in _audioSources)
+        {
+            source.Pause();
+        }
+
+        _fixer.Pause(true);
     }
 }
