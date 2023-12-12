@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpdateCharacteristicWindow : MonoBehaviour
 {
     [SerializeField] private List<CharacteristicChangerConfig> _characteristicChangers;
-    [SerializeField] private int _chengersCount = 3;
-
     [SerializeField] private CharacteristicChanger _characteristicChangerTemplate;
+    [SerializeField] private Button _menuButton;
+    [SerializeField] private int _chengersCount = 3;
 
     private List<CharacteristicChanger> _currentChangers = new List<CharacteristicChanger>();
 
@@ -18,6 +19,14 @@ public class UpdateCharacteristicWindow : MonoBehaviour
     private void OnEnable()
     {
         Time.timeScale = 0.0f;
+        StateManager.Instance.SetState(GameStates.Paused);
+        _menuButton.enabled = false;
+    }
+
+    private void OnDisable()
+    {
+        StateManager.Instance.SetState(GameStates.Gameplay);
+        _menuButton.enabled = transform;
     }
 
     public void CharacteristicChangerListUpdated(CharacteristicChangerConfig changer)

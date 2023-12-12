@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class LeaderboardOpener : MonoBehaviour
 {
-
-
     [SerializeField] private GameObject _leaderboardPanel;
     [SerializeField] private GameObject _notAuthorizedPanel;
     [SerializeField] private Button _openLeaderboardButton;
@@ -25,7 +23,6 @@ public class LeaderboardOpener : MonoBehaviour
         }
         else
         {
-            PlayerAccount.Authorize();
             _notAuthorizedPanel.gameObject.SetActive(true);
         }
     }

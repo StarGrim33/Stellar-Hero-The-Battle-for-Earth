@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ReduceReloadAmmo 2
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 1660eefaf07f7a245bab0d6d94eb2f21, type: 3}
-  _enDescription: Reduce ShootCooldown
-  _ruDescription: "\u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u0437\u0430\u0440\u044F\u0434\u043A\u0438"
-  _trDescription: "\u015Earj\u0131 h\u0131zland\u0131r\u0131n"
+  _enDescription: Reduce ShootCooldown -0.1
+  _ruDescription: "\u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u0437\u0430\u0440\u044F\u0434\u043A\u0438
+    -0.1"
+  _trDescription: "\u015Earj\u0131 h\u0131zland\u0131r\u0131n -0.1"
   _changes:
   - _characteristics: 5
     _value: -0.1
