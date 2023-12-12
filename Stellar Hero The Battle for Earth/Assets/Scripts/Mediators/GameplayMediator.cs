@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameplayMediator : MonoBehaviour
 {
     [SerializeField] private DefeatPanel _defeatPanel;
-
+    [SerializeField] private GameObject _menuPanel;
     private Level _level;
 
     private void OnDisable()
@@ -23,7 +24,11 @@ public class GameplayMediator : MonoBehaviour
         _level.Defeat += OnDefeat;
     }
 
-    private void OnDefeat() => _defeatPanel.Show();
+    private void OnDefeat()
+    {
+        _menuPanel.SetActive(false);
+        _defeatPanel.Show();
+    }
 
     public void RestartLevel()
     {

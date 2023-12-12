@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AddTriggerDamage
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 8b34f66dce744474eb9361a0698619fb, type: 3}
-  _enDescription: Add drone trigger Damage
+  _enDescription: Add drone trigger 10 Damage
   _ruDescription: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0434\u0440\u043E\u043D\u0443
-    \u0443\u0440\u043E\u043D \u0441\u0442\u043E\u043B\u043A\u043D\u043E\u0432\u0435\u043D\u0438\u044F"
-  _trDescription: "Drone'a \xE7arp\u0131\u015Fma hasar\u0131 ekle"
+    10 \u0443\u0440\u043E\u043D\u0430 \u0441\u0442\u043E\u043B\u043A\u043D\u043E\u0432\u0435\u043D\u0438\u044F"
+  _trDescription: "Drone'a \xE7arp\u0131\u015Fma 10 hasar\u0131 ekle"
   _changes:
   - _characteristics: 8
     _value: 10

@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ced777abd780b48958d33e6ef76b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _experienceForEnemy: 100
+  _experienceForEnemy: 50
 --- !u!114 &3075750381347088520
 MonoBehaviour:
   m_ObjectHideFlags: 0

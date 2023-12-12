@@ -30,6 +30,11 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] private GameObject _secondsBossPrefab;
     [SerializeField] private List<GameObject> _secondsBossList;
 
+
+    [SerializeField] private int _rangeEnemyAmount;
+    [SerializeField] private GameObject _rangeEnemyPrefab;
+    [SerializeField] private List<GameObject> _rangeEnemyList;
+
     private void Awake()
     {
         EnemyPoolInstance = this;
@@ -43,7 +48,7 @@ public class EnemyPool : MonoBehaviour
         CreateObjects(prefab: _knightPrefab, parent: _container.transform, count: _knightAmount, list: _knightList);
         CreateObjects(prefab: _firstBossPrefab, parent: _container.transform, count: _firstBoss, list: _firstBossList);
         CreateObjects(prefab: _secondsBossPrefab, parent: _container.transform, count: _secondsBossAmount, list: _secondsBossList);
-
+        CreateObjects(prefab: _rangeEnemyPrefab, parent: _container.transform, count: _rangeEnemyAmount, list: _rangeEnemyList);
     }
 
     private void CreateObjects(GameObject prefab, Transform parent, int count, List<GameObject> list)
@@ -72,6 +77,8 @@ public class EnemyPool : MonoBehaviour
             list = _firstBossList;
         else if (prefab == _secondsBossPrefab) 
             list = _secondsBossList;
+        else if (prefab == _rangeEnemyPrefab)
+            list = _rangeEnemyList;
         else
             return null;
 

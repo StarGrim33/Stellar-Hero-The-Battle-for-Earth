@@ -49,6 +49,9 @@ public class EnemyHealth : UnitHealth, IDamageable
         //if (_deadEffectSpawner != null)
         //    _deadEffectSpawner.SpawnEffect();
 
+        if (_deadEffectSpawner != null)
+            _deadEffectSpawner.SpawnRandomEffect();
+
         CurrentHealth -= damage;
 
         if (_blicker != null)
@@ -60,8 +63,7 @@ public class EnemyHealth : UnitHealth, IDamageable
 
     protected override void Die()
     {
-        if (_deadEffectSpawner != null)
-            _deadEffectSpawner.SpawnRandomEffect();
+
 
         if (_enemyBuffDropper != null)
             _enemyBuffDropper.SpawnRandomBuff();

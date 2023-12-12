@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a336cb06e8fe548b987d2e2d91d8cd, type: 3}
   m_Name: KnightConfig
   m_EditorClassIdentifier: 
-  _unitName: 
-  _health: 50
-  _speed: 2
+  _unitName: Knight
+  _health: 750
+  _speed: 3
   _armor: 300
