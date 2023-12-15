@@ -607,5 +607,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4633878654956202061, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7286913810712067222}
   m_SourcePrefab: {fileID: 100100000, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+--- !u!1 &7286913810712067221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4633878654956202061, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+  m_PrefabInstance: {fileID: 7286913810712067220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7286913810712067222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7286913810712067221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6301c600d05b3d9439e88a289c5d603c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _en: 'Stellar Hero: The Battle for Earth'
+  _ru: "\u0417\u0432\u0435\u0437\u0434\u043D\u044B\u0439 \u0413\u0435\u0440\u043E\u0439:
+    \u0411\u0438\u0442\u0432\u0430 \u0437\u0430 \u0417\u0435\u043C\u043B\u044E"
+  _tr: "Y\u0131ld\u0131z Kahraman\u0131: D\xFCnya Sava\u015F\u0131"

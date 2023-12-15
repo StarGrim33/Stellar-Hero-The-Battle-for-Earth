@@ -74,13 +74,13 @@ public class LeaderboardOpener : MonoBehaviour
     private string TextOprimizer(string name)
     {
         string nameToLower = name.ToLower();
-
-        char[] letters = name.ToCharArray();
+        char[] letters = nameToLower.ToCharArray();
         letters[0] = char.ToUpper(letters[0]);
+        string finalName = new(letters);
 
-        if (nameToLower.Length > _maxLength)
-            return nameToLower[.._maxLength];
+        if (finalName.Length > _maxLength)
+            return finalName.Substring(0, _maxLength);
         else
-            return nameToLower;
+            return finalName;
     }
 }
