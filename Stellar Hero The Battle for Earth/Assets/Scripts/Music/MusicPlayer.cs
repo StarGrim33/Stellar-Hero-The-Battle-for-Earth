@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,21 +10,7 @@ public class MusicPlayer : MonoBehaviour
 
     private void Start()
     {
-        PlayNextClip();
-    }
-
-    private void PlayNextClip()
-    {
-        if (_currentClipIndex < _clips.Count)
-        {
-            _source.clip = _clips[_currentClipIndex];
-            _source.Play();
-            _currentClipIndex++;
-        }
-        else
-        {
-            _currentClipIndex = 0;
-        }
+        StartCoroutine(NextTrack());
     }
 
     public void Pause()
@@ -39,5 +26,25 @@ public class MusicPlayer : MonoBehaviour
     public void ChangeVolume(float value)
     {
         _source.volume = value;
+    }
+
+    private IEnumerator NextTrack()
+    {
+        while(_clips.Count > 0)
+        {
+            if (_currentClipIndex < _clips.Count)
+            {
+                _source.clip = _clips[_currentClipIndex];
+                _source.Play();
+
+                yield return new WaitForSeconds(_source.clip.length);
+
+                _currentClipIndex++;
+            }
+            else
+            {
+                _currentClipIndex = 0;
+            }
+        }
     }
 }

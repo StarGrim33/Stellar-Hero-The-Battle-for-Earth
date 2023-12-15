@@ -6,16 +6,24 @@ using UnityEngine.UI;
 public class DefeatPanel : MonoBehaviour
 {
     [SerializeField] private Button _restartButton;
+    [SerializeField] private Button _advRestartButton;
+    [SerializeField] private Button _menuButton;
     [SerializeField] private AdvShower _advShower;
+    [SerializeField] private WebUtilityFixer _fixer;
     private GameplayMediator _mediator;
 
     private void OnEnable()
     {
+        _restartButton.gameObject.SetActive(false);
+        _advRestartButton.gameObject.SetActive(false);
         _restartButton.onClick.AddListener(OnRestartClick);
+        _advRestartButton.onClick.AddListener(OnAdvRestartClick);
+        StartCoroutine(ShowAdvButton());
     }
 
     private void OnDisable()
     {
+        _advRestartButton.onClick.RemoveListener(OnAdvRestartClick);
         _restartButton.onClick.RemoveListener(OnRestartClick);
     }
 
@@ -26,12 +34,36 @@ public class DefeatPanel : MonoBehaviour
 
     public void Show()
     {
+        _menuButton.enabled = false;
         _advShower.ShowAdv();
         gameObject.SetActive(true);
+        _advRestartButton.enabled = true;
     }
 
-    public void Hide() => gameObject.SetActive(false);
+    public void Hide()
+    {
+        _menuButton.enabled = true;
+        gameObject.SetActive(false);
+    }
 
     public void OnRestartClick() => _mediator.RestartLevel();
 
+    public void OnAdvRestartClick()
+    {
+        _advShower.ShowVideoAd();
+        _menuButton.enabled = true;
+        gameObject.SetActive(false);
+    }
+
+    private IEnumerator ShowAdvButton()
+    {
+        var waitForSeconds = new WaitForSeconds(4);
+
+        if(_advRestartButton.IsActive() == false)
+        {
+            yield return waitForSeconds;
+            _advRestartButton.gameObject.SetActive(true);
+            _restartButton.gameObject.SetActive(true);
+        }
+    }
 }

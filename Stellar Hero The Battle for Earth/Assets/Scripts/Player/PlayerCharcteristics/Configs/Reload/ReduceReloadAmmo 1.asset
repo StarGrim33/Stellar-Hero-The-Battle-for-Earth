@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b2f6a2b81b3ce4c9928df382d08eed, type: 3}
   m_Name: ReduceReloadAmmo 1
   m_EditorClassIdentifier: 
-  _icon: {fileID: 21300000, guid: 1660eefaf07f7a245bab0d6d94eb2f21, type: 3}
+  _icon: {fileID: 21300000, guid: 357c48fd269f5444f9e1c06922ca3074, type: 3}
   _enDescription: Reduce ShootCooldown -0.1
   _ruDescription: "\u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u0437\u0430\u0440\u044F\u0434\u043A\u0438
     -0.1"

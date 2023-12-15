@@ -8,6 +8,7 @@ public class WebUtilityFixer : MonoBehaviour
     [SerializeField] private StateManager _stateManager;
     [SerializeField] private MusicPlayer _backgroundSource;
     [SerializeField] private AudioSource _gunSource;
+    private bool _isAdvShowing = false;
 
     //#if UNITY_WEBGL && !UNITY_EDITOR
     private void Awake()
@@ -77,17 +78,23 @@ public class WebUtilityFixer : MonoBehaviour
         }
     }
 
-    public void UnPause()
+    public void UnPause(bool isAdvShowing)
     {
-        Debug.Log("UnPaused");
+        _isAdvShowing = isAdvShowing;
+
+        if (isAdvShowing)
+            return;
+
+        Debug.Log($"UnPaused + {_isAdvShowing}");
         _backgroundSource.UnPause();
         _gunSource.UnPause();
         _stateManager.SetState(GameStates.Gameplay);
     }
 
-    public void Pause()
+    public void Pause(bool isAdvShowing)
     {
-        Debug.Log("Paused");
+        _isAdvShowing = isAdvShowing;
+        Debug.Log($"UnPaused + {_isAdvShowing}");
         _backgroundSource.Pause();
         _gunSource.Pause();
         _stateManager.SetState(GameStates.Paused);
