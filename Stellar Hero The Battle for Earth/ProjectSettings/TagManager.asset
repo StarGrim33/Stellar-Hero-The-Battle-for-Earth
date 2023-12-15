@@ -17,7 +17,7 @@ TagManager:
   - Bullet
   - Player
   - CanDashObstacles
-  - 
+  - UII
   - 
   - 
   - 
@@ -47,4 +47,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 246853113
+    locked: 0
+  - name: SecondUI
+    uniqueID: 577582671
     locked: 0

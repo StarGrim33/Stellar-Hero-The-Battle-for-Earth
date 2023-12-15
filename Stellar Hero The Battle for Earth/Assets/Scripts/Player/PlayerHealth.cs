@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class PlayerHealth : UnitHealth, IDamageable
 {
     [SerializeField] private Animator _animator;
-
+    [SerializeField] private HandSpriteHandler _handSpriteHandler;
     private PlayerMovement _playerMovement;
     private ParticleSystemPlayer _effects;
     private bool _isInvulnerable = false;
@@ -70,6 +70,7 @@ public class PlayerHealth : UnitHealth, IDamageable
 
     protected override void Die()
     {
+        _handSpriteHandler.Disable();
         _animator.SetTrigger(Constants.DeadState);
         StateManager.Instance.SetState(GameStates.Paused);
         PlayerDead?.Invoke();
@@ -98,6 +99,16 @@ public class PlayerHealth : UnitHealth, IDamageable
         CurrentHealth -= damage;
         OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
         Debug.Log($"Health is {CurrentHealth}");
+    }
+
+    public void Revive()
+    {
+        CurrentHealth = MaxHealth;
+        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+        _animator.StopPlayback();
+        _animator.SetTrigger(Constants.AttackState);
+        _handSpriteHandler.Enable();
+        Debug.Log("Revived");
     }
 
     public void InvulnerableActivated(bool isInvulnerable) => _isInvulnerable = isInvulnerable;

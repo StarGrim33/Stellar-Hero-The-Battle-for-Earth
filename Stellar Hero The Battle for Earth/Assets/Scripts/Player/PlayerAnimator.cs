@@ -12,7 +12,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Dashing(bool dash)
     {
-        _animator.SetBool("IsDashing", dash);
+        _animator.SetBool(Constants.DashState, dash);
     }
 
     private void Update()

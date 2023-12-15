@@ -80,10 +80,12 @@ public class WebUtilityFixer : MonoBehaviour
 
     public void UnPause(bool isAdvShowing)
     {
+        _isAdvShowing = isAdvShowing;
+
         if (isAdvShowing)
             return;
 
-        Debug.Log("UnPaused");
+        Debug.Log($"UnPaused + {_isAdvShowing}");
         _backgroundSource.UnPause();
         _gunSource.UnPause();
         _stateManager.SetState(GameStates.Gameplay);
@@ -92,7 +94,7 @@ public class WebUtilityFixer : MonoBehaviour
     public void Pause(bool isAdvShowing)
     {
         _isAdvShowing = isAdvShowing;
-        Debug.Log("Paused");
+        Debug.Log($"UnPaused + {_isAdvShowing}");
         _backgroundSource.Pause();
         _gunSource.Pause();
         _stateManager.SetState(GameStates.Paused);

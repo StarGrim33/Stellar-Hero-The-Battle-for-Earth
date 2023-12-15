@@ -8,6 +8,7 @@ public class AdvShower : MonoBehaviour
     [SerializeField] private TMP_Text _countDown;
     [SerializeField] private WebUtilityFixer _fixer;
     [SerializeField] private AudioSource[] _audioSources;
+    [SerializeField] private PlayerHealth _player;
     private readonly string _ruText = "Показ рекламы через ";
     private readonly string _enText = "Adv in ";
     private readonly string _trText = "Reklam yoluyla ";
@@ -36,6 +37,11 @@ public class AdvShower : MonoBehaviour
         }
     }
 
+    public void ShowVideoAd()
+    {
+        VideoAd.Show(onOpenCallback: Pause, onCloseCallback: IsRewardedAdvEnded);
+    }
+
     private IEnumerator ShowAdWithCountdown(string text)
     {
         int countdown = 3;
@@ -45,6 +51,7 @@ public class AdvShower : MonoBehaviour
             _countDown.text = text + countdown.ToString();
             yield return new WaitForSeconds(1);
             countdown--;
+            _countDown.text = text + countdown.ToString();
         }
 
         yield return new WaitForSeconds(1);
@@ -57,13 +64,25 @@ public class AdvShower : MonoBehaviour
     {
         if (isAdvEnded)
         {
-            _fixer.UnPause(true);
+            _fixer.UnPause(false);
 
-            foreach(var source in _audioSources)
+            foreach (var source in _audioSources)
             {
                 source.UnPause();
             }
         }
+    }
+    private void IsRewardedAdvEnded()
+    {
+        _fixer.UnPause(false);
+
+        foreach (var source in _audioSources)
+        {
+            source.UnPause();
+        }
+
+        _player.Revive();
+        StateManager.Instance.SetState(GameStates.Gameplay);
     }
 
     private void Pause()

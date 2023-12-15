@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ced777abd780b48958d33e6ef76b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _experienceForEnemy: 5
+  _experienceForEnemy: 7
 --- !u!114 &2467056133224261586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,6 +722,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 609632087710174881}
     m_Modifications:
+    - target: {fileID: 2384880284765460905, guid: bc04f9bd94a0bd94cade510dad34db0d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2655610182938613516, guid: bc04f9bd94a0bd94cade510dad34db0d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -792,7 +796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2655610182938613516, guid: bc04f9bd94a0bd94cade510dad34db0d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 1.039
       objectReference: {fileID: 0}
     - target: {fileID: 2655610182938613516, guid: bc04f9bd94a0bd94cade510dad34db0d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
