@@ -456,6 +456,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3173131929967794766, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3345347672500024259, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 3345347672500024259, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 3345347672500024259, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3345347672500024259, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.99215686
+      objectReference: {fileID: 0}
+    - target: {fileID: 3345347672500024259, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.8425228
+      objectReference: {fileID: 0}
+    - target: {fileID: 3345347672500024259, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+    - target: {fileID: 3345347672500024259, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3345347672500024259, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278255063
+      objectReference: {fileID: 0}
+    - target: {fileID: 3345347672500024259, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4256880829913806749, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -555,6 +595,14 @@ PrefabInstance:
     - target: {fileID: 6426190742399684003, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762496332638760818, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 683.3186
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762496332638760818, guid: 419e4e22b12f4074593b1f7744b9c677, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.989
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

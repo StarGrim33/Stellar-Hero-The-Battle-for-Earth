@@ -106,7 +106,8 @@ public class PlayerHealth : UnitHealth, IDamageable
         CurrentHealth = MaxHealth;
         OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
         _animator.StopPlayback();
-        _animator.SetTrigger(Constants.AttackState);
+        _animator.SetTrigger(Constants.DashState);
+        _animator.StopPlayback();
         _handSpriteHandler.Enable();
         Debug.Log("Revived");
     }

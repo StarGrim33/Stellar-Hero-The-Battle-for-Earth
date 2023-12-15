@@ -75,8 +75,11 @@ public class LeaderboardOpener : MonoBehaviour
     {
         string nameToLower = name.ToLower();
 
+        char[] letters = name.ToCharArray();
+        letters[0] = char.ToUpper(letters[0]);
+
         if (nameToLower.Length > _maxLength)
-            return nameToLower.Substring(0, _maxLength);
+            return nameToLower[.._maxLength];
         else
             return nameToLower;
     }
