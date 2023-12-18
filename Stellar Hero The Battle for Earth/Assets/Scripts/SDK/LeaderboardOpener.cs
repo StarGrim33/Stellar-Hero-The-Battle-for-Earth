@@ -7,6 +7,7 @@ public class LeaderboardOpener : MonoBehaviour
 {
     [SerializeField] private GameObject _leaderboardPanel;
     [SerializeField] private GameObject _notAuthorizedPanel;
+    [SerializeField] private Button _soundButton;
     [SerializeField] private Button _openLeaderboardButton;
     [SerializeField] private Button _authorizeButton;
     [SerializeField] private Button _declineAuthorizeButton;
@@ -20,10 +21,12 @@ public class LeaderboardOpener : MonoBehaviour
         {
             OnGetLeaderboardEntriesButtonClick();
             _leaderboardPanel.SetActive(true);
+            _soundButton.gameObject.SetActive(false);
         }
         else
         {
             _notAuthorizedPanel.gameObject.SetActive(true);
+            _soundButton.gameObject.SetActive(false);
         }
     }
 
