@@ -13,6 +13,11 @@ public class CurrentWaveView : MonoBehaviour
         _spawner.WaveChanged += WaveChanged;
     }
 
+    private void OnDisable()
+    {
+        _spawner.WaveChanged -= WaveChanged;
+    }
+
     private void Start()
     {
         if( _spawner == null )

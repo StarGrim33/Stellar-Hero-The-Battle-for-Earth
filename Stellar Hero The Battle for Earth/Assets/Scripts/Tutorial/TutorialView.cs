@@ -6,6 +6,7 @@ public class TutorialView : MonoBehaviour
 {
     [SerializeField] private List<Button> _tutorials;
     [SerializeField] private PlayerMovement _player;
+    [SerializeField] private Button _menuButton;
 
     private TutorialPresenter _presenter;
 
@@ -33,6 +34,7 @@ public class TutorialView : MonoBehaviour
     {
         if (tutorialModel.ShowTutorial && tutorialModel.CurrentTutorialIndex < TutorialsCount)
         {
+            _menuButton.enabled = false;
             _tutorials[tutorialModel.CurrentTutorialIndex].gameObject.SetActive(true);
             _player.enabled = false;
             Time.timeScale = 0f;
@@ -44,6 +46,7 @@ public class TutorialView : MonoBehaviour
     {
         Time.timeScale = 1f;
         StateManager.Instance.SetState(GameStates.Gameplay);
+        _menuButton.enabled = true;
         _player.enabled = true;
     }
 }
