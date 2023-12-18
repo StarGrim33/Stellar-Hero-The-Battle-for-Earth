@@ -10,6 +10,16 @@ public class BestWaveView : MonoBehaviour
     private string _turkeyLevelText = "En iyi dalga: ";
     private string _language;
 
+    private void Awake()
+    {
+        _currentWave.WaveChanged += OnWaveChanged;
+    }
+
+    private void OnWaveChanged(int value)
+    {
+        value.ToString();
+    }
+
     private void OnEnable()
     {
         Agava.YandexGames.Leaderboard.GetPlayerEntry("Leaderboard", (result) =>
@@ -30,16 +40,29 @@ public class BestWaveView : MonoBehaviour
             else
             {
                 _language = Language.Instance.CurrentLanguage;
+                int index = _currentWave.CurrentWaveIndex + 1;
 
                 _text.text = _language switch
                 {
-                    Constants.EnglishCode => _englishLevelText + _currentWave.CurrentWaveIndex.ToString(),
-                    Constants.RussianCode => _russianLevelText + _currentWave.CurrentWaveIndex.ToString(),
-                    Constants.TurkishCode => _turkeyLevelText + _currentWave.CurrentWaveIndex.ToString(),
-                    _ => _russianLevelText + _currentWave.CurrentWaveIndex.ToString(),
+                    Constants.EnglishCode => _englishLevelText + index,
+                    Constants.RussianCode => _russianLevelText + index,
+                    Constants.TurkishCode => _turkeyLevelText + index,
+                    _ => _russianLevelText + index,
                 };
             }
         });
+
+        _language = Language.Instance.CurrentLanguage;
+
+        int index = _currentWave.CurrentWaveIndex + 1; 
+
+        _text.text = _language switch
+        {
+            Constants.EnglishCode => _englishLevelText + index,
+            Constants.RussianCode => _russianLevelText + index,
+            Constants.TurkishCode => _turkeyLevelText + index,
+            _ => _russianLevelText + index,
+        };
     }
 }
 
