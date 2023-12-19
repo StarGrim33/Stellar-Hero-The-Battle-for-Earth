@@ -50,9 +50,9 @@ public class DefeatPanel : MonoBehaviour
 
     public void OnAdvRestartClick()
     {
-        _advShower.ShowVideoAd();
-        _menuButton.enabled = true;
         gameObject.SetActive(false);
+        _menuButton.enabled = true;
+        _advShower.ShowVideoAd();
     }
 
     private IEnumerator ShowAdvButton()

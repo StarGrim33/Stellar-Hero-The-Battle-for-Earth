@@ -23,6 +23,14 @@ public class WebUtilityFixer : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _backgroundSource.enabled = false;
+        _backgroundSource.enabled = true;
+        _backgroundSource.Pause();
+        _backgroundSource.UnPause();
+    }
+
     private bool IsMobile()
     {
         int mobileScreenWidthThreshold = 800;
