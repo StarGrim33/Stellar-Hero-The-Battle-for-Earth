@@ -28,7 +28,7 @@ public class GameplayMediator : MonoBehaviour
     private void OnDefeat()
     {
         _playerUnit.velocity = Vector3.zero;
-        _menuPanel.SetActive(false);
+        //_menuPanel.SetActive(false);
         _defeatPanel.Show();
     }
 

@@ -970,6 +970,18 @@ PrefabInstance:
       propertyPath: _soundButton
       value: 
       objectReference: {fileID: 982174761}
+    - target: {fileID: 1663744473958281204, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 167.885
+      objectReference: {fileID: 0}
+    - target: {fileID: 1663744473958281204, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 125.178
+      objectReference: {fileID: 0}
+    - target: {fileID: 1663744473958281204, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 12.588135
+      objectReference: {fileID: 0}
     - target: {fileID: 1825187079920734503, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
       propertyPath: m_SizeDelta.x
       value: 109.7727
@@ -1749,6 +1761,26 @@ PrefabInstance:
     - target: {fileID: 7182276348304433123, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 4.6654
+      objectReference: {fileID: 0}
+    - target: {fileID: 7285781016155673865, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.78900003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7285781016155673865, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.78900003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7285781016155673865, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 62.91992
+      objectReference: {fileID: 0}
+    - target: {fileID: 7285781016155673865, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -31
+      objectReference: {fileID: 0}
+    - target: {fileID: 7285781016155673865, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16
       objectReference: {fileID: 0}
     - target: {fileID: 7394040253902246143, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
       propertyPath: m_SizeDelta.x
