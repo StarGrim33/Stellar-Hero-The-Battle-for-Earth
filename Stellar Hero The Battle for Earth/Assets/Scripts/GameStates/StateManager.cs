@@ -10,6 +10,9 @@ public class StateManager : MonoBehaviour
 
     public event GameStateChangeHandler OnGameStateChange;
 
+    public bool IsLevelUpPanelShowing { get; set; }
+
+
     private void Awake()
     {
         if (Instance == null)

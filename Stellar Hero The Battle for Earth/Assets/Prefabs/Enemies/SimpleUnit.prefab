@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ced777abd780b48958d33e6ef76b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _experienceForEnemy: 5
+  _experienceForEnemy: 3
 --- !u!114 &6142243885911002162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,6 +875,10 @@ PrefabInstance:
     - target: {fileID: 3061212712493313443, guid: bc04f9bd94a0bd94cade510dad34db0d, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061212712493313443, guid: bc04f9bd94a0bd94cade510dad34db0d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3061212712493313443, guid: bc04f9bd94a0bd94cade510dad34db0d, type: 3}
       propertyPath: m_fontSize

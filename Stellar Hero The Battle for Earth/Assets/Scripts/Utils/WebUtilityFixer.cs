@@ -50,6 +50,9 @@ public class WebUtilityFixer : MonoBehaviour
 
     private void PauseGame(bool inBackground)
     {
+        if (StateManager.Instance.IsLevelUpPanelShowing)
+            return;
+
         if (inBackground)
         {
             _stateManager.SetState(GameStates.Paused);
@@ -64,6 +67,7 @@ public class WebUtilityFixer : MonoBehaviour
 
     private void MuteAudio(bool inBackground)
     {
+
         if (inBackground)
         {
             _backgroundSource.Pause();
@@ -89,18 +93,22 @@ public class WebUtilityFixer : MonoBehaviour
     {
         _isAdvShowing = isAdvShowing;
 
+        if (StateManager.Instance.IsLevelUpPanelShowing)
+            return;
+
         if (!isAdvShowing)
         {
             Debug.Log($"UnPaused + {_isAdvShowing}");
             _backgroundSource.UnPause();
             _gunSource.UnPause();
             _stateManager.SetState(GameStates.Gameplay);
-        }  
+        }
     }
 
     public void Pause(bool isAdvShowing)
     {
         _isAdvShowing = isAdvShowing;
+
         Debug.Log($"UnPaused + {_isAdvShowing}");
         _backgroundSource.Pause();
         _gunSource.Pause();
