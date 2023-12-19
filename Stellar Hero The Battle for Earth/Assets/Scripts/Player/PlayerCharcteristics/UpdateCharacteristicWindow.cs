@@ -20,12 +20,16 @@ public class UpdateCharacteristicWindow : MonoBehaviour
     {
         Time.timeScale = 0.0f;
         StateManager.Instance.SetState(GameStates.Paused);
+        StateManager.Instance.IsLevelUpPanelShowing = true;
+        Debug.Log(StateManager.Instance.IsLevelUpPanelShowing);
         _menuButton.enabled = false;
     }
 
     private void OnDisable()
     {
         StateManager.Instance.SetState(GameStates.Gameplay);
+        StateManager.Instance.IsLevelUpPanelShowing = false;
+        Debug.Log(StateManager.Instance.IsLevelUpPanelShowing);
         _menuButton.enabled = transform;
     }
 
