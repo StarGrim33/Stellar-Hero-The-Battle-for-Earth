@@ -1,51 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using Plugins.Audio.Core;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MusicPlayer : MonoBehaviour
 {
-    [SerializeField] private AudioSource _source;
-    [SerializeField] private List<AudioClip> _clips;
-    private int _currentClipIndex = 0;
+    [SerializeField] private SourceAudio _source;
 
     private void Start()
     {
-        StartCoroutine(NextTrack());
+        _source.Play("Battle");
     }
 
     public void Pause()
     {
-        _source.Pause();
+        _source.Mute = true;    
     }
 
     public void UnPause()
     {
-        _source.UnPause();
-    }
-
-    public void ChangeVolume(float value)
-    {
-        _source.volume = value;
-    }
-
-    private IEnumerator NextTrack()
-    {
-        while(_clips.Count > 0)
-        {
-            if (_currentClipIndex < _clips.Count)
-            {
-                _source.clip = _clips[_currentClipIndex];
-                _source.Play();
-
-                yield return new WaitForSeconds(_source.clip.length);
-
-                _currentClipIndex++;
-            }
-            else
-            {
-                _currentClipIndex = 0;
-            }
-        }
+        _source.Mute = false;
     }
 }

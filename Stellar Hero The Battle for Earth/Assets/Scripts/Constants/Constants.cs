@@ -5,9 +5,11 @@ public static class Constants
     public static string AttackState = "attack";
     public static string CelebrationState = "idle";
     public static string DeadState = "Dead";
+
     public static string DashState = "IsDashing";
     public static string ExplosionEnemyAnimation = "Explosion";
     public static string Speed = "Speed";
+    public static string IdleState = "IdleState";
 
     public const string EnglishCode = "en";
     public const string RussianCode = "ru";

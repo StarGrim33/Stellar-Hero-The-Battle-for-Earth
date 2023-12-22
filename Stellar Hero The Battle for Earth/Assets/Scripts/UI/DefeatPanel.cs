@@ -57,7 +57,7 @@ public class DefeatPanel : MonoBehaviour
 
     private IEnumerator ShowAdvButton()
     {
-        var waitForSeconds = new WaitForSeconds(4);
+        var waitForSeconds = new WaitForSeconds(5);
 
         if(_advRestartButton.IsActive() == false)
         {

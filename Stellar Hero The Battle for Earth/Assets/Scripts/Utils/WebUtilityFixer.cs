@@ -1,5 +1,5 @@
 using Agava.WebUtility;
-using System;
+using Plugins.Audio.Core;
 using UnityEngine;
 
 public class WebUtilityFixer : MonoBehaviour
@@ -7,7 +7,7 @@ public class WebUtilityFixer : MonoBehaviour
     [SerializeField] private GameSettings _environment;
     [SerializeField] private StateManager _stateManager;
     [SerializeField] private MusicPlayer _backgroundSource;
-    [SerializeField] private AudioSource _gunSource;
+    [SerializeField] private SourceAudio _gunSource;
     private bool _isAdvShowing = false;
 
     //#if UNITY_WEBGL && !UNITY_EDITOR
@@ -75,20 +75,21 @@ public class WebUtilityFixer : MonoBehaviour
 
     private void MuteAudio(bool inBackground)
     {
-
         if (inBackground)
         {
             _backgroundSource.Pause();
-            _gunSource.Pause();
-            Debug.Log("Paused");
+
+            if (_gunSource != null)
+                _gunSource.Pause();
         }
-        else if(!inBackground)
+        else if (!inBackground)
         {
-            if(!_isAdvShowing)
+            if (!_isAdvShowing)
             {
-                Debug.Log("UnPaused");
                 _backgroundSource.UnPause();
-                _gunSource.UnPause();
+
+                if (_gunSource != null)
+                    _gunSource.UnPause();
             }
             else
             {
@@ -108,7 +109,9 @@ public class WebUtilityFixer : MonoBehaviour
         {
             Debug.Log($"UnPaused + {_isAdvShowing}");
             _backgroundSource.UnPause();
-            _gunSource.UnPause();
+
+            if (_gunSource != null)
+                _gunSource.UnPause();
             _stateManager.SetState(GameStates.Gameplay);
         }
     }
@@ -119,7 +122,9 @@ public class WebUtilityFixer : MonoBehaviour
 
         Debug.Log($"UnPaused + {_isAdvShowing}");
         _backgroundSource.Pause();
-        _gunSource.Pause();
+
+        if (_gunSource != null)
+            _gunSource.Pause();
         _stateManager.SetState(GameStates.Paused);
     }
     //#endif

@@ -1,4 +1,5 @@
 using Cinemachine;
+using Plugins.Audio.Core;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,9 +9,7 @@ public class Pistol : Weapon
     [SerializeField] private PoolObjectSpawnComponent _spawnComponent;
     [SerializeField] private BulletParams _params;
     [SerializeField] private Transform _transform;
-    [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _shotSound;
-    [SerializeField] private AudioClip _reloadSound;
+    [SerializeField] private SourceAudio _audioSource;
     [SerializeField] private CinemachineImpulseSource _cameraShaker;
 
     public event UnityAction<bool> Reloading;
@@ -56,7 +55,7 @@ public class Pistol : Weapon
         if (_isReloading == false && _currentAmmo < _maxAmmo)
         {
             _isReloading = true;
-            _audioSource.PlayOneShot(_reloadSound);
+            _audioSource.PlayOneShot("Reload");
             Reloading?.Invoke(_isReloading);
             StartCoroutine(ReloadCoroutine());
         }
@@ -84,7 +83,7 @@ public class Pistol : Weapon
             bullet.Shot(_transform.position, _currentTarget.TargetTransform.position, _params.BulletSpeed, (int)_characteristics.GetValue(Characteristics.Damage));
 
             _cameraShaker.GenerateImpulse();
-            _audioSource.PlayOneShot(_shotSound);
+            _audioSource.PlayOneShot("Shot");
         }
     }
 
