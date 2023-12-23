@@ -1,5 +1,5 @@
-using UnityEngine;
 using Agava.YandexGames;
+using UnityEngine;
 using PlayerPrefs = Agava.YandexGames.PlayerPrefs;
 
 public static class Saves
@@ -93,7 +93,6 @@ public static class Saves
         PlayerAccount.SetCloudSaveData(save,
     () => Debug.Log("Success Saves!"),
     (message) => Debug.Log("Saves Error!" + message));
-
     }
 
     public static void LoadData()

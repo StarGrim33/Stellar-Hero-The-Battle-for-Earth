@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PanelSwitcher : MonoBehaviour
@@ -15,21 +16,26 @@ public class PanelSwitcher : MonoBehaviour
         _panel.SetActive(true);
 
         if (_soundButton != null)
-            _soundButton.gameObject.SetActive(false); 
-        
+            _soundButton.gameObject.SetActive(false);
+
         StateManager.Instance.SetState(GameStates.Paused);
     }
 
-    public void ClosePanel()
+    public void ClosePanel(bool isEffectEnabled)
     {
-        if (_effect != null)
+        if (_effect != null && isEffectEnabled)
             _effect.SetActive(true);
 
-        _panel.SetActive(false);
+            _panel.SetActive(false);
 
         if (_soundButton != null)
             _soundButton.gameObject.SetActive(true);
 
         StateManager.Instance.SetState(GameStates.Gameplay);
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(1);
     }
 }

@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+using Plugins.Audio.Core;
 using UnityEngine;
 
 public class MusicHandler : MonoBehaviour
 {
-    [SerializeField] private AudioSource[] _source;
+    [SerializeField] private SourceAudio[] _source;
     private SoundImageHandler _handler;
 
     private void Awake()
@@ -15,18 +13,15 @@ public class MusicHandler : MonoBehaviour
 
     public void HandlSound()
     {
-        foreach (AudioSource source in _source)
+        var volume = AudioManagement.Instance.GetVolume();
+
+        if (volume > 0.05)
         {
-            if (source.enabled)
-            {
-                source.enabled = false;
-                _handler.ChangeImage();
-            }
-            else if (!source.enabled)
-            {
-                source.enabled = true;
-                _handler.ChangeImage();
-            }
+            AudioManagement.Instance.SetVolume(0);
+        }
+        else
+        {
+            AudioManagement.Instance.SetVolume(1);
         }
     }
 }

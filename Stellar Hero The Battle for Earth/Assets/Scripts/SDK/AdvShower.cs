@@ -1,4 +1,5 @@
 using Agava.YandexGames;
+using Plugins.Audio.Core;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class AdvShower : MonoBehaviour
 {
     [SerializeField] private TMP_Text _countDown;
     [SerializeField] private WebUtilityFixer _fixer;
-    [SerializeField] private AudioSource[] _audioSources;
+    [SerializeField] private SourceAudio[] _audioSources;
     [SerializeField] private PlayerHealth _player;
     private readonly string _ruText = "Показ рекламы через ";
     private readonly string _enText = "Adv in ";
