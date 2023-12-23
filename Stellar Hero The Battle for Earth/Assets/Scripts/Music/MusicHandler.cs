@@ -4,7 +4,6 @@ using UnityEngine;
 public class MusicHandler : MonoBehaviour
 {
     [SerializeField] private SourceAudio[] _source;
-    [SerializeField] private AudioPauseHandler _sourceGlobal;
     private SoundImageHandler _handler;
 
     private void Awake()
@@ -24,20 +23,5 @@ public class MusicHandler : MonoBehaviour
         {
             AudioManagement.Instance.SetVolume(1);
         }
-
-
-        //foreach (SourceAudio source in _source)
-        //{
-        //    if (!source.Mute)
-        //    {
-        //        source.Mute = true;
-        //        _handler.ChangeImage();
-        //    }
-        //    else if (source.Mute)
-        //    {
-        //        source.Mute = false;
-        //        _handler.ChangeImage();
-        //    }
-        //}
     }
 }

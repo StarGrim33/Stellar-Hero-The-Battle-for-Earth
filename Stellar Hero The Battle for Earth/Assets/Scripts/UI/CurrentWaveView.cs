@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CurrentWaveView : MonoBehaviour
 {
-   [SerializeField] private TMP_Text _text;
+    [SerializeField] private TMP_Text _text;
     private Spawner _spawner;
 
     public void Init(Spawner spawner)
@@ -20,13 +20,12 @@ public class CurrentWaveView : MonoBehaviour
 
     private void Start()
     {
-        if( _spawner == null )
+        if (_spawner == null)
             throw new Exception("Check spawner and enemy pool for available space");
     }
 
     private void WaveChanged(int value)
     {
-        value++;
         _text.text = value.ToString();
     }
 }

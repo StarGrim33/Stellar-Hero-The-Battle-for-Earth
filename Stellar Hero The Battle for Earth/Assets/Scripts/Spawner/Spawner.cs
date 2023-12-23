@@ -17,7 +17,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private BestWaveView _bestWaveView;
     private LeaderboradSaver _saver;
 
-    public int CurrentWaveIndex => _currentWaveIndex;
+    public int CurrentWaveIndex => _currentWaveIndex + 1;
 
     public event UnityAction AllEnemySpawned;
 
@@ -29,14 +29,11 @@ public class Spawner : MonoBehaviour
     private WaveEnemies _currentWave;
     private float _timeAfterLastSpawn;
     private int _spawned;
-    private int _lastWaveNumber = 1;
     private int _currentSpawnPointIndex = 1;
     private bool _isSpawnFrozen = false;
-    private int _bestWave;
 
     private void Awake()
     {
-
         if (Instance == null)
         {
             Instance = this;
@@ -47,10 +44,6 @@ public class Spawner : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-#if UNITY_WEBGL && !UNITY_EDITOR
-        _bestWave = Saves.Load("BestWave", 0);
-#endif
 
         _saver = GetComponent<LeaderboradSaver>();
     }
@@ -96,7 +89,7 @@ public class Spawner : MonoBehaviour
             SetWave(_currentWaveIndex);
             _spawned = 0;
             SpawnWave();
-            WaveChanged?.Invoke(_currentWaveIndex);
+            WaveChanged?.Invoke(CurrentWaveIndex);
         }
     }
 
@@ -114,7 +107,14 @@ public class Spawner : MonoBehaviour
 
         SetWave(++_currentWaveIndex);
         _spawned = 0;
-        WaveChanged?.Invoke(CurrentWaveIndex);
+        //WaveChanged?.Invoke(CurrentWaveIndex);
+
+        if (_currentWaveIndex > _bestWaveView.BestWave)
+        {
+            Saves.Save(Constants.BestWaveKey, _currentWaveIndex++);
+            _saver.GetLeaderboardPlayerEntryButtonClick(_currentWaveIndex++);
+            Debug.Log($"Лучший счет перезаписан - {_currentWaveIndex++}");
+        }
     }
 
     private IEnumerator UnfreezeSpawnAfterDelay(float duration)
@@ -188,13 +188,14 @@ public class Spawner : MonoBehaviour
     {
         _currentWave = _waves[index];
 
-        if (_currentWaveIndex > _bestWave)
+        if (_currentWaveIndex > _bestWaveView.BestWave)
         {
-            _bestWave = _currentWaveIndex;
-            Saves.Save(Constants.BestWaveKey, _bestWave);
-            _saver.GetLeaderboardPlayerEntryButtonClick(_bestWave);
-            Debug.Log($"Best wave is {_bestWave}");
+            Saves.Save(Constants.BestWaveKey, _currentWaveIndex++);
+            _saver.GetLeaderboardPlayerEntryButtonClick(_currentWaveIndex++);
+            Debug.Log($"Лучший счет перезаписан - {_currentWaveIndex++}");
         }
+
+        WaveChanged?.Invoke(CurrentWaveIndex);
     }
 
     private bool TryGetSpawnPoint(int randomIndex, out int spawnPointIndex)
