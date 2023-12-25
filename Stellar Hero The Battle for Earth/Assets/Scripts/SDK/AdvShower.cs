@@ -71,8 +71,11 @@ public class AdvShower : MonoBehaviour
             {
                 source.UnPause();
             }
+
+            StateManager.Instance.SetState(GameStates.Gameplay);
         }
     }
+
     private void IsRewardedAdvEnded()
     {
         _fixer.UnPause(false);
@@ -94,5 +97,6 @@ public class AdvShower : MonoBehaviour
         }
 
         _fixer.Pause(true);
+        StateManager.Instance.SetState(GameStates.Paused);
     }
 }
