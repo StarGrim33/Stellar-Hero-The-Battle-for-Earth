@@ -14,7 +14,7 @@ public class PlayerParticleSystem : BaseParticleSystemPlayer
         switch (effects)
         {
             case ParticleEffects.Dust:
-                _effect.Play();
+                Effect.Play();
                 break;
         }
 
@@ -44,6 +44,6 @@ public class PlayerParticleSystem : BaseParticleSystemPlayer
     {
         var waitForSeconds = new WaitForSeconds(_dustDuration);
         yield return waitForSeconds;
-        _effect.Stop();
+        Effect.Stop();
     }
 }

@@ -3,15 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class Level
 {
-    private PlayerHealth _health;
-
-    public event Action Defeat;
+    private readonly PlayerHealth _health;
 
     public Level(PlayerHealth playerHealth)
     {
         _health = playerHealth;
         _health.PlayerDead += OnPlayerDead;
     }
+
+    public event Action Defeat;
 
     ~Level() 
     { 

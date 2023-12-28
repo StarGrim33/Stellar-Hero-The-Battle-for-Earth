@@ -2,10 +2,10 @@ using UnityEngine;
 
 public abstract class BaseParticleSystemPlayer : MonoBehaviour
 {
-    [SerializeField] protected ParticleSystem _effect;
+    [SerializeField] protected ParticleSystem Effect;
 
     public virtual void PlayEffect(ParticleEffects effects)
     {
-        _effect.Play();
+        Effect.Play();
     }
 }

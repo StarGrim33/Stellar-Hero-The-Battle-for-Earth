@@ -12,8 +12,6 @@ public class EnemyHealth : UnitHealth, IDamageable
 
     public event Action<EnemyHealth> Dying;
 
-    public float MaxHealth { get; private set; }
-
     public float CurrentHealth
     {
         get
