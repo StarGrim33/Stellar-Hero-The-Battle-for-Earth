@@ -1,18 +1,17 @@
 using DG.Tweening;
 using UnityEngine;
 
+[RequireComponent(typeof(Pistol))]
 public class WeaponAnimator : MonoBehaviour
 {
-    [SerializeField] private Transform weaponTransform;
+    [SerializeField] private Transform _weaponTransform;
     private Pistol _pistol;
-
     private Quaternion _startRotation; 
 
     private void Awake()
     {
         _pistol = GetComponent<Pistol>();
-
-        _startRotation = weaponTransform.localRotation;
+        _startRotation = _weaponTransform.localRotation;
     }
 
     private void OnEnable()
@@ -27,17 +26,22 @@ public class WeaponAnimator : MonoBehaviour
 
     private void Reloading(bool reloading)
     {
+        float zeroAngle = 0f;
+        float completeAngle = 360f;
+        float duration = 0.2f;
+        int loop = -1;
+
         if (reloading)
         {
-            weaponTransform
-                .DOLocalRotate(new Vector3(0f, 0f, 360f), 0.2f, RotateMode.FastBeyond360)
-                .SetLoops(-1, LoopType.Restart)
-                .SetEase(Ease.Linear).SetLink(weaponTransform.gameObject);
+            _weaponTransform
+                .DOLocalRotate(new Vector3(zeroAngle, zeroAngle, completeAngle), duration, RotateMode.FastBeyond360)
+                .SetLoops(loop, LoopType.Restart)
+                .SetEase(Ease.Linear).SetLink(_weaponTransform.gameObject);
         }
         else
         {
-            weaponTransform.DOKill();
-            weaponTransform.localRotation = _startRotation;
+            _weaponTransform.DOKill();
+            _weaponTransform.localRotation = _startRotation;
         }
     }
 }

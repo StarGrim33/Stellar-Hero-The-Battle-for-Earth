@@ -1,26 +1,28 @@
 using Assets.Scripts.Components.Checkers;
 using Assets.Scripts.Utils;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class Weapon : MonoBehaviour, IWeapon
 {
-    [SerializeField] protected Cooldown _shotCooldown;
-    [SerializeField] protected SpriteRenderer _weaponSprite;
-    [SerializeField] protected GameObject _crosshair;
     [SerializeField] private CheckCircleOverlap _enemyChecker;
+    [SerializeField] private PlayerMovement _movement;
+    [SerializeField] protected Cooldown ShotCooldown;
+    [SerializeField] protected SpriteRenderer WeaponSprite;
+    [SerializeField] protected GameObject Crosshair;
 
     [Space, Header("Reload and Ammo")]
     protected int _maxAmmo = 6;
+
     [SerializeField] protected float _reloadTime = 1f;
     protected int _currentAmmo = 6;
-    [SerializeField] private PlayerMovement _movement;
 
     protected bool _isReloading = false;
-
     protected List<IDamageable> _enemies;
     protected IDamageable _currentTarget;
+
+    public event Action<int, int> AmmoChanged;
 
     public Vector3 Target { get; private set; }
 
@@ -28,11 +30,10 @@ public abstract class Weapon : MonoBehaviour, IWeapon
 
     public int MaxAmmo => _maxAmmo;
 
-    public event UnityAction<int, int> AmmoChanged;
 
     private void Start()
     {
-        _weaponSprite.flipY = true;
+        WeaponSprite.flipY = true;
     }
 
     private void Update()
@@ -45,12 +46,12 @@ public abstract class Weapon : MonoBehaviour, IWeapon
 
     public void PerformShot()
     {
-        if (_isReloading == false && _enemies != null && _enemies.Count > 0 && _shotCooldown.IsReady())
+        if (_isReloading == false && _enemies != null && _enemies.Count > 0 && ShotCooldown.IsReady())
         {
             if (_currentAmmo > 0 && _currentTarget != null)
             {
                 RotateWeaponToTarget(_currentTarget.TargetTransform.position);
-                _shotCooldown.Reset();
+                ShotCooldown.Reset();
                 _currentAmmo--;
                 AmmoChanged?.Invoke(_currentAmmo, _maxAmmo);
                 SpawnBullet();
@@ -77,18 +78,18 @@ public abstract class Weapon : MonoBehaviour, IWeapon
 
             if (playerDirection.x < 0)
             {
-                _weaponSprite.flipX = true;
+                WeaponSprite.flipX = true;
             }
             else
             {
-                _weaponSprite.flipX = false;
+                WeaponSprite.flipX = false;
             }
         }
 
         if (_currentTarget != null && _isReloading == false)
         {
-            if (_crosshair.activeSelf == false)
-                _crosshair.SetActive(true);
+            if (Crosshair.activeSelf == false)
+                Crosshair.SetActive(true);
 
             UpdateCrossHair();
             RotateWeaponToTarget(_currentTarget.TargetTransform.position);
@@ -129,13 +130,11 @@ public abstract class Weapon : MonoBehaviour, IWeapon
             if (_currentTarget.IsAlive == false)
                 _currentTarget = FindClosestLivingEnemy();
 
-            _crosshair.SetActive(_currentTarget != null);
+            Crosshair.SetActive(_currentTarget != null);
 
             UpdateCrossHairPosition(_currentTarget);
         }
     }
-
-
 
     protected abstract void RotateWeaponToTarget(Vector3 target);
 

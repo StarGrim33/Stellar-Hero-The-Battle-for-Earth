@@ -4,8 +4,8 @@ using System;
 [Serializable]
 public class Dictionary<T>
 {
-    public List<string> Key = new List<string>();
-    public List<T> Value = new List<T>();
+    public List<string> Key = new();
+    public List<T> Value = new();
 
     public bool ContainsKey(string key)
     {
@@ -44,9 +44,9 @@ public class Dictionary<T>
 [Serializable]
 public class CloudPlayerPrefs
 {
-    public Dictionary<string> _stringPrefs = new Dictionary<string>();
-    public Dictionary<int> _intPrefs = new Dictionary<int>();
-    public Dictionary<float> _floatPrefs = new Dictionary<float>();
+    public Dictionary<string> _stringPrefs = new();
+    public Dictionary<int> _intPrefs = new();
+    public Dictionary<float> _floatPrefs = new();
 
     public bool HasKey(string key)
     {

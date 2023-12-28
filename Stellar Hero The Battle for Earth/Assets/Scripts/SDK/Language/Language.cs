@@ -1,5 +1,4 @@
 using Agava.YandexGames;
-using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -18,10 +17,7 @@ public class Language : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(Instance);
-
             _currentLanguage = YandexGamesSdk.Environment.i18n.lang;
-
-            Console.WriteLine("!!!Language - " + _currentLanguage);
         }
         else
         {

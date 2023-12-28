@@ -7,7 +7,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] private int _capacity;
     [SerializeField] private Transform _container;
 
-    private List<GameObject> _pool = new List<GameObject>();
+    private readonly List<GameObject> _pool = new();
 
     protected void Initialize(GameObject prefab)
     { 
@@ -38,11 +38,13 @@ public class ObjectPool : MonoBehaviour
     public int FreeObjectsInPool()
     {
         int count = 0;
+
         foreach (var item in _pool)
         {
             if(item.activeSelf == false)
                 count++;
         }
+
         return count;
     }
 }

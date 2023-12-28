@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class AdvShower : MonoBehaviour
 {
-    private readonly string _ruText = "Показ рекламы через ";
-    private readonly string _enText = "Adv in ";
-    private readonly string _trText = "Reklam yoluyla ";
-
     [SerializeField] private TMP_Text _countDown;
     [SerializeField] private WebUtilityFixer _fixer;
     [SerializeField] private SourceAudio[] _audioSources;
@@ -21,20 +17,20 @@ public class AdvShower : MonoBehaviour
 
         switch (language)
         {
-            case ("ru"):
-                StartCoroutine(ShowAdWithCountdown(_ruText));
+            case (Constants.RussianCode):
+                StartCoroutine(ShowAdWithCountdown(Constants.RuAdvText));
                 break;
 
-            case ("en"):
-                StartCoroutine(ShowAdWithCountdown(_enText));
+            case (Constants.EnglishCode):
+                StartCoroutine(ShowAdWithCountdown(Constants.EnAdvText));
                 break;
 
-            case ("tr"):
-                StartCoroutine(ShowAdWithCountdown(_trText));
+            case (Constants.TurkishCode):
+                StartCoroutine(ShowAdWithCountdown(Constants.TrAdvText));
                 break;
 
             default:
-                StartCoroutine(ShowAdWithCountdown(_ruText));
+                StartCoroutine(ShowAdWithCountdown(Constants.RuAdvText));
                 break;
         }
     }
@@ -46,17 +42,19 @@ public class AdvShower : MonoBehaviour
 
     private IEnumerator ShowAdWithCountdown(string text)
     {
+        int second = 1;
+        var waitForSeconds = new WaitForSeconds(second);
         int countdown = 3;
 
         while (countdown > 0)
         {
             _countDown.text = text + countdown.ToString();
-            yield return new WaitForSeconds(1);
+            yield return waitForSeconds;
             countdown--;
             _countDown.text = text + countdown.ToString();
         }
 
-        yield return new WaitForSeconds(1);
+        yield return waitForSeconds;
 
         InterstitialAd.Show(onOpenCallback: Pause, onCloseCallback: IsAdvEnded);
         _countDown.text = string.Empty;
@@ -69,9 +67,7 @@ public class AdvShower : MonoBehaviour
             _fixer.UnPause(false);
 
             foreach (var source in _audioSources)
-            {
                 source.UnPause();
-            }
 
             StateManager.Instance.SetState(GameStates.Gameplay);
         }
@@ -82,9 +78,7 @@ public class AdvShower : MonoBehaviour
         _fixer.UnPause(false);
 
         foreach (var source in _audioSources)
-        {
             source.UnPause();
-        }
 
         _player.Revive();
         StateManager.Instance.SetState(GameStates.Gameplay);
@@ -93,9 +87,7 @@ public class AdvShower : MonoBehaviour
     private void Pause()
     {
         foreach (var source in _audioSources)
-        {
             source.Pause();
-        }
 
         _fixer.Pause(true);
         StateManager.Instance.SetState(GameStates.Paused);

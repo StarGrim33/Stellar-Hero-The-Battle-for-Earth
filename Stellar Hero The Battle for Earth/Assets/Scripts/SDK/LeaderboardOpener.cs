@@ -34,7 +34,6 @@ public class LeaderboardOpener : MonoBehaviour
     {
         Agava.YandexGames.Leaderboard.GetEntries(Constants.LeaderboardName, (result) =>
         {
-            Debug.Log($"My rank = {result.userRank}");
             ClearLeaderboardPanel();
 
             for (int i = 0; i < result.entries.Length; i++)
@@ -46,13 +45,13 @@ public class LeaderboardOpener : MonoBehaviour
                 if (string.IsNullOrEmpty(name))
                 {
                     if (Language.Instance.CurrentLanguage == Constants.RussianCode)
-                        name = "Аноним";
+                        name = Constants.AnonimRu;
                     else if (Language.Instance.CurrentLanguage == Constants.EnglishCode)
                         name = Constants.AnonymousName;
                     else if (Language.Instance.CurrentLanguage == Constants.TurkishCode)
-                        name = "Anonim";
+                        name = Constants.AnonymousName;
                     else
-                        name = "Аноним";
+                        name = Constants.AnonimRu;
                 }
 
                 _playersName[i].text = TextOprimizer(name);
@@ -64,14 +63,10 @@ public class LeaderboardOpener : MonoBehaviour
     private void ClearLeaderboardPanel()
     {
         foreach (var text in _playersName)
-        {
             text.text = string.Empty;
-        }
 
         foreach (var text in _playersScore)
-        {
             text.text = string.Empty;
-        }
     }
 
     private string TextOprimizer(string name)

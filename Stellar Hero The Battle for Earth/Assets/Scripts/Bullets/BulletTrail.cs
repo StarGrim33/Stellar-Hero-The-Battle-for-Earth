@@ -10,7 +10,7 @@ public class BulletTrail : MonoBehaviour
 
     private void Start()
     {
-        _startPosition = transform.position.WithAxis(VectorsExtension.Axis.z, value: _axisValue);
+        _startPosition = transform.position.WithAxis(Axises.z, value: _axisValue);
     }
 
     private void Update()
@@ -21,6 +21,6 @@ public class BulletTrail : MonoBehaviour
 
     public void SetTargetPosition(Vector3 targetPosition)
     {
-        _targetPosition = targetPosition.WithAxis(VectorsExtension.Axis.z, value: _axisValue);
+        _targetPosition = targetPosition.WithAxis(Axises.z, value: _axisValue);
     }
 }

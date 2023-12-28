@@ -1,4 +1,3 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +7,6 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private PlayerHealth _health;
     [SerializeField] private Image _fronHealthBar;
     [SerializeField] private Image _backHealthBar;
-
     [SerializeField] private TMP_Text _healthValue;
 
     private float _lerpTimer = 0f;

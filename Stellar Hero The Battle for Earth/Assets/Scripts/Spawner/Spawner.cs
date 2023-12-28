@@ -9,28 +9,28 @@ public class Spawner : MonoBehaviour
     public static Spawner Instance { get; private set; }
 
     [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private float _delayBetweenWaves;
     [SerializeField] private EnemyPool _enemyPool;
     [SerializeField] private List<WaveEnemies> _waves;
     [SerializeField] private PlayerUnit _playerUnit;
     [SerializeField] private List<int> _unusedSpawnPoints;
     [SerializeField] private BestWaveView _bestWaveView;
+    [SerializeField] private float _delayBetweenWaves;
+
     private LeaderboradSaver _saver;
+    private IDamageable _target;
+    private ExperienceHandler _experienceHandler;
+    private WaveEnemies _currentWave;
+    private int _currentWaveIndex = 0;
+    private int _currentSpawnPointIndex = 1;
+    private bool _isSpawnFrozen = false;
+    private float _timeAfterLastSpawn;
+    private int _spawned;
 
     public int CurrentWaveIndex => _currentWaveIndex + 1;
 
     public event UnityAction AllEnemySpawned;
 
     public event UnityAction<int> WaveChanged;
-
-    private IDamageable _target;
-    private ExperienceHandler _experienceHandler;
-    private int _currentWaveIndex = 0;
-    private WaveEnemies _currentWave;
-    private float _timeAfterLastSpawn;
-    private int _spawned;
-    private int _currentSpawnPointIndex = 1;
-    private bool _isSpawnFrozen = false;
 
     private void Awake()
     {
@@ -84,7 +84,6 @@ public class Spawner : MonoBehaviour
 
         if (_currentWaveIndex >= _waves.Count - 1)
         {
-            Debug.Log("Loop");
             _currentWaveIndex = 0;
             SetWave(_currentWaveIndex);
             _spawned = 0;
@@ -107,20 +106,17 @@ public class Spawner : MonoBehaviour
 
         SetWave(++_currentWaveIndex);
         _spawned = 0;
-        //WaveChanged?.Invoke(CurrentWaveIndex);
 
         if (_currentWaveIndex > _bestWaveView.BestWave)
         {
             Saves.Save(Constants.BestWaveKey, _currentWaveIndex++);
             _saver.GetLeaderboardPlayerEntryButtonClick(_currentWaveIndex++);
-            Debug.Log($"Лучший счет перезаписан - {_currentWaveIndex++}");
         }
     }
 
     private IEnumerator UnfreezeSpawnAfterDelay(float duration)
     {
         var delay = new WaitForSeconds(duration);
-
         yield return delay;
         _isSpawnFrozen = false;
     }
@@ -153,7 +149,9 @@ public class Spawner : MonoBehaviour
         int randomIndex = UnityEngine.Random.Range(0, _unusedSpawnPoints.Count);
 
         if (TryGetSpawnPoint(randomIndex, out int spawnPointIndex))
+        {
             _unusedSpawnPoints.RemoveAt(randomIndex);
+        }
         else
         {
             ResetSpawnPoints();
@@ -192,7 +190,6 @@ public class Spawner : MonoBehaviour
         {
             Saves.Save(Constants.BestWaveKey, _currentWaveIndex++);
             _saver.GetLeaderboardPlayerEntryButtonClick(_currentWaveIndex++);
-            Debug.Log($"Лучший счет перезаписан - {_currentWaveIndex++}");
         }
 
         WaveChanged?.Invoke(CurrentWaveIndex);
@@ -216,8 +213,6 @@ public class Spawner : MonoBehaviour
         _unusedSpawnPoints.Clear();
 
         for (int i = 0; i < _spawnPoints.Length; i++)
-        {
             _unusedSpawnPoints.Add(i);
-        }
     }
 }

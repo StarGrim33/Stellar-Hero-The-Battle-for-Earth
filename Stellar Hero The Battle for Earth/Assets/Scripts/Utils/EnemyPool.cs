@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour
 {
     public static EnemyPool EnemyPoolInstance;
+
     [SerializeField] private GameObject _container;
 
     [SerializeField] private int _amount;
@@ -29,7 +30,6 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] private int _secondsBossAmount;
     [SerializeField] private GameObject _secondsBossPrefab;
     [SerializeField] private List<GameObject> _secondsBossList;
-
 
     [SerializeField] private int _rangeEnemyAmount;
     [SerializeField] private GameObject _rangeEnemyPrefab;

@@ -1,3 +1,5 @@
+using UnityEngine.Animations;
+
 public static class Constants
 {
     public static string AttackState = "attack";
@@ -15,7 +17,19 @@ public static class Constants
 
     public const string BestWaveKey = "BestWave";
     public const string AnonymousName = "Anonymous";
+    public const string AnonimRu = "Аноним";
     public const string LeaderboardName = "Leaderboard";
 
     public const string TurorialShowed = "_tutorialShowed";
+
+    public const string RuAdvText = "Показ рекламы через ";
+    public const string EnAdvText = "Adv in ";
+    public const string TrAdvText = "Reklam yoluyla ";
+
+    public const string BestWaveTextRu = "Лучшая волна: ";
+    public const string BestWaveTextEn = "Best wave: ";
+    public const string BestWaveTextTr = "En iyi dalga: ";
+
+    public const string ReloadSound = "Reload";
+    public const string ShotSound = "Shot";
 }
