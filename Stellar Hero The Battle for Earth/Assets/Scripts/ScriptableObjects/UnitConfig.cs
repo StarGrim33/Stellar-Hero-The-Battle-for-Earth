@@ -11,16 +11,7 @@ public class UnitConfig : ScriptableObject
     [SerializeField, Min(0)] private float _speed;
     [SerializeField, Min(0)] private float _armor;
 
-    public string UnitName => _unitName;
-
     public float Health => _health;
 
     public float Speed => _speed;
-
-    public float Armor => _armor;
-
-    public void ApplyHealthUpgrade()
-    {
-        _health += 10; // just for an example
-    }
 }

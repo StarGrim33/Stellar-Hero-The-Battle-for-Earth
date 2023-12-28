@@ -4,9 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(Animator), typeof(DeadEffectSpawner))]
 public class KamikadzeAttack : AttackState
 {
+    private readonly float _explosionRadius = 1f;
+
     [SerializeField] private ParticleSystem _explosionEffect;
     private DeadEffectSpawner _effectSpawner;
-    private readonly float _explosionRadius = 1f;
     private EnemyHealth _enemyHealth;
     private int _explosionDamage = 25;
     private float _explosionDelay = 0.5f;
@@ -20,7 +21,7 @@ public class KamikadzeAttack : AttackState
 
     public override void Attack()
     {
-        _damage = 0;
+        Damage = 0;
 
         if (Target != null)
         {
@@ -30,7 +31,7 @@ public class KamikadzeAttack : AttackState
             }
             else
             {
-                _enemyStateMachine.ResetState();
+                EnemyStateMachine.ResetState();
                 enabled = false;
             }
         }

@@ -18,16 +18,6 @@ public class Level
         _health.PlayerDead -= OnPlayerDead;
     }
 
-    private void OnPlayerDead()
-    {
-        OnDefeat();
-    }
-
-    public void Start()
-    {
-
-    }
-
     public void Restart()
     {
         Scene scene = SceneManager.GetActiveScene();
@@ -39,5 +29,10 @@ public class Level
     {
         StateManager.Instance.SetState(GameStates.Paused);
         Defeat?.Invoke();
+    }
+
+    private void OnPlayerDead()
+    {
+        OnDefeat();
     }
 }

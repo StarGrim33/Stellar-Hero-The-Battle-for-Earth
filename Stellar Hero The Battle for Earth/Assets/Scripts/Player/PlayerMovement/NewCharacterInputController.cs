@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(IControllable))]
 public class NewCharacterInputController : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
@@ -9,12 +10,10 @@ public class NewCharacterInputController : MonoBehaviour
     private IControllable _iControllable;
     private Input _gameInput;
     private Vector2 _mousePosition;
-    private Rigidbody2D _rigidbody;
 
     private void Awake()
     {
         _iControllable = GetComponent<IControllable>();
-        _rigidbody = GetComponent<Rigidbody2D>();
 
         if (_iControllable == null)
         {
@@ -28,10 +27,8 @@ public class NewCharacterInputController : MonoBehaviour
     private void OnEnable()
     {
         _gameInput.Gameplay.Dash.performed += OnDashOnPerformed;
-
         _gameInput.Gameplay.Movement.performed += OnGetDirection;
         _gameInput.Gameplay.Movement.canceled += OnGetDirection;
-
         _gameInput.Gameplay.MousePosition.performed += OnMousePositionPerformed;
     }
 
@@ -58,13 +55,5 @@ public class NewCharacterInputController : MonoBehaviour
     {
         var direction = context.ReadValue<Vector2>();
         _iControllable.SetDirection(direction);
-    }
-
-    private void ReadRotation()
-    {
-        float rightAngle = 90f;
-        Vector2 facingRotation = _mousePosition - _rigidbody.position;
-        float angle = Mathf.Atan2(facingRotation.y, facingRotation.x) * Mathf.Rad2Deg + rightAngle;
-        _rigidbody.MoveRotation(angle);
     }
 }

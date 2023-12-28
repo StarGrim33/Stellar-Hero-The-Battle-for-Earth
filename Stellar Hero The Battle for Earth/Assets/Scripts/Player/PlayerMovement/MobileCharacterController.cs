@@ -1,10 +1,10 @@
 using UnityEngine;
 
+[RequireComponent(typeof(IControllable))]
 public class MobileCharacterController : MonoBehaviour
 {
     [SerializeField] private FixedJoystick _joystick;
     [SerializeField] private AbilityButton _abilityButton;
-
     private IControllable _iControllable;
 
     private void Awake()
@@ -14,22 +14,22 @@ public class MobileCharacterController : MonoBehaviour
 
     private void OnEnable()
     {
-        _joystick.ChangeDirection += OnGetDirection;
-        _abilityButton.Clicked += OnDashOnPerformed;
+        _joystick.ChangeDirection += SetDirection;
+        _abilityButton.Clicked += Dash;
     }
 
     private void OnDisable()
     {
-        _joystick.ChangeDirection -= OnGetDirection;
-        _abilityButton.Clicked -= OnDashOnPerformed;
+        _joystick.ChangeDirection -= SetDirection;
+        _abilityButton.Clicked -= Dash;
     }
 
-    private void OnDashOnPerformed()
+    private void Dash()
     {
         _iControllable.TryDash();
     }
 
-    private void OnGetDirection()
+    private void SetDirection()
     {
         var direction = _joystick.Direction;
         _iControllable.SetDirection(direction);

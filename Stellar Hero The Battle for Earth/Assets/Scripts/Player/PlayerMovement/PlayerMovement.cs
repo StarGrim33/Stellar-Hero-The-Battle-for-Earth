@@ -1,9 +1,10 @@
 using Assets.Scripts.Components.Checkers;
 using Assets.Scripts.Utils;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(PlayerUnit))]
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerParticleSystem))]
 public class PlayerMovement : MonoBehaviour, IControllable
 {
     [Space]
@@ -16,12 +17,6 @@ public class PlayerMovement : MonoBehaviour, IControllable
     [SerializeField] private ButtonFiller _dushFiller;
     [SerializeField] private EnterTriggerDamage _enterTriggerDamage;
 
-    public float CurrentSpeed { get; private set; }
-
-    public Vector3 Direction => _direction;
-
-    public event UnityAction<bool> Dashing;
-
     private PlayerParticleSystem _particleSystem;
     private Rigidbody2D _rigidBody;
     private Vector2 _direction;
@@ -30,6 +25,12 @@ public class PlayerMovement : MonoBehaviour, IControllable
     private float _dashTimer;
     private bool _isDash = false;
     private float _speed;
+
+    public event Action<bool> Dashing;
+
+    public Vector3 Direction => _direction;
+
+    public float CurrentSpeed { get; private set; }
 
     private void Awake()
     {
@@ -109,7 +110,6 @@ public class PlayerMovement : MonoBehaviour, IControllable
     {
         _speed = PlayerCharacteristics.I.GetValue(Characteristics.Speed);
         _dashCooldown.ChangeCooldownValue(PlayerCharacteristics.I.GetValue(Characteristics.DushCooldown));
-
         _enterTriggerDamage.SetDamage((int)PlayerCharacteristics.I.GetValue(Characteristics.PlayerTriggerDamage));
     } 
 }

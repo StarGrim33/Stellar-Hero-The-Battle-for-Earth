@@ -13,7 +13,7 @@ public class BulletSpawner : MonoBehaviour
     private List<IDamageable> _enemies;
     private IDamageable _currentTarget;
 
-    private BulletParams _params;
+    private BulletSpeedModifier _params;
     private Vector3 _shotTarget;
     private Coroutine _coroutine;
 
@@ -21,7 +21,7 @@ public class BulletSpawner : MonoBehaviour
 
     private void Awake()
     {
-        _params = GetComponent<BulletParams>();
+        _params = GetComponent<BulletSpeedModifier>();
     }
 
     private void Update()

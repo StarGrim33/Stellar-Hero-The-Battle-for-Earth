@@ -1,45 +1,47 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator)), RequireComponent(typeof(EnemyStateMachine))]
 public class AttackState : State
 {
-    [SerializeField] protected int _damage;
-    [SerializeField] protected float _delay;
+    [SerializeField] protected int Damage;
+    [SerializeField] protected float Delay;
 
-    protected EnemyStateMachine _enemyStateMachine;
-    protected Animator _animator;
-    protected float _lastAttackTime;
+    protected EnemyStateMachine EnemyStateMachine;
+    protected Animator Animator;
+    protected float LastAttackTime;
 
     protected void Start()
     {
-        _enemyStateMachine = GetComponent<EnemyStateMachine>();
-        _animator = GetComponent<Animator>();
+        EnemyStateMachine = GetComponent<EnemyStateMachine>();
+        Animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if(_lastAttackTime <= 0)
+        if(LastAttackTime <= 0)
         {
             Attack();
-            _lastAttackTime = _delay;
+            LastAttackTime = Delay;
         }
 
-        _lastAttackTime -= Time.deltaTime;
+        LastAttackTime -= Time.deltaTime;
     }
 
     public virtual void Attack()
     {
+        int minDistanceForAttack = 1;
+
         if(Target.IsAlive) 
         {
-            if(Vector2.Distance(Target.TargetTransform.position, transform.position) < 1)
+            if(Vector2.Distance(Target.TargetTransform.position, transform.position) < minDistanceForAttack)
             {
-                _animator.Play(Constants.AttackState);
-                Target.TakeDamage(_damage);
+                Animator.Play(Constants.AttackState);
+                Target.TakeDamage(Damage);
             }
             else
             {
                 enabled = false;
-                _enemyStateMachine.ResetState();
+                EnemyStateMachine.ResetState();
             }
         }
     }

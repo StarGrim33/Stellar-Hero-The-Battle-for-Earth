@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerCharacteristics : MonoBehaviour
 {
@@ -19,9 +19,9 @@ public class PlayerCharacteristics : MonoBehaviour
     private float _droneDamage = 10f;
     private float _droneShotDelay = 2f;
 
-    private Dictionary<Characteristics, float> characteristics = new Dictionary<Characteristics, float>();
+    private Dictionary<Characteristics, float> _characteristics = new();
 
-    public UnityAction CharacteristicChanged;
+    public Action CharacteristicChanged;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class PlayerCharacteristics : MonoBehaviour
 
     public float GetValue(Characteristics characteristic)
     {
-        if (characteristics.TryGetValue(characteristic, out float value))
+        if (_characteristics.TryGetValue(characteristic, out float value))
         {
             return value;
         }
@@ -50,12 +50,10 @@ public class PlayerCharacteristics : MonoBehaviour
 
     public void SetValue(Characteristics characteristic, float value)
     {
-        if (characteristics.ContainsKey(characteristic))
+        if (_characteristics.ContainsKey(characteristic))
         {
-            characteristics[characteristic] = value;
+            _characteristics[characteristic] = value;
             CharacteristicChanged?.Invoke();
-            Debug.Log($"Max Health is {_maxHealth}");
-
         }
         else
         {
@@ -65,9 +63,9 @@ public class PlayerCharacteristics : MonoBehaviour
 
     public void AddValue(Characteristics characteristic, float value)
     {
-        if (characteristics.ContainsKey(characteristic))
+        if (_characteristics.ContainsKey(characteristic))
         {
-            characteristics[characteristic] += value;
+            _characteristics[characteristic] += value;
             CharacteristicChanged?.Invoke();
         }
         else
@@ -83,18 +81,17 @@ public class PlayerCharacteristics : MonoBehaviour
 
     private void Initialize()
     {
-        //Load start characteristics
-        characteristics[Characteristics.Speed] = _speed;
-        characteristics[Characteristics.Damage] = _damage;
-        characteristics[Characteristics.ShotCooldown] = _shotCooldown;
-        characteristics[Characteristics.MaxHealth] = _maxHealth;
-        characteristics[Characteristics.MaxAmmo] = _maxAmmo;
-        characteristics[Characteristics.ReloadTimeAmmo] = _reloadTimeAmmo;
-        characteristics[Characteristics.DushCooldown] = _dushCooldown;
-        characteristics[Characteristics.PlayerTriggerDamage] = _playerTriggerDamage;
-        characteristics[Characteristics.DroneTriggerDamage] = _droneTriggerDamage;
-        characteristics[Characteristics.DroneDamage] = _droneDamage;
-        characteristics[Characteristics.DroneShotDelay] = _droneShotDelay;
+        _characteristics[Characteristics.Speed] = _speed;
+        _characteristics[Characteristics.Damage] = _damage;
+        _characteristics[Characteristics.ShotCooldown] = _shotCooldown;
+        _characteristics[Characteristics.MaxHealth] = _maxHealth;
+        _characteristics[Characteristics.MaxAmmo] = _maxAmmo;
+        _characteristics[Characteristics.ReloadTimeAmmo] = _reloadTimeAmmo;
+        _characteristics[Characteristics.DushCooldown] = _dushCooldown;
+        _characteristics[Characteristics.PlayerTriggerDamage] = _playerTriggerDamage;
+        _characteristics[Characteristics.DroneTriggerDamage] = _droneTriggerDamage;
+        _characteristics[Characteristics.DroneDamage] = _droneDamage;
+        _characteristics[Characteristics.DroneShotDelay] = _droneShotDelay;
     }
 }
 

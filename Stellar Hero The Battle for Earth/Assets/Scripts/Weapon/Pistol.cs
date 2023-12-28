@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class Pistol : Weapon
 {
     [SerializeField] private PoolObjectSpawnComponent _spawnComponent;
-    [SerializeField] private BulletParams _params;
+    [SerializeField] private BulletSpeedModifier _params;
     [SerializeField] private Transform _transform;
     [SerializeField] private SourceAudio _audioSource;
     [SerializeField] private CinemachineImpulseSource _cameraShaker;

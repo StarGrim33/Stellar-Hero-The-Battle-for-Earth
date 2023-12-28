@@ -9,7 +9,7 @@ public class UpdateCharacteristicWindow : MonoBehaviour
     [SerializeField] private Button _menuButton;
     [SerializeField] private int _chengersCount = 3;
 
-    private List<CharacteristicChanger> _currentChangers = new List<CharacteristicChanger>();
+    private List<CharacteristicChanger> _currentChangers = new();
 
     private void Start()
     {
@@ -21,7 +21,6 @@ public class UpdateCharacteristicWindow : MonoBehaviour
         Time.timeScale = 0.0f;
         StateManager.Instance.SetState(GameStates.Paused);
         StateManager.Instance.IsLevelUpPanelShowing = true;
-        Debug.Log(StateManager.Instance.IsLevelUpPanelShowing);
         _menuButton.enabled = false;
     }
 
@@ -29,7 +28,6 @@ public class UpdateCharacteristicWindow : MonoBehaviour
     {
         StateManager.Instance.SetState(GameStates.Gameplay);
         StateManager.Instance.IsLevelUpPanelShowing = false;
-        Debug.Log(StateManager.Instance.IsLevelUpPanelShowing);
         _menuButton.enabled = transform;
     }
 
@@ -48,9 +46,7 @@ public class UpdateCharacteristicWindow : MonoBehaviour
     private void Init()
     {
         _characteristicChangers.Shuffle();
-
         _currentChangers.Clear();
-
         _chengersCount = Mathf.Min(_chengersCount, _characteristicChangers.Count);
 
         for (int i = 0; i < _chengersCount; i++)
@@ -65,8 +61,6 @@ public class UpdateCharacteristicWindow : MonoBehaviour
     private void RemoveChangers()
     {
         foreach(var changer in _currentChangers)
-        {
             Destroy(changer.gameObject);
-        }
     }
 }

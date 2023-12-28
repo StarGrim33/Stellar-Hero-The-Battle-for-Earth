@@ -1,5 +1,6 @@
+using UnityEngine;
 
-
+[RequireComponent(typeof(PlayerHealth))]
 public class PlayerUnit : Unit
 {
     private PlayerHealth _health;
@@ -13,7 +14,7 @@ public class PlayerUnit : Unit
 
     private void OnTriggerEnter2D(UnityEngine.Collider2D collision)
     {
-        if(collision.TryGetComponent<Buff>(out Buff buff))
+        if(collision.TryGetComponent<BaseBuff>(out BaseBuff buff))
         {
             buff.Take(_health);
         }

@@ -1,26 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [CreateAssetMenu(menuName = "Source/Updates", fileName = "UpdasteConfig", order = 0)]
 public class CharacteristicChangerConfig : ScriptableObject
 {
+    private const string EnLanguage = "en";
+    private const string RuLanguage = "ru";
+    private const string TrLanguage = "tr";
+
     [SerializeField] private Sprite _icon;
     [SerializeField] private string _enDescription;
     [SerializeField] private string _ruDescription;
     [SerializeField] private string _trDescription;
-
     [SerializeField] private List<Changes> _changes;
-
     [SerializeField] private CharacteristicChangerConfig _nextChanger;
 
-    private const string _enLanguage = "en";
-    private const string _ruLanguage = "ru";
-    private const string _trLanguage = "tr";
-
-    private string _description;
-
     public Sprite Icon=> _icon;
+
     public CharacteristicChangerConfig NextChanger => _nextChanger;
 
     public string GetDescription()
@@ -29,9 +25,9 @@ public class CharacteristicChangerConfig : ScriptableObject
 
         return lang switch
         {
-            _enLanguage => _enDescription,
-            _ruLanguage => _ruDescription,
-            _trLanguage => _trDescription,
+            EnLanguage => _enDescription,
+            RuLanguage => _ruDescription,
+            TrLanguage => _trDescription,
             _ => _enDescription,
         };
     }

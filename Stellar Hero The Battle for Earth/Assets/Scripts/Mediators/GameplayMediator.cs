@@ -25,16 +25,15 @@ public class GameplayMediator : MonoBehaviour
         _level.Defeat += OnDefeat;
     }
 
-    private void OnDefeat()
-    {
-        _playerUnit.velocity = Vector3.zero;
-        //_menuPanel.SetActive(false);
-        _defeatPanel.Show();
-    }
-
     public void RestartLevel()
     {
         _defeatPanel.Hide();
         _level.Restart();
+    }
+
+    private void OnDefeat()
+    {
+        _playerUnit.velocity = Vector3.zero;
+        _defeatPanel.Show();
     }
 }

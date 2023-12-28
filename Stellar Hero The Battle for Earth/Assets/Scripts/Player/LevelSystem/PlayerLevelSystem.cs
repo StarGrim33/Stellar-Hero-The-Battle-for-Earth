@@ -1,15 +1,18 @@
+using System;
 using System.Linq;
-using UnityEngine.Events;
 
 public class PlayerLevelSystem
 {
-    private int _level;
-    private int _experience;
     private readonly int[] _experienceLevel;
 
-    public event UnityAction OnExperienceChanged;
+    private int _minLevelExp = 100;
+    private int _maxLevelExp = 341;
+    private int _level;
+    private int _experience;
 
-    public event UnityAction OnLevelChanged;
+    public event Action OnExperienceChanged;
+
+    public event Action OnLevelChanged;
 
     public int Level => _level;
 
@@ -23,7 +26,7 @@ public class PlayerLevelSystem
     {
         _level = 0;
         _experience = 0;
-        _experienceLevel = Enumerable.Range(100, 341).ToArray();
+        _experienceLevel = Enumerable.Range(_minLevelExp, _maxLevelExp).ToArray();
     }
 
     public void AddExperience(int amount)

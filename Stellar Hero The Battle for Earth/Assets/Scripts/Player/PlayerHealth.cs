@@ -1,25 +1,24 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
-[RequireComponent(typeof(PlayerUnit))]
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerHealth : UnitHealth, IDamageable
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private HandSpriteHandler _handSpriteHandler;
     private PlayerMovement _playerMovement;
-    private ParticleSystemPlayer _effects;
+    private BaseParticleSystemPlayer _effects;
     private bool _isInvulnerable = false;
     private bool _isImmortal = false;
     private int _immortalityTime = 5;
     private float _remainingImmortalityTime;
 
-    public event UnityAction<float, float> OnHealthChanged;
+    public event Action<float, float> OnHealthChanged;
 
-    public event UnityAction PlayerDead;
+    public event Action PlayerDead;
 
-    public event UnityAction Immortality;
+    public event Action Immortality;
 
     public float MaxHealth => _maxHealth;
 
@@ -30,18 +29,15 @@ public class PlayerHealth : UnitHealth, IDamageable
 
     private void Awake()
     {
-        _effects = GetComponent<ParticleSystemPlayer>();
+        _effects = GetComponent<BaseParticleSystemPlayer>();
     }
 
     private void Start()
     {
         _playerMovement = GetComponent<PlayerMovement>();
         _playerMovement.Dashing += InvulnerableActivated;
-
         SetMaxHealth();
-
         PlayerCharacteristics.I.CharacteristicChanged += SetMaxHealth;
-        Debug.Log($"Max Health is {MaxHealth}");
     }
 
     private void OnDisable()
@@ -98,7 +94,6 @@ public class PlayerHealth : UnitHealth, IDamageable
 
         CurrentHealth -= damage;
         OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
-        Debug.Log($"Health is {CurrentHealth}");
     }
 
     public void Revive()
@@ -107,7 +102,6 @@ public class PlayerHealth : UnitHealth, IDamageable
         OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
         _animator.SetBool("IsRevive", true);
         _handSpriteHandler.Enable();
-        Debug.Log("Revived");
     }
 
     public void InvulnerableActivated(bool isInvulnerable) => _isInvulnerable = isInvulnerable;

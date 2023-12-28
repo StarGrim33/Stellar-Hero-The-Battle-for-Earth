@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class DroneSpriteRotator : MonoBehaviour
 {
     private SpriteRenderer _droneSprite;

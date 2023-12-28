@@ -6,13 +6,14 @@ using UnityEngine;
 
 public class AdvShower : MonoBehaviour
 {
+    private readonly string _ruText = "Показ рекламы через ";
+    private readonly string _enText = "Adv in ";
+    private readonly string _trText = "Reklam yoluyla ";
+
     [SerializeField] private TMP_Text _countDown;
     [SerializeField] private WebUtilityFixer _fixer;
     [SerializeField] private SourceAudio[] _audioSources;
     [SerializeField] private PlayerHealth _player;
-    private readonly string _ruText = "Показ рекламы через ";
-    private readonly string _enText = "Adv in ";
-    private readonly string _trText = "Reklam yoluyla ";
 
     public void ShowAdv()
     {
