@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyUnit)), RequireComponent(typeof(DeadEffectSpawner)), RequireComponent(typeof(DamagePopuper))]
+[RequireComponent(typeof(EnemyUnit)), RequireComponent(typeof(DeadEffectSpawner)), RequireComponent(typeof(DamagePopuper)), RequireComponent(typeof(EnemyBuffDropper))]
 public class EnemyHealth : UnitHealth, IDamageable
 {
     private MaterialBlicker _blicker;
@@ -27,6 +27,10 @@ public class EnemyHealth : UnitHealth, IDamageable
         }
     }
 
+    public Transform TargetTransform => transform;
+
+    public bool IsAlive => ÑurrenHealth > 0;
+
     private void Start()
     {
         _enemyBuffDropper = GetComponent<EnemyBuffDropper>();
@@ -34,10 +38,6 @@ public class EnemyHealth : UnitHealth, IDamageable
         _damagePopuper = GetComponent<DamagePopuper>();
         _blicker = GetComponentInChildren<MaterialBlicker>();
     }
-
-    public Transform TargetTransform => transform;
-
-    public bool IsAlive => ÑurrenHealth > 0;
 
     public void TakeDamage(int damage)
     {
