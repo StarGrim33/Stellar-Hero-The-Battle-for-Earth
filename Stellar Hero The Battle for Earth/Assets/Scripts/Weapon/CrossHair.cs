@@ -1,6 +1,3 @@
 using UnityEngine;
 
-public class CrossHair : MonoBehaviour
-{
-
-}
+public class CrossHair : MonoBehaviour { }

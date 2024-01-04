@@ -1,18 +1,16 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
-[RequireComponent(typeof(EnemyUnit))]
+[RequireComponent(typeof(EnemyUnit)), RequireComponent(typeof(DeadEffectSpawner)), RequireComponent(typeof(DamagePopuper))]
 public class EnemyHealth : UnitHealth, IDamageable
 {
     private MaterialBlicker _blicker;
     private DamagePopuper _damagePopuper;
     private DeadEffectSpawner _deadEffectSpawner;
     private EnemyBuffDropper _enemyBuffDropper;
-    public event UnityAction<EnemyHealth> Dying;
 
-    public float MaxHealth { get; private set; }
+    public event Action<EnemyHealth> Dying;
 
     public float CurrentHealth
     {
@@ -46,9 +44,6 @@ public class EnemyHealth : UnitHealth, IDamageable
         if (damage <= 0)
             throw new ArgumentException("Value cannot be negative", nameof(damage));
 
-        //if (_deadEffectSpawner != null)
-        //    _deadEffectSpawner.SpawnEffect();
-
         if (_deadEffectSpawner != null)
             _deadEffectSpawner.SpawnRandomEffect();
 
@@ -63,8 +58,6 @@ public class EnemyHealth : UnitHealth, IDamageable
 
     protected override void Die()
     {
-
-
         if (_enemyBuffDropper != null)
             _enemyBuffDropper.SpawnRandomBuff();
 
@@ -75,7 +68,9 @@ public class EnemyHealth : UnitHealth, IDamageable
 
     private IEnumerator SetDisabled()
     {
-        yield return new WaitForSeconds(0.5f);
+        var timeForDisable = 0.5f;
+        var waitForSeconds = new WaitForSeconds(timeForDisable);
+        yield return waitForSeconds;
         gameObject.SetActive(false);
     }
 }

@@ -3,14 +3,18 @@ using UnityEngine;
 
 public class EnemyBuffDropper : MonoBehaviour
 {
-    [SerializeField] private List<Buff> _buffs;
-    [SerializeField, Range(0f, 100f)] private float _spawnProbability = 10f;
+    private const float MinRange = 0f;
+    private const float MaxRange = 100f;
+    private const float SpawnProbability = 10f;
+
+    [SerializeField] private List<BaseBuff> _buffs;
+    [SerializeField, Range(MinRange, MaxRange)] private float _spawnProbability = SpawnProbability;
 
     public void SpawnRandomBuff()
     {
-        if (Random.Range(0f, 100f) <= _spawnProbability)
+        if (Random.Range(MinRange, MaxRange) <= _spawnProbability)
         {
-            Buff buff = TryGetRandomBuff();
+            BaseBuff buff = TryGetRandomBuff();
 
             if (buff != null)
             {
@@ -21,7 +25,7 @@ public class EnemyBuffDropper : MonoBehaviour
         }
     }
 
-    private Buff TryGetRandomBuff()
+    private BaseBuff TryGetRandomBuff()
     {
         return _buffs.Count > 0 ? _buffs[Random.Range(0, _buffs.Count)] : null;
     }

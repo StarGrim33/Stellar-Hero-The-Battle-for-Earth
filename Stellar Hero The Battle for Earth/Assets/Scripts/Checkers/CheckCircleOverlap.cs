@@ -5,10 +5,12 @@ namespace Assets.Scripts.Components.Checkers
 {
     public class CheckCircleOverlap : MonoBehaviour
     {
+        private static int ColliderSize = 5;
+
         [SerializeField] private float _radius;
         [SerializeField] private LayerMask _layer;
 
-        private readonly Collider2D[] _collidedResult = new Collider2D[5];
+        private readonly Collider2D[] _collidedResult = new Collider2D[ColliderSize];
 
         public LayerMask Layer => _layer;
 

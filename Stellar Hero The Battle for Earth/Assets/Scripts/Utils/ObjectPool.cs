@@ -6,8 +6,28 @@ public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private int _capacity;
     [SerializeField] private Transform _container;
+    private readonly List<GameObject> _pool = new();
 
-    private List<GameObject> _pool = new List<GameObject>();
+    public void ResetPool()
+    {
+        foreach (var item in _pool)
+        {
+            item.SetActive(false);
+        }
+    }
+
+    public int FreeObjectsInPool()
+    {
+        int count = 0;
+
+        foreach (var item in _pool)
+        {
+            if(item.activeSelf == false)
+                count++;
+        }
+
+        return count;
+    }
 
     protected void Initialize(GameObject prefab)
     { 
@@ -23,26 +43,6 @@ public class ObjectPool : MonoBehaviour
     protected bool TryGetObject(out GameObject result)
     {
         result = _pool.FirstOrDefault(p => p.activeSelf == false);
-
         return result != null;
-    }
-
-    public void ResetPool()
-    {
-        foreach (var item in _pool)
-        {
-            item.SetActive(false);
-        }
-    }
-
-    public int FreeObjectsInPool()
-    {
-        int count = 0;
-        foreach (var item in _pool)
-        {
-            if(item.activeSelf == false)
-                count++;
-        }
-        return count;
     }
 }

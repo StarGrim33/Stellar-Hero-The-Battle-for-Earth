@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public class ButtonFiller : MonoBehaviour
 {
     private Image _image;
@@ -14,19 +15,19 @@ public class ButtonFiller : MonoBehaviour
     public void SetFilled(float value)
     {
         value = Mathf.Clamp01(value);
-
         _image.fillAmount = value;
     }
 
     public void StartFilled(float delay)
     {
-        if( _image.gameObject.activeInHierarchy)
-        StartCoroutine(Filled(delay));
+        if (_image.gameObject.activeInHierarchy)
+            StartCoroutine(Filled(delay));
     }
 
     private IEnumerator Filled(float delay)
     {
         var timer = 0f;
+
         while (delay >= timer)
         {
             timer += Time.deltaTime;

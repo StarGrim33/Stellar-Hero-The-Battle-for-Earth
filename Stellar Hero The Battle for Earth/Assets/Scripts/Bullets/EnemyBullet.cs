@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour, IBullet
 {
+    [SerializeField] float maxDistance = 10f;
     private Vector3 _direction;
     private int _damage = 0;
-    public float maxDistance = 10f;
 
     public void Shot(Vector3 startPoint, Vector3 endPoint, float speed, int damage)
     {

@@ -1,4 +1,3 @@
-using Agava.YandexGames;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,7 +56,8 @@ public class DefeatPanel : MonoBehaviour
 
     private IEnumerator ShowAdvButton()
     {
-        var waitForSeconds = new WaitForSeconds(5);
+        int showDelay = 5;
+        var waitForSeconds = new WaitForSeconds(showDelay);
 
         if(_advRestartButton.IsActive() == false)
         {

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class IntroInternationalText : InternationalText
 {
-    private string _lang = "en";
+    private string _lang;
 
     protected override void Start()
     {
@@ -18,13 +18,13 @@ public class IntroInternationalText : InternationalText
 
         switch (_lang)
         {
-            case _enLanguage:
+            case (Constants.EnglishCode):
                 SetText(_en);
                 break;
-            case _ruLanguage:
+            case (Constants.RussianCode):
                 SetText(_ru);
                 break;
-            case _trLanguage:
+            case (Constants.TurkishCode):
                 SetText(_tr);
                 break;
             default:

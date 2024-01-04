@@ -7,10 +7,6 @@ public class InternationalText : MonoBehaviour
     [SerializeField] protected string _ru;
     [SerializeField] protected string _tr;
 
-    protected const string _enLanguage = "en";
-    protected const string _ruLanguage = "ru";
-    protected const string _trLanguage = "tr";
-
     private TMP_Text _text;
 
     private void Awake()
@@ -24,13 +20,13 @@ public class InternationalText : MonoBehaviour
 
         switch (lang)
         {
-            case _enLanguage:
+            case (Constants.EnglishCode):
                 SetText(_en);
                 break;
-            case _ruLanguage:
+            case (Constants.RussianCode):
                 SetText(_ru);
                 break;
-            case _trLanguage:
+            case (Constants.TurkishCode):
                 SetText(_tr);
                 break;
             default:

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyHealth))]
 public abstract class State : MonoBehaviour
 {
     [SerializeField] private List<Transition> _transitions;

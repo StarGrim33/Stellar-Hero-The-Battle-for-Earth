@@ -1,29 +1,25 @@
 using Cinemachine;
 using Plugins.Audio.Core;
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Pistol : Weapon
+public class Pistol : BaseWeapon
 {
     [SerializeField] private PoolObjectSpawnComponent _spawnComponent;
-    [SerializeField] private BulletParams _params;
+    [SerializeField] private BulletSpeedModifier _params;
     [SerializeField] private Transform _transform;
     [SerializeField] private SourceAudio _audioSource;
     [SerializeField] private CinemachineImpulseSource _cameraShaker;
-
-    public event UnityAction<bool> Reloading;
-
     private PlayerCharacteristics _characteristics;
+
+    public event Action<bool> Reloading;
 
     private void Start()
     {
         _characteristics = PlayerCharacteristics.I;
-
         _characteristics.CharacteristicChanged += SetWeaponParams;
-
         SetWeaponParams();
-
         _currentAmmo = _maxAmmo;
     }
 
@@ -31,23 +27,23 @@ public class Pistol : Weapon
     {
         Vector2 directionToTarget = (target - transform.position).normalized;
         float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
-        _weaponSprite.transform.eulerAngles = new Vector3(0, 0, angle);
+        WeaponSprite.transform.eulerAngles = new Vector3(0, 0, angle);
 
         if (directionToTarget.x < 0)
         {
-            _weaponSprite.flipX = false;
-            _weaponSprite.flipY = true;
+            WeaponSprite.flipX = false;
+            WeaponSprite.flipY = true;
         }
         else
         {
-            _weaponSprite.flipX = false;
-            _weaponSprite.flipY = false;
+            WeaponSprite.flipX = false;
+            WeaponSprite.flipY = false;
         }
     }
 
     protected override void DisableCrossHair()
     {
-        _crosshair.SetActive(false);
+        Crosshair.SetActive(false);
     }
 
     protected override void StartReloading()
@@ -55,7 +51,7 @@ public class Pistol : Weapon
         if (_isReloading == false && _currentAmmo < _maxAmmo)
         {
             _isReloading = true;
-            _audioSource.PlayOneShot("Reload");
+            _audioSource.PlayOneShot(Constants.ReloadSound);
             Reloading?.Invoke(_isReloading);
             StartCoroutine(ReloadCoroutine());
         }
@@ -66,8 +62,8 @@ public class Pistol : Weapon
         if (target == null)
             return;
 
-        _crosshair.transform.parent = target.TargetTransform;
-        _crosshair.transform.localPosition = Vector3.zero;
+        Crosshair.transform.parent = target.TargetTransform;
+        Crosshair.transform.localPosition = Vector3.zero;
     }
 
     protected override void SpawnBullet()
@@ -81,9 +77,8 @@ public class Pistol : Weapon
             bullet.gameObject.SetActive(true);
             bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, -directionToTarget);
             bullet.Shot(_transform.position, _currentTarget.TargetTransform.position, _params.BulletSpeed, (int)_characteristics.GetValue(Characteristics.Damage));
-
             _cameraShaker.GenerateImpulse();
-            _audioSource.PlayOneShot("Shot");
+            _audioSource.PlayOneShot(Constants.ShotSound);
         }
     }
 
@@ -100,6 +95,6 @@ public class Pistol : Weapon
     {
         _reloadTime = _characteristics.GetValue(Characteristics.ReloadTimeAmmo);
         _maxAmmo = (int)_characteristics.GetValue(Characteristics.MaxAmmo);
-        _shotCooldown.ChangeCooldownValue(_characteristics.GetValue(Characteristics.ShotCooldown));
+        ShotCooldown.ChangeCooldownValue(_characteristics.GetValue(Characteristics.ShotCooldown));
     }
 }

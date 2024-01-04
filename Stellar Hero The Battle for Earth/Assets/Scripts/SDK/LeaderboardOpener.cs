@@ -13,7 +13,7 @@ public class LeaderboardOpener : MonoBehaviour
     [SerializeField] private Button _declineAuthorizeButton;
     [SerializeField] private TMP_Text[] _playersName;
     [SerializeField] private TMP_Text[] _playersScore;
-    [SerializeField] private int _maxLength;
+    [SerializeField] private TextOptimizer _textOptimizer;
 
     public void OnOpenLeaderBoard()
     {
@@ -34,7 +34,6 @@ public class LeaderboardOpener : MonoBehaviour
     {
         Agava.YandexGames.Leaderboard.GetEntries(Constants.LeaderboardName, (result) =>
         {
-            Debug.Log($"My rank = {result.userRank}");
             ClearLeaderboardPanel();
 
             for (int i = 0; i < result.entries.Length; i++)
@@ -46,16 +45,16 @@ public class LeaderboardOpener : MonoBehaviour
                 if (string.IsNullOrEmpty(name))
                 {
                     if (Language.Instance.CurrentLanguage == Constants.RussianCode)
-                        name = "Аноним";
+                        name = Constants.AnonimRu;
                     else if (Language.Instance.CurrentLanguage == Constants.EnglishCode)
                         name = Constants.AnonymousName;
                     else if (Language.Instance.CurrentLanguage == Constants.TurkishCode)
-                        name = "Anonim";
+                        name = Constants.AnonymousName;
                     else
-                        name = "Аноним";
+                        name = Constants.AnonimRu;
                 }
 
-                _playersName[i].text = TextOprimizer(name);
+                _playersName[i].text = _textOptimizer.OptimizeText(name);
                 _playersScore[i].text = $"{score}";
             }
         });
@@ -64,26 +63,9 @@ public class LeaderboardOpener : MonoBehaviour
     private void ClearLeaderboardPanel()
     {
         foreach (var text in _playersName)
-        {
             text.text = string.Empty;
-        }
 
         foreach (var text in _playersScore)
-        {
             text.text = string.Empty;
-        }
-    }
-
-    private string TextOprimizer(string name)
-    {
-        string nameToLower = name.ToLower();
-        char[] letters = nameToLower.ToCharArray();
-        letters[0] = char.ToUpper(letters[0]);
-        string finalName = new(letters);
-
-        if (finalName.Length > _maxLength)
-            return finalName.Substring(0, _maxLength);
-        else
-            return finalName;
     }
 }

@@ -1,11 +1,10 @@
-using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class MaterialBlicker : MonoBehaviour
 {
     [SerializeField] private Material _materialFlash;
     [SerializeField] private float _flashDuration;
-
     private SpriteRenderer _spriteRenderer;
     private Material _originalMaterial;
     private Coroutine _flashCoroutine;

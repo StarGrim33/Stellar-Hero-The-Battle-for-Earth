@@ -3,9 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Level
 {
-    private PlayerHealth _health;
-
-    public event Action Defeat;
+    private readonly PlayerHealth _health;
 
     public Level(PlayerHealth playerHealth)
     {
@@ -13,19 +11,11 @@ public class Level
         _health.PlayerDead += OnPlayerDead;
     }
 
+    public event Action Defeat;
+
     ~Level() 
     { 
         _health.PlayerDead -= OnPlayerDead;
-    }
-
-    private void OnPlayerDead()
-    {
-        OnDefeat();
-    }
-
-    public void Start()
-    {
-
     }
 
     public void Restart()
@@ -39,5 +29,10 @@ public class Level
     {
         StateManager.Instance.SetState(GameStates.Paused);
         Defeat?.Invoke();
+    }
+
+    private void OnPlayerDead()
+    {
+        OnDefeat();
     }
 }

@@ -36,6 +36,7 @@ public class PanelSwitcher : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        SceneManager.LoadScene(1);
+        int firstSceneIndex = 1;
+        SceneManager.LoadScene(firstSceneIndex);
     }
 }

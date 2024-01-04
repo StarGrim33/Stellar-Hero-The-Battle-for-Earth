@@ -4,12 +4,6 @@ using UnityEngine;
 public class MusicHandler : MonoBehaviour
 {
     [SerializeField] private SourceAudio[] _source;
-    private SoundImageHandler _handler;
-
-    private void Awake()
-    {
-        _handler = GetComponent<SoundImageHandler>();
-    }
 
     public void HandlSound()
     {

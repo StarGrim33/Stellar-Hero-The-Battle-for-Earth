@@ -17,8 +17,10 @@ public class PoolObjectSpawnComponent : ObjectPool
         {
             template.transform.position = _spawnPoint.position;
 
-            if(_isTransformToLossyScale)
+            if (_isTransformToLossyScale)
+            {
                 template.transform.localScale = _spawnPoint.lossyScale;
+            }
 
             template.SetActive(false);
         }

@@ -7,10 +7,10 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        _movement.Dashing += Dashing;
+        _movement.Dashing += Dash;
     }
 
-    private void Dashing(bool dash)
+    private void Dash(bool dash)
     {
         _animator.SetBool(Constants.DashState, dash);
     }

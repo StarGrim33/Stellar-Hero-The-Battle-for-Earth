@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyUnit))]
 public class EnemyStateMachine : MonoBehaviour
 {
     [SerializeField] private State _firstState;
@@ -8,7 +7,6 @@ public class EnemyStateMachine : MonoBehaviour
     public IDamageable Target { get; private set; }
 
     public State CurrentState { get; private set; }
-
 
     private void Start()
     {

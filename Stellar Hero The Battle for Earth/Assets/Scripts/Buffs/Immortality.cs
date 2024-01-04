@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Immortality : Buff
+public class Immortality : BaseBuff
 {
     [SerializeField] private float _duration;
     [SerializeField] private SpriteRenderer _sprite;

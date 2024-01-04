@@ -163,13 +163,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55100145}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &55100149
 MonoBehaviour:
@@ -392,13 +392,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384282668}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1460231561
 GameObject:
@@ -437,13 +437,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460231561}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 965.43286, y: 564.113, z: -3.1505709}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1460231564
 MonoBehaviour:
@@ -546,13 +546,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1633147957}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2075760662
 PrefabInstance:
@@ -1746,6 +1746,10 @@ PrefabInstance:
       propertyPath: _soundButton
       value: 
       objectReference: {fileID: 982174761}
+    - target: {fileID: 6942535478140863936, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
+      propertyPath: _textOptimizer
+      value: 
+      objectReference: {fileID: 3473504811919739035}
     - target: {fileID: 6953700667854311852, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 34
@@ -2181,6 +2185,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 523286405}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6690423172542742019, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3473504811919739035}
     - targetCorrespondingSourceObject: {fileID: 5788586199451375369, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3473504811919739033}
@@ -2206,3 +2213,33 @@ MonoBehaviour:
   _ru: "\u0417\u0432\u0435\u0437\u0434\u043D\u044B\u0439 \u0413\u0435\u0440\u043E\u0439:
     \u0411\u0438\u0442\u0432\u0430 \u0437\u0430 \u0417\u0435\u043C\u043B\u044E"
   _tr: "Y\u0131ld\u0131z Kahraman\u0131: D\xFCnya Sava\u015F\u0131"
+--- !u!1 &3473504811919739034 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6690423172542742019, guid: c170db7c9f6e35c4eabdbd1264d4113c, type: 3}
+  m_PrefabInstance: {fileID: 3473504811919739031}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3473504811919739035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3473504811919739034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce53adcb96b986458f0bbc721f6f325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxLength: 12
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 1633147960}
+  - {fileID: 1384282670}
+  - {fileID: 3473504811919739031}
+  - {fileID: 55100148}
+  - {fileID: 1460231563}
+  - {fileID: 1778922274743402770}
+  - {fileID: 1169611102}
+  - {fileID: 2075760662}

@@ -4,11 +4,12 @@ using PlayerPrefs = Agava.YandexGames.PlayerPrefs;
 
 public static class Saves
 {
-    public static bool IsSavesLoaded { get; private set; }
 
     public const string Level = nameof(Level);
     public const string IsSoundOn = nameof(IsSoundOn);
     public const string IsAutorize = nameof(IsAutorize);
+
+    public static bool IsSavesLoaded { get; private set; }
 
     private static CloudPlayerPrefs _playerPrefs;
 
@@ -84,6 +85,21 @@ public static class Saves
         return _playerPrefs.GetInt(key) > 0;
     }
 
+    public static void LoadFromPrefs()
+    {
+        if (PlayerPrefs.HasKey("Saves"))
+            _playerPrefs = JsonUtility.FromJson<CloudPlayerPrefs>(PlayerPrefs.GetString("Saves"));
+        else
+            _playerPrefs = new CloudPlayerPrefs();
+
+        IsSavesLoaded = true;
+    }
+
+    public static void LoadData()
+    {
+        PlayerAccount.GetCloudSaveData(OnSuccessLoad, OnErrorLoad);
+    }
+
     private static void SaveData()
     {
         string save = JsonUtility.ToJson(_playerPrefs);
@@ -95,33 +111,14 @@ public static class Saves
     (message) => Debug.Log("Saves Error!" + message));
     }
 
-    public static void LoadData()
-    {
-        PlayerAccount.GetCloudSaveData(OnSuccessLoad, OnErrorLoad);
-    }
-
     private static void OnSuccessLoad(string json)
     {
         _playerPrefs = JsonUtility.FromJson<CloudPlayerPrefs>(json);
-
         IsSavesLoaded = true;
     }
 
     private static void OnErrorLoad(string message)
     {
         LoadFromPrefs();
-
-        Debug.Log(message);
-
-    }
-
-    public static void LoadFromPrefs()
-    {
-        if (PlayerPrefs.HasKey("Saves"))
-            _playerPrefs = JsonUtility.FromJson<CloudPlayerPrefs>(PlayerPrefs.GetString("Saves"));
-        else
-            _playerPrefs = new CloudPlayerPrefs();
-
-        IsSavesLoaded = true;
     }
 }

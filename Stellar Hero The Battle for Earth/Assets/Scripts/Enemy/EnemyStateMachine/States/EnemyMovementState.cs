@@ -1,21 +1,21 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(EnemyUnit))]
+[RequireComponent(typeof(EnemyUnit)), RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(Animator))]
 public class EnemyMovementState : State
 {
-    protected Animator _animator;
-    private float _speed;
     private EnemyUnit _enemyUnit;
     private NavMeshAgent _agent;
+    private float _speed;
+    protected Animator Animator;
    
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        Animator = GetComponent<Animator>();
+        _enemyUnit = GetComponent<EnemyUnit>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
-        _animator = GetComponent<Animator>();
-        _enemyUnit = GetComponent<EnemyUnit>();
         _speed = _enemyUnit.Config.Speed;
         _agent.speed = _speed;
     }

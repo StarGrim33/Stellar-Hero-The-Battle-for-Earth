@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Collider2D))]
 public class EnterTriggerDamage : MonoBehaviour
 {
     [SerializeField] private bool _isTriggerDamage = false;
@@ -12,9 +11,7 @@ public class EnterTriggerDamage : MonoBehaviour
             return;
 
         if(collision.TryGetComponent<IDamageable>(out IDamageable damageable))
-        {
             damageable.TakeDamage(_damage);
-        }
     }
 
     public void OnTriggerDamage()=> _isTriggerDamage = true;

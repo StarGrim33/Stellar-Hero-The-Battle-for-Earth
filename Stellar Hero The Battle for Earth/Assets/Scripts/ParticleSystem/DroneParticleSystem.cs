@@ -1,4 +1,4 @@
 
-public class DroneParticleSystem : ParticleSystemPlayer
+public class DroneParticleSystem : BaseParticleSystemPlayer
 {
 }

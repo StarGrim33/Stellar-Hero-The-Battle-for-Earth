@@ -7,17 +7,19 @@ public class RangeAttackState : AttackState
 
     public override void Attack()
     {
+        float minRangeAttack = 10f;
+
         if (Target.IsAlive)
         {
-            if (Vector2.Distance(Target.TargetTransform.position, transform.position) < 10f)
+            if (Vector2.Distance(Target.TargetTransform.position, transform.position) < minRangeAttack)
             {
-                _animator.Play(Constants.AttackState);
+                Animator.Play(Constants.AttackState);
                 SpawnBullet();
             }
             else
             {
                 enabled = false;
-                _enemyStateMachine.ResetState();
+                EnemyStateMachine.ResetState();
             }
         }
     }
@@ -28,6 +30,6 @@ public class RangeAttackState : AttackState
 
         var bullet = Instantiate(_bullet);
         bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, -directionToTarget);
-        bullet.Shot(transform.position, Target.TargetTransform.position, _speed, _damage);
+        bullet.Shot(transform.position, Target.TargetTransform.position, _speed, Damage);
     }
 }

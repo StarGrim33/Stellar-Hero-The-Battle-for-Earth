@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DroneAttackState : IStateSwitcher
 {
-    public Transform CurrenTarget { get; private set; }
-
     private CheckCircleOverlap _enemyChecker;
     private DroneParticleSystem _shotEffect;
     private DroneStateMachine _machine;
@@ -18,6 +16,8 @@ public class DroneAttackState : IStateSwitcher
     private PlayerCharacteristics _characteristics;
     private float _lastAttackTime;
     private float _angle;
+
+    public Transform CurrenTarget { get; private set; }
 
     public DroneAttackState(DroneStateMachine machine, CheckCircleOverlap checker, DroneParticleSystem shotEffect, Transform transformDrone, Transform heroTransform, DroneParameters droneParameters, TrailInstantiator instantiator, PlayerCharacteristics characteristics)
     {

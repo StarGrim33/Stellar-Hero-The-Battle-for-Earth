@@ -1,7 +1,5 @@
 using Agava.YandexGames;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SDKInitializer : MonoBehaviour
 {
@@ -18,17 +16,17 @@ public class SDKInitializer : MonoBehaviour
 
         if (YandexGamesSdk.IsInitialized)
         {
-            Debug.Log("SDK is initialized");
-
             StartCoroutine(OnInitialized());
         }
     }
 
     private IEnumerator OnInitialized()
     {
-        var waitForSeconds = new WaitForSeconds(3f);
+        int threeSeconds = 3;
+        int firsScene = 1;
+        var waitForSeconds = new WaitForSeconds(threeSeconds);
         yield return waitForSeconds;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(firsScene);
     }
 #endif
 }

@@ -18,7 +18,6 @@ public class CharacteristicChanger : MonoBehaviour
     public void Init(CharacteristicChangerConfig config)
     {
         _config = config;
-
         _icon.sprite = _config.Icon;
         _description.text = _config.GetDescription();
     }
@@ -26,7 +25,6 @@ public class CharacteristicChanger : MonoBehaviour
     public void OnClick()
     {
         ChangeCharacteristic();
-
         Time.timeScale = 1.0f;
         _window.gameObject.SetActive(false);
     }
@@ -34,7 +32,6 @@ public class CharacteristicChanger : MonoBehaviour
     public void ChangeCharacteristic()
     {
         _config.ChangeCharacteristic();
-
         _window.CharacteristicChangerListUpdated(_config);
     }
 }
