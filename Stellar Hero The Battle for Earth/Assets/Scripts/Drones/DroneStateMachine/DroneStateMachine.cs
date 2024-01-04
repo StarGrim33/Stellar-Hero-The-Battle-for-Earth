@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CheckCircleOverlap))]
+[RequireComponent(typeof(CheckCircleOverlap), typeof(DroneSpriteRotator), typeof(DroneParticleSystem)), RequireComponent(typeof(CheckCircleOverlap))]
 public class DroneStateMachine : MonoBehaviour
 {
     [SerializeField] private Transform _playerUnit;
@@ -51,7 +51,7 @@ public class DroneStateMachine : MonoBehaviour
 
         _states = new Dictionary<Type, IStateSwitcher>()
         {
-            [typeof(DroneMovementState)] = new DroneMovementState(transform, _playerUnit, this, _enemyChecker),
+            [typeof(DroneMovementState)] = new DroneMovementState(transform, _playerUnit, this, _enemyChecker, _shotEffect),
             [typeof(DroneAttackState)] = new DroneAttackState(this, _enemyChecker, _shotEffect, transform, _playerUnit, _parameters, _instantiator, _characteristics),
         };
     }

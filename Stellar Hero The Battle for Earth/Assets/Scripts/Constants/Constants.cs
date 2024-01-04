@@ -1,4 +1,3 @@
-using UnityEngine.Animations;
 
 public static class Constants
 {
