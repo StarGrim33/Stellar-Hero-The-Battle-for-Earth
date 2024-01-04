@@ -44,7 +44,9 @@ public class DroneAttackState : IStateSwitcher
     public void Update()
     {
         if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+        {
             return;
+        }
 
         Move();
         CheckEnemiesAndAttack();
@@ -59,10 +61,12 @@ public class DroneAttackState : IStateSwitcher
         if (hit.collider != null && hit.collider.TryGetComponent<IDamageable>(out var damageable))
         {
             if (damageable is not PlayerHealth)
+            {
                 damageable.TakeDamage((int)_characteristics.GetValue(Characteristics.DroneDamage));
+            }
 
             _instantiator.TrailInstantiate(hit.point);
-            
+
             _shotEffect.PlayEffect(ParticleEffects.Shield);
         }
     }
@@ -102,10 +106,14 @@ public class DroneAttackState : IStateSwitcher
         _enemyList = _enemyChecker.Check<IDamageable>();
 
         if (_currentTarget == null || _currentTarget.IsAlive == false)
+        {
             _currentTarget = FindClosestLivingEnemy();
+        }
 
         if (_enemyList.Count < 0)
+        {
             return;
+        }
 
         if (_lastAttackTime <= 0 && _currentTarget != null)
         {
