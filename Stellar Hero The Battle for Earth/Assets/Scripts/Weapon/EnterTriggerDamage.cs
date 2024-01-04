@@ -11,9 +11,7 @@ public class EnterTriggerDamage : MonoBehaviour
             return;
 
         if(collision.TryGetComponent<IDamageable>(out IDamageable damageable))
-        {
             damageable.TakeDamage(_damage);
-        }
     }
 
     public void OnTriggerDamage()=> _isTriggerDamage = true;

@@ -6,7 +6,7 @@ public class WeaponAnimator : MonoBehaviour
 {
     [SerializeField] private Transform _weaponTransform;
     private Pistol _pistol;
-    private Quaternion _startRotation; 
+    private Quaternion _startRotation;
 
     private void Awake()
     {
@@ -34,9 +34,9 @@ public class WeaponAnimator : MonoBehaviour
         if (reloading)
         {
             _weaponTransform
-                .DOLocalRotate(new Vector3(zeroAngle, zeroAngle, completeAngle), duration, RotateMode.FastBeyond360)
-                .SetLoops(loop, LoopType.Restart)
-                .SetEase(Ease.Linear).SetLink(_weaponTransform.gameObject);
+            .DOLocalRotate(new Vector3(zeroAngle, zeroAngle, completeAngle), duration, RotateMode.FastBeyond360)
+            .SetLoops(loop, LoopType.Restart)
+            .SetEase(Ease.Linear).SetLink(_weaponTransform.gameObject);
         }
         else
         {

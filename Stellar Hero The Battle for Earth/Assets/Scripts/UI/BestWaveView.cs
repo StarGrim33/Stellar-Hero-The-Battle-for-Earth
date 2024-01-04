@@ -7,10 +7,10 @@ public class BestWaveView : MonoBehaviour
     [SerializeField] private TMP_Text _text;
     [SerializeField] private Spawner _currentWave;
     [SerializeField] private Button _recordButton;
-
-    public int BestWave => _bestWave;
     private string _language;
     private int _bestWave;
+
+    public int BestWave => _bestWave;
 
     private void OnEnable()
     {

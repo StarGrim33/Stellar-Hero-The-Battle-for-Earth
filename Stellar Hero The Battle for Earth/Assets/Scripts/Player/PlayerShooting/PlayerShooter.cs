@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerShooter : MonoBehaviour
 {
-    [SerializeField] private List<Weapon> _weapons;
+    [SerializeField] private List<BaseWeapon> _weapons;
     [SerializeField] private Transform _transform;
 
     private void Start()

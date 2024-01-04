@@ -32,18 +32,14 @@ public class WebUtilityFixer : MonoBehaviour
         WebApplication.InBackgroundChangeEvent -= OnInBackgroundChangeWeb;
     }
 
-    private void OnInBackgroundChangeWeb(bool inBackground)
-    {
-        MuteAudio(inBackground);
-        PauseGame(inBackground);
-    }
-
     public void UnPause(bool isAdvShowing)
     {
         _isAdvShowing = isAdvShowing;
 
         if (StateManager.Instance.IsLevelUpPanelShowing)
+        {
             return;
+        }
 
         if (!isAdvShowing)
         {
@@ -71,10 +67,18 @@ public class WebUtilityFixer : MonoBehaviour
         _stateManager.SetState(GameStates.Paused);
     }
 
+    private void OnInBackgroundChangeWeb(bool inBackground)
+    {
+        MuteAudio(inBackground);
+        PauseGame(inBackground);
+    }
+
     private void PauseGame(bool inBackground)
     {
         if (StateManager.Instance.IsLevelUpPanelShowing)
+        {
             return;
+        }
 
         if (inBackground)
         {

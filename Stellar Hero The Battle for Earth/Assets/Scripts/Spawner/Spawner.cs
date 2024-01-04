@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Spawner : MonoBehaviour
 {
@@ -26,11 +25,11 @@ public class Spawner : MonoBehaviour
     private float _timeAfterLastSpawn;
     private int _spawned;
 
+    public event Action AllEnemySpawned;
+
+    public event Action<int> WaveChanged;
+
     public int CurrentWaveIndex => _currentWaveIndex + 1;
-
-    public event UnityAction AllEnemySpawned;
-
-    public event UnityAction<int> WaveChanged;
 
     private void Awake()
     {
@@ -64,10 +63,14 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         if (_isSpawnFrozen || StateManager.Instance.CurrentGameState == GameStates.Paused)
+        {
             return;
+        }
 
         if (_currentWave == null)
+        {
             return;
+        }
 
         SpawnWave();
 
@@ -164,7 +167,9 @@ public class Spawner : MonoBehaviour
         enemy.transform.position = _spawnPoints[spawnPointIndex].position;
 
         if (enemy.transform.position == null)
+        {
             throw new Exception("Check spawner and enemy pool for available space");
+        }
 
         enemy.transform.rotation = _spawnPoints[spawnPointIndex].rotation;
         enemy.gameObject.SetActive(true);
@@ -174,10 +179,15 @@ public class Spawner : MonoBehaviour
 
     private void OnEnemyDying(EnemyHealth enemy)
     {
-        if (enemy == null) return;
+        if (enemy == null)
+        {
+            return;
+        }
 
         if (enemy.TryGetComponent<ExperienceEnemy>(out ExperienceEnemy experience))
+        {
             _experienceHandler.AddExperience(experience.ExperienceForEnemy);
+        }
 
         enemy.Dying -= OnEnemyDying;
     }

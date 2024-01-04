@@ -6,7 +6,7 @@ public class DamagePopuper : MonoBehaviour
 {
     [SerializeField] private GameObject _prefabPopup;
     [SerializeField] private TMP_Text _text;
-    private float _maxShiftDistance = 0.5f; 
+    private float _maxShiftDistance = 0.5f;
 
     private void Start()
     {

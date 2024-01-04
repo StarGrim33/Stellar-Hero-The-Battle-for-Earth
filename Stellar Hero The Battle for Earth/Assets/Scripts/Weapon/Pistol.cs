@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Pistol : Weapon
+public class Pistol : BaseWeapon
 {
     [SerializeField] private PoolObjectSpawnComponent _spawnComponent;
     [SerializeField] private BulletSpeedModifier _params;
@@ -77,7 +77,6 @@ public class Pistol : Weapon
             bullet.gameObject.SetActive(true);
             bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, -directionToTarget);
             bullet.Shot(_transform.position, _currentTarget.TargetTransform.position, _params.BulletSpeed, (int)_characteristics.GetValue(Characteristics.Damage));
-
             _cameraShaker.GenerateImpulse();
             _audioSource.PlayOneShot(Constants.ShotSound);
         }
