@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NextSceneLoader : MonoBehaviour
+public class NextSceneLoader : MonoBehaviour, ISceneLoader
 {
     [SerializeField] private int _levelIndex;
     [SerializeField] private GameObject _panel;

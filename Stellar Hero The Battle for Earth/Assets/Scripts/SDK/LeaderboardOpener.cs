@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LeaderboardOpener : MonoBehaviour
+public class LeaderboardOpener : MonoBehaviour, ILeaderboard
 {
     [SerializeField] private GameObject _leaderboardPanel;
     [SerializeField] private GameObject _notAuthorizedPanel;
@@ -15,11 +15,11 @@ public class LeaderboardOpener : MonoBehaviour
     [SerializeField] private TMP_Text[] _playersScore;
     [SerializeField] private TextOptimizer _textOptimizer;
 
-    public void OnOpenLeaderBoard()
+    public void OpenLeaderboard()
     {
         if (PlayerAccount.IsAuthorized)
         {
-            OnGetLeaderboardEntriesButtonClick();
+            GetLeaderboardEntriesButtonClick();
             _leaderboardPanel.SetActive(true);
             _soundButton.gameObject.SetActive(false);
         }
@@ -30,7 +30,7 @@ public class LeaderboardOpener : MonoBehaviour
         }
     }
 
-    public void OnGetLeaderboardEntriesButtonClick()
+    public void GetLeaderboardEntriesButtonClick()
     {
         Agava.YandexGames.Leaderboard.GetEntries(Constants.LeaderboardName, (result) =>
         {
@@ -60,7 +60,7 @@ public class LeaderboardOpener : MonoBehaviour
         });
     }
 
-    private void ClearLeaderboardPanel()
+    public void ClearLeaderboardPanel()
     {
         foreach (var text in _playersName)
             text.text = string.Empty;

@@ -1,7 +1,7 @@
 using Plugins.Audio.Core;
 using UnityEngine;
 
-public class MusicHandler : MonoBehaviour
+public class MusicHandler : MonoBehaviour, IMusicHandler
 {
     [SerializeField] private SourceAudio[] _source;
 

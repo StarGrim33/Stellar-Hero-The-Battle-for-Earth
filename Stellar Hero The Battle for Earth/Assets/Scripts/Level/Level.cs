@@ -11,12 +11,12 @@ public class Level
         _health.PlayerDead += OnPlayerDead;
     }
 
-    public event Action Defeat;
-
     ~Level() 
     { 
         _health.PlayerDead -= OnPlayerDead;
     }
+
+    public event Action Defeat;
 
     public void Restart()
     {
@@ -31,8 +31,5 @@ public class Level
         Defeat?.Invoke();
     }
 
-    private void OnPlayerDead()
-    {
-        OnDefeat();
-    }
+    private void OnPlayerDead() => OnDefeat();
 }

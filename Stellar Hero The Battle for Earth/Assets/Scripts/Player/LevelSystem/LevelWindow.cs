@@ -9,20 +9,12 @@ public class LevelWindow : MonoBehaviour
     [SerializeField] private TMP_Text _leveText;
     [SerializeField] private Image _experienceBarImage;
     private PlayerLevelSystem _playerLevelSystem;
-    private string _englishLevelText = "Level: ";
-    private string _russianLevelText = "Уровень: ";
-    private string _turkeyLevelText = "Seviye: ";
+
     private string _language;
 
-    private void Awake()
-    {
-        _language = Language.Instance.CurrentLanguage;
-    }
+    private void Awake() => _language = Language.Instance.CurrentLanguage;
 
-    private void SetExperienceBarSize(float experienceNormalized)
-    {
-        _experienceBarImage.fillAmount = experienceNormalized;
-    }
+    private void SetExperienceBarSize(float experienceNormalized) => _experienceBarImage.fillAmount = experienceNormalized;
 
     private void SetLevelNumber(int number)
     {
@@ -30,10 +22,10 @@ public class LevelWindow : MonoBehaviour
 
         _leveText.text = _language switch
         {
-            Constants.EnglishCode => _englishLevelText + number.ToString(),
-            Constants.RussianCode => _russianLevelText + number.ToString(),
-            Constants.TurkishCode => _turkeyLevelText + number.ToString(),
-            _ => _russianLevelText + number.ToString(),
+            Constants.EnglishCode => Constants.EnglishLevelText + number.ToString(),
+            Constants.RussianCode => Constants.RussianLevelText + number.ToString(),
+            Constants.TurkishCode => Constants.TurkeyLevelText + number.ToString(),
+            _ => Constants.RussianLevelText + number.ToString(),
         };
     }
 
@@ -50,12 +42,8 @@ public class LevelWindow : MonoBehaviour
     private void OnLevelChanged()
     {
         SetLevelNumber(_playerLevelSystem.Level);
-
         _updateCharacteristicWindow.gameObject.SetActive(true);
     }
 
-    private void OnExperienceChanged()
-    {
-        SetExperienceBarSize(_playerLevelSystem.ExperienceNormalized);
-    }
+    private void OnExperienceChanged() => SetExperienceBarSize(_playerLevelSystem.ExperienceNormalized);
 }

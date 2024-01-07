@@ -6,10 +6,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private List<BaseWeapon> _weapons;
     [SerializeField] private Transform _transform;
 
-    private void Start()
-    {
-        transform.rotation = Quaternion.identity;
-    }
+    private void Start() => transform.rotation = Quaternion.identity;
 
     private void Update()
     {

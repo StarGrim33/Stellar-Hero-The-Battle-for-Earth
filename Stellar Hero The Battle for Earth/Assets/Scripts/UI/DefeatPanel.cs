@@ -26,10 +26,7 @@ public class DefeatPanel : MonoBehaviour
         _restartButton.onClick.RemoveListener(OnRestartClick);
     }
 
-    public void Initialize(GameplayMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    public void Initialize(GameplayMediator mediator) => _mediator = mediator;
 
     public void Show()
     {

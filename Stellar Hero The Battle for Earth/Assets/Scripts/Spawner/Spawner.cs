@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour, ISpawner
 {
     public static Spawner Instance { get; private set; }
 
@@ -26,7 +26,6 @@ public class Spawner : MonoBehaviour
     private int _spawned;
 
     public event Action AllEnemySpawned;
-
     public event Action<int> WaveChanged;
 
     public int CurrentWaveIndex => _currentWaveIndex + 1;
@@ -49,15 +48,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        _experienceHandler = GetComponent<ExperienceHandler>();
-        _unusedSpawnPoints = new List<int>();
-
-        for (int i = 0; i < _spawnPoints.Length; i++)
-            _unusedSpawnPoints.Add(i);
-
-        SetWave(_currentWaveIndex);
-        _target = _playerUnit.GetComponent<IDamageable>();
-        WaveChanged?.Invoke(CurrentWaveIndex);
+        Init();
     }
 
     private void Update()
@@ -95,12 +86,6 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public void FreezeSpawn(float duration)
-    {
-        _isSpawnFrozen = true;
-        StartCoroutine(UnfreezeSpawnAfterDelay(duration));
-    }
-
     public IEnumerator NextWave()
     {
         var delay = new WaitForSeconds(_delayBetweenWaves);
@@ -117,14 +102,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private IEnumerator UnfreezeSpawnAfterDelay(float duration)
-    {
-        var delay = new WaitForSeconds(duration);
-        yield return delay;
-        _isSpawnFrozen = false;
-    }
-
-    private void SpawnWave()
+    public void SpawnWave()
     {
         _timeAfterLastSpawn += Time.deltaTime;
 
@@ -147,7 +125,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy()
+    public void SpawnEnemy()
     {
         int randomIndex = UnityEngine.Random.Range(0, _unusedSpawnPoints.Count);
 
@@ -192,7 +170,7 @@ public class Spawner : MonoBehaviour
         enemy.Dying -= OnEnemyDying;
     }
 
-    private void SetWave(int index)
+    public void SetWave(int index)
     {
         _currentWave = _waves[index];
 
@@ -205,7 +183,7 @@ public class Spawner : MonoBehaviour
         WaveChanged?.Invoke(CurrentWaveIndex);
     }
 
-    private bool TryGetSpawnPoint(int randomIndex, out int spawnPointIndex)
+    public bool TryGetSpawnPoint(int randomIndex, out int spawnPointIndex)
     {
         spawnPointIndex = -1;
 
@@ -224,5 +202,18 @@ public class Spawner : MonoBehaviour
 
         for (int i = 0; i < _spawnPoints.Length; i++)
             _unusedSpawnPoints.Add(i);
+    }
+
+    private void Init()
+    {
+        _experienceHandler = GetComponent<ExperienceHandler>();
+        _unusedSpawnPoints = new List<int>();
+
+        for (int i = 0; i < _spawnPoints.Length; i++)
+            _unusedSpawnPoints.Add(i);
+
+        SetWave(_currentWaveIndex);
+        _target = _playerUnit.GetComponent<IDamageable>();
+        WaveChanged?.Invoke(CurrentWaveIndex);
     }
 }

@@ -8,10 +8,7 @@ public class GameplayMediator : MonoBehaviour
     [SerializeField] private Rigidbody2D _playerUnit;
     private Level _level;
 
-    private void OnDisable()
-    {
-        _level.Defeat -= OnDefeat;
-    }
+    private void OnDisable() => _level.Defeat -= OnDefeat;
 
     public void Initialize(Level level)
     {

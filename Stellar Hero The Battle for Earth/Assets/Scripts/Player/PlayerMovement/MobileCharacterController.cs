@@ -7,10 +7,7 @@ public class MobileCharacterController : MonoBehaviour
     [SerializeField] private AbilityButton _abilityButton;
     private IControllable _iControllable;
 
-    private void Awake()
-    {
-        _iControllable = GetComponent<IControllable>();
-    }
+    private void Awake() => _iControllable = GetComponent<IControllable>();
 
     private void OnEnable()
     {
@@ -24,10 +21,7 @@ public class MobileCharacterController : MonoBehaviour
         _abilityButton.Clicked -= Dash;
     }
 
-    private void Dash()
-    {
-        _iControllable.TryDash();
-    }
+    private void Dash() => _iControllable.TryDash();
 
     private void SetDirection()
     {

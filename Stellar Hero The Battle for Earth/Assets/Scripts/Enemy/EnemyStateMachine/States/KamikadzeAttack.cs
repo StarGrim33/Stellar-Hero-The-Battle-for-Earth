@@ -5,13 +5,14 @@ using UnityEngine;
 public class KamikadzeAttack : AttackState
 {
     private readonly float _explosionRadius = 1f;
+    private readonly int _explosionDamage = 25;
+    private readonly float _explosionDelay = 0.5f;
+    private readonly float _attackDistance = 0.8f;
 
     [SerializeField] private ParticleSystem _explosionEffect;
+
     private DeadEffectSpawner _effectSpawner;
     private EnemyHealth _enemyHealth;
-    private int _explosionDamage = 25;
-    private float _explosionDelay = 0.5f;
-    private float _attackDistance = 0.8f;
 
     private void Awake()
     {
@@ -21,8 +22,6 @@ public class KamikadzeAttack : AttackState
 
     public override void Attack()
     {
-        Damage = 0;
-
         if (Target != null)
         {
             if (Vector2.Distance(Target.TargetTransform.position, transform.position) < _attackDistance)
@@ -39,9 +38,9 @@ public class KamikadzeAttack : AttackState
 
     private IEnumerator ExplodeWithDelay(float delay)
     {
-        yield return new WaitForSeconds(delay); 
+        var waitForSeconds = new WaitForSeconds(delay);
+        yield return waitForSeconds; 
         Explode();
-
     }
 
     private void Explode()

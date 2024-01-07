@@ -20,7 +20,7 @@ public class DamagePopuper : MonoBehaviour
         float scaleDuration = 0.2f;
         _text.text = damage.ToString();
 
-        Vector3 randomShift = new Vector3(
+        Vector3 randomShift = new(
             Random.Range(-_maxShiftDistance, _maxShiftDistance),
             Random.Range(-_maxShiftDistance, _maxShiftDistance),
             0
@@ -33,8 +33,5 @@ public class DamagePopuper : MonoBehaviour
                     .OnComplete(() => HidePopup()));
     }
 
-    private void HidePopup()
-    {
-        _prefabPopup.SetActive(false);
-    }
+    private void HidePopup() => _prefabPopup.SetActive(false);
 }

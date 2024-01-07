@@ -18,10 +18,7 @@ public class BestWaveView : MonoBehaviour
         UpdateUI();
     }
 
-    private void OnDisable()
-    {
-        _recordButton.onClick.RemoveListener(UpdateUI);
-    }
+    private void OnDisable() => _recordButton.onClick.RemoveListener(UpdateUI);
 
     private void UpdateUI()
     {

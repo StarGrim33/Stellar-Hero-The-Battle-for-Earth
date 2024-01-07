@@ -5,7 +5,6 @@ public class AttackState : State
 {
     [SerializeField] protected int Damage;
     [SerializeField] protected float Delay;
-
     protected EnemyStateMachine EnemyStateMachine;
     protected Animator Animator;
     protected float LastAttackTime;
