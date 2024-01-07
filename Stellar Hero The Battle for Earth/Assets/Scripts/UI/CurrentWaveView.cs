@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -13,19 +12,7 @@ public class CurrentWaveView : MonoBehaviour
         _spawner.WaveChanged += WaveChanged;
     }
 
-    private void OnDisable()
-    {
-        _spawner.WaveChanged -= WaveChanged;
-    }
+    private void OnDisable() => _spawner.WaveChanged -= WaveChanged;
 
-    private void Start()
-    {
-        if (_spawner == null)
-            throw new Exception("Check spawner and enemy pool for available space");
-    }
-
-    private void WaveChanged(int value)
-    {
-        _text.text = value.ToString();
-    }
+    private void WaveChanged(int value) => _text.text = value.ToString();
 }

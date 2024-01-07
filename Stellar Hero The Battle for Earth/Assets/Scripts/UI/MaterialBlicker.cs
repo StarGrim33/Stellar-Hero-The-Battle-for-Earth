@@ -24,8 +24,5 @@ public class MaterialBlicker : MonoBehaviour
         Invoke(nameof(ResetMaterial), _flashDuration);
     }
 
-    private void ResetMaterial()
-    {
-        _spriteRenderer.material = _originalMaterial;
-    }
+    private void ResetMaterial() => _spriteRenderer.material = _originalMaterial;
 }

@@ -11,10 +11,7 @@ public abstract class State : MonoBehaviour
 
     protected EnemyHealth Health => _health;
 
-    private void Awake()
-    {
-        _health = GetComponent<EnemyHealth>();
-    }
+    private void Awake() => _health = GetComponent<EnemyHealth>();
 
     public void Enter(IDamageable target)
     {

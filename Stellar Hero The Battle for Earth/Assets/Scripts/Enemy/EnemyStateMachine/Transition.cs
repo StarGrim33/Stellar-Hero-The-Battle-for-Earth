@@ -10,13 +10,7 @@ public abstract class Transition : MonoBehaviour
 
     public bool NeedTransit { get; protected set; }
 
-    private void OnEnable()
-    {
-        NeedTransit = false;
-    }
+    private void OnEnable() => NeedTransit = false;
 
-    public void Init(IDamageable target)
-    {
-        Target ??= target;
-    }
+    public void Init(IDamageable target) => Target ??= target;
 }

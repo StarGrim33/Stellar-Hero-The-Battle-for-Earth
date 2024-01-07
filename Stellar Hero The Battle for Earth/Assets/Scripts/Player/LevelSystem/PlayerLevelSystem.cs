@@ -4,9 +4,9 @@ using System.Linq;
 public class PlayerLevelSystem
 {
     private readonly int[] _experienceLevel;
+    private readonly int _minLevelExp = 100;
+    private readonly int _maxLevelExp = 341;
 
-    private int _minLevelExp = 100;
-    private int _maxLevelExp = 341;
     private int _level;
     private int _experience;
 

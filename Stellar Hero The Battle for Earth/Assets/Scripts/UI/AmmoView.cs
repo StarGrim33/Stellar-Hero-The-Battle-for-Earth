@@ -21,8 +21,5 @@ public class AmmoView : MonoBehaviour
         AmmoChanged(_weapon.CurrentAmmo, _weapon.MaxAmmo);
     }
 
-    private void AmmoChanged(int value, int maxAmmo)
-    {
-        _ammoText.text = $"{value} / {maxAmmo}".ToString();
-    }
+    private void AmmoChanged(int value, int maxAmmo) => _ammoText.text = $"{value} / {maxAmmo}".ToString();
 }

@@ -6,20 +6,11 @@ public class DroneSpriteRotator : MonoBehaviour
     private SpriteRenderer _droneSprite;
     private DroneAttackState _droneAttackState;
 
-    private void Start()
-    {
-        _droneSprite = GetComponent<SpriteRenderer>();
-    }
+    private void Start() => _droneSprite = GetComponent<SpriteRenderer>();
 
-    public void Init(DroneAttackState attackState)
-    {
-        _droneAttackState = attackState;
-    }
+    public void Init(DroneAttackState attackState) => _droneAttackState = attackState;
 
-    private void Update()
-    {
-        RotateToTarget();
-    }
+    private void Update() => RotateToTarget();
 
     private void RotateToTarget()
     {

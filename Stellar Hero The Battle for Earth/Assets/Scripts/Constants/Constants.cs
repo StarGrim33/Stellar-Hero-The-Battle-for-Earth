@@ -31,4 +31,11 @@ public static class Constants
 
     public const string ReloadSound = "Reload";
     public const string ShotSound = "Shot";
+    public const string IsRevive = "IsRevive";
+
+    public const string EnglishLevelText = "Level: ";
+    public const string RussianLevelText = "Уровень: ";
+    public const string TurkeyLevelText = "Seviye: ";
+
+    public const string BattleSound = "Battle";
 }

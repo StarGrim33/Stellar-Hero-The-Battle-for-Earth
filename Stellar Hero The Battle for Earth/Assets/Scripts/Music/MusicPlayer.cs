@@ -1,22 +1,13 @@
 using Plugins.Audio.Core;
 using UnityEngine;
 
-public class MusicPlayer : MonoBehaviour
+public class MusicPlayer : MonoBehaviour, IMusicPlayer
 {
     [SerializeField] private SourceAudio _source;
 
-    private void Start()
-    {
-        _source.Play("Battle");
-    }
+    private void Start() => _source.Play(Constants.BattleSound);
 
-    public void Pause()
-    {
-        _source.Mute = true;    
-    }
+    public void Pause() => _source.Mute = true;
 
-    public void UnPause()
-    {
-        _source.Mute = false;
-    }
+    public void UnPause() => _source.Mute = false;
 }

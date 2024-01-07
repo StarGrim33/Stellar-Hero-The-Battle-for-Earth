@@ -8,10 +8,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     public State CurrentState { get; private set; }
 
-    private void Start()
-    {
-        ResetState();
-    }
+    private void Start() => ResetState();
 
     private void Update()
     {

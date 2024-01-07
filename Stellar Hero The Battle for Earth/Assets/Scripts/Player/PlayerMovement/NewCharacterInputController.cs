@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class NewCharacterInputController : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
-
     private IControllable _iControllable;
     private Input _gameInput;
     private Vector2 _mousePosition;
@@ -24,26 +23,14 @@ public class NewCharacterInputController : MonoBehaviour
         _gameInput.Enable();
     }
 
-    private void OnEnable()
-    {
-        _gameInput.Gameplay.Dash.performed += OnDashOnPerformed;
-        _gameInput.Gameplay.Movement.performed += OnGetDirection;
-        _gameInput.Gameplay.Movement.canceled += OnGetDirection;
-        _gameInput.Gameplay.MousePosition.performed += OnMousePositionPerformed;
-    }
+    private void OnEnable() => Init();
 
     private void OnMousePositionPerformed(InputAction.CallbackContext callbackContext)
     {
         _mousePosition = _camera.ScreenToWorldPoint(callbackContext.ReadValue<Vector2>());
     }
 
-    private void OnDisable()
-    {
-        _gameInput.Gameplay.MousePosition.performed -= OnMousePositionPerformed;
-        _gameInput.Gameplay.Dash.performed -= OnDashOnPerformed;
-        _gameInput.Gameplay.Movement.performed -= OnGetDirection;
-        _gameInput.Gameplay.Movement.canceled -= OnGetDirection;
-    }
+    private void OnDisable() => Finalization();
 
     private void OnDashOnPerformed(InputAction.CallbackContext callbackContext)
     {
@@ -55,5 +42,21 @@ public class NewCharacterInputController : MonoBehaviour
     {
         var direction = context.ReadValue<Vector2>();
         _iControllable.SetDirection(direction);
+    }
+
+    private void Init()
+    {
+        _gameInput.Gameplay.Dash.performed += OnDashOnPerformed;
+        _gameInput.Gameplay.Movement.performed += OnGetDirection;
+        _gameInput.Gameplay.Movement.canceled += OnGetDirection;
+        _gameInput.Gameplay.MousePosition.performed += OnMousePositionPerformed;
+    }
+
+    private void Finalization()
+    {
+        _gameInput.Gameplay.MousePosition.performed -= OnMousePositionPerformed;
+        _gameInput.Gameplay.Dash.performed -= OnDashOnPerformed;
+        _gameInput.Gameplay.Movement.performed -= OnGetDirection;
+        _gameInput.Gameplay.Movement.canceled -= OnGetDirection;
     }
 }

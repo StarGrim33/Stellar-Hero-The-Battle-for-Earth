@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PanelSwitcher : MonoBehaviour
+public class PanelSwitcher : MonoBehaviour, IPanelSwiitcher
 {
     [SerializeField] private GameObject _panel;
     [SerializeField] private GameObject _effect;

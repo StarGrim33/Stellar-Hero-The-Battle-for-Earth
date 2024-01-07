@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class ShieldHandler : MonoBehaviour
@@ -6,15 +5,9 @@ public class ShieldHandler : MonoBehaviour
     [SerializeField] private PlayerHealth _health;
     [SerializeField] private ParticleSystem _particle;
 
-    private void OnEnable()
-    {
-        _health.Immortality += Immortality;
-    }
+    private void OnEnable() => _health.Immortality += Immortality;
 
-    private void OnDisable()
-    {
-        _health.Immortality -= Immortality;
-    }
+    private void OnDisable() => _health.Immortality -= Immortality;
 
     private void Immortality()
     {

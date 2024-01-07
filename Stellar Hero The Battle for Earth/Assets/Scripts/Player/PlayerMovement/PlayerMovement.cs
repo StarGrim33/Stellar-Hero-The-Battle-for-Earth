@@ -2,7 +2,6 @@ using Assets.Scripts.Components.Checkers;
 using Assets.Scripts.Utils;
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerParticleSystem))]
 public class PlayerMovement : MonoBehaviour, IControllable

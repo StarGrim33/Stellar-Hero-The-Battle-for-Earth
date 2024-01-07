@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class RangeAttackState : AttackState
 {
+    private readonly float _speed = 3.5f;
     [SerializeField] private EnemyBullet _bullet;
-    private float _speed = 3.5f;
 
     public override void Attack()
     {

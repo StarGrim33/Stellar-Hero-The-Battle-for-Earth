@@ -15,35 +15,10 @@ public class PlayerHealth : UnitHealth, IDamageable
     private float _remainingImmortalityTime;
 
     public event Action<float, float> OnHealthChanged;
-
     public event Action PlayerDead;
-
     public event Action Immortality;
 
-    public float MaxHealth => _maxHealth;
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-    }
-
-    private void Awake()
-    {
-        _effects = GetComponent<BaseParticleSystemPlayer>();
-    }
-
-    private void Start()
-    {
-        _playerMovement = GetComponent<PlayerMovement>();
-        _playerMovement.Dashing += InvulnerableActivated;
-        SetMaxHealth();
-        PlayerCharacteristics.I.CharacteristicChanged += SetMaxHealth;
-    }
-
-    private void OnDisable()
-    {
-        _playerMovement.Dashing -= InvulnerableActivated;
-    }
+    public new float MaxHealth => base.MaxHealth;
 
     public float CurrentHealth
     {
@@ -53,7 +28,7 @@ public class PlayerHealth : UnitHealth, IDamageable
         }
         private set
         {
-            ÑurrenHealth = Mathf.Clamp(value, 0, _maxHealth);
+            ÑurrenHealth = Mathf.Clamp(value, 0, base.MaxHealth);
 
             if (ÑurrenHealth <= 0)
                 Die();
@@ -63,6 +38,20 @@ public class PlayerHealth : UnitHealth, IDamageable
     public Transform TargetTransform => transform;
 
     public bool IsAlive => ÑurrenHealth > 0;
+
+    protected override void OnEnable() => base.OnEnable();
+
+    private void Awake() => _effects = GetComponent<BaseParticleSystemPlayer>();
+
+    private void Start()
+    {
+        _playerMovement = GetComponent<PlayerMovement>();
+        _playerMovement.Dashing += InvulnerableActivated;
+        SetMaxHealth();
+        PlayerCharacteristics.I.CharacteristicChanged += SetMaxHealth;
+    }
+
+    private void OnDisable() => _playerMovement.Dashing -= InvulnerableActivated;
 
     protected override void Die()
     {
@@ -100,7 +89,7 @@ public class PlayerHealth : UnitHealth, IDamageable
     {
         CurrentHealth = MaxHealth;
         OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
-        _animator.SetBool("IsRevive", true);
+        _animator.SetBool(Constants.IsRevive, true);
         _handSpriteHandler.Enable();
     }
 
@@ -129,7 +118,7 @@ public class PlayerHealth : UnitHealth, IDamageable
 
     private void SetMaxHealth()
     {
-        _maxHealth = PlayerCharacteristics.I.GetValue(Characteristics.MaxHealth);
+        base.MaxHealth = PlayerCharacteristics.I.GetValue(Characteristics.MaxHealth);
         CurrentHealth = MaxHealth;
     }
 }

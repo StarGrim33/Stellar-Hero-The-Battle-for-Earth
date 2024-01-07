@@ -7,10 +7,7 @@ public class ButtonFiller : MonoBehaviour
 {
     private Image _image;
 
-    private void Awake()
-    {
-        _image = GetComponent<Image>();
-    }
+    private void Awake() => _image = GetComponent<Image>();
 
     public void SetFilled(float value)
     {

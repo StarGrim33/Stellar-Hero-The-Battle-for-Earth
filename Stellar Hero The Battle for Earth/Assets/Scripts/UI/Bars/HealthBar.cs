@@ -12,10 +12,7 @@ public class HealthBar : MonoBehaviour
     private float _lerpTimer = 0f;
     private float _chipSpeed = 2f;
 
-    private void Update()
-    {
-        UpdateHealthUI();
-    }
+    private void Update() => UpdateHealthUI();
 
     private void UpdateHealthUI()
     {
@@ -44,9 +41,6 @@ public class HealthBar : MonoBehaviour
             _lerpTimer = 0f;
         }
     }
-    
-    private void SetHealthValue(float currentHealth, float maxHealth)
-    {
-        _healthValue.text = $"{currentHealth}/{maxHealth}".ToString();
-    }
+
+    private void SetHealthValue(float currentHealth, float maxHealth) => _healthValue.text = $"{currentHealth}/{maxHealth}".ToString();
 }

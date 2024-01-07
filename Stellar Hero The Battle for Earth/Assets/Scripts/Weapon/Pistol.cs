@@ -17,10 +17,7 @@ public class Pistol : BaseWeapon
 
     private void Start()
     {
-        _characteristics = PlayerCharacteristics.I;
-        _characteristics.CharacteristicChanged += SetWeaponParams;
-        SetWeaponParams();
-        _currentAmmo = _maxAmmo;
+        Init();
     }
 
     protected override void RotateWeaponToTarget(Vector3 target)
@@ -96,5 +93,13 @@ public class Pistol : BaseWeapon
         _reloadTime = _characteristics.GetValue(Characteristics.ReloadTimeAmmo);
         _maxAmmo = (int)_characteristics.GetValue(Characteristics.MaxAmmo);
         ShotCooldown.ChangeCooldownValue(_characteristics.GetValue(Characteristics.ShotCooldown));
+    }
+
+    private void Init()
+    {
+        _characteristics = PlayerCharacteristics.I;
+        _characteristics.CharacteristicChanged += SetWeaponParams;
+        SetWeaponParams();
+        _currentAmmo = _maxAmmo;
     }
 }

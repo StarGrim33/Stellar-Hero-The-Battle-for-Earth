@@ -20,7 +20,7 @@ public class EnemyHealth : UnitHealth, IDamageable
         }
         private set
         {
-            ÑurrenHealth = Mathf.Clamp(value, 0, _maxHealth);
+            ÑurrenHealth = Mathf.Clamp(value, 0, MaxHealth);
 
             if (ÑurrenHealth <= 0)
                 Die();
@@ -33,10 +33,7 @@ public class EnemyHealth : UnitHealth, IDamageable
 
     private void Start()
     {
-        _enemyBuffDropper = GetComponent<EnemyBuffDropper>();
-        _deadEffectSpawner = GetComponent<DeadEffectSpawner>();
-        _damagePopuper = GetComponent<DamagePopuper>();
-        _blicker = GetComponentInChildren<MaterialBlicker>();
+        Init();
     }
 
     public void TakeDamage(int damage)
@@ -72,5 +69,13 @@ public class EnemyHealth : UnitHealth, IDamageable
         var waitForSeconds = new WaitForSeconds(timeForDisable);
         yield return waitForSeconds;
         gameObject.SetActive(false);
+    }
+
+    private void Init()
+    {
+        _enemyBuffDropper = GetComponent<EnemyBuffDropper>();
+        _deadEffectSpawner = GetComponent<DeadEffectSpawner>();
+        _damagePopuper = GetComponent<DamagePopuper>();
+        _blicker = GetComponentInChildren<MaterialBlicker>();
     }
 }
