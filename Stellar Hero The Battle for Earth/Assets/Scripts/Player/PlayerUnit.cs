@@ -1,3 +1,4 @@
+using Buffs;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerHealth))]

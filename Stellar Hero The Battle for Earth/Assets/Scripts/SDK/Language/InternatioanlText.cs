@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using Utils;
 
 public class InternationalText : MonoBehaviour
 {
@@ -23,12 +24,15 @@ public class InternationalText : MonoBehaviour
             case (Constants.EnglishCode):
                 SetText(_en);
                 break;
+
             case (Constants.RussianCode):
                 SetText(_ru);
                 break;
+
             case (Constants.TurkishCode):
                 SetText(_tr);
                 break;
+
             default:
                 SetText(_en);
                 break;

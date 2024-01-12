@@ -2,6 +2,7 @@ using Agava.YandexGames;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 public class LeaderboardOpener : MonoBehaviour, ILeaderboard
 {

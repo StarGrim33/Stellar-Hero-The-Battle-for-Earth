@@ -1,5 +1,6 @@
 using Agava.YandexGames;
 using UnityEngine;
+using Utils;
 
 public class LeaderboradSaver : MonoBehaviour
 {

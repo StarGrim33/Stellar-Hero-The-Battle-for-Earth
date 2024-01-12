@@ -5,7 +5,7 @@ namespace Assets.Scripts.Components.Checkers
 {
     public class CheckCircleOverlap : MonoBehaviour
     {
-        private static readonly int ColliderSize = 5;
+        private const int ColliderSize = 5;
 
         private readonly Collider2D[] _collidedResult = new Collider2D[ColliderSize];
 

@@ -1,11 +1,14 @@
 using System;
 
-[Serializable]
-public class DroneParameters
+namespace Drone
 {
-    public int Damage { get; private set; } = 15;
+    [Serializable]
+    public class DroneParameters
+    {
+        public int Damage { get; } = 15;
 
-    public float Delay { get; private set; } = 2f;
+        public float Delay { get; } = 2f;
 
-    public float FlyRadius { get; private set; } = 1.0f;
+        public float FlyRadius { get; } = 1.0f;
+    }
 }

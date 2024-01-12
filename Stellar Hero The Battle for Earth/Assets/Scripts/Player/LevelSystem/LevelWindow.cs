@@ -1,20 +1,25 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 public class LevelWindow : MonoBehaviour
 {
     [SerializeField] private UpdateCharacteristicWindow _updateCharacteristicWindow;
-    [Space]
     [SerializeField] private TMP_Text _leveText;
     [SerializeField] private Image _experienceBarImage;
     private PlayerLevelSystem _playerLevelSystem;
-
     private string _language;
 
-    private void Awake() => _language = Language.Instance.CurrentLanguage;
+    private void Awake()
+    {
+        _language = Language.Instance.CurrentLanguage;
+    }
 
-    private void SetExperienceBarSize(float experienceNormalized) => _experienceBarImage.fillAmount = experienceNormalized;
+    private void SetExperienceBarSize(float experienceNormalized)
+    {
+        _experienceBarImage.fillAmount = experienceNormalized;
+    }
 
     private void SetLevelNumber(int number)
     {
@@ -45,5 +50,8 @@ public class LevelWindow : MonoBehaviour
         _updateCharacteristicWindow.gameObject.SetActive(true);
     }
 
-    private void OnExperienceChanged() => SetExperienceBarSize(_playerLevelSystem.ExperienceNormalized);
+    private void OnExperienceChanged()
+    {
+        SetExperienceBarSize(_playerLevelSystem.ExperienceNormalized);
+    }
 }

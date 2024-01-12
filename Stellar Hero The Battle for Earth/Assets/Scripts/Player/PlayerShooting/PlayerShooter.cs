@@ -1,12 +1,13 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShooter : MonoBehaviour
 {
-    [SerializeField] private List<BaseWeapon> _weapons;
-    [SerializeField] private Transform _transform;
+    [SerializeField] private BaseWeapon _weapon;
 
-    private void Start() => transform.rotation = Quaternion.identity;
+    private void Start()
+    {
+        transform.rotation = Quaternion.identity;
+    }
 
     private void Update()
     {
@@ -15,12 +16,6 @@ public class PlayerShooter : MonoBehaviour
             return;
         }
 
-        foreach (var weapon in _weapons)
-        {
-            if(weapon.Target != null)
-            {
-                weapon.PerformShot();
-            }
-        }
+        _weapon.PerformShot();
     }
 }

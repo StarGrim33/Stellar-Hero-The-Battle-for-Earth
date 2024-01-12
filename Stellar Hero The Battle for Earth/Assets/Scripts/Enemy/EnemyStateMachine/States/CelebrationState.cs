@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 [RequireComponent(typeof(Animator))]
 public class CelebrationState : State

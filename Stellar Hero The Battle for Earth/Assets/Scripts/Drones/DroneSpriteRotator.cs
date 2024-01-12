@@ -1,30 +1,35 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class DroneSpriteRotator : MonoBehaviour
+namespace Drone
 {
-    private SpriteRenderer _droneSprite;
-    private DroneAttackState _droneAttackState;
-
-    private void Start() => _droneSprite = GetComponent<SpriteRenderer>();
-
-    public void Init(DroneAttackState attackState) => _droneAttackState = attackState;
-
-    private void Update() => RotateToTarget();
-
-    private void RotateToTarget()
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class DroneSpriteRotator : MonoBehaviour
     {
-        if (_droneSprite != null && _droneAttackState.CurrenTarget != null)
-        {
-            Transform target = _droneAttackState.CurrenTarget;
+        private SpriteRenderer _droneSprite;
+        private DroneAttackState _droneAttackState;
 
-            if (target.position.x > transform.position.x)
+        private void Start()
+        {
+            _droneSprite = GetComponent<SpriteRenderer>();
+        }
+
+        private void Update()
+        {
+            RotateToTarget();
+        }
+
+        public void Init(DroneAttackState attackState)
+        {
+            _droneAttackState = attackState;
+        }
+
+        private void RotateToTarget()
+        {
+            if (_droneSprite != null && _droneAttackState.CurrenTarget != null)
             {
-                _droneSprite.flipX = false; 
-            }
-            else
-            {
-                _droneSprite.flipX = true;
+                Transform target = _droneAttackState.CurrenTarget;
+
+                _droneSprite.flipX = target.position.x <= transform.position.x;
             }
         }
     }

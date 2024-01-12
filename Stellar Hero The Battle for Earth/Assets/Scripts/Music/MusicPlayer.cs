@@ -1,5 +1,6 @@
 using Plugins.Audio.Core;
 using UnityEngine;
+using Utils;
 
 public class MusicPlayer : MonoBehaviour, IMusicPlayer
 {

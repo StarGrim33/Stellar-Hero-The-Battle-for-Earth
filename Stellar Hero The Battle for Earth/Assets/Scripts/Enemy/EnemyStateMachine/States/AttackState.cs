@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 [RequireComponent(typeof(Animator)), RequireComponent(typeof(EnemyStateMachine))]
 public class AttackState : State

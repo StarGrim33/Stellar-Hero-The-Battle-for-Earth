@@ -1,5 +1,6 @@
 using Agava.YandexGames;
 using System.Collections;
+using Utils;
 
 public class IntroInternationalText : InternationalText
 {
@@ -21,12 +22,15 @@ public class IntroInternationalText : InternationalText
             case (Constants.EnglishCode):
                 SetText(_en);
                 break;
+
             case (Constants.RussianCode):
                 SetText(_ru);
                 break;
+
             case (Constants.TurkishCode):
                 SetText(_tr);
                 break;
+
             default:
                 SetText(_en);
                 break;

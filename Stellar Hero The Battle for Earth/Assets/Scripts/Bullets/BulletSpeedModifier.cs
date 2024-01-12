@@ -1,9 +1,15 @@
 using UnityEngine;
 
-public class BulletSpeedModifier : MonoBehaviour
+namespace Bullets
 {
-    [SerializeField] private float _bulletSpeedModify = 0;
-    private float _baseBulletSpeed = 3f;
+    public class BulletSpeedModifier : MonoBehaviour
+    {
+        private readonly float _baseBulletSpeed = 3f;
+        [SerializeField] private float _bulletSpeedModify = 0;
 
-    public float BulletSpeed =>  _baseBulletSpeed * (1f + _bulletSpeedModify);
+        public float GetBulletSpeed()
+        {
+            return _baseBulletSpeed * (1f + _bulletSpeedModify);
+        }
+    }
 }

@@ -1,23 +1,24 @@
 using UnityEngine;
 
-[RequireComponent (typeof(EnterTriggerDamage))]
-public class DroneTriggerDamageSetter : MonoBehaviour
+namespace Drone
 {
-    private EnterTriggerDamage _triggerDamage;
-    private PlayerCharacteristics _playerCharacteristics;
-
-    private void Start()
+    [RequireComponent(typeof(EnterTriggerDamage))]
+    public class DroneTriggerDamageSetter : MonoBehaviour
     {
-        _triggerDamage = GetComponent<EnterTriggerDamage>();
-        _playerCharacteristics = PlayerCharacteristics.I;
+        private EnterTriggerDamage _triggerDamage;
+        private PlayerCharacteristics _playerCharacteristics;
 
-        SetDamage();
+        private void Start()
+        {
+            _triggerDamage = GetComponent<EnterTriggerDamage>();
+            _playerCharacteristics = PlayerCharacteristics.I;
+            SetDamage();
+            _playerCharacteristics.CharacteristicChanged += SetDamage;
+        }
 
-        _playerCharacteristics.CharacteristicChanged += SetDamage;
-    }
-
-    private void SetDamage()
-    {
-        _triggerDamage.SetDamage((int)_playerCharacteristics.GetValue(Characteristics.DroneTriggerDamage));
+        private void SetDamage()
+        {
+            _triggerDamage.SetDamage((int)_playerCharacteristics.GetValue(Characteristics.DroneTriggerDamage));
+        }
     }
 }

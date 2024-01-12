@@ -1,38 +1,46 @@
 using System.Collections;
 using UnityEngine;
 
-public class Immortality : BaseBuff
+namespace Buffs
 {
-    [SerializeField] private float _duration;
-    [SerializeField] private SpriteRenderer _sprite;
-
-    private void OnEnable()
+    public class Immortality : BaseBuff
     {
-        StartCoroutine(LifeTime());
-    }
+        [SerializeField] private float _duration;
+        [SerializeField] private SpriteRenderer _sprite;
+        private WaitForSeconds _delay;
 
-    public override void Take(PlayerHealth playerHealth)
-    {
-        playerHealth.ActivateImmortal();
-        StartCoroutine(DisableEffect());
-    }
-
-    private IEnumerator DisableEffect()
-    {
-        _sprite.enabled = false;
-        var waitForSeconds = new WaitForSeconds(_duration);
-        yield return waitForSeconds;
-        Destroy(gameObject);
-    }
-
-    private IEnumerator LifeTime()
-    {
-        while (Timer < _duration)
+        private void OnEnable()
         {
-            Timer += Time.deltaTime;
-            yield return null;
+            StartCoroutine(LifeTime());
         }
 
-        Destroy(gameObject);
+        private void Start()
+        {
+            _delay = new WaitForSeconds(_duration);
+        }
+
+        public override void Take(PlayerHealth playerHealth)
+        {
+            playerHealth.ActivateImmortal();
+            StartCoroutine(DisableEffect());
+        }
+
+        private IEnumerator DisableEffect()
+        {
+            _sprite.enabled = false;
+            yield return _delay;
+            Destroy(gameObject);
+        }
+
+        private IEnumerator LifeTime()
+        {
+            while (Timer < _duration)
+            {
+                Timer += Time.deltaTime;
+                yield return null;
+            }
+
+            Destroy(gameObject);
+        }
     }
 }

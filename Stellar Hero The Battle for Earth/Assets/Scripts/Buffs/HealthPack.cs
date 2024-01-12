@@ -1,13 +1,15 @@
 using UnityEngine;
 
-public class HealthPack : BaseBuff
+namespace Buffs
 {
-    [SerializeField] private int _healValue;
-    
-    public override void Take(PlayerHealth playerHealth)
+    public class HealthPack : BaseBuff
     {
-        playerHealth.HealUp(_healValue);
-        Destroy(gameObject);
+        [SerializeField] private int _healValue;
+
+        public override void Take(PlayerHealth playerHealth)
+        {
+            playerHealth.HealUp(_healValue);
+            Destroy(gameObject);
+        }
     }
 }
-

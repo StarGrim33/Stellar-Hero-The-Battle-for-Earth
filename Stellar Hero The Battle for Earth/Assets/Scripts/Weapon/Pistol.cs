@@ -1,8 +1,10 @@
+using Bullets;
 using Cinemachine;
 using Plugins.Audio.Core;
 using System;
 using System.Collections;
 using UnityEngine;
+using Utils;
 
 public class Pistol : BaseWeapon
 {
@@ -69,11 +71,11 @@ public class Pistol : BaseWeapon
 
         GameObject gameObject = _spawnComponent.Spawn();
 
-        if (gameObject.TryGetComponent(out Bullet bullet))
+        if (gameObject.TryGetComponent(out PlayerBullet bullet))
         {
             bullet.gameObject.SetActive(true);
             bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, -directionToTarget);
-            bullet.Shot(_transform.position, _currentTarget.TargetTransform.position, _params.BulletSpeed, (int)_characteristics.GetValue(Characteristics.Damage));
+            bullet.Shot(_transform.position, _currentTarget.TargetTransform.position, _params.GetBulletSpeed(), (int)_characteristics.GetValue(Characteristics.Damage));
             _cameraShaker.GenerateImpulse();
             _audioSource.PlayOneShot(Constants.ShotSound);
         }
