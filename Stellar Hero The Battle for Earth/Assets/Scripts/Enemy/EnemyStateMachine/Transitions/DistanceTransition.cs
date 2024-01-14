@@ -1,14 +1,16 @@
 using UnityEngine;
 
-public class DistanceTransition : Transition
+namespace Enemy
 {
-    [SerializeField] private float _transitionRangeForNextState;
-    [SerializeField] private float _spreadRange;
-
-    private void Update()
+    public class DistanceTransition : Transition
     {
-        if (Target.IsAlive)
-            if (Vector2.Distance(transform.position, Target.TargetTransform.position) < _transitionRangeForNextState)
+        [SerializeField] private float _transitionRangeForNextState;
+        //[SerializeField] private float _spreadRange;
+
+        private void Update()
+        {
+            if (Target.IsAlive && Vector2.Distance(transform.position, Target.TargetTransform.position) < _transitionRangeForNextState)
                 NeedTransit = true;
+        }
     }
 }

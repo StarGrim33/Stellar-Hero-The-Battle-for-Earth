@@ -1,49 +1,52 @@
 using System.Collections;
+using Player;
 using UnityEngine;
 
-public class PlayerParticleSystem : BaseParticleSystemPlayer
+namespace Core
 {
-    [SerializeField] private ParticleSystem _levelUpEffect;
-    [SerializeField] private ParticleSystem _shieldEffect;
-    private PlayerLevelSystem _playerLevelSystem;
-    private float _dustDuration = 0.1f;
-    private float _levelUpEffectDuration = 3f;
-
-    public override void PlayEffect(ParticleEffects effects)
+    public class PlayerParticleSystem : BaseParticleSystem
     {
-        switch (effects)
+        private readonly float _dustDuration = 0.1f;
+        private readonly float _levelUpEffectDuration = 3f;
+        [SerializeField] private ParticleSystem _levelUpEffect;
+        private PlayerLevelSystem _playerLevelSystem;
+        private WaitForSeconds _levelUpDelay;
+        private WaitForSeconds _dustDelay;
+
+        private void Start()
         {
-            case ParticleEffects.Dust:
-                Effect.Play();
-                break;
+            _levelUpDelay = new WaitForSeconds(_levelUpEffectDuration);
+            _dustDelay = new WaitForSeconds(_dustDuration);
         }
 
-        StartCoroutine(StopDustAfterDelay());
-    }
+        public override void PlayEffect()
+        {
+            base.PlayEffect();
+            StartCoroutine(StopDustAfterDelay());
+        }
 
-    public void SetLevelSystem(PlayerLevelSystem playerLevelSystem)
-    {
-        _playerLevelSystem = playerLevelSystem;
-        _playerLevelSystem.OnLevelChanged += OnLevelChanged;
-    }
+        public void SetLevelSystem(PlayerLevelSystem playerLevelSystem)
+        {
+            _playerLevelSystem = playerLevelSystem;
+            _playerLevelSystem.OnLevelChanged += OnLevelChanged;
+        }
 
-    private void OnLevelChanged()
-    {
-        _levelUpEffect.Play();
-        StartCoroutine(StopLevelUpAfterDelay());
-    }
+        private void OnLevelChanged()
+        {
+            _levelUpEffect.Play();
+            StartCoroutine(StopLevelUpAfterDelay());
+        }
 
-    private IEnumerator StopLevelUpAfterDelay()
-    {
-        var waitForSeconds = new WaitForSeconds(_levelUpEffectDuration);
-        yield return waitForSeconds;
-        _levelUpEffect.Stop();
-    }
+        private IEnumerator StopLevelUpAfterDelay()
+        {
+            yield return _levelUpDelay;
+            _levelUpEffect.Stop();
+        }
 
-    private IEnumerator StopDustAfterDelay()
-    {
-        var waitForSeconds = new WaitForSeconds(_dustDuration);
-        yield return waitForSeconds;
-        Effect.Stop();
+        private IEnumerator StopDustAfterDelay()
+        {
+            yield return _dustDelay;
+            Effect.Stop();
+        }
     }
 }

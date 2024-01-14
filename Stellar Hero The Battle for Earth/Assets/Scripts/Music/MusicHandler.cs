@@ -1,21 +1,22 @@
 using Plugins.Audio.Core;
 using UnityEngine;
 
-public class MusicHandler : MonoBehaviour, IMusicHandler
+namespace Music
 {
-    [SerializeField] private SourceAudio[] _source;
-
-    public void HandlSound()
+    public class MusicHandler : MonoBehaviour, IMusicHandler
     {
-        var volume = AudioManagement.Instance.GetVolume();
+        public void HandlSound()
+        {
+            var volume = AudioManagement.Instance.GetVolume();
 
-        if (volume > 0.05)
-        {
-            AudioManagement.Instance.SetVolume(0);
-        }
-        else
-        {
-            AudioManagement.Instance.SetVolume(1);
+            if (volume > 0.05)
+            {
+                AudioManagement.Instance.SetVolume(0);
+            }
+            else
+            {
+                AudioManagement.Instance.SetVolume(1);
+            }
         }
     }
 }

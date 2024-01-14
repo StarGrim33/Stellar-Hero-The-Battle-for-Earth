@@ -1,38 +1,41 @@
 using UnityEngine;
 
-public class StateManager : MonoBehaviour
+namespace Utils
 {
-    public static StateManager Instance { get; private set; }
-
-    public bool IsLevelUpPanelShowing { get; set; }
-
-    public GameStates CurrentGameState { get; private set; }
-
-    public delegate void GameStateChangeHandler(GameStates newGameState);
-
-    public event GameStateChangeHandler OnGameStateChange;
-
-    private void Awake()
+    public class StateManager : MonoBehaviour
     {
-        if (Instance == null)
+        public static StateManager Instance { get; private set; }
+
+        public bool IsLevelUpPanelShowing { get; set; }
+
+        public GameStates CurrentGameState { get; private set; }
+
+        public delegate void GameStateChangeHandler(GameStates newGameState);
+
+        public event GameStateChangeHandler OnGameStateChange;
+
+        private void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            DontDestroyOnLoad(gameObject);
         }
-        else
+
+        public void SetState(GameStates state)
         {
-            Debug.LogWarning("Multiple instances of Spawner found. Only one instance should exist.");
-            Destroy(gameObject);
-            return;
+            if (state != CurrentGameState)
+            {
+                CurrentGameState = state;
+                OnGameStateChange?.Invoke(state);
+            }
         }
-
-        DontDestroyOnLoad(gameObject);
-    }
-
-    public void SetState(GameStates state)
-    {
-        if (state == CurrentGameState) return;
-
-        CurrentGameState = state;
-        OnGameStateChange?.Invoke(state);
     }
 }

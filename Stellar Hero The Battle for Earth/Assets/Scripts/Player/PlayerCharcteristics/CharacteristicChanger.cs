@@ -2,36 +2,38 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacteristicChanger : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private Image _icon;
-    [SerializeField] private TMP_Text _description;
-
-    private CharacteristicChangerConfig _config;
-    private UpdateCharacteristicWindow _window;
-
-    private void Start()
+    public class CharacteristicChanger : MonoBehaviour
     {
-        _window = GetComponentInParent<UpdateCharacteristicWindow>();
-    }
+        [SerializeField] private Image _icon;
+        [SerializeField] private TMP_Text _description;
+        private CharacteristicChangerConfig _config;
+        private UpdateCharacteristicWindow _window;
 
-    public void Init(CharacteristicChangerConfig config)
-    {
-        _config = config;
-        _icon.sprite = _config.Icon;
-        _description.text = _config.GetDescription();
-    }
+        private void Start()
+        {
+            _window = GetComponentInParent<UpdateCharacteristicWindow>();
+        }
 
-    public void OnClick()
-    {
-        ChangeCharacteristic();
-        Time.timeScale = 1.0f;
-        _window.gameObject.SetActive(false);
-    }
+        public void Init(CharacteristicChangerConfig config)
+        {
+            _config = config;
+            _icon.sprite = _config.Icon;
+            _description.text = _config.GetDescription();
+        }
 
-    public void ChangeCharacteristic()
-    {
-        _config.ChangeCharacteristic();
-        _window.CharacteristicChangerListUpdated(_config);
+        public void OnClick()
+        {
+            ChangeCharacteristic();
+            Time.timeScale = 1.0f;
+            _window.gameObject.SetActive(false);
+        }
+
+        public void ChangeCharacteristic()
+        {
+            _config.ChangeCharacteristic();
+            _window.CharacteristicChangerListUpdated(_config);
+        }
     }
 }

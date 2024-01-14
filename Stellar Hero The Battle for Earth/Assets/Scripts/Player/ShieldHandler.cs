@@ -1,22 +1,25 @@
 using UnityEngine;
 
-public class ShieldHandler : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private PlayerHealth _health;
-    [SerializeField] private ParticleSystem _particle;
-
-    private void OnEnable() => _health.Immortality += Immortality;
-
-    private void OnDisable() => _health.Immortality -= Immortality;
-
-    private void Immortality()
+    public class ShieldHandler : MonoBehaviour
     {
-        if(_particle.isPlaying)
+        [SerializeField] private PlayerHealth _health;
+        [SerializeField] private ParticleSystem _particle;
+
+        private void OnEnable() => _health.Immortality += Immortality;
+
+        private void OnDisable() => _health.Immortality -= Immortality;
+
+        private void Immortality()
         {
-            _particle.Stop();
+            if (_particle.isPlaying)
+            {
+                _particle.Stop();
+                _particle.Play();
+            }
+
             _particle.Play();
         }
-
-        _particle.Play();
     }
 }

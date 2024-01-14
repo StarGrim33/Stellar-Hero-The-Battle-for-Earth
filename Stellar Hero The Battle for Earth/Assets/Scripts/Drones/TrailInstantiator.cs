@@ -1,7 +1,7 @@
 using Bullets;
 using UnityEngine;
 
-namespace Drone
+namespace Utils
 {
     public class TrailInstantiator : MonoBehaviour
     {

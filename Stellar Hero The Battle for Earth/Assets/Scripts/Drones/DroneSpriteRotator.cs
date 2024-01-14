@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Drone
+namespace Utils
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class DroneSpriteRotator : MonoBehaviour

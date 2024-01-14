@@ -1,6 +1,7 @@
+using Player;
 using UnityEngine;
 
-namespace Drone
+namespace Utils
 {
     [RequireComponent(typeof(EnterTriggerDamage))]
     public class DroneTriggerDamageSetter : MonoBehaviour

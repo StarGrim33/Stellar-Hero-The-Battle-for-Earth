@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utils;
 
 public class NextSceneLoader : MonoBehaviour, ISceneLoader
 {

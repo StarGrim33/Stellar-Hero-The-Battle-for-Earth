@@ -1,8 +1,15 @@
-public interface IStateSwitcher
+namespace Utils
 {
-    void Enter();
+    public interface IStateSwitcher
+    {
+        void Enter()
+        {
+        }
 
-    void Exit();
+        void Exit()
+        {
+        }
 
-    void Update();
+        void Update();
+    }
 }

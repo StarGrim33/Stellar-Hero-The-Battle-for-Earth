@@ -1,18 +1,21 @@
 using UnityEngine;
 
-public class HandSpriteHandler : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private SpriteRenderer[] _hands;
-
-    public void Enable()
+    public class HandSpriteHandler : MonoBehaviour
     {
-        foreach (var hand in _hands)
-            hand.enabled = true;
-    }
+        [SerializeField] private SpriteRenderer[] _hands;
 
-    public void Disable()
-    {
-        foreach (var hand in _hands)
-            hand.enabled = false;
+        public void Enable()
+        {
+            foreach (var hand in _hands)
+                hand.enabled = true;
+        }
+
+        public void Disable()
+        {
+            foreach (var hand in _hands)
+                hand.enabled = false;
+        }
     }
 }

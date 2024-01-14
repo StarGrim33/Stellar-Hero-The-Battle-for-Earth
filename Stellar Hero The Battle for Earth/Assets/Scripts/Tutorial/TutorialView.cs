@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 public class TutorialView : MonoBehaviour
 {

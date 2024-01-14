@@ -1,4 +1,7 @@
-public interface IUnit
+namespace Core
 {
-    void PerformAttack();
+    public interface IUnit
+    {
+        void PerformAttack();
+    }
 }

@@ -1,35 +1,43 @@
 using System;
+using Player;
 using UnityEngine.SceneManagement;
+using Utils;
 
-public class Level
+namespace Core
 {
-    private readonly PlayerHealth _health;
-
-    public Level(PlayerHealth playerHealth)
+    public class Level
     {
-        _health = playerHealth;
-        _health.PlayerDead += OnPlayerDead;
+        private readonly PlayerHealth _health;
+
+        public Level(PlayerHealth playerHealth)
+        {
+            _health = playerHealth;
+            _health.PlayerDead += OnPlayerDead;
+        }
+
+        ~Level()
+        {
+            _health.PlayerDead -= OnPlayerDead;
+        }
+
+        public event Action Defeat;
+
+        public void Restart()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.buildIndex);
+            StateManager.Instance.SetState(GameStates.Gameplay);
+        }
+
+        public void OnDefeat()
+        {
+            StateManager.Instance.SetState(GameStates.Paused);
+            Defeat?.Invoke();
+        }
+
+        private void OnPlayerDead()
+        {
+            OnDefeat();
+        }
     }
-
-    ~Level() 
-    { 
-        _health.PlayerDead -= OnPlayerDead;
-    }
-
-    public event Action Defeat;
-
-    public void Restart()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.buildIndex);
-        StateManager.Instance.SetState(GameStates.Gameplay);
-    }
-
-    public void OnDefeat()
-    {
-        StateManager.Instance.SetState(GameStates.Paused);
-        Defeat?.Invoke();
-    }
-
-    private void OnPlayerDead() => OnDefeat();
 }

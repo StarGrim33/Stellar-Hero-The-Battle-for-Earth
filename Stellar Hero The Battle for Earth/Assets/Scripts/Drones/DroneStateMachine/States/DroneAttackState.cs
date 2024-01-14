@@ -1,21 +1,23 @@
-using Assets.Scripts.Components.Checkers;
 using System.Collections.Generic;
+using Assets.Scripts.Components.Checkers;
+using Core;
+using Player;
 using UnityEngine;
 
-namespace Drone
+namespace Utils
 {
     public class DroneAttackState : IStateSwitcher
     {
-        private CheckCircleOverlap _enemyChecker;
-        private DroneParticleSystem _shotEffect;
-        private DroneStateMachine _machine;
+        private readonly CheckCircleOverlap _enemyChecker;
+        private readonly DroneParticleSystem _shotEffect;
+        private readonly DroneStateMachine _machine;
         private List<IDamageable> _enemyList;
-        private Transform _transform;
+        private readonly Transform _transform;
         private IDamageable _currentTarget;
-        private Transform _heroTransform;
-        private DroneParameters _parameters;
-        private TrailInstantiator _instantiator;
-        private PlayerCharacteristics _characteristics;
+        private readonly Transform _heroTransform;
+        private readonly DroneParameters _parameters;
+        private readonly TrailInstantiator _instantiator;
+        private readonly PlayerCharacteristics _characteristics;
         private float _lastAttackTime;
         private float _angle;
 
@@ -71,7 +73,7 @@ namespace Drone
 
                 _instantiator.Instantiate(hit.point);
 
-                _shotEffect.PlayEffect(ParticleEffects.Shield);
+                _shotEffect.PlayEffect();
             }
         }
 

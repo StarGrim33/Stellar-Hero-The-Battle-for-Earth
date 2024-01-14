@@ -1,52 +1,63 @@
+using Core;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyHealth))]
-public abstract class State : MonoBehaviour
+namespace Enemy
 {
-    [SerializeField] private List<Transition> _transitions;
-    private EnemyHealth _health;
-
-    protected IDamageable Target { get; set; }
-
-    protected EnemyHealth Health => _health;
-
-    private void Awake() => _health = GetComponent<EnemyHealth>();
-
-    public void Enter(IDamageable target)
+    [RequireComponent(typeof(EnemyHealth))]
+    public abstract class State : MonoBehaviour
     {
-        if(enabled == false)
-        {
-            Target = target;
-            enabled = true;
+        [SerializeField] private List<Transition> _transitions;
+        private EnemyHealth _health;
 
-            foreach(Transition transition in _transitions) 
+        protected IDamageable Target { get; private set; }
+
+        protected EnemyHealth Health => _health;
+
+        private void Awake()
+        {
+            _health = GetComponent<EnemyHealth>();
+        }
+
+        public void Enter(IDamageable target)
+        {
+            if (!enabled)
             {
-                transition.enabled = true;
-                transition.Init(Target);
+                Target = target;
+                enabled = true;
+
+                foreach (Transition transition in _transitions)
+                {
+                    transition.enabled = true;
+                    transition.Init(Target);
+                }
             }
         }
-    }
 
-    public State GetNextState()
-    {
-        foreach(Transition transition in _transitions)
-        {
-            if(transition.NeedTransit)
-                return transition.NextState;
-        }
-
-        return null;
-    }
-
-    public void Exit()
-    {
-        if(enabled)
+        public State GetNextState()
         {
             foreach (Transition transition in _transitions)
-                transition.enabled = false;
+            {
+                if (transition.NeedTransit)
+                {
+                    return transition.NextState;
+                }
+            }
 
-            enabled = false;
+            return null;
+        }
+
+        public void Exit()
+        {
+            if (enabled)
+            {
+                foreach (Transition transition in _transitions)
+                {
+                    transition.enabled = false;
+                }
+
+                enabled = false;
+            }
         }
     }
 }

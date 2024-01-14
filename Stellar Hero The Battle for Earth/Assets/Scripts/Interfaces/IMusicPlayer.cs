@@ -1,6 +1,9 @@
-public interface IMusicPlayer
+namespace Music
 {
-    void UnPause();
+    public interface IMusicPlayer
+    {
+        void UnPause();
 
-    void Pause();
+        void Pause();
+    }
 }

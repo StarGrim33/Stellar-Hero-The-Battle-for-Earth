@@ -1,23 +1,26 @@
 using Buffs;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerHealth))]
-public class PlayerUnit : Unit
+namespace Player
 {
-    private PlayerHealth _health;
-
-    public PlayerHealth PlayerHealth => _health;
-
-    private void Start()
+    [RequireComponent(typeof(PlayerHealth))]
+    public class PlayerUnit : Unit
     {
-        _health = GetComponent<PlayerHealth>();
-    }
+        private PlayerHealth _health;
 
-    private void OnTriggerEnter2D(UnityEngine.Collider2D collision)
-    {
-        if(collision.TryGetComponent<BaseBuff>(out BaseBuff buff))
+        public PlayerHealth PlayerHealth => _health;
+
+        private void Start()
         {
-            buff.Take(_health);
+            _health = GetComponent<PlayerHealth>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.TryGetComponent<BaseBuff>(out BaseBuff buff))
+            {
+                buff.Take(_health);
+            }
         }
     }
 }

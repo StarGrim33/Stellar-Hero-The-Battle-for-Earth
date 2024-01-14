@@ -1,21 +1,25 @@
 using UnityEngine;
+using Utils;
 
-public class PlayerShooter : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private BaseWeapon _weapon;
-
-    private void Start()
+    public class PlayerShooter : MonoBehaviour
     {
-        transform.rotation = Quaternion.identity;
-    }
+        [SerializeField] private BaseWeapon _weapon;
 
-    private void Update()
-    {
-        if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+        private void Start()
         {
-            return;
+            transform.rotation = Quaternion.identity;
         }
 
-        _weapon.PerformShot();
+        private void Update()
+        {
+            if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+            {
+                return;
+            }
+
+            _weapon.PerformShot();
+        }
     }
 }

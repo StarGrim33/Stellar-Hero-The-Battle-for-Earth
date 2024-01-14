@@ -1,4 +1,6 @@
 using Agava.WebUtility;
+using Utils;
+using Music;
 using Plugins.Audio.Core;
 using UnityEngine;
 
@@ -8,12 +10,6 @@ public class WebUtilityFixer : MonoBehaviour
     [SerializeField] private MusicPlayer _backgroundSource;
     [SerializeField] private SourceAudio _gunSource;
     private bool _isAdvShowing = false;
-
-    private void Awake()
-    {
-        if (Device.IsMobile || IsMobile())
-            Debug.Log("Mobile is initialized");
-    }
 
     private bool IsMobile()
     {

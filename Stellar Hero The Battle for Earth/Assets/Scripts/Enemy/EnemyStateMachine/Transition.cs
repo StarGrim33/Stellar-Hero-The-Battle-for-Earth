@@ -1,16 +1,26 @@
+using Core;
 using UnityEngine;
 
-public abstract class Transition : MonoBehaviour
+namespace Enemy
 {
-    [SerializeField] private State _nextState;
+    public abstract class Transition : MonoBehaviour
+    {
+        [SerializeField] private State _nextState;
 
-    protected IDamageable Target { get; private set; }
+        protected IDamageable Target { get; private set; }
 
-    public State NextState => _nextState;
+        public State NextState => _nextState;
 
-    public bool NeedTransit { get; protected set; }
+        public bool NeedTransit { get; protected set; }
 
-    private void OnEnable() => NeedTransit = false;
+        private void OnEnable()
+        {
+            NeedTransit = false;
+        }
 
-    public void Init(IDamageable target) => Target ??= target;
+        public void Init(IDamageable target)
+        {
+            Target ??= target;
+        }
+    }
 }

@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public interface IControllable
+namespace Player
 {
-    void Move();
+    public interface IControllable
+    {
+        void Move();
 
-    void TryDash();
+        void TryDash();
 
-    void SetDirection(Vector2 direction);
+        void SetDirection(Vector2 direction);
+    }
 }

@@ -1,1 +1,6 @@
-public class EnemyUnit : Unit { }
+namespace Enemy
+{
+    public class EnemyUnit : Unit
+    {
+    }
+}

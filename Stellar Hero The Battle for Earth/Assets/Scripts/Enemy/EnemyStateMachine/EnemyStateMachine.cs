@@ -1,48 +1,50 @@
+using Core;
 using UnityEngine;
+using Utils;
 
-public class EnemyStateMachine : MonoBehaviour
+namespace Enemy
 {
-    [SerializeField] private State _firstState;
-
-    public IDamageable Target { get; private set; }
-
-    public State CurrentState { get; private set; }
-
-    private void Start() => ResetState();
-
-    private void Update()
+    public class EnemyStateMachine : MonoBehaviour
     {
-        if (CurrentState == null || StateManager.Instance.CurrentGameState == GameStates.Paused)
-            return;
+        [SerializeField] private State _firstState;
 
-        var nextState = CurrentState.GetNextState();
+        public IDamageable Target { get; private set; }
 
-        if(nextState != null)
-            Transit(nextState);
-    }
+        public State CurrentState { get; private set; }
 
-    public void SetTarget(IDamageable target)
-    {
-        if (target != null)
-            Target = target;
-    }
+        private void Start()
+        {
+            ResetState();
+        }
 
-    public void ResetState()
-    {
-        CurrentState = _firstState;
+        private void Update()
+        {
+            if (CurrentState == null || StateManager.Instance.CurrentGameState == GameStates.Paused)
+                return;
 
-        if (CurrentState != null)
-            CurrentState.Enter(Target);
-    }
+            var nextState = CurrentState.GetNextState();
 
-    private void Transit(State nextState)
-    {
-        if (CurrentState != null)
-            CurrentState.Exit();
+            if (nextState != null)
+                Transit(nextState);
+        }
 
-        CurrentState = nextState;
+        public void SetTarget(IDamageable target)
+        {
+            if (target != null)
+                Target = target;
+        }
 
-        if (CurrentState != null)
-            CurrentState.Enter(Target);
+        public void ResetState()
+        {
+            CurrentState = _firstState;
+            CurrentState?.Enter(Target);
+        }
+
+        private void Transit(State nextState)
+        {
+            CurrentState?.Exit();
+            CurrentState = nextState;
+            CurrentState?.Enter(Target);
+        }
     }
 }

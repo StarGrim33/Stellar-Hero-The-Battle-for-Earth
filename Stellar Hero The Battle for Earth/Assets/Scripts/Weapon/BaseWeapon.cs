@@ -1,8 +1,11 @@
-using Assets.Scripts.Components.Checkers;
-using Assets.Scripts.Utils;
 using System;
 using System.Collections.Generic;
+using Assets.Scripts.Components.Checkers;
+using Assets.Scripts.Utils;
+using Core;
+using Player;
 using UnityEngine;
+using Utils;
 
 public abstract class BaseWeapon : MonoBehaviour, IWeapon
 {

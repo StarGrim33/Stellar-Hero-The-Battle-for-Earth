@@ -1,7 +1,7 @@
 using Assets.Scripts.Components.Checkers;
 using UnityEngine;
 
-namespace Drone
+namespace Utils
 {
     public class DroneMovementState : IDroneMovementState, IStateSwitcher
     {
@@ -9,28 +9,16 @@ namespace Drone
         private Transform _heroTransform;
         private DroneStateMachine _stateMachine;
         private CheckCircleOverlap _enemyChecker;
-        private DroneParticleSystem _enemyParticleSystem;
         private float _flyRadius = 1.0f;
         private float _angle;
 
         public DroneMovementState(Transform transform, Transform playerTransform, DroneStateMachine stateMachine,
-            CheckCircleOverlap checker, DroneParticleSystem droneParticleSystem)
+            CheckCircleOverlap checker)
         {
             _droneTransform = transform;
             _heroTransform = playerTransform;
             _stateMachine = stateMachine;
             _enemyChecker = checker;
-            _enemyParticleSystem = droneParticleSystem;
-        }
-
-        public void Enter()
-        {
-            _enemyParticleSystem.PlayEffect(ParticleEffects.Shield);
-        }
-
-        public void Exit()
-        {
-            _enemyParticleSystem.PlayEffect(ParticleEffects.Dust);
         }
 
         public void Update()

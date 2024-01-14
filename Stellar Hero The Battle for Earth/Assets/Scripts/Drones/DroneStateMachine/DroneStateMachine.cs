@@ -1,9 +1,11 @@
-using Assets.Scripts.Components.Checkers;
 using System;
 using System.Collections.Generic;
+using Assets.Scripts.Components.Checkers;
+using Core;
+using Player;
 using UnityEngine;
 
-namespace Drone
+namespace Utils
 {
     [RequireComponent(typeof(CheckCircleOverlap), typeof(DroneSpriteRotator),
     typeof(DroneParticleSystem)), RequireComponent(typeof(CheckCircleOverlap))]
@@ -54,7 +56,7 @@ namespace Drone
 
             _states = new Dictionary<Type, IStateSwitcher>()
             {
-                [typeof(DroneMovementState)] = new DroneMovementState(transform, _playerUnit, this, _enemyChecker, _shotEffect),
+                [typeof(DroneMovementState)] = new DroneMovementState(transform, _playerUnit, this, _enemyChecker),
                 [typeof(DroneAttackState)] = new DroneAttackState(this, _enemyChecker, _shotEffect, transform,
                 _playerUnit, _parameters, _instantiator, _characteristics),
             };

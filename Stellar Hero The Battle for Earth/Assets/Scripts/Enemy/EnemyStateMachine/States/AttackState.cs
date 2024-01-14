@@ -1,47 +1,50 @@
 using UnityEngine;
 using Utils;
 
-[RequireComponent(typeof(Animator)), RequireComponent(typeof(EnemyStateMachine))]
-public class AttackState : State
+namespace Enemy
 {
-    [SerializeField] protected int Damage;
-    [SerializeField] protected float Delay;
-    protected EnemyStateMachine EnemyStateMachine;
-    protected Animator Animator;
-    protected float LastAttackTime;
-
-    protected void Start()
+    [RequireComponent(typeof(Animator)), RequireComponent(typeof(EnemyStateMachine))]
+    public class AttackState : State
     {
-        EnemyStateMachine = GetComponent<EnemyStateMachine>();
-        Animator = GetComponent<Animator>();
-    }
+        [SerializeField] protected int Damage;
+        [SerializeField] protected float Delay;
+        protected EnemyStateMachine EnemyStateMachine;
+        protected Animator Animator;
+        protected float LastAttackTime;
 
-    private void Update()
-    {
-        if(LastAttackTime <= 0)
+        protected void Start()
         {
-            Attack();
-            LastAttackTime = Delay;
+            EnemyStateMachine = GetComponent<EnemyStateMachine>();
+            Animator = GetComponent<Animator>();
         }
 
-        LastAttackTime -= Time.deltaTime;
-    }
-
-    public virtual void Attack()
-    {
-        int minDistanceForAttack = 1;
-
-        if(Target.IsAlive) 
+        private void Update()
         {
-            if(Vector2.Distance(Target.TargetTransform.position, transform.position) < minDistanceForAttack)
+            if (LastAttackTime <= 0)
             {
-                Animator.Play(Constants.AttackState);
-                Target.TakeDamage(Damage);
+                Attack();
+                LastAttackTime = Delay;
             }
-            else
+
+            LastAttackTime -= Time.deltaTime;
+        }
+
+        public virtual void Attack()
+        {
+            int minDistanceForAttack = 1;
+
+            if (Target.IsAlive)
             {
-                enabled = false;
-                EnemyStateMachine.ResetState();
+                if (Vector2.Distance(Target.TargetTransform.position, transform.position) < minDistanceForAttack)
+                {
+                    Animator.Play(Constants.AttackState);
+                    Target.TakeDamage(Damage);
+                }
+                else
+                {
+                    enabled = false;
+                    EnemyStateMachine.ResetState();
+                }
             }
         }
     }

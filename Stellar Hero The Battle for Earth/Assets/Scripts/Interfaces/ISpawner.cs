@@ -1,14 +1,17 @@
 using System.Collections;
 
-public interface ISpawner
+namespace Enemy
 {
-    void SpawnWave();
+    public interface ISpawner
+    {
+        void SpawnWave();
 
-    void SpawnEnemy();
+        void SpawnEnemy();
 
-    void SetWave(int index);
+        void SetWave(int index);
 
-    bool TryGetSpawnPoint(int randomIndex, out int spawnPointIndex);
+        bool TryGetSpawnPoint(int randomIndex, out int spawnPointIndex);
 
-    IEnumerator NextWave();
+        IEnumerator NextWave();
+    }
 }

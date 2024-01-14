@@ -1,6 +1,9 @@
-public enum ParticleEffects
+namespace Core
 {
-    LevelUp,
-    Shield,
-    Dust,
+    public enum ParticleEffects
+    {
+        LevelUp,
+        Shield,
+        Dust,
+    }
 }

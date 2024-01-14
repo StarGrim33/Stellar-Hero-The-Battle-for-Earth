@@ -1,8 +1,10 @@
-using Bullets;
-using Cinemachine;
-using Plugins.Audio.Core;
 using System;
 using System.Collections;
+using Bullets;
+using Cinemachine;
+using Core;
+using Player;
+using Plugins.Audio.Core;
 using UnityEngine;
 using Utils;
 
@@ -47,7 +49,7 @@ public class Pistol : BaseWeapon
 
     protected override void StartReloading()
     {
-        if (_isReloading == false && _currentAmmo < _maxAmmo)
+        if (!_isReloading && _currentAmmo < _maxAmmo)
         {
             _isReloading = true;
             _audioSource.PlayOneShot(Constants.ReloadSound);

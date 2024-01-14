@@ -1,10 +1,11 @@
-using UnityEngine.Events;
-
-public interface IWeapon
+namespace Core
 {
-    public void PerformShot();
+    public interface IWeapon
+    {
+        public void PerformShot();
 
-    int CurrentAmmo { get; }
+        int CurrentAmmo { get; }
 
-    int MaxAmmo { get; }
+        int MaxAmmo { get; }
+    }
 }

@@ -1,37 +1,41 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Utils;
 
-[RequireComponent(typeof(EnemyUnit)), RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(Animator))]
-public class EnemyMovementState : State
+namespace Enemy
 {
-    private EnemyUnit _enemyUnit;
-    private NavMeshAgent _agent;
-    private float _speed;
-    protected Animator Animator;
-   
-    private void Start()
+    [RequireComponent(typeof(EnemyUnit)), RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(Animator))]
+    public class EnemyMovementState : State
     {
-        _agent = GetComponent<NavMeshAgent>();
-        Animator = GetComponent<Animator>();
-        _enemyUnit = GetComponent<EnemyUnit>();
-        _agent.updateRotation = false;
-        _agent.updateUpAxis = false;
-        _speed = _enemyUnit.Config.Speed;
-        _agent.speed = _speed;
-    }
+        protected Animator Animator;
+        private EnemyUnit _enemyUnit;
+        private NavMeshAgent _agent;
+        private float _speed;
 
-    private void Update()
-    {
-        if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+        private void Start()
         {
-            _agent.destination = _agent.transform.position;
-            return;
+            _agent = GetComponent<NavMeshAgent>();
+            Animator = GetComponent<Animator>();
+            _enemyUnit = GetComponent<EnemyUnit>();
+            _agent.updateRotation = false;
+            _agent.updateUpAxis = false;
+            _speed = _enemyUnit.Config.Speed;
+            _agent.speed = _speed;
         }
 
-        if (Target != null)
-            _agent.SetDestination(Target.TargetTransform.position);
+        private void Update()
+        {
+            if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+            {
+                _agent.destination = _agent.transform.position;
+                return;
+            }
 
-        if(Health.CurrentHealth == 0)
-            _agent.destination = _agent.transform.position;
+            if (Target != null)
+                _agent.SetDestination(Target.TargetTransform.position);
+
+            if (Health.CurrentHealth == 0)
+                _agent.destination = _agent.transform.position;
+        }
     }
 }

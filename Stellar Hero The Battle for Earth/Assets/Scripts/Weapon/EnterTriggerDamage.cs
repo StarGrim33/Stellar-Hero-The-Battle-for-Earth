@@ -1,3 +1,4 @@
+using Core;
 using UnityEngine;
 
 public class EnterTriggerDamage : MonoBehaviour

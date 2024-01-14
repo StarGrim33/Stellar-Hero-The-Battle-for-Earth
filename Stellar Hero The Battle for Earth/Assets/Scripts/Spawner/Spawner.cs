@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core;
+using Enemy;
+using Player;
 using UnityEngine;
 using Utils;
 
@@ -163,7 +166,7 @@ public class Spawner : MonoBehaviour, ISpawner
             return;
         }
 
-        if (enemy.TryGetComponent<ExperienceEnemy>(out ExperienceEnemy experience))
+        if (enemy.TryGetComponent<ExperienceEnemyProvider>(out ExperienceEnemyProvider experience))
         {
             _experienceHandler.AddExperience(experience.ExperienceForEnemy);
         }

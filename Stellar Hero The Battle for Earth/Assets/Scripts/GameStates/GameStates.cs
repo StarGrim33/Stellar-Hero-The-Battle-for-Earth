@@ -1,5 +1,8 @@
-public enum GameStates
+namespace Utils
 {
-    Gameplay,
-    Paused
+    public enum GameStates
+    {
+        Gameplay,
+        Paused
+    }
 }

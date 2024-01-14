@@ -1,6 +1,6 @@
 using System;
 
-namespace Drone
+namespace Utils
 {
     [Serializable]
     public class DroneParameters

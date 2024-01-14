@@ -1,4 +1,7 @@
-public interface IMusicHandler
+namespace Music
 {
-    void HandlSound();
+    public interface IMusicHandler
+    {
+        void HandlSound();
+    }
 }
