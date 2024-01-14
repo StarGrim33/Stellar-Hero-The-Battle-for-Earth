@@ -1,17 +1,21 @@
 using UnityEngine;
 
-public abstract class UnitHealth : MonoBehaviour
+namespace Core
 {
-    [SerializeField] private Unit _unit;
-
-    protected float MaxHealth;
-    protected float ÑurrenHealth;
-
-    protected virtual void OnEnable()
+    public abstract class UnitHealth : MonoBehaviour
     {
-        MaxHealth = _unit.Config.Health;
-        ÑurrenHealth = MaxHealth;
-    }
+        protected float MaxHealth;
+        protected float ÑurrenHealth;
+        [SerializeField] private Unit _unit;
 
-    protected virtual void Die() { }
+        protected virtual void OnEnable()
+        {
+            MaxHealth = _unit.Config.Health;
+            ÑurrenHealth = MaxHealth;
+        }
+
+        protected virtual void Die()
+        {
+        }
+    }
 }

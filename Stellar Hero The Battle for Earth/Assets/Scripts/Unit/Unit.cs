@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public abstract class Unit : MonoBehaviour
+namespace Core
 {
-    [SerializeField] private UnitConfig _unitConfig;
+    public abstract class Unit : MonoBehaviour
+    {
+        [SerializeField] private UnitConfig _unitConfig;
 
-    public UnitConfig Config => _unitConfig;
+        public UnitConfig Config => _unitConfig;
+    }
 }

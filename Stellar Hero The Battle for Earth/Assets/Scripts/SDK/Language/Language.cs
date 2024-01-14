@@ -1,27 +1,31 @@
-using Agava.YandexGames;
 using System.Runtime.InteropServices;
+using Agava.YandexGames;
 using UnityEngine;
 
-public class Language : MonoBehaviour
+namespace SDK
 {
-    [DllImport("__Internal")] private static extern string GetYandexGamesSdkEnvironment();
-    [SerializeField] private string _currentLanguage = "en";
-
-    public string CurrentLanguage => _currentLanguage;
-
-    public static Language Instance;
-
-    private void Awake()
+    public class Language : MonoBehaviour
     {
-        if (Instance == null)
+        [DllImport("__Internal")] private static extern string GetYandexGamesSdkEnvironment();
+
+        public static Language Instance;
+
+        [SerializeField] private string _currentLanguage = "en";
+
+        public string CurrentLanguage => _currentLanguage;
+
+        private void Awake()
         {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
-            _currentLanguage = YandexGamesSdk.Environment.i18n.lang;
-        }
-        else
-        {
-            Destroy(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(Instance);
+                _currentLanguage = YandexGamesSdk.Environment.i18n.lang;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

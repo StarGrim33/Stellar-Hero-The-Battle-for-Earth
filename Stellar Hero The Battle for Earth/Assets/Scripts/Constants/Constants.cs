@@ -30,5 +30,6 @@ namespace Utils
         public const string RussianLevelText = "Уровень: ";
         public const string TurkeyLevelText = "Seviye: ";
         public const string BattleSound = "Battle";
+        public const string Saves = "Saves";
     }
 }

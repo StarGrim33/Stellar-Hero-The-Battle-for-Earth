@@ -2,45 +2,45 @@ using TMPro;
 using UnityEngine;
 using Utils;
 
-public class InternationalText : MonoBehaviour
+namespace SDK
 {
-    [SerializeField] protected string _en;
-    [SerializeField] protected string _ru;
-    [SerializeField] protected string _tr;
-
-    private TMP_Text _text;
-
-    private void Awake()
+    public class InternationalText : MonoBehaviour
     {
-        _text = GetComponent<TMP_Text>();
-    }
+        [SerializeField] protected string EnglishLanguage;
+        [SerializeField] protected string RussianLanguage;
+        [SerializeField] protected string TurkishLanguage;
+        private TMP_Text _text;
 
-    protected virtual void Start()
-    {
-        string lang = Language.Instance.CurrentLanguage;
-
-        switch (lang)
+        private void Awake()
         {
-            case (Constants.EnglishCode):
-                SetText(_en);
-                break;
-
-            case (Constants.RussianCode):
-                SetText(_ru);
-                break;
-
-            case (Constants.TurkishCode):
-                SetText(_tr);
-                break;
-
-            default:
-                SetText(_en);
-                break;
+            _text = GetComponent<TMP_Text>();
         }
-    }
 
-    protected void SetText(string text)
-    {
-        _text.text = text;
+        protected virtual void Start()
+        {
+            switch (Language.Instance.CurrentLanguage)
+            {
+                case (Constants.EnglishCode):
+                    SetText(EnglishLanguage);
+                    break;
+
+                case (Constants.RussianCode):
+                    SetText(RussianLanguage);
+                    break;
+
+                case (Constants.TurkishCode):
+                    SetText(TurkishLanguage);
+                    break;
+
+                default:
+                    SetText(EnglishLanguage);
+                    break;
+            }
+        }
+
+        protected void SetText(string text)
+        {
+            _text.text = text;
+        }
     }
 }
