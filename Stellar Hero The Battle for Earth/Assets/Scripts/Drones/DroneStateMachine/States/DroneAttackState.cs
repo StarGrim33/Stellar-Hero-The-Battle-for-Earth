@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Assets.Scripts.Components.Checkers;
-using Core;
 using Player;
 using UnityEngine;
 
@@ -11,28 +10,27 @@ namespace Utils
         private readonly CheckCircleOverlap _enemyChecker;
         private readonly DroneParticleSystem _shotEffect;
         private readonly DroneStateMachine _machine;
-        private List<IDamageable> _enemyList;
-        private readonly Transform _transform;
-        private IDamageable _currentTarget;
         private readonly Transform _heroTransform;
-        private readonly DroneParameters _parameters;
         private readonly TrailInstantiator _instantiator;
         private readonly PlayerCharacteristics _characteristics;
+        private readonly Transform _transform;
+        private readonly float _flyRadius = 1.0f;
+
+        private List<IDamageable> _enemyList;
+        private IDamageable _currentTarget;
         private float _lastAttackTime;
         private float _angle;
 
         public Transform CurrenTarget { get; private set; }
 
         public DroneAttackState(DroneStateMachine machine, CheckCircleOverlap checker, DroneParticleSystem shotEffect,
-            Transform transformDrone, Transform heroTransform, DroneParameters droneParameters,
-            TrailInstantiator instantiator, PlayerCharacteristics characteristics)
+            Transform transformDrone, Transform heroTransform, TrailInstantiator instantiator, PlayerCharacteristics characteristics)
         {
             _enemyChecker = checker;
             _machine = machine;
             _shotEffect = shotEffect;
             _transform = transformDrone;
             _heroTransform = heroTransform;
-            _parameters = droneParameters;
             _instantiator = instantiator;
             _characteristics = characteristics;
         }
@@ -102,8 +100,8 @@ namespace Utils
         private void Move()
         {
             _angle += Time.deltaTime;
-            float x = _heroTransform.position.x + _parameters.FlyRadius * Mathf.Cos(_angle);
-            float y = _heroTransform.position.y + _parameters.FlyRadius * Mathf.Sin(_angle);
+            float x = _heroTransform.position.x + (_flyRadius * Mathf.Cos(_angle));
+            float y = _heroTransform.position.y + (_flyRadius * Mathf.Sin(_angle));
             _transform.position = new Vector3(x, y, _transform.position.z);
         }
 

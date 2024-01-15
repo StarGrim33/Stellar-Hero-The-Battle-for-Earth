@@ -1,4 +1,7 @@
-public interface ISceneLoader
+namespace Utils
 {
-    void LoadScene();
+    public interface ISceneLoader
+    {
+        void LoadScene();
+    }
 }

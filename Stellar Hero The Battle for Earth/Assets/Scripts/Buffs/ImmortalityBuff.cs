@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Buffs
 {
-    public class Immortality : BaseBuff
+    public class ImmortalityBuff : BaseBuff
     {
         [SerializeField] private float _duration;
         [SerializeField] private SpriteRenderer _sprite;

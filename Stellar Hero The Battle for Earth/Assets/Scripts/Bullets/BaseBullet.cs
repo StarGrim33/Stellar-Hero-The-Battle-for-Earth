@@ -1,4 +1,4 @@
-using Core;
+using Utils;
 using System.Collections;
 using UnityEngine;
 
@@ -6,9 +6,9 @@ namespace Bullets
 {
     public abstract class BaseBullet : MonoBehaviour, IBullet
     {
+        protected int Damage = 1;
         [SerializeField] private float maxDistance = 10f;
         private Vector3 _direction;
-        protected int Damage = 1;
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
@@ -32,7 +32,7 @@ namespace Bullets
 
             while (distanceTravelled < maxDistance)
             {
-                transform.position += speed * _direction * Time.deltaTime;
+                transform.position += speed * Time.deltaTime * _direction;
                 distanceTravelled += speed * Time.deltaTime;
                 yield return null;
             }

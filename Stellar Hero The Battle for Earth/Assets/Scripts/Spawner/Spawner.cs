@@ -5,9 +5,8 @@ using Enemy;
 using Player;
 using SDK;
 using UnityEngine;
-using Utils;
 
-namespace Core
+namespace Utils
 {
     [RequireComponent(typeof(LeaderboardSaver), typeof(ExperienceHandler))]
     public class Spawner : MonoBehaviour, ISpawner
@@ -41,19 +40,10 @@ namespace Core
 
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
-
-        private void Start()
-        {
+            InitSingleton();
             Init();
+            InitSpawnPoints();
+            SetWave(_currentWaveIndex);
         }
 
         private void Update()
@@ -98,31 +88,6 @@ namespace Core
             }
         }
 
-        public void SpawnEnemy()
-        {
-            int randomIndex = UnityEngine.Random.Range(0, _unusedSpawnPoints.Count);
-
-            if (TryGetSpawnPoint(randomIndex, out int spawnPointIndex))
-            {
-                _unusedSpawnPoints.RemoveAt(randomIndex);
-            }
-            else
-            {
-                ResetSpawnPoints();
-                randomIndex = UnityEngine.Random.Range(0, _unusedSpawnPoints.Count);
-                TryGetSpawnPoint(randomIndex, out spawnPointIndex);
-            }
-
-            GameObject enemy = _enemyPool.GetObject(_currentWave.EnemyPrefab);
-
-            enemy.transform.position = _spawnPoints[spawnPointIndex].position;
-            enemy.transform.rotation = _spawnPoints[spawnPointIndex].rotation;
-            enemy.gameObject.SetActive(true);
-            enemy.GetComponent<EnemyStateMachine>().SetTarget(_target);
-            enemy.GetComponent<EnemyHealth>().Dying += OnEnemyDying;
-        }
-
-
         public void SetWave(int index)
         {
             _currentWave = _waves[index];
@@ -147,6 +112,46 @@ namespace Core
             }
 
             return false;
+        }
+
+        public void SpawnEnemy()
+        {
+            int randomIndex = GetRandomSpawnIndex();
+
+            int spawnPointIndex;
+            if (TryGetSpawnPoint(randomIndex, out spawnPointIndex))
+            {
+                _unusedSpawnPoints.RemoveAt(randomIndex);
+            }
+            else
+            {
+                ResetSpawnPoints();
+                randomIndex = GetRandomSpawnIndex();
+                TryGetSpawnPoint(randomIndex, out spawnPointIndex);
+            }
+
+            GameObject enemy = CreateEnemyObject();
+            SetEnemyPositionAndRotation(enemy, spawnPointIndex);
+        }
+
+        private int GetRandomSpawnIndex()
+        {
+            return UnityEngine.Random.Range(0, _unusedSpawnPoints.Count);
+        }
+
+        private GameObject CreateEnemyObject()
+        {
+            GameObject enemy = _enemyPool.GetObject(_currentWave.EnemyPrefab);
+            enemy.gameObject.SetActive(true);
+            enemy.GetComponent<EnemyHealth>().Dying += OnEnemyDying;
+            return enemy;
+        }
+
+        private void SetEnemyPositionAndRotation(GameObject enemy, int spawnPointIndex)
+        {
+            enemy.transform.position = _spawnPoints[spawnPointIndex].position;
+            enemy.transform.rotation = _spawnPoints[spawnPointIndex].rotation;
+            enemy.GetComponent<EnemyStateMachine>().SetTarget(_target);
         }
 
         private void OnEnemyDying(EnemyHealth enemy)
@@ -176,17 +181,18 @@ namespace Core
         {
             _saver = GetComponent<LeaderboardSaver>();
             _experienceHandler = GetComponent<ExperienceHandler>();
-            _unusedSpawnPoints = new List<int>();
             _wavesDelay = new WaitForSeconds(_delayBetweenWaves);
+            _target = _playerUnit.GetComponent<IDamageable>();
+            WaveChanged?.Invoke(CurrentWaveIndex);
+        }
 
+        private void InitSpawnPoints()
+        {
+            _unusedSpawnPoints = new List<int>();
             for (int i = 0; i < _spawnPoints.Length; i++)
             {
                 _unusedSpawnPoints.Add(i);
             }
-
-            SetWave(_currentWaveIndex);
-            _target = _playerUnit.GetComponent<IDamageable>();
-            WaveChanged?.Invoke(CurrentWaveIndex);
         }
 
         private void Spawn()
@@ -221,6 +227,18 @@ namespace Core
                 _spawned = 0;
                 SpawnWave();
                 WaveChanged?.Invoke(CurrentWaveIndex);
+            }
+        }
+
+        private void InitSingleton()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         }
     }

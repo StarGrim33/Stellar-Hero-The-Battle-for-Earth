@@ -9,7 +9,7 @@ namespace Buffs
 
         public override void Take(PlayerHealth playerHealth)
         {
-            playerHealth.HealUp(_healValue);
+            playerHealth.Heal(_healValue);
             Destroy(gameObject);
         }
     }

@@ -1,16 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Utils;
 
-public class NextSceneLoader : MonoBehaviour, ISceneLoader
+namespace Utils
 {
-    [SerializeField] private int _levelIndex;
-    [SerializeField] private GameObject _panel;
-
-    public void LoadScene()
+    public class NextSceneLoader : MonoBehaviour, ISceneLoader
     {
-        SceneManager.LoadScene(_levelIndex);
-        _panel.SetActive(false);
-        StateManager.Instance.SetState(GameStates.Gameplay);
+        [SerializeField] private int _levelIndex;
+        [SerializeField] private GameObject _panel;
+
+        public void LoadScene()
+        {
+            SceneManager.LoadScene(_levelIndex);
+            _panel.SetActive(false);
+            StateManager.Instance.SetState(GameStates.Gameplay);
+        }
     }
 }

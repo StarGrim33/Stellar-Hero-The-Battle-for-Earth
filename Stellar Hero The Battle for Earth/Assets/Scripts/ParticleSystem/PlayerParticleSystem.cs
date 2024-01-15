@@ -2,12 +2,13 @@ using System.Collections;
 using Player;
 using UnityEngine;
 
-namespace Core
+namespace Utils
 {
     public class PlayerParticleSystem : BaseParticleSystem
     {
         private readonly float _dustDuration = 0.1f;
         private readonly float _levelUpEffectDuration = 3f;
+
         [SerializeField] private ParticleSystem _levelUpEffect;
         private PlayerLevelSystem _playerLevelSystem;
         private WaitForSeconds _levelUpDelay;

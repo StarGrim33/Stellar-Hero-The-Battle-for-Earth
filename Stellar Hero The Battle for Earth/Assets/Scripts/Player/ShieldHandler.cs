@@ -7,9 +7,15 @@ namespace Player
         [SerializeField] private PlayerHealth _health;
         [SerializeField] private ParticleSystem _particle;
 
-        private void OnEnable() => _health.Immortality += Immortality;
+        private void OnEnable()
+        {
+            _health.Immortality += Immortality;
+        }
 
-        private void OnDisable() => _health.Immortality -= Immortality;
+        private void OnDisable()
+        {
+            _health.Immortality -= Immortality;
+        }
 
         private void Immortality()
         {

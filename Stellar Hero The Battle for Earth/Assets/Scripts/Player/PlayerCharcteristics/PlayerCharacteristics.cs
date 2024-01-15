@@ -15,11 +15,10 @@ namespace Player
         private float _maxAmmo = 6f;
         private float _reloadTimeAmmo = 1f;
         private float _dushCooldown = 2f;
-        private float _playerTriggerDamage = 0f;
-
-        private float _droneTriggerDamage = 0f;
         private float _droneDamage = 10f;
         private float _droneShotDelay = 2f;
+        private float _playerTriggerDamage;
+        private float _droneTriggerDamage;
 
         private Dictionary<Characteristics, float> _characteristics = new();
 

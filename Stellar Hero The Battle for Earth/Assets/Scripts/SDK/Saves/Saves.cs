@@ -39,9 +39,13 @@ namespace SDK
         public static void LoadFromPrefs()
         {
             if (PlayerPrefs.HasKey(Constants.Saves))
+            {
                 _playerPrefs = JsonUtility.FromJson<CloudPlayerPrefs>(PlayerPrefs.GetString(Constants.Saves));
+            }
             else
+            {
                 _playerPrefs = new CloudPlayerPrefs();
+            }
 
             IsSavesLoaded = true;
         }
@@ -54,7 +58,6 @@ namespace SDK
         private static void SaveData()
         {
             string save = JsonUtility.ToJson(_playerPrefs);
-
             PlayerPrefs.SetString(Constants.Saves, save);
             PlayerAccount.SetCloudSaveData(save);
         }

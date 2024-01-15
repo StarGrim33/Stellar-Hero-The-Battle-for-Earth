@@ -28,7 +28,6 @@ namespace Utils
             if (_droneSprite != null && _droneAttackState.CurrenTarget != null)
             {
                 Transform target = _droneAttackState.CurrenTarget;
-
                 _droneSprite.flipX = target.position.x <= transform.position.x;
             }
         }

@@ -1,6 +1,6 @@
-﻿using Core;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 namespace Assets.Scripts.Components.Checkers
 {
@@ -24,7 +24,9 @@ namespace Assets.Scripts.Components.Checkers
             for (int i = 0; i < size; i++)
             {
                 if (_collidedResult[i].gameObject.TryGetComponent<T>(out var damageable))
+                {
                     result.Add(damageable);
+                }
             }
 
             return result;

@@ -1,6 +1,9 @@
-public class TutorialModel
+namespace Utils
 {
-    public bool ShowTutorial { get; set; }
+    public class TutorialModel
+    {
+        public bool ShowTutorial { get; set; }
 
-    public int CurrentTutorialIndex { get; set; } = 0;
+        public int CurrentTutorialIndex { get; set; } = 0;
+    }
 }

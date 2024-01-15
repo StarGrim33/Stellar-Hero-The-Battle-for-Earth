@@ -1,5 +1,6 @@
 using UnityEngine;
 using Utils;
+using Weapon;
 
 namespace Player
 {

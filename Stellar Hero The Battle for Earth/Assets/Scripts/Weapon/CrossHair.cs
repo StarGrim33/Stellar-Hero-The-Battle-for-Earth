@@ -1,3 +1,8 @@
 using UnityEngine;
 
-public class CrossHair : MonoBehaviour { }
+namespace Weapon
+{
+    public class CrossHair : MonoBehaviour
+    {
+    }
+}

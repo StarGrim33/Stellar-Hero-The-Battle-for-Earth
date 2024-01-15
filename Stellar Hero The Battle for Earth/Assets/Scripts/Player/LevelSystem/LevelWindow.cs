@@ -3,9 +3,8 @@ using SDK;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils;
 
-namespace Core
+namespace Utils
 {
     public class LevelWindow : MonoBehaviour
     {

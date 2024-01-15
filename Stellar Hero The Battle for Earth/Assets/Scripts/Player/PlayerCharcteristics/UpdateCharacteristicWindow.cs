@@ -1,5 +1,5 @@
-using Player;
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
@@ -10,7 +10,7 @@ public class UpdateCharacteristicWindow : MonoBehaviour
     [SerializeField] private CharacteristicChanger _characteristicChangerTemplate;
     [SerializeField] private Button _menuButton;
     [SerializeField] private int _chengersCount = 3;
-    private List<CharacteristicChanger> _currentChangers = new();
+    private List<CharacteristicChanger> _currentChangers = new ();
 
     private void Start()
     {

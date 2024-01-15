@@ -1,9 +1,9 @@
 using System;
 using Assets.Scripts.Components.Checkers;
 using Assets.Scripts.Utils;
-using Core;
 using Utils;
 using UnityEngine;
+using Weapon;
 
 namespace Player
 {
@@ -23,8 +23,8 @@ namespace Player
         private Vector2 _startDashPostioin;
         private Vector2 _endDashPostioin;
         private float _dashTimer;
-        private bool _isDash;
         private float _speed;
+        private bool _isDash;
 
         public event Action<bool> Dashing;
 
@@ -34,14 +34,7 @@ namespace Player
 
         private void Awake()
         {
-            _particleSystem = GetComponent<PlayerParticleSystem>();
-            _rigidBody = GetComponent<Rigidbody2D>();
-        }
-
-        private void Start()
-        {
-            SetMovementCharacteristic();
-            PlayerCharacteristics.I.CharacteristicChanged += SetMovementCharacteristic;
+            Init();
         }
 
         private void FixedUpdate()
@@ -75,7 +68,7 @@ namespace Player
                 _dashCooldown.Reset();
                 _startDashPostioin = transform.position;
                 var directionDash = _direction == Vector2.zero ? Vector2.down : _direction;
-                _endDashPostioin = _startDashPostioin + directionDash * _distance;
+                _endDashPostioin = _startDashPostioin + (directionDash * _distance);
                 _dashTimer = 0;
                 _isDash = true;
                 Dashing?.Invoke(true);
@@ -104,6 +97,14 @@ namespace Player
             _speed = PlayerCharacteristics.I.GetValue(Characteristics.Speed);
             _dashCooldown.ChangeCooldownValue(PlayerCharacteristics.I.GetValue(Characteristics.DushCooldown));
             _enterTriggerDamage.SetDamage((int)PlayerCharacteristics.I.GetValue(Characteristics.PlayerTriggerDamage));
+        }
+
+        private void Init()
+        {
+            _particleSystem = GetComponent<PlayerParticleSystem>();
+            _rigidBody = GetComponent<Rigidbody2D>();
+            SetMovementCharacteristic();
+            PlayerCharacteristics.I.CharacteristicChanged += SetMovementCharacteristic;
         }
     }
 }

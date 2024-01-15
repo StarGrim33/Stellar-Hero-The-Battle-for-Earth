@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Core
+namespace Utils
 {
     public class WaveEnemies : MonoBehaviour
     {

@@ -31,7 +31,7 @@ namespace Enemy
 
         public virtual void Attack()
         {
-            int minDistanceForAttack = 1;
+            const int minDistanceForAttack = 1;
 
             if (Target.IsAlive)
             {

@@ -1,11 +1,10 @@
 using System;
 using Player;
 using UnityEngine.SceneManagement;
-using Utils;
 
-namespace Core
+namespace Utils
 {
-    public class Level
+    public class Level : ILevel
     {
         private readonly PlayerHealth _health;
 

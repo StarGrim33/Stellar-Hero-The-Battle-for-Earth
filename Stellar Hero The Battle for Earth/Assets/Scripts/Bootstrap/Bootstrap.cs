@@ -3,8 +3,9 @@ using Player;
 using SDK;
 using UnityEngine;
 using UnityEngine.UI;
+using Weapon;
 
-namespace Core
+namespace Utils
 {
     public class Bootstrap : MonoBehaviour
     {

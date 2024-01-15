@@ -5,11 +5,11 @@ namespace Utils
 {
     public class DroneMovementState : IDroneMovementState, IStateSwitcher
     {
-        private Transform _droneTransform;
-        private Transform _heroTransform;
-        private DroneStateMachine _stateMachine;
-        private CheckCircleOverlap _enemyChecker;
-        private float _flyRadius = 1.0f;
+        private readonly Transform _droneTransform;
+        private readonly Transform _heroTransform;
+        private readonly DroneStateMachine _stateMachine;
+        private readonly CheckCircleOverlap _enemyChecker;
+        private readonly float _flyRadius = 1.0f;
         private float _angle;
 
         public DroneMovementState(Transform transform, Transform playerTransform, DroneStateMachine stateMachine,
@@ -39,8 +39,8 @@ namespace Utils
         private void MoveAroundPlayer()
         {
             _angle += Time.deltaTime;
-            float x = _heroTransform.position.x + _flyRadius * Mathf.Cos(_angle);
-            float y = _heroTransform.position.y + _flyRadius * Mathf.Sin(_angle);
+            float x = _heroTransform.position.x + (_flyRadius * Mathf.Cos(_angle));
+            float y = _heroTransform.position.y + (_flyRadius * Mathf.Sin(_angle));
             _droneTransform.position = new Vector3(x, y, _droneTransform.position.z);
         }
     }

@@ -1,6 +1,5 @@
-using Core;
-using UnityEngine;
 using Utils;
+using UnityEngine;
 
 namespace Enemy
 {

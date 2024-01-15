@@ -1,5 +1,5 @@
-using Buffs;
 using System.Collections.Generic;
+using Buffs;
 using UnityEngine;
 
 namespace Enemy

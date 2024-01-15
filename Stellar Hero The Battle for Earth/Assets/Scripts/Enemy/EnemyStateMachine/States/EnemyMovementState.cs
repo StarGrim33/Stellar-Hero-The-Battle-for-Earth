@@ -14,13 +14,7 @@ namespace Enemy
 
         private void Start()
         {
-            _agent = GetComponent<NavMeshAgent>();
-            Animator = GetComponent<Animator>();
-            _enemyUnit = GetComponent<EnemyUnit>();
-            _agent.updateRotation = false;
-            _agent.updateUpAxis = false;
-            _speed = _enemyUnit.Config.Speed;
-            _agent.speed = _speed;
+            Init();
         }
 
         private void Update()
@@ -36,6 +30,17 @@ namespace Enemy
 
             if (Health.CurrentHealth == 0)
                 _agent.destination = _agent.transform.position;
+        }
+
+        private void Init()
+        {
+            _agent = GetComponent<NavMeshAgent>();
+            Animator = GetComponent<Animator>();
+            _enemyUnit = GetComponent<EnemyUnit>();
+            _agent.updateRotation = false;
+            _agent.updateUpAxis = false;
+            _speed = _enemyUnit.Config.Speed;
+            _agent.speed = _speed;
         }
     }
 }

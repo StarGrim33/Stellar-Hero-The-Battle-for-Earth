@@ -4,51 +4,54 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utils;
 
-public class TutorialView : MonoBehaviour
+namespace Utils
 {
-    [SerializeField] private List<Button> _tutorials;
-    [SerializeField] private PlayerMovement _player;
-    [SerializeField] private Button _menuButton;
-
-    private TutorialPresenter _presenter;
-
-    public int TutorialsCount => _tutorials.Count;
-
-    private void Start()
+    public class TutorialView : MonoBehaviour
     {
-        _presenter = new TutorialPresenter(this);
-    }
+        [SerializeField] private List<Button> _tutorials;
+        [SerializeField] private PlayerMovement _player;
+        [SerializeField] private Button _menuButton;
 
-    public void OnTutorialClick()
-    {
-        _presenter.OnTutorialClick();
-    }
+        private TutorialPresenter _presenter;
 
-    public void HideTutorial(TutorialModel tutorialModel)
-    {
-        if (tutorialModel.CurrentTutorialIndex < TutorialsCount)
+        public int TutorialsCount => _tutorials.Count;
+
+        private void Start()
         {
-            _tutorials[tutorialModel.CurrentTutorialIndex].gameObject.SetActive(false);
+            _presenter = new TutorialPresenter(this);
         }
-    }
 
-    public void ShowTutorial(TutorialModel tutorialModel)
-    {
-        if (tutorialModel.ShowTutorial && tutorialModel.CurrentTutorialIndex < TutorialsCount)
+        public void OnTutorialClick()
         {
-            _menuButton.enabled = false;
-            _tutorials[tutorialModel.CurrentTutorialIndex].gameObject.SetActive(true);
-            _player.enabled = false;
-            Time.timeScale = 0f;
-            StateManager.Instance.SetState(GameStates.Paused);
+            _presenter.OnTutorialClick();
         }
-    }
 
-    public void EnablePlayerControls()
-    {
-        Time.timeScale = 1f;
-        StateManager.Instance.SetState(GameStates.Gameplay);
-        _menuButton.enabled = true;
-        _player.enabled = true;
+        public void HideTutorial(TutorialModel tutorialModel)
+        {
+            if (tutorialModel.CurrentTutorialIndex < TutorialsCount)
+            {
+                _tutorials[tutorialModel.CurrentTutorialIndex].gameObject.SetActive(false);
+            }
+        }
+
+        public void ShowTutorial(TutorialModel tutorialModel)
+        {
+            if (tutorialModel.ShowTutorial && tutorialModel.CurrentTutorialIndex < TutorialsCount)
+            {
+                _menuButton.enabled = false;
+                _tutorials[tutorialModel.CurrentTutorialIndex].gameObject.SetActive(true);
+                _player.enabled = false;
+                Time.timeScale = 0f;
+                StateManager.Instance.SetState(GameStates.Paused);
+            }
+        }
+
+        public void EnablePlayerControls()
+        {
+            Time.timeScale = 1f;
+            StateManager.Instance.SetState(GameStates.Gameplay);
+            _menuButton.enabled = true;
+            _player.enabled = true;
+        }
     }
 }

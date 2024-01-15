@@ -10,12 +10,13 @@ namespace SDK
 {
     public class AdvShower : MonoBehaviour, IAdShow
     {
+        private readonly float _second = 1f;
+
         [SerializeField] private TMP_Text _countDown;
-        [SerializeField] private WebUtilityFixer _fixer;
+        [SerializeField] private WebApplicationStateController _fixer;
         [SerializeField] private SourceAudio[] _audioSources;
         [SerializeField] private PlayerHealth _player;
         private WaitForSeconds _delay;
-        private float _second = 1f;
 
         private void Start()
         {
@@ -49,24 +50,6 @@ namespace SDK
             VideoAd.Show(onOpenCallback: OnOpenCallback, onCloseCallback: OnCloseCallback);
         }
 
-        private IEnumerator ShowAdWithCountdown(string text)
-        {
-            int countdown = 3;
-
-            while (countdown > 0)
-            {
-                _countDown.text = text + countdown.ToString();
-                yield return _delay;
-                countdown--;
-                _countDown.text = text + countdown.ToString();
-            }
-
-            yield return _delay;
-
-            InterstitialAd.Show(onOpenCallback: OnOpenCallback, onCloseCallback: IsAdvEnded);
-            _countDown.text = string.Empty;
-        }
-
         public void IsAdvEnded(bool isAdvEnded)
         {
             if (isAdvEnded)
@@ -98,6 +81,24 @@ namespace SDK
 
             _fixer.Pause(true);
             StateManager.Instance.SetState(GameStates.Paused);
+        }
+
+        private IEnumerator ShowAdWithCountdown(string text)
+        {
+            int countdown = 3;
+
+            while (countdown > 0)
+            {
+                _countDown.text = text + countdown.ToString();
+                yield return _delay;
+                countdown--;
+                _countDown.text = text + countdown.ToString();
+            }
+
+            yield return _delay;
+
+            InterstitialAd.Show(onOpenCallback: OnOpenCallback, onCloseCallback: IsAdvEnded);
+            _countDown.text = string.Empty;
         }
     }
 }

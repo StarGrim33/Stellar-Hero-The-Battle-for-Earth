@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Core
+namespace Utils
 {
     public abstract class Unit : MonoBehaviour
     {

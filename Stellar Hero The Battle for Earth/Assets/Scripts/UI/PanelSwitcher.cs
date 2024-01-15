@@ -1,43 +1,43 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Utils;
 
-public class PanelSwitcher : MonoBehaviour, IPanelSwiitcher
+namespace Utils
 {
-    [SerializeField] private GameObject _panel;
-    [SerializeField] private GameObject _effect;
-    [SerializeField] private Button _soundButton;
-
-    public void OpenPanel()
+    public class PanelSwitcher : MonoBehaviour, IPanelSwiitcher
     {
-        if (_effect != null)
-            _effect.SetActive(false);
+        [SerializeField] private GameObject _panel;
+        [SerializeField] private GameObject _effect;
+        [SerializeField] private Button _soundButton;
 
-        _panel.SetActive(true);
+        public void OpenPanel()
+        {
+            _effect?.SetActive(false);
+            _panel.SetActive(true);
 
-        if (_soundButton != null)
-            _soundButton.gameObject.SetActive(false);
+            if (_soundButton != null)
+                _soundButton.gameObject.SetActive(false);
 
-        StateManager.Instance.SetState(GameStates.Paused);
-    }
+            StateManager.Instance.SetState(GameStates.Paused);
+        }
 
-    public void ClosePanel(bool isEffectEnabled)
-    {
-        if (_effect != null && isEffectEnabled)
-            _effect.SetActive(true);
+        public void ClosePanel(bool isEffectEnabled)
+        {
+            if (_effect != null && isEffectEnabled)
+                _effect.SetActive(true);
 
             _panel.SetActive(false);
 
-        if (_soundButton != null)
-            _soundButton.gameObject.SetActive(true);
+            if (_soundButton != null)
+                _soundButton.gameObject.SetActive(true);
 
-        StateManager.Instance.SetState(GameStates.Gameplay);
-    }
+            StateManager.Instance.SetState(GameStates.Gameplay);
+        }
 
-    public void GoToMainMenu()
-    {
-        int firstSceneIndex = 1;
-        SceneManager.LoadScene(firstSceneIndex);
+        public void GoToMainMenu()
+        {
+            const int firstSceneIndex = 1;
+            SceneManager.LoadScene(firstSceneIndex);
+        }
     }
 }

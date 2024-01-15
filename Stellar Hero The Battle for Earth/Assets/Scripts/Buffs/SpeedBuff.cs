@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Buffs
 {
-    public class SpeedIncrease : BaseBuff
+    public class SpeedBuff : BaseBuff
     {
         [SerializeField] private float _speedValue = 4;
         [SerializeField] private float _duration = 5;

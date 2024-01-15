@@ -1,14 +1,14 @@
 using UnityEngine;
+using Utils;
 
 namespace Bullets
 {
     public class BulletTrail : MonoBehaviour
     {
-        [SerializeField] private float _speed = 40f;
+        private readonly float _axisValue = -1;
         private Vector3 _startPosition;
         private Vector3 _targetPosition;
         private float _progress;
-        private float _axisValue = -1;
 
         private void Start()
         {

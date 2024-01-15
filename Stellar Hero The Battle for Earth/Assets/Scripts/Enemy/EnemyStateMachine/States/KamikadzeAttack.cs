@@ -1,5 +1,5 @@
 using System.Collections;
-using Core;
+using Utils;
 using UnityEngine;
 
 namespace Enemy
@@ -22,10 +22,7 @@ namespace Enemy
 
         private void Awake()
         {
-            _enemyHealth = GetComponent<EnemyHealth>();
-            _effectSpawner = GetComponent<DeadEffectSpawner>();
-            _explosionDelay = new WaitForSeconds(_explosionTimeDelay);
-            _disableDelay = new WaitForSeconds(_disableTimeDelay);
+            Init();
         }
 
         public override void Attack()
@@ -66,6 +63,14 @@ namespace Enemy
         {
             yield return _disableDelay;
             _enemyHealth.TakeDamage(_maxExplosionDamage);
+        }
+
+        private void Init()
+        {
+            _enemyHealth = GetComponent<EnemyHealth>();
+            _effectSpawner = GetComponent<DeadEffectSpawner>();
+            _explosionDelay = new WaitForSeconds(_explosionTimeDelay);
+            _disableDelay = new WaitForSeconds(_disableTimeDelay);
         }
     }
 }

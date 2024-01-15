@@ -1,7 +1,7 @@
 using Player;
 using UnityEngine;
 
-namespace Core
+namespace Utils
 {
     public class ExperienceHandler : MonoBehaviour
     {

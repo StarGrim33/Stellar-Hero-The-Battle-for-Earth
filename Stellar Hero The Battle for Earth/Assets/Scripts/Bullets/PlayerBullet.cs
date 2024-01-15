@@ -1,4 +1,4 @@
-using Core;
+using Utils;
 using UnityEngine;
 
 namespace Bullets

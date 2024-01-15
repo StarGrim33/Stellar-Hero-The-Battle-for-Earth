@@ -2,9 +2,9 @@ using System;
 using SDK;
 using UnityEngine;
 
-namespace Core
+namespace Utils
 {
-    public class GameplayMediator : MonoBehaviour
+    public class GameplayMediator : MonoBehaviour, IGameplayMediator
     {
         [SerializeField] private DefeatPanel _defeatPanel;
         [SerializeField] private Rigidbody2D _playerUnit;

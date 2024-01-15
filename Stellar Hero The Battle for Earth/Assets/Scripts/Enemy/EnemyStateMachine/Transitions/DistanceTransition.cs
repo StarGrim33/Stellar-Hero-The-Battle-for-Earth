@@ -5,7 +5,6 @@ namespace Enemy
     public class DistanceTransition : Transition
     {
         [SerializeField] private float _transitionRangeForNextState;
-        //[SerializeField] private float _spreadRange;
 
         private void Update()
         {

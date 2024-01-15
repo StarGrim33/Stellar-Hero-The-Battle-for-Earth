@@ -1,4 +1,4 @@
-using Core;
+using Utils;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -22,20 +22,20 @@ namespace Enemy
         {
             get
             {
-                return ÑurrenHealth;
+                return base.CurrentHealth;
             }
             private set
             {
-                ÑurrenHealth = Mathf.Clamp(value, 0, MaxHealth);
+                base.CurrentHealth = Mathf.Clamp(value, 0, MaxHealth);
 
-                if (ÑurrenHealth <= 0)
+                if (base.CurrentHealth <= 0)
                     Die();
             }
         }
 
         public Transform TargetTransform => transform;
 
-        public bool IsAlive => ÑurrenHealth > 0;
+        public bool IsAlive => base.CurrentHealth > 0;
 
         private void Start()
         {

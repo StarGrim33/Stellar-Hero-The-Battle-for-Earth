@@ -1,21 +1,21 @@
 using System;
 using System.Collections;
-using Core;
-using UnityEngine;
 using Utils;
+using UnityEngine;
 
 namespace Player
 {
     [RequireComponent(typeof(PlayerMovement))]
     public class PlayerHealth : UnitHealth, IDamageable
     {
+        private readonly int _immortalityTime = 5;
+
         [SerializeField] private Animator _animator;
         [SerializeField] private HandSpriteHandler _handSpriteHandler;
         private PlayerMovement _playerMovement;
         private BaseParticleSystem _effects;
         private bool _isInvulnerable;
         private bool _isImmortal;
-        private int _immortalityTime = 5;
         private float _remainingImmortalityTime;
 
         public event Action<float, float> OnHealthChanged;
@@ -24,33 +24,26 @@ namespace Player
 
         public event Action Immortality;
 
-        public new float MaxHealth => base.MaxHealth;
-
-        public float CurrentHealth
+        public override float CurrentHealth
         {
             get
             {
-                return ÑurrenHealth;
+                return base.CurrentHealth;
             }
-            private set
+            protected set
             {
-                ÑurrenHealth = Mathf.Clamp(value, 0, base.MaxHealth);
+                base.CurrentHealth = Mathf.Clamp(value, 0, base.MaxHealth);
 
-                if (ÑurrenHealth <= 0)
+                if (base.CurrentHealth <= 0)
                     Die();
             }
         }
 
         public Transform TargetTransform => transform;
 
-        public bool IsAlive => ÑurrenHealth > 0;
+        public bool IsAlive => base.CurrentHealth > 0;
 
         private void Awake()
-        {
-            _effects = GetComponent<BaseParticleSystem>();
-        }
-
-        private void Start()
         {
             Init();
         }
@@ -60,12 +53,12 @@ namespace Player
             _playerMovement.Dashing -= InvulnerableActivated;
         }
 
-        public void HealUp(int value)
+        public void Heal(int healingAmount)
         {
-            if (value <= 0)
-                throw new ArgumentException(nameof(value));
+            if (healingAmount <= 0)
+                throw new ArgumentException(nameof(healingAmount));
 
-            CurrentHealth += value;
+            CurrentHealth += healingAmount;
             OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
         }
 
@@ -134,6 +127,7 @@ namespace Player
 
         private void Init()
         {
+            _effects = GetComponent<BaseParticleSystem>();
             _playerMovement = GetComponent<PlayerMovement>();
             _playerMovement.Dashing += InvulnerableActivated;
             SetMaxHealth();

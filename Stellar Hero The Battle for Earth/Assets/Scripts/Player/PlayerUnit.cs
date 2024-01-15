@@ -1,5 +1,5 @@
 using Buffs;
-using Core;
+using Utils;
 using UnityEngine;
 
 namespace Player
@@ -8,8 +8,6 @@ namespace Player
     public class PlayerUnit : Unit
     {
         private PlayerHealth _health;
-
-        public PlayerHealth PlayerHealth => _health;
 
         private void Start()
         {

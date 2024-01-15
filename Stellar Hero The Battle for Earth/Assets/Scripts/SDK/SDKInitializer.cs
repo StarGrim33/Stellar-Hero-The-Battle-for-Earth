@@ -28,7 +28,7 @@ namespace SDK
 
         private IEnumerator OnInitialized()
         {
-            int firsScene = 1;
+            const int firsScene = 1;
             yield return _delay;
             SceneManager.LoadScene(firsScene);
         }

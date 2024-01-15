@@ -1,23 +1,26 @@
-using Core;
+using Utils;
 using UnityEngine;
 
-public class EnterTriggerDamage : MonoBehaviour
+namespace Weapon
 {
-    [SerializeField] private bool _isTriggerDamage = false;
-    private int _damage = 0;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class EnterTriggerDamage : MonoBehaviour
     {
-        if (_isTriggerDamage == false || _damage == 0)
-            return;
+        [SerializeField] private bool _isTriggerDamage;
+        private int _damage = 0;
 
-        if(collision.TryGetComponent<IDamageable>(out IDamageable damageable))
-            damageable.TakeDamage(_damage);
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (_isTriggerDamage == false || _damage == 0)
+                return;
+
+            if (collision.TryGetComponent<IDamageable>(out IDamageable damageable))
+                damageable.TakeDamage(_damage);
+        }
+
+        public void OnTriggerDamage() => _isTriggerDamage = true;
+
+        public void OffTriggerDamage() => _isTriggerDamage = false;
+
+        public void SetDamage(int damage) => _damage = damage;
     }
-
-    public void OnTriggerDamage()=> _isTriggerDamage = true;
-
-    public void OffTriggerDamage()=> _isTriggerDamage = false;
-
-    public void SetDamage(int damage) => _damage = damage;  
 }
