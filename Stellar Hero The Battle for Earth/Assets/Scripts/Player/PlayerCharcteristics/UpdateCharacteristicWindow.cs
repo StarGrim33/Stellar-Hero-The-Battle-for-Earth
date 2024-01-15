@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 public class UpdateCharacteristicWindow : MonoBehaviour
 {
@@ -8,8 +10,7 @@ public class UpdateCharacteristicWindow : MonoBehaviour
     [SerializeField] private CharacteristicChanger _characteristicChangerTemplate;
     [SerializeField] private Button _menuButton;
     [SerializeField] private int _chengersCount = 3;
-
-    private List<CharacteristicChanger> _currentChangers = new();
+    private List<CharacteristicChanger> _currentChangers = new ();
 
     private void Start()
     {
@@ -34,12 +35,12 @@ public class UpdateCharacteristicWindow : MonoBehaviour
     public void CharacteristicChangerListUpdated(CharacteristicChangerConfig changer)
     {
         if (changer.NextChanger != null)
+        {
             _characteristicChangers.Add(changer.NextChanger);
+        }
 
         _characteristicChangers.Remove(changer);
-
         RemoveChangers();
-
         Init();
     }
 
@@ -53,14 +54,13 @@ public class UpdateCharacteristicWindow : MonoBehaviour
         {
             var template = Instantiate(_characteristicChangerTemplate, gameObject.transform);
             template.Init(_characteristicChangers[i]);
-
             _currentChangers.Add(template);
         }
     }
 
     private void RemoveChangers()
     {
-        foreach(var changer in _currentChangers)
+        foreach (var changer in _currentChangers)
             Destroy(changer.gameObject);
     }
 }

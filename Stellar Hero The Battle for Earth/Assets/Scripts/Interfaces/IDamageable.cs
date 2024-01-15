@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public interface IDamageable
+namespace Utils
 {
-    bool IsAlive { get; }
+    public interface IDamageable
+    {
+        bool IsAlive { get; }
 
-    Transform TargetTransform { get;}
+        Transform TargetTransform { get; }
 
-    public void TakeDamage(int damage);
+        public void TakeDamage(int damage);
+    }
 }

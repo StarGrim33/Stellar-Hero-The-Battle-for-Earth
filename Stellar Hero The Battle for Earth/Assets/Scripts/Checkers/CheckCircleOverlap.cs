@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 namespace Assets.Scripts.Components.Checkers
 {
     public class CheckCircleOverlap : MonoBehaviour
     {
-        private static readonly int ColliderSize = 5;
+        private const int ColliderSize = 5;
 
         private readonly Collider2D[] _collidedResult = new Collider2D[ColliderSize];
 
@@ -23,7 +24,9 @@ namespace Assets.Scripts.Components.Checkers
             for (int i = 0; i < size; i++)
             {
                 if (_collidedResult[i].gameObject.TryGetComponent<T>(out var damageable))
+                {
                     result.Add(damageable);
+                }
             }
 
             return result;

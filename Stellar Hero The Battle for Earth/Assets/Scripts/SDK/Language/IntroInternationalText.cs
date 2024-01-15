@@ -1,35 +1,38 @@
-using Agava.YandexGames;
 using System.Collections;
+using Agava.YandexGames;
+using Utils;
 
-public class IntroInternationalText : InternationalText
+namespace SDK
 {
-    private string _lang;
-
-    protected override void Start()
+    public class IntroInternationalText : InternationalText
     {
-        StartCoroutine(WaitSDKInitialize());
-    }
-
-    private IEnumerator WaitSDKInitialize()
-    {
-        yield return YandexGamesSdk.Initialize();
-
-        _lang = YandexGamesSdk.Environment.i18n.lang;
-
-        switch (_lang)
+        protected override void Start()
         {
-            case (Constants.EnglishCode):
-                SetText(_en);
-                break;
-            case (Constants.RussianCode):
-                SetText(_ru);
-                break;
-            case (Constants.TurkishCode):
-                SetText(_tr);
-                break;
-            default:
-                SetText(_en);
-                break;
+            StartCoroutine(WaitSDKInitialize());
+        }
+
+        private IEnumerator WaitSDKInitialize()
+        {
+            yield return YandexGamesSdk.Initialize();
+
+            switch (Language.Instance.CurrentLanguage)
+            {
+                case (Constants.EnglishCode):
+                    SetText(EnglishLanguage);
+                    break;
+
+                case (Constants.RussianCode):
+                    SetText(RussianLanguage);
+                    break;
+
+                case (Constants.TurkishCode):
+                    SetText(TurkishLanguage);
+                    break;
+
+                default:
+                    SetText(RussianLanguage);
+                    break;
+            }
         }
     }
 }

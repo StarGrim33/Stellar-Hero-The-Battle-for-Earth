@@ -1,219 +1,245 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enemy;
+using Player;
+using SDK;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour, ISpawner
+namespace Utils
 {
-    public static Spawner Instance { get; private set; }
-
-    [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private EnemyPool _enemyPool;
-    [SerializeField] private List<WaveEnemies> _waves;
-    [SerializeField] private PlayerUnit _playerUnit;
-    [SerializeField] private List<int> _unusedSpawnPoints;
-    [SerializeField] private BestWaveView _bestWaveView;
-    [SerializeField] private float _delayBetweenWaves;
-
-    private LeaderboradSaver _saver;
-    private IDamageable _target;
-    private ExperienceHandler _experienceHandler;
-    private WaveEnemies _currentWave;
-    private int _currentWaveIndex = 0;
-    private int _currentSpawnPointIndex = 1;
-    private bool _isSpawnFrozen = false;
-    private float _timeAfterLastSpawn;
-    private int _spawned;
-
-    public event Action AllEnemySpawned;
-    public event Action<int> WaveChanged;
-
-    public int CurrentWaveIndex => _currentWaveIndex + 1;
-
-    private void Awake()
+    [RequireComponent(typeof(LeaderboardSaver), typeof(ExperienceHandler))]
+    public class Spawner : MonoBehaviour, ISpawner
     {
-        if (Instance == null)
+        public static Spawner Instance { get; private set; }
+
+        [SerializeField] private Transform[] _spawnPoints;
+        [SerializeField] private EnemyPool _enemyPool;
+        [SerializeField] private List<WaveEnemies> _waves;
+        [SerializeField] private PlayerUnit _playerUnit;
+        [SerializeField] private List<int> _unusedSpawnPoints;
+        [SerializeField] private BestWaveView _bestWaveView;
+        [SerializeField] private float _delayBetweenWaves;
+
+        private LeaderboardSaver _saver;
+        private IDamageable _target;
+        private ExperienceHandler _experienceHandler;
+        private WaveEnemies _currentWave;
+        private WaitForSeconds _wavesDelay;
+        private int _currentWaveIndex;
+        private int _currentSpawnPointIndex = 1;
+        private bool _isSpawnFrozen;
+        private float _timeAfterLastSpawn;
+        private int _spawned;
+
+        public event Action AllEnemySpawned;
+
+        public event Action<int> WaveChanged;
+
+        public int CurrentWaveIndex => _currentWaveIndex + 1;
+
+        private void Awake()
         {
-            Instance = this;
+            InitSingleton();
+            Init();
+            InitSpawnPoints();
+            SetWave(_currentWaveIndex);
         }
-        else
+
+        private void Update()
         {
-            Debug.LogWarning("Multiple instances of Spawner found. Only one instance should exist.");
-            Destroy(gameObject);
-            return;
+            Spawn();
         }
 
-        _saver = GetComponent<LeaderboradSaver>();
-    }
-
-    private void Start()
-    {
-        Init();
-    }
-
-    private void Update()
-    {
-        if (_isSpawnFrozen || StateManager.Instance.CurrentGameState == GameStates.Paused)
+        public IEnumerator NextWave()
         {
-            return;
-        }
+            yield return _wavesDelay;
 
-        if (_currentWave == null)
-        {
-            return;
-        }
+            SetWave(++_currentWaveIndex);
+            _spawned = 0;
 
-        SpawnWave();
-
-        if (_currentWave.Amount <= _spawned)
-        {
-            if (_waves.Count > _currentWaveIndex + 1)
+            if (_currentWaveIndex > _bestWaveView.BestWave)
             {
-                AllEnemySpawned?.Invoke();
-                StartCoroutine(NextWave());
+                Saves.Save(Constants.BestWaveKey, _currentWaveIndex++);
+                _saver.UpdateOrCreatePlayerScore(_currentWaveIndex++);
+            }
+        }
+
+        public void SpawnWave()
+        {
+            _timeAfterLastSpawn += Time.deltaTime;
+
+            if (_timeAfterLastSpawn >= _currentWave.SpawnDelay)
+            {
+                if (_currentSpawnPointIndex < _spawnPoints.Length - 1)
+                {
+                    _currentSpawnPointIndex++;
+                    SpawnEnemy();
+                    _spawned++;
+                    _timeAfterLastSpawn = 0;
+                }
+                else
+                {
+                    _currentSpawnPointIndex = 0;
+                    SpawnEnemy();
+                    _spawned++;
+                    _timeAfterLastSpawn = 0;
+                }
+            }
+        }
+
+        public void SetWave(int index)
+        {
+            _currentWave = _waves[index];
+
+            if (_currentWaveIndex > _bestWaveView.BestWave)
+            {
+                Saves.Save(Constants.BestWaveKey, _currentWaveIndex++);
+                _saver.UpdateOrCreatePlayerScore(_currentWaveIndex++);
             }
 
-            _currentWave = null;
-        }
-
-        if (_currentWaveIndex >= _waves.Count - 1)
-        {
-            _currentWaveIndex = 0;
-            SetWave(_currentWaveIndex);
-            _spawned = 0;
-            SpawnWave();
             WaveChanged?.Invoke(CurrentWaveIndex);
         }
-    }
 
-    public IEnumerator NextWave()
-    {
-        var delay = new WaitForSeconds(_delayBetweenWaves);
-
-        yield return delay;
-
-        SetWave(++_currentWaveIndex);
-        _spawned = 0;
-
-        if (_currentWaveIndex > _bestWaveView.BestWave)
+        public bool TryGetSpawnPoint(int randomIndex, out int spawnPointIndex)
         {
-            Saves.Save(Constants.BestWaveKey, _currentWaveIndex++);
-            _saver.GetLeaderboardPlayerEntryButtonClick(_currentWaveIndex++);
-        }
-    }
+            spawnPointIndex = -1;
 
-    public void SpawnWave()
-    {
-        _timeAfterLastSpawn += Time.deltaTime;
-
-        if (_timeAfterLastSpawn >= _currentWave.SpawnDelay)
-        {
-            if (_currentSpawnPointIndex < _spawnPoints.Length - 1)
+            if (_unusedSpawnPoints.Contains(randomIndex))
             {
-                _currentSpawnPointIndex++;
-                SpawnEnemy();
-                _spawned++;
-                _timeAfterLastSpawn = 0;
+                spawnPointIndex = _unusedSpawnPoints[randomIndex];
+                return true;
+            }
+
+            return false;
+        }
+
+        public void SpawnEnemy()
+        {
+            int randomIndex = GetRandomSpawnIndex();
+
+            int spawnPointIndex;
+            if (TryGetSpawnPoint(randomIndex, out spawnPointIndex))
+            {
+                _unusedSpawnPoints.RemoveAt(randomIndex);
             }
             else
             {
-                _currentSpawnPointIndex = 0;
-                SpawnEnemy();
-                _spawned++;
-                _timeAfterLastSpawn = 0;
+                ResetSpawnPoints();
+                randomIndex = GetRandomSpawnIndex();
+                TryGetSpawnPoint(randomIndex, out spawnPointIndex);
+            }
+
+            GameObject enemy = CreateEnemyObject();
+            SetEnemyPositionAndRotation(enemy, spawnPointIndex);
+        }
+
+        private int GetRandomSpawnIndex()
+        {
+            return UnityEngine.Random.Range(0, _unusedSpawnPoints.Count);
+        }
+
+        private GameObject CreateEnemyObject()
+        {
+            GameObject enemy = _enemyPool.GetObject(_currentWave.EnemyPrefab);
+            enemy.gameObject.SetActive(true);
+            enemy.GetComponent<EnemyHealth>().Dying += OnEnemyDying;
+            return enemy;
+        }
+
+        private void SetEnemyPositionAndRotation(GameObject enemy, int spawnPointIndex)
+        {
+            enemy.transform.position = _spawnPoints[spawnPointIndex].position;
+            enemy.transform.rotation = _spawnPoints[spawnPointIndex].rotation;
+            enemy.GetComponent<EnemyStateMachine>().SetTarget(_target);
+        }
+
+        private void OnEnemyDying(EnemyHealth enemy)
+        {
+            if (enemy == null)
+            {
+                return;
+            }
+
+            if (enemy.TryGetComponent<ExperienceEnemyProvider>(out ExperienceEnemyProvider experience))
+            {
+                _experienceHandler.AddExperience(experience.ExperienceForEnemy);
+            }
+
+            enemy.Dying -= OnEnemyDying;
+        }
+
+        private void ResetSpawnPoints()
+        {
+            _unusedSpawnPoints.Clear();
+
+            for (int i = 0; i < _spawnPoints.Length; i++)
+                _unusedSpawnPoints.Add(i);
+        }
+
+        private void Init()
+        {
+            _saver = GetComponent<LeaderboardSaver>();
+            _experienceHandler = GetComponent<ExperienceHandler>();
+            _wavesDelay = new WaitForSeconds(_delayBetweenWaves);
+            _target = _playerUnit.GetComponent<IDamageable>();
+            WaveChanged?.Invoke(CurrentWaveIndex);
+        }
+
+        private void InitSpawnPoints()
+        {
+            _unusedSpawnPoints = new List<int>();
+            for (int i = 0; i < _spawnPoints.Length; i++)
+            {
+                _unusedSpawnPoints.Add(i);
             }
         }
-    }
 
-    public void SpawnEnemy()
-    {
-        int randomIndex = UnityEngine.Random.Range(0, _unusedSpawnPoints.Count);
-
-        if (TryGetSpawnPoint(randomIndex, out int spawnPointIndex))
+        private void Spawn()
         {
-            _unusedSpawnPoints.RemoveAt(randomIndex);
-        }
-        else
-        {
-            ResetSpawnPoints();
-            randomIndex = UnityEngine.Random.Range(0, _unusedSpawnPoints.Count);
-            TryGetSpawnPoint(randomIndex, out spawnPointIndex);
-        }
+            if (_isSpawnFrozen || StateManager.Instance.CurrentGameState == GameStates.Paused)
+            {
+                return;
+            }
 
-        GameObject enemy = _enemyPool.GetObject(_currentWave.EnemyPrefab);
+            if (_currentWave == null)
+            {
+                return;
+            }
 
-        enemy.transform.position = _spawnPoints[spawnPointIndex].position;
+            SpawnWave();
 
-        if (enemy.transform.position == null)
-        {
-            throw new Exception("Check spawner and enemy pool for available space");
-        }
+            if (_currentWave.Amount <= _spawned)
+            {
+                if (_waves.Count > _currentWaveIndex + 1)
+                {
+                    AllEnemySpawned?.Invoke();
+                    StartCoroutine(NextWave());
+                }
 
-        enemy.transform.rotation = _spawnPoints[spawnPointIndex].rotation;
-        enemy.gameObject.SetActive(true);
-        enemy.GetComponent<EnemyStateMachine>().SetTarget(_target);
-        enemy.GetComponent<EnemyHealth>().Dying += OnEnemyDying;
-    }
+                _currentWave = null;
+            }
 
-    private void OnEnemyDying(EnemyHealth enemy)
-    {
-        if (enemy == null)
-        {
-            return;
+            if (_currentWaveIndex >= _waves.Count - 1)
+            {
+                _currentWaveIndex = 0;
+                SetWave(_currentWaveIndex);
+                _spawned = 0;
+                SpawnWave();
+                WaveChanged?.Invoke(CurrentWaveIndex);
+            }
         }
 
-        if (enemy.TryGetComponent<ExperienceEnemy>(out ExperienceEnemy experience))
+        private void InitSingleton()
         {
-            _experienceHandler.AddExperience(experience.ExperienceForEnemy);
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-
-        enemy.Dying -= OnEnemyDying;
-    }
-
-    public void SetWave(int index)
-    {
-        _currentWave = _waves[index];
-
-        if (_currentWaveIndex > _bestWaveView.BestWave)
-        {
-            Saves.Save(Constants.BestWaveKey, _currentWaveIndex++);
-            _saver.GetLeaderboardPlayerEntryButtonClick(_currentWaveIndex++);
-        }
-
-        WaveChanged?.Invoke(CurrentWaveIndex);
-    }
-
-    public bool TryGetSpawnPoint(int randomIndex, out int spawnPointIndex)
-    {
-        spawnPointIndex = -1;
-
-        if (_unusedSpawnPoints.Contains(randomIndex))
-        {
-            spawnPointIndex = _unusedSpawnPoints[randomIndex];
-            return true;
-        }
-
-        return false;
-    }
-
-    private void ResetSpawnPoints()
-    {
-        _unusedSpawnPoints.Clear();
-
-        for (int i = 0; i < _spawnPoints.Length; i++)
-            _unusedSpawnPoints.Add(i);
-    }
-
-    private void Init()
-    {
-        _experienceHandler = GetComponent<ExperienceHandler>();
-        _unusedSpawnPoints = new List<int>();
-
-        for (int i = 0; i < _spawnPoints.Length; i++)
-            _unusedSpawnPoints.Add(i);
-
-        SetWave(_currentWaveIndex);
-        _target = _playerUnit.GetComponent<IDamageable>();
-        WaveChanged?.Invoke(CurrentWaveIndex);
     }
 }

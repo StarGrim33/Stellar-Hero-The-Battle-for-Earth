@@ -1,10 +1,10 @@
+using Player;
 using TMPro;
 using UnityEngine;
 
 public class PlayerCharacteristicsView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _characteristicsText;
-
     private PlayerCharacteristics _characteristics;
 
     private void Start()

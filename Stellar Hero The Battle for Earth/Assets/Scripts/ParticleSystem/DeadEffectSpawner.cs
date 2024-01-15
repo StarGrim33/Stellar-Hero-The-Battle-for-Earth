@@ -1,25 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeadEffectSpawner : MonoBehaviour
+namespace Utils
 {
-    [SerializeField] private List<ParticleSystem> _particles;
-    
-    public void SpawnRandomEffect()
+    public class DeadEffectSpawner : MonoBehaviour
     {
-        ParticleSystem particleSystem = TryGetDeadEffect();
-        particleSystem?.Play();
-    }
+        [SerializeField] private List<ParticleSystem> _particles;
 
-    public void SpawnEffect(ParticleSystem particleSystem)
-    {
-        if(particleSystem == null) return;
+        public void SpawnRandomEffect()
+        {
+            ParticleSystem particleSystem = TryGetDeadEffect();
+            particleSystem?.Play();
+        }
 
-        particleSystem.Play();
-    }
+        public void SpawnEffect(ParticleSystem particleSystem)
+        {
+            if (particleSystem == null)
+                return;
 
-    private ParticleSystem TryGetDeadEffect()
-    {
-        return _particles.Count > 0 ? _particles[Random.Range(0, _particles.Count)] : null;
+            particleSystem.Play();
+        }
+
+        private ParticleSystem TryGetDeadEffect()
+        {
+            return _particles.Count > 0 ? _particles[Random.Range(0, _particles.Count)] : null;
+        }
     }
 }

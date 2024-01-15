@@ -2,9 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class AbilityButton : MonoBehaviour, IPointerClickHandler
+namespace Player
 {
-    public Action Clicked;
+    public class AbilityButton : MonoBehaviour, IPointerClickHandler
+    {
+        public Action Clicked;
 
-    public void OnPointerClick(PointerEventData eventData) => Clicked?.Invoke();
+        public void OnPointerClick(PointerEventData eventData) => Clicked?.Invoke();
+    }
 }

@@ -1,4 +1,9 @@
-public interface IDroneMovementState
+namespace Utils
 {
-    void MoveAroundPlayer() { }
+    public interface IDroneMovementState
+    {
+        void MoveAroundPlayer()
+        {
+        }
+    }
 }

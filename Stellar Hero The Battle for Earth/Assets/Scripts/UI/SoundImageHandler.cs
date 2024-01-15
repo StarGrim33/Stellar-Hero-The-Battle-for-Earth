@@ -1,21 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundImageHandler : MonoBehaviour
+namespace Utils
 {
-    [SerializeField] private Image _sourceImage;
-    [SerializeField] private Sprite _soundOnSprite;
-    [SerializeField] private Sprite _soundOffSprite; 
-
-    public void ChangeImage()
+    public class SoundImageHandler : MonoBehaviour
     {
-        if (_sourceImage.sprite == _soundOnSprite)
+        [SerializeField] private Image _sourceImage;
+        [SerializeField] private Sprite _soundOnSprite;
+        [SerializeField] private Sprite _soundOffSprite;
+
+        public void ChangeImage()
         {
-            _sourceImage.sprite = _soundOffSprite;
-        }
-        else
-        {
-            _sourceImage.sprite = _soundOnSprite;
+            if (_sourceImage.sprite == _soundOnSprite)
+            {
+                _sourceImage.sprite = _soundOffSprite;
+            }
+            else
+            {
+                _sourceImage.sprite = _soundOnSprite;
+            }
         }
     }
 }

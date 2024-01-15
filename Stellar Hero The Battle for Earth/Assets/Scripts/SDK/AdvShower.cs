@@ -1,95 +1,104 @@
-using Agava.YandexGames;
-using Plugins.Audio.Core;
 using System.Collections;
+using Agava.YandexGames;
+using Player;
+using Plugins.Audio.Core;
 using TMPro;
 using UnityEngine;
+using Utils;
 
-public class AdvShower : MonoBehaviour
+namespace SDK
 {
-    [SerializeField] private TMP_Text _countDown;
-    [SerializeField] private WebUtilityFixer _fixer;
-    [SerializeField] private SourceAudio[] _audioSources;
-    [SerializeField] private PlayerHealth _player;
-
-    public void ShowAdv()
+    public class AdvShower : MonoBehaviour, IAdShow
     {
-        string language = Language.Instance.CurrentLanguage;
+        private readonly float _second = 1f;
 
-        switch (language)
+        [SerializeField] private TMP_Text _countDown;
+        [SerializeField] private WebApplicationStateController _fixer;
+        [SerializeField] private SourceAudio[] _audioSources;
+        [SerializeField] private PlayerHealth _player;
+        private WaitForSeconds _delay;
+
+        private void Start()
         {
-            case (Constants.RussianCode):
-                StartCoroutine(ShowAdWithCountdown(Constants.RuAdvText));
-                break;
-
-            case (Constants.EnglishCode):
-                StartCoroutine(ShowAdWithCountdown(Constants.EnAdvText));
-                break;
-
-            case (Constants.TurkishCode):
-                StartCoroutine(ShowAdWithCountdown(Constants.TrAdvText));
-                break;
-
-            default:
-                StartCoroutine(ShowAdWithCountdown(Constants.RuAdvText));
-                break;
-        }
-    }
-
-    public void ShowVideoAd()
-    {
-        VideoAd.Show(onOpenCallback: Pause, onCloseCallback: IsRewardedAdvEnded);
-    }
-
-    private IEnumerator ShowAdWithCountdown(string text)
-    {
-        int second = 1;
-        var waitForSeconds = new WaitForSeconds(second);
-        int countdown = 3;
-
-        while (countdown > 0)
-        {
-            _countDown.text = text + countdown.ToString();
-            yield return waitForSeconds;
-            countdown--;
-            _countDown.text = text + countdown.ToString();
+            _delay = new WaitForSeconds(_second);
         }
 
-        yield return waitForSeconds;
+        public void ShowAdv()
+        {
+            switch (Language.Instance.CurrentLanguage)
+            {
+                case (Constants.RussianCode):
+                    StartCoroutine(ShowAdWithCountdown(Constants.RuAdvText));
+                    break;
 
-        InterstitialAd.Show(onOpenCallback: Pause, onCloseCallback: IsAdvEnded);
-        _countDown.text = string.Empty;
-    }
+                case (Constants.EnglishCode):
+                    StartCoroutine(ShowAdWithCountdown(Constants.EnAdvText));
+                    break;
 
-    private void IsAdvEnded(bool isAdvEnded)
-    {
-        if (isAdvEnded)
+                case (Constants.TurkishCode):
+                    StartCoroutine(ShowAdWithCountdown(Constants.TrAdvText));
+                    break;
+
+                default:
+                    StartCoroutine(ShowAdWithCountdown(Constants.RuAdvText));
+                    break;
+            }
+        }
+
+        public void ShowVideoAd()
+        {
+            VideoAd.Show(onOpenCallback: OnOpenCallback, onCloseCallback: OnCloseCallback);
+        }
+
+        public void IsAdvEnded(bool isAdvEnded)
+        {
+            if (isAdvEnded)
+            {
+                _fixer.UnPause(false);
+
+                foreach (var source in _audioSources)
+                    source.UnPause();
+
+                StateManager.Instance.SetState(GameStates.Gameplay);
+            }
+        }
+
+        public void OnCloseCallback()
         {
             _fixer.UnPause(false);
 
             foreach (var source in _audioSources)
                 source.UnPause();
 
+            _player.Revive();
             StateManager.Instance.SetState(GameStates.Gameplay);
         }
-    }
 
-    private void IsRewardedAdvEnded()
-    {
-        _fixer.UnPause(false);
+        public void OnOpenCallback()
+        {
+            foreach (var source in _audioSources)
+                source.Pause();
 
-        foreach (var source in _audioSources)
-            source.UnPause();
+            _fixer.Pause(true);
+            StateManager.Instance.SetState(GameStates.Paused);
+        }
 
-        _player.Revive();
-        StateManager.Instance.SetState(GameStates.Gameplay);
-    }
+        private IEnumerator ShowAdWithCountdown(string text)
+        {
+            int countdown = 3;
 
-    private void Pause()
-    {
-        foreach (var source in _audioSources)
-            source.Pause();
+            while (countdown > 0)
+            {
+                _countDown.text = text + countdown.ToString();
+                yield return _delay;
+                countdown--;
+                _countDown.text = text + countdown.ToString();
+            }
 
-        _fixer.Pause(true);
-        StateManager.Instance.SetState(GameStates.Paused);
+            yield return _delay;
+
+            InterstitialAd.Show(onOpenCallback: OnOpenCallback, onCloseCallback: IsAdvEnded);
+            _countDown.text = string.Empty;
+        }
     }
 }

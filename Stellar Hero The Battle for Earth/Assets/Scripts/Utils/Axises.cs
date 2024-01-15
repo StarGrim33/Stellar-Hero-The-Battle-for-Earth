@@ -1,6 +1,9 @@
-public enum Axises
+namespace Utils
 {
-    x,
-    y,
-    z
+    public enum Axises
+    {
+        x,
+        y,
+        z,
+    }
 }

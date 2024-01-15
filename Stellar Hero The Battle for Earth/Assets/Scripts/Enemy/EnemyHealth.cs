@@ -1,81 +1,78 @@
+using Utils;
 using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyUnit)), RequireComponent(typeof(DeadEffectSpawner)), RequireComponent(typeof(DamagePopuper)), RequireComponent(typeof(EnemyBuffDropper))]
-public class EnemyHealth : UnitHealth, IDamageable
+namespace Enemy
 {
-    private MaterialBlicker _blicker;
-    private DamagePopuper _damagePopuper;
-    private DeadEffectSpawner _deadEffectSpawner;
-    private EnemyBuffDropper _enemyBuffDropper;
-
-    public event Action<EnemyHealth> Dying;
-
-    public float CurrentHealth
+    [RequireComponent(typeof(EnemyUnit)), RequireComponent(typeof(DeadEffectSpawner)),
+    RequireComponent(typeof(DamagePopuper)), RequireComponent(typeof(EnemyBuffDropper))]
+    public class EnemyHealth : UnitHealth, IDamageable
     {
-        get
+        private readonly float _timeForEnemyDisable = 0.5f;
+        private MaterialBlicker _blicker;
+        private DamagePopuper _damagePopuper;
+        private DeadEffectSpawner _deadEffectSpawner;
+        private EnemyBuffDropper _enemyBuffDropper;
+        private WaitForSeconds _delay;
+
+        public event Action<EnemyHealth> Dying;
+
+        public float CurrentHealth
         {
-            return ÑurrenHealth;
+            get
+            {
+                return base.CurrentHealth;
+            }
+            private set
+            {
+                base.CurrentHealth = Mathf.Clamp(value, 0, MaxHealth);
+
+                if (base.CurrentHealth <= 0)
+                    Die();
+            }
         }
-        private set
+
+        public Transform TargetTransform => transform;
+
+        public bool IsAlive => base.CurrentHealth > 0;
+
+        private void Start()
         {
-            ÑurrenHealth = Mathf.Clamp(value, 0, MaxHealth);
-
-            if (ÑurrenHealth <= 0)
-                Die();
+            _delay = new WaitForSeconds(_timeForEnemyDisable);
+            Init();
         }
-    }
 
-    public Transform TargetTransform => transform;
+        public void TakeDamage(int damage)
+        {
+            if (damage <= 0)
+                throw new ArgumentException(nameof(damage));
 
-    public bool IsAlive => ÑurrenHealth > 0;
+            _deadEffectSpawner?.SpawnRandomEffect();
+            CurrentHealth -= damage;
+            _blicker?.Flash();
+            _damagePopuper?.ShowDamagePopup(damage);
+        }
 
-    private void Start()
-    {
-        Init();
-    }
+        protected override void Die()
+        {
+            _enemyBuffDropper?.SpawnRandomBuff();
+            Dying?.Invoke(this);
+            StartCoroutine(SetDisabled());
+        }
 
-    public void TakeDamage(int damage)
-    {
-        if (damage <= 0)
-            throw new ArgumentException("Value cannot be negative", nameof(damage));
+        private IEnumerator SetDisabled()
+        {
+            yield return _delay;
+            gameObject.SetActive(false);
+        }
 
-        if (_deadEffectSpawner != null)
-            _deadEffectSpawner.SpawnRandomEffect();
-
-        CurrentHealth -= damage;
-
-        if (_blicker != null)
-            _blicker.Flash();
-
-        if (_damagePopuper != null)
-            _damagePopuper.ShowDamagePopup(damage);
-    }
-
-    protected override void Die()
-    {
-        if (_enemyBuffDropper != null)
-            _enemyBuffDropper.SpawnRandomBuff();
-
-        Dying?.Invoke(this);
-
-        StartCoroutine(SetDisabled());
-    }
-
-    private IEnumerator SetDisabled()
-    {
-        var timeForDisable = 0.5f;
-        var waitForSeconds = new WaitForSeconds(timeForDisable);
-        yield return waitForSeconds;
-        gameObject.SetActive(false);
-    }
-
-    private void Init()
-    {
-        _enemyBuffDropper = GetComponent<EnemyBuffDropper>();
-        _deadEffectSpawner = GetComponent<DeadEffectSpawner>();
-        _damagePopuper = GetComponent<DamagePopuper>();
-        _blicker = GetComponentInChildren<MaterialBlicker>();
+        private void Init()
+        {
+            _enemyBuffDropper = GetComponent<EnemyBuffDropper>();
+            _deadEffectSpawner = GetComponent<DeadEffectSpawner>();
+            _damagePopuper = GetComponent<DamagePopuper>();
+            _blicker = GetComponentInChildren<MaterialBlicker>();
+        }
     }
 }

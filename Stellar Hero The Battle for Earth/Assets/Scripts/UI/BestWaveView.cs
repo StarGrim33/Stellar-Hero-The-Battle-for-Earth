@@ -1,59 +1,63 @@
+using SDK;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BestWaveView : MonoBehaviour
+namespace Utils
 {
-    [SerializeField] private TMP_Text _text;
-    [SerializeField] private Spawner _currentWave;
-    [SerializeField] private Button _recordButton;
-    private string _language;
-    private int _bestWave;
-
-    public int BestWave => _bestWave;
-
-    private void OnEnable()
+    public class BestWaveView : MonoBehaviour
     {
-        _recordButton.onClick.AddListener(UpdateUI);
-        UpdateUI();
-    }
+        [SerializeField] private TMP_Text _text;
+        [SerializeField] private Button _recordButton;
+        private string _language;
+        private int _bestWave;
 
-    private void OnDisable() => _recordButton.onClick.RemoveListener(UpdateUI);
+        public int BestWave => _bestWave;
 
-    private void UpdateUI()
-    {
-        int defaultValue = 1;
-        _bestWave = Saves.Load(Constants.BestWaveKey, defaultValue);
-        _language = Language.Instance.CurrentLanguage;
-        string bestWaveText = GetBestWaveText(_language, _bestWave);
-        _text.text = bestWaveText;
-    }
-
-    private string GetBestWaveText(string language, int wave)
-    {
-        string languageCode = GetValidLanguageCode(language);
-        string waveTextPrefix = GetWaveTextPrefix(languageCode);
-        return waveTextPrefix + wave.ToString();
-    }
-
-    private string GetValidLanguageCode(string language)
-    {
-        return language switch
+        private void OnEnable()
         {
-            Constants.EnglishCode => Constants.EnglishCode,
-            Constants.TurkishCode => Constants.TurkishCode,
-            _ => Constants.RussianCode,
-        };
-    }
+            _recordButton.onClick.AddListener(UpdateUI);
+            UpdateUI();
+        }
 
-    private string GetWaveTextPrefix(string languageCode)
-    {
-        return languageCode switch
+        private void OnDisable()
         {
-            Constants.EnglishCode => Constants.BestWaveTextEn,
-            Constants.TurkishCode => Constants.BestWaveTextTr,
-            _ => Constants.BestWaveTextRu,
-        };
+            _recordButton.onClick.RemoveListener(UpdateUI);
+        }
+
+        private void UpdateUI()
+        {
+            const int defaultValue = 1;
+            _bestWave = Saves.Load(Constants.BestWaveKey, defaultValue);
+            _language = Language.Instance.CurrentLanguage;
+            _text.text = GetBestWaveText(_language, _bestWave);
+        }
+
+        private string GetBestWaveText(string language, int wave)
+        {
+            string languageCode = GetValidLanguageCode(language);
+            string waveTextPrefix = GetWaveTextPrefix(languageCode);
+            return waveTextPrefix + wave.ToString();
+        }
+
+        private string GetValidLanguageCode(string language)
+        {
+            return language switch
+            {
+                Constants.EnglishCode => Constants.EnglishCode,
+                Constants.TurkishCode => Constants.TurkishCode,
+                _ => Constants.RussianCode,
+            };
+        }
+
+        private string GetWaveTextPrefix(string languageCode)
+        {
+            return languageCode switch
+            {
+                Constants.EnglishCode => Constants.BestWaveTextEn,
+                Constants.TurkishCode => Constants.BestWaveTextTr,
+                _ => Constants.BestWaveTextRu,
+            };
+        }
     }
 }
-

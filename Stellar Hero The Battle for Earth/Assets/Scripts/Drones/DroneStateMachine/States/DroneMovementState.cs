@@ -1,55 +1,47 @@
 using Assets.Scripts.Components.Checkers;
 using UnityEngine;
 
-public class DroneMovementState : IDroneMovementState, IStateSwitcher
+namespace Utils
 {
-    private Transform _droneTransform;
-    private Transform _heroTransform;
-    private float _flyRadius = 1.0f;
-    private float _angle = 0.0f;
-    private DroneStateMachine _stateMachine;
-    private CheckCircleOverlap _enemyChecker;
-    private DroneParticleSystem _enemyParticleSystem;
-
-    public DroneMovementState(Transform transform, Transform playerTransform, DroneStateMachine stateMachine, CheckCircleOverlap checker, DroneParticleSystem droneParticleSystem)
+    public class DroneMovementState : IDroneMovementState, IStateSwitcher
     {
-        _droneTransform = transform;
-        _heroTransform = playerTransform;
-        _stateMachine = stateMachine;
-        _enemyChecker = checker;
-        _enemyParticleSystem = droneParticleSystem;
-    }
+        private readonly Transform _droneTransform;
+        private readonly Transform _heroTransform;
+        private readonly DroneStateMachine _stateMachine;
+        private readonly CheckCircleOverlap _enemyChecker;
+        private readonly float _flyRadius = 1.0f;
+        private float _angle;
 
-    public void Enter()
-    {
-        _enemyParticleSystem.PlayEffect(ParticleEffects.Shield);
-    }
-
-    public void Exit()
-    {
-        _enemyParticleSystem.PlayEffect(ParticleEffects.Dust);
-    }
-
-    public void Update()
-    {
-        if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+        public DroneMovementState(Transform transform, Transform playerTransform, DroneStateMachine stateMachine,
+            CheckCircleOverlap checker)
         {
-            return;
+            _droneTransform = transform;
+            _heroTransform = playerTransform;
+            _stateMachine = stateMachine;
+            _enemyChecker = checker;
         }
 
-        MoveAroundPlayer();
-
-        if (_enemyChecker.CheckCount() > 0)
+        public void Update()
         {
-            _stateMachine.SetWorkState();
-        }
-    }
+            if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+            {
+                return;
+            }
 
-    private void MoveAroundPlayer()
-    {
-        _angle += Time.deltaTime;
-        float x = _heroTransform.position.x + _flyRadius * Mathf.Cos(_angle);
-        float y = _heroTransform.position.y + _flyRadius * Mathf.Sin(_angle);
-        _droneTransform.position = new Vector3(x, y, _droneTransform.position.z);
+            MoveAroundPlayer();
+
+            if (_enemyChecker.CheckCount() > 0)
+            {
+                _stateMachine.SetWorkState();
+            }
+        }
+
+        private void MoveAroundPlayer()
+        {
+            _angle += Time.deltaTime;
+            float x = _heroTransform.position.x + (_flyRadius * Mathf.Cos(_angle));
+            float y = _heroTransform.position.y + (_flyRadius * Mathf.Sin(_angle));
+            _droneTransform.position = new Vector3(x, y, _droneTransform.position.z);
+        }
     }
 }

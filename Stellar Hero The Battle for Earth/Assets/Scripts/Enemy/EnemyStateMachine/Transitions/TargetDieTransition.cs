@@ -1,8 +1,11 @@
-public class TargetDieTransition : Transition
+namespace Enemy
 {
-    private void Update()
+    public class TargetDieTransition : Transition
     {
-        if (Target.IsAlive == false)
-            NeedTransit = true;
+        private void Update()
+        {
+            if (!Target.IsAlive)
+                NeedTransit = true;
+        }
     }
 }

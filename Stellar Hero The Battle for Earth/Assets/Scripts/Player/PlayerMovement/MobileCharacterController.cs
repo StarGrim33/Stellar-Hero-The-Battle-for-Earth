@@ -1,31 +1,40 @@
 using UnityEngine;
 
-[RequireComponent(typeof(IControllable))]
-public class MobileCharacterController : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private FixedJoystick _joystick;
-    [SerializeField] private AbilityButton _abilityButton;
-    private IControllable _iControllable;
-
-    private void Awake() => _iControllable = GetComponent<IControllable>();
-
-    private void OnEnable()
+    [RequireComponent(typeof(IControllable))]
+    public class MobileCharacterController : MonoBehaviour
     {
-        _joystick.ChangeDirection += SetDirection;
-        _abilityButton.Clicked += Dash;
-    }
+        [SerializeField] private FixedJoystick _joystick;
+        [SerializeField] private AbilityButton _abilityButton;
+        private IControllable _iControllable;
 
-    private void OnDisable()
-    {
-        _joystick.ChangeDirection -= SetDirection;
-        _abilityButton.Clicked -= Dash;
-    }
+        private void Awake()
+        {
+            _iControllable = GetComponent<IControllable>();
+        }
 
-    private void Dash() => _iControllable.TryDash();
+        private void OnEnable()
+        {
+            _joystick.ChangeDirection += SetDirection;
+            _abilityButton.Clicked += Dash;
+        }
 
-    private void SetDirection()
-    {
-        var direction = _joystick.Direction;
-        _iControllable.SetDirection(direction);
+        private void OnDisable()
+        {
+            _joystick.ChangeDirection -= SetDirection;
+            _abilityButton.Clicked -= Dash;
+        }
+
+        private void Dash()
+        {
+            _iControllable.TryDash();
+        }
+
+        private void SetDirection()
+        {
+            var direction = _joystick.Direction;
+            _iControllable.SetDirection(direction);
+        }
     }
 }

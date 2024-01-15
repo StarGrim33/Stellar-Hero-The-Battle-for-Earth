@@ -7,10 +7,9 @@ namespace Assets.Scripts.Utils
     public class Cooldown
     {
         [SerializeField] private float _value;
+        private float _timesUp;
 
         public float Value => _value;
-
-        private float _timesUp;
 
         public void Reset()
         {

@@ -1,35 +1,41 @@
 using System;
+using SDK;
 using UnityEngine;
 
-public class GameplayMediator : MonoBehaviour
+namespace Utils
 {
-    [SerializeField] private DefeatPanel _defeatPanel;
-    [SerializeField] private GameObject _menuPanel;
-    [SerializeField] private Rigidbody2D _playerUnit;
-    private Level _level;
-
-    private void OnDisable() => _level.Defeat -= OnDefeat;
-
-    public void Initialize(Level level)
+    public class GameplayMediator : MonoBehaviour, IGameplayMediator
     {
-        if (level is null)
+        [SerializeField] private DefeatPanel _defeatPanel;
+        [SerializeField] private Rigidbody2D _playerUnit;
+        private Level _level;
+
+        private void OnDisable()
         {
-            throw new ArgumentNullException(nameof(level));
+            _level.Defeat -= OnDefeat;
         }
 
-        _level = level;
-        _level.Defeat += OnDefeat;
-    }
+        public void Initialize(Level level)
+        {
+            if (level is null)
+            {
+                throw new ArgumentNullException(nameof(level));
+            }
 
-    public void RestartLevel()
-    {
-        _defeatPanel.Hide();
-        _level.Restart();
-    }
+            _level = level;
+            _level.Defeat += OnDefeat;
+        }
 
-    private void OnDefeat()
-    {
-        _playerUnit.velocity = Vector3.zero;
-        _defeatPanel.Show();
+        public void RestartLevel()
+        {
+            _defeatPanel.Hide();
+            _level.Restart();
+        }
+
+        private void OnDefeat()
+        {
+            _playerUnit.velocity = Vector3.zero;
+            _defeatPanel.Show();
+        }
     }
 }

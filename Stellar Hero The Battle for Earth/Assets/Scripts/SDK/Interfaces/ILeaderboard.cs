@@ -1,8 +1,11 @@
-public interface ILeaderboard
+namespace SDK
 {
-    void OpenLeaderboard();
+    public interface ILeaderboard
+    {
+        void OpenLeaderboard();
 
-    void ClearLeaderboardPanel();
+        void ClearLeaderboardPanel();
 
-    void GetLeaderboardEntriesButtonClick();
+        void OnGetLeaderboardEntriesButtonClick();
+    }
 }

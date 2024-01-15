@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class WaveEnemies : MonoBehaviour
+namespace Utils
 {
-    [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private float _spawnDelay;
-    [SerializeField] private int _amount;
+    public class WaveEnemies : MonoBehaviour
+    {
+        [SerializeField] private GameObject _enemyPrefab;
+        [SerializeField] private float _spawnDelay;
+        [SerializeField] private int _amount;
 
-    public float SpawnDelay => _spawnDelay;
+        public float SpawnDelay => _spawnDelay;
 
-    public GameObject EnemyPrefab => _enemyPrefab;
+        public GameObject EnemyPrefab => _enemyPrefab;
 
-    public int Amount => _amount;
+        public int Amount => _amount;
+    }
 }

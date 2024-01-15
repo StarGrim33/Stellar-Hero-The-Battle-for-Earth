@@ -1,48 +1,51 @@
 using System;
 using System.Linq;
 
-public class PlayerLevelSystem
+namespace Player
 {
-    private readonly int[] _experienceLevel;
-    private readonly int _minLevelExp = 100;
-    private readonly int _maxLevelExp = 341;
-
-    private int _level;
-    private int _experience;
-
-    public event Action OnExperienceChanged;
-
-    public event Action OnLevelChanged;
-
-    public int Level => _level;
-
-    public float ExperienceNormalized => (float)_experience / ExperienceToNextLevel;
-
-    public int ExperienceToNextLevel => _experienceLevel[_level];
-
-    public bool IsMaxLevel => _level == _experienceLevel.Length - 1;
-
-    public PlayerLevelSystem()
+    public class PlayerLevelSystem
     {
-        _level = 0;
-        _experience = 0;
-        _experienceLevel = Enumerable.Range(_minLevelExp, _maxLevelExp).ToArray();
-    }
+        private readonly int[] _experienceLevel;
+        private readonly int _minLevelExp = 100;
+        private readonly int _maxLevelExp = 341;
 
-    public void AddExperience(int amount)
-    {
-        if(IsMaxLevel == false)
+        private int _level;
+        private int _experience;
+
+        public event Action OnExperienceChanged;
+
+        public event Action OnLevelChanged;
+
+        public int Level => _level;
+
+        public float ExperienceNormalized => (float)_experience / ExperienceToNextLevel;
+
+        public int ExperienceToNextLevel => _experienceLevel[_level];
+
+        public bool IsMaxLevel => _level == _experienceLevel.Length - 1;
+
+        public PlayerLevelSystem()
         {
-            _experience += amount;
+            _level = 0;
+            _experience = 0;
+            _experienceLevel = Enumerable.Range(_minLevelExp, _maxLevelExp).ToArray();
+        }
 
-            while (_experience >= ExperienceToNextLevel)
+        public void AddExperience(int amount)
+        {
+            if (!IsMaxLevel)
             {
-                _experience -= ExperienceToNextLevel;
-                _level++;
-                OnLevelChanged?.Invoke();
-            }
+                _experience += amount;
 
-            OnExperienceChanged?.Invoke();
+                while (_experience >= ExperienceToNextLevel)
+                {
+                    _experience -= ExperienceToNextLevel;
+                    _level++;
+                    OnLevelChanged?.Invoke();
+                }
+
+                OnExperienceChanged?.Invoke();
+            }
         }
     }
 }

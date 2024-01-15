@@ -1,26 +1,26 @@
-using System.Collections.Generic;
 using UnityEngine;
+using Utils;
+using Weapon;
 
-public class PlayerShooter : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private List<BaseWeapon> _weapons;
-    [SerializeField] private Transform _transform;
-
-    private void Start() => transform.rotation = Quaternion.identity;
-
-    private void Update()
+    public class PlayerShooter : MonoBehaviour
     {
-        if (StateManager.Instance.CurrentGameState == GameStates.Paused)
+        [SerializeField] private BaseWeapon _weapon;
+
+        private void Start()
         {
-            return;
+            transform.rotation = Quaternion.identity;
         }
 
-        foreach (var weapon in _weapons)
+        private void Update()
         {
-            if(weapon.Target != null)
+            if (StateManager.Instance.CurrentGameState == GameStates.Paused)
             {
-                weapon.PerformShot();
+                return;
             }
+
+            _weapon.PerformShot();
         }
     }
 }

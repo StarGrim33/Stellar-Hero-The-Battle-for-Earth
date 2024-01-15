@@ -1,4 +1,7 @@
-public interface IAuthorization
+namespace SDK
 {
-    void Authorize();
+    public interface IAuthorization
+    {
+        void Authorize();
+    }
 }

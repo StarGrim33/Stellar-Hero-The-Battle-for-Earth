@@ -1,46 +1,53 @@
+using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour
+namespace Utils
 {
-    [SerializeField] private PlayerHealth _health;
-    [SerializeField] private Image _fronHealthBar;
-    [SerializeField] private Image _backHealthBar;
-    [SerializeField] private TMP_Text _healthValue;
-
-    private float _lerpTimer = 0f;
-    private float _chipSpeed = 2f;
-
-    private void Update() => UpdateHealthUI();
-
-    private void UpdateHealthUI()
+    public class HealthBar : MonoBehaviour
     {
-        float fillFront = _fronHealthBar.fillAmount;
-        float fillBack = _backHealthBar.fillAmount;
-        float hFraction = _health.CurrentHealth / _health.MaxHealth;
+        private readonly float _chipSpeed = 2f;
 
-        SetHealthValue(_health.CurrentHealth, _health.MaxHealth);
+        [SerializeField] private PlayerHealth _health;
+        [SerializeField] private Image _fronHealthBar;
+        [SerializeField] private Image _backHealthBar;
+        [SerializeField] private TMP_Text _healthValue;
+        private float _lerpTimer;
 
-        if (fillBack > hFraction)
+        private void Update()
         {
-            _fronHealthBar.fillAmount = hFraction;
-            _backHealthBar.color = Color.red;
-            _lerpTimer += Time.deltaTime;
-            float percentComplete = _lerpTimer / _chipSpeed;
-            _backHealthBar.fillAmount = Mathf.Lerp(fillBack, hFraction, percentComplete);
-            _lerpTimer = 0f;
+            UpdateHealthUI();
         }
-        else if(fillFront < hFraction)
+
+        private void UpdateHealthUI()
         {
-            _backHealthBar.color = Color.green;
-            _backHealthBar.fillAmount = hFraction;
-            _lerpTimer += Time.deltaTime;
-            float percentComplete = _lerpTimer / _chipSpeed;
-            _fronHealthBar.fillAmount = Mathf.Lerp(fillFront, _backHealthBar.fillAmount, percentComplete);
-            _lerpTimer = 0f;
+            float fillFront = _fronHealthBar.fillAmount;
+            float fillBack = _backHealthBar.fillAmount;
+            float hFraction = _health.CurrentHealth / _health.MaxHealth;
+
+            SetHealthValue(_health.CurrentHealth, _health.MaxHealth);
+
+            if (fillBack > hFraction)
+            {
+                _fronHealthBar.fillAmount = hFraction;
+                _backHealthBar.color = Color.red;
+                _lerpTimer += Time.deltaTime;
+                float percentComplete = _lerpTimer / _chipSpeed;
+                _backHealthBar.fillAmount = Mathf.Lerp(fillBack, hFraction, percentComplete);
+                _lerpTimer = 0f;
+            }
+            else if (fillFront < hFraction)
+            {
+                _backHealthBar.color = Color.green;
+                _backHealthBar.fillAmount = hFraction;
+                _lerpTimer += Time.deltaTime;
+                float percentComplete = _lerpTimer / _chipSpeed;
+                _fronHealthBar.fillAmount = Mathf.Lerp(fillFront, _backHealthBar.fillAmount, percentComplete);
+                _lerpTimer = 0f;
+            }
         }
+
+        private void SetHealthValue(float currentHealth, float maxHealth) => _healthValue.text = $"{currentHealth}/{maxHealth}";
     }
-
-    private void SetHealthValue(float currentHealth, float maxHealth) => _healthValue.text = $"{currentHealth}/{maxHealth}".ToString();
 }

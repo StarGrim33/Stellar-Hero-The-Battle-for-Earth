@@ -1,19 +1,22 @@
 using System;
 using System.Collections.Generic;
 
-public static class ListExtensions
+namespace Utils
 {
-    private static Random _randomRange = new();
-
-    public static void Shuffle<T>(this IList<T> list)
+    public static class ListExtensions
     {
-        int n = list.Count;
+        private static readonly Random _randomRange = new ();
 
-        while (n > 1)
+        public static void Shuffle<T>(this IList<T> list)
         {
-            n--;
-            int k = _randomRange.Next(n + 1);
-            (list[n], list[k]) = (list[k], list[n]);
+            int n = list.Count;
+
+            while (n > 1)
+            {
+                n--;
+                int k = _randomRange.Next(n + 1);
+                (list[n], list[k]) = (list[k], list[n]);
+            }
         }
     }
 }

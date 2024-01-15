@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using Utils;
 
 namespace Assets.Scripts.Components.Checkers
 {

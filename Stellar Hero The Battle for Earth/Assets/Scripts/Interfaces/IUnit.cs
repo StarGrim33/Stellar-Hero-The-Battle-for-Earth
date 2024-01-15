@@ -1,4 +1,7 @@
-public interface IUnit
+namespace Utils
 {
-    void PerformAttack();
+    public interface IUnit
+    {
+        void PerformAttack();
+    }
 }

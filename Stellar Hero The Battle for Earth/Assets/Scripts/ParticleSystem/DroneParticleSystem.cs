@@ -1,2 +1,6 @@
-
-public class DroneParticleSystem : BaseParticleSystemPlayer { }
+namespace Utils
+{
+    public class DroneParticleSystem : BaseParticleSystem
+    {
+    }
+}

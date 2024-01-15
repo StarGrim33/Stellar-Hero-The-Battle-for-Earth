@@ -2,25 +2,27 @@ using Agava.YandexGames;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AuthorizationButton : MonoBehaviour, IAuthorization
+namespace SDK
 {
-    [SerializeField] private Button _button;
-    [SerializeField] private Button _soundButton;
-    [SerializeField] private GameObject _panel;
-
-    public void Authorize()
+    public class AuthorizationButton : MonoBehaviour, IAuthorization
     {
-        PlayerAccount.Authorize();
-    }
+        [SerializeField] private Button _soundButton;
+        [SerializeField] private GameObject _panel;
 
-    public void OnAuthorizeButtonClick()
-    {
-        Authorize();
-    }
+        public void Authorize()
+        {
+            PlayerAccount.Authorize();
+        }
 
-    public void OnDeclineAuthorizationButton()
-    {
-        _panel.gameObject.SetActive(false);
-        _soundButton.gameObject.SetActive(true);
+        public void OnAuthorizeButtonClick()
+        {
+            Authorize();
+        }
+
+        public void OnDeclineAuthorizationButton()
+        {
+            _panel.gameObject.SetActive(false);
+            _soundButton.gameObject.SetActive(true);
+        }
     }
 }

@@ -1,14 +1,17 @@
+using Bullets;
 using UnityEngine;
 
-public class TrailInstantiator : MonoBehaviour
+namespace Utils
 {
-    [SerializeField] private GameObject _trailPrefab;
-    [SerializeField] private Transform _gunPoint;
-
-    public void TrailInstantiate(Vector3 targetPosition)
+    public class TrailInstantiator : MonoBehaviour
     {
-        var trail = Instantiate(_trailPrefab, _gunPoint.transform.position, Quaternion.identity);
-        var trailScript = trail.GetComponent<BulletTrail>();
-        trailScript.SetTargetPosition(targetPosition);
+        [SerializeField] private BulletTrail _trailPrefab;
+        [SerializeField] private Transform _gunPoint;
+
+        public void Instantiate(Vector3 targetPosition)
+        {
+            var trail = Instantiate(_trailPrefab, _gunPoint.transform.position, Quaternion.identity);
+            trail.SetTargetPosition(targetPosition);
+        }
     }
 }

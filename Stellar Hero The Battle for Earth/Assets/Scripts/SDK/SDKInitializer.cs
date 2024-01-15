@@ -1,32 +1,36 @@
+using System.Collections;
 using Agava.YandexGames;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class SDKInitializer : MonoBehaviour
+namespace SDK
 {
-    private void Awake()
+    public class SDKInitializer : MonoBehaviour
     {
-        YandexGamesSdk.CallbackLogging = true;
-    }
+        private readonly float _threeSecondsDelay = 3f;
+        private WaitForSeconds _delay;
 
-#if UNITY_WEBGL && !UNITY_EDITOR
-
-    private IEnumerator Start()
-    {
-        yield return YandexGamesSdk.Initialize();
-
-        if (YandexGamesSdk.IsInitialized)
+        private void Awake()
         {
-            StartCoroutine(OnInitialized());
+            YandexGamesSdk.CallbackLogging = true;
+            _delay = new WaitForSeconds(_threeSecondsDelay);
+        }
+
+        private IEnumerator Start()
+        {
+            yield return YandexGamesSdk.Initialize();
+
+            if (YandexGamesSdk.IsInitialized)
+            {
+                StartCoroutine(OnInitialized());
+            }
+        }
+
+        private IEnumerator OnInitialized()
+        {
+            const int firsScene = 1;
+            yield return _delay;
+            SceneManager.LoadScene(firsScene);
         }
     }
-
-    private IEnumerator OnInitialized()
-    {
-        int threeSeconds = 3;
-        int firsScene = 1;
-        var waitForSeconds = new WaitForSeconds(threeSeconds);
-        yield return waitForSeconds;
-        SceneManager.LoadScene(firsScene);
-    }
-#endif
 }

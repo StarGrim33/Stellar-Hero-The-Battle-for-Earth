@@ -1,35 +1,39 @@
+using Bullets;
 using UnityEngine;
+using Utils;
 
-public class RangeAttackState : AttackState
+namespace Enemy
 {
-    private readonly float _speed = 3.5f;
-    [SerializeField] private EnemyBullet _bullet;
-
-    public override void Attack()
+    public class RangeAttackState : AttackState
     {
-        float minRangeAttack = 10f;
+        private readonly float _speed = 3.5f;
+        private readonly float _minRangeAttackDistance = 10f;
 
-        if (Target.IsAlive)
+        [SerializeField] private EnemyBullet _bullet;
+
+        public override void Attack()
         {
-            if (Vector2.Distance(Target.TargetTransform.position, transform.position) < minRangeAttack)
+            if (Target.IsAlive)
             {
-                Animator.Play(Constants.AttackState);
-                SpawnBullet();
-            }
-            else
-            {
-                enabled = false;
-                EnemyStateMachine.ResetState();
+                if (Vector2.Distance(Target.TargetTransform.position, transform.position) < _minRangeAttackDistance)
+                {
+                    Animator.Play(Constants.AttackState);
+                    SpawnBullet();
+                }
+                else
+                {
+                    enabled = false;
+                    EnemyStateMachine.ResetState();
+                }
             }
         }
-    }
 
-    private void SpawnBullet()
-    {
-        Vector2 directionToTarget = (Target.TargetTransform.position - transform.position).normalized;
-
-        var bullet = Instantiate(_bullet);
-        bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, -directionToTarget);
-        bullet.Shot(transform.position, Target.TargetTransform.position, _speed, Damage);
+        private void SpawnBullet()
+        {
+            Vector2 directionToTarget = (Target.TargetTransform.position - transform.position).normalized;
+            var bullet = Instantiate(_bullet);
+            bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, -directionToTarget);
+            bullet.Shot(transform.position, Target.TargetTransform.position, _speed, Damage);
+        }
     }
 }

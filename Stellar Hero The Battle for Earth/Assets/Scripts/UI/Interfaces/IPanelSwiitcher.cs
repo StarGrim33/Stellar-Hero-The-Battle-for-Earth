@@ -1,8 +1,11 @@
-public interface IPanelSwiitcher
+namespace Utils
 {
-    void OpenPanel();
+    public interface IPanelSwiitcher
+    {
+        void OpenPanel();
 
-    void ClosePanel(bool isEffectEnabled);
+        void ClosePanel(bool isEffectEnabled);
 
-    void GoToMainMenu();
+        void GoToMainMenu();
+    }
 }
